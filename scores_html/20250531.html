@@ -91,16 +91,11 @@
 
             tables.forEach(table => {
                 // 「枠」列の色を設定（列インデックス1が「枠」）
-                table.querySelectorAll('tbody tr').forEach(row => {
-                    const frameCell = row.cells[1]; // 「枠」列の位置（1列目がインデックス0）
-                    const frameValue = frameCell.textContent.trim();
-                    frameCell.classList.add('frame-' + frameValue);
-                });
 
                 // 色付けする列のインデックスと列名を定義
-                const scoreColumns = [4, 5, 16, 17, 18, 19, 20, 21];
-                const specificValueColumn = 6;
-                const rangeColumn = 7;
+                const scoreColumns = [2, 3, 4];
+                const specificValueColumn = 5;
+                const rangeColumn = 6;
 
                 // スコア列の色付け
                 scoreColumns.forEach(colIndex => {
@@ -163,269 +158,104 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>枠 番</th>
       <th>馬番</th>
-      <th>ラスト3F</th>
-      <th>v13.1 穴馬</th>
-      <th>v21.1 複勝率</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
-      <th>複勝B</th>
-      <th>◎ワイドB</th>
-      <th>〇ワイドB</th>
-      <th>馬名</th>
-      <th>性齢</th>
-      <th>斤量</th>
-      <th>騎手</th>
-      <th>脚質</th>
-      <th>上り指MAX</th>
-      <th>上り指AVG</th>
-      <th>上り指1R</th>
-      <th>スピ指MAX</th>
-      <th>スピ指AVG</th>
-      <th>スピ指1R</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1</td>
-      <td>-7.4</td>
-      <td>16.23</td>
       <td>49.10</td>
+      <td>54.02</td>
+      <td>49.27</td>
       <td>4</td>
       <td>10.1</td>
-      <td>2.4</td>
-      <td>3.9</td>
-      <td>NaN</td>
-      <td>ローズマイスター</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>佐々木大輔</td>
-      <td>追</td>
-      <td>8.3</td>
-      <td>-2.8</td>
-      <td>8.3</td>
-      <td>99.2</td>
-      <td>74.4</td>
-      <td>99.2</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>2</td>
-      <td>-16.7</td>
-      <td>8.62</td>
       <td>9.28</td>
+      <td>6.37</td>
+      <td>10.13</td>
       <td>5</td>
       <td>16.0</td>
-      <td>12.9</td>
-      <td>20.6</td>
-      <td>26.3</td>
-      <td>スズノソレイユ</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>藤懸貴志</td>
-      <td>先</td>
-      <td>-7.8</td>
-      <td>-11.0</td>
-      <td>-8.8</td>
-      <td>68.0</td>
-      <td>61.8</td>
-      <td>68.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>3</td>
-      <td>-6.1</td>
-      <td>9.37</td>
       <td>29.73</td>
+      <td>29.00</td>
+      <td>26.72</td>
       <td>6</td>
       <td>17.0</td>
-      <td>4.0</td>
-      <td>6.4</td>
-      <td>8.2</td>
-      <td>ブレトワルダ</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>北村宏司</td>
-      <td>先</td>
-      <td>2.7</td>
-      <td>-7.8</td>
-      <td>-3.7</td>
-      <td>84.0</td>
-      <td>71.2</td>
-      <td>84.0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>4</td>
-      <td>-11.2</td>
-      <td>10.10</td>
       <td>9.28</td>
+      <td>6.37</td>
+      <td>10.22</td>
       <td>9</td>
       <td>41.4</td>
-      <td>12.9</td>
-      <td>20.6</td>
-      <td>26.3</td>
-      <td>グレイスザクラウン</td>
-      <td>セ3</td>
-      <td>55.0</td>
-      <td>△長浜鴻緒</td>
-      <td>先</td>
-      <td>-0.7</td>
-      <td>-21.0</td>
-      <td>-4.3</td>
-      <td>76.2</td>
-      <td>38.8</td>
-      <td>76.2</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>5</td>
-      <td>-2.2</td>
-      <td>13.46</td>
       <td>26.21</td>
+      <td>28.90</td>
+      <td>22.92</td>
       <td>7</td>
       <td>19.9</td>
-      <td>4.6</td>
-      <td>7.3</td>
-      <td>9.3</td>
-      <td>ブラックジジ</td>
-      <td>牡3</td>
-      <td>54.0</td>
-      <td>▲舟山瑠泉</td>
-      <td>逃</td>
-      <td>15.9</td>
-      <td>7.7</td>
-      <td>3.5</td>
-      <td>81.8</td>
-      <td>66.7</td>
-      <td>81.8</td>
     </tr>
     <tr>
       <th>5</th>
       <td>6</td>
-      <td>6</td>
-      <td>15.5</td>
-      <td>11.78</td>
       <td>47.20</td>
+      <td>46.61</td>
+      <td>44.57</td>
       <td>2</td>
       <td>3.9</td>
-      <td>2.5</td>
-      <td>4.0</td>
-      <td>5.2</td>
-      <td>マテンロウブレイブ</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>横山武史</td>
-      <td>差</td>
-      <td>18.6</td>
-      <td>3.3</td>
-      <td>-4.8</td>
-      <td>86.6</td>
-      <td>76.3</td>
-      <td>81.0</td>
     </tr>
     <tr>
       <th>6</th>
       <td>7</td>
-      <td>7</td>
-      <td>-30.0</td>
-      <td>14.12</td>
       <td>5.62</td>
+      <td>5.92</td>
+      <td>8.63</td>
       <td>8</td>
       <td>37.5</td>
-      <td>21.4</td>
-      <td>34.0</td>
-      <td>43.5</td>
-      <td>ホウオウゴールド</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>横山和生</td>
-      <td>逃</td>
-      <td>-1.8</td>
-      <td>-8.6</td>
-      <td>-9.1</td>
-      <td>76.9</td>
-      <td>73.6</td>
-      <td>72.1</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>7</td>
       <td>8</td>
-      <td>-3.2</td>
-      <td>7.76</td>
       <td>47.20</td>
+      <td>47.63</td>
+      <td>45.66</td>
       <td>3</td>
       <td>5.9</td>
-      <td>2.5</td>
-      <td>4.0</td>
-      <td>5.2</td>
-      <td>ルグランヴァン</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>原優介</td>
-      <td>差</td>
-      <td>8.1</td>
-      <td>0.3</td>
-      <td>2.4</td>
-      <td>86.6</td>
-      <td>78.6</td>
-      <td>86.6</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>8</td>
       <td>9</td>
-      <td>15.4</td>
-      <td>3.69</td>
       <td>62.87</td>
+      <td>64.70</td>
+      <td>69.56</td>
       <td>1</td>
       <td>2.0</td>
-      <td>1.9</td>
-      <td>NaN</td>
-      <td>3.9</td>
-      <td>タガノバビロン</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>三浦皇成</td>
-      <td>追</td>
-      <td>16.4</td>
-      <td>9.2</td>
-      <td>13.4</td>
-      <td>99.2</td>
-      <td>93.6</td>
-      <td>99.2</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>8</td>
       <td>10</td>
-      <td>25.1</td>
-      <td>14.08</td>
       <td>13.51</td>
+      <td>10.49</td>
+      <td>12.32</td>
       <td>10</td>
       <td>77.4</td>
-      <td>8.9</td>
-      <td>14.1</td>
-      <td>18.1</td>
-      <td>レッドベルダンス</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>嶋田純次</td>
-      <td>差</td>
-      <td>5.5</td>
-      <td>-3.4</td>
-      <td>-16.8</td>
-      <td>78.4</td>
-      <td>71.7</td>
-      <td>77.9</td>
     </tr>
   </tbody>
 </table><br><br>
@@ -438,293 +268,113 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>枠 番</th>
       <th>馬番</th>
-      <th>ラスト3F</th>
-      <th>v13.1 穴馬</th>
-      <th>v21.1 複勝率</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
-      <th>複勝B</th>
-      <th>◎ワイドB</th>
-      <th>〇ワイドB</th>
-      <th>馬名</th>
-      <th>性齢</th>
-      <th>斤量</th>
-      <th>騎手</th>
-      <th>脚質</th>
-      <th>上り指MAX</th>
-      <th>上り指AVG</th>
-      <th>上り指1R</th>
-      <th>スピ指MAX</th>
-      <th>スピ指AVG</th>
-      <th>スピ指1R</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1</td>
-      <td>-4.4</td>
-      <td>3.30</td>
       <td>46.86</td>
+      <td>50.25</td>
+      <td>52.36</td>
       <td>1</td>
       <td>3.5</td>
-      <td>2.6</td>
-      <td>NaN</td>
-      <td>5.5</td>
-      <td>カザンラク</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>Ｄ．レーン</td>
-      <td>差</td>
-      <td>24.0</td>
-      <td>16.7</td>
-      <td>7.9</td>
-      <td>111.1</td>
-      <td>96.2</td>
-      <td>111.1</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>2</td>
-      <td>37.8</td>
-      <td>7.08</td>
       <td>7.57</td>
+      <td>5.16</td>
+      <td>7.97</td>
       <td>11</td>
       <td>137.3</td>
-      <td>15.9</td>
-      <td>33.8</td>
-      <td>33.8</td>
-      <td>カガバベル</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>松岡正海</td>
-      <td>差</td>
-      <td>21.1</td>
-      <td>3.6</td>
-      <td>21.1</td>
-      <td>88.3</td>
-      <td>80.8</td>
-      <td>86.4</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>3</td>
-      <td>-22.0</td>
-      <td>4.64</td>
       <td>46.86</td>
+      <td>50.25</td>
+      <td>48.83</td>
       <td>4</td>
       <td>6.2</td>
-      <td>2.6</td>
-      <td>5.5</td>
-      <td>NaN</td>
-      <td>ダイシンラー</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>吉田豊</td>
-      <td>逃</td>
-      <td>18.8</td>
-      <td>9.3</td>
-      <td>8.5</td>
-      <td>102.8</td>
-      <td>91.1</td>
-      <td>102.8</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>4</td>
-      <td>-8.7</td>
-      <td>14.56</td>
       <td>22.70</td>
+      <td>20.80</td>
+      <td>18.20</td>
       <td>9</td>
       <td>67.1</td>
-      <td>5.3</td>
-      <td>11.3</td>
-      <td>11.3</td>
-      <td>スピリットライズ</td>
-      <td>セ3</td>
-      <td>57.0</td>
-      <td>佐々木大輔</td>
-      <td>先</td>
-      <td>11.8</td>
-      <td>-6.9</td>
-      <td>11.8</td>
-      <td>98.4</td>
-      <td>77.7</td>
-      <td>98.4</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>5</td>
-      <td>-9.7</td>
-      <td>2.82</td>
       <td>42.90</td>
+      <td>45.13</td>
+      <td>43.87</td>
       <td>2</td>
       <td>4.0</td>
-      <td>2.8</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>パワースナッチ</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>Ｃ．ルメール</td>
-      <td>先</td>
-      <td>21.0</td>
-      <td>13.5</td>
-      <td>7.7</td>
-      <td>106.0</td>
-      <td>92.1</td>
-      <td>88.2</td>
     </tr>
     <tr>
       <th>5</th>
       <td>6</td>
-      <td>6</td>
-      <td>-5.9</td>
-      <td>11.69</td>
       <td>7.57</td>
+      <td>4.98</td>
+      <td>7.46</td>
       <td>5</td>
       <td>11.2</td>
-      <td>15.9</td>
-      <td>33.8</td>
-      <td>33.8</td>
-      <td>アサクサグレース</td>
-      <td>牝3</td>
-      <td>55.0</td>
-      <td>Ｍ．ディー</td>
-      <td>先</td>
-      <td>7.0</td>
-      <td>-12.1</td>
-      <td>-18.0</td>
-      <td>73.0</td>
-      <td>64.2</td>
-      <td>73.0</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>6</td>
       <td>7</td>
-      <td>23.9</td>
-      <td>10.16</td>
       <td>5.98</td>
+      <td>4.01</td>
+      <td>7.29</td>
       <td>10</td>
       <td>124.0</td>
-      <td>20.1</td>
-      <td>42.8</td>
-      <td>42.8</td>
-      <td>ユキノエミリオ</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>三浦皇成</td>
-      <td>先</td>
-      <td>16.6</td>
-      <td>1.4</td>
-      <td>1.9</td>
-      <td>82.4</td>
-      <td>74.9</td>
-      <td>82.4</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>7</td>
       <td>8</td>
-      <td>-14.2</td>
-      <td>13.70</td>
       <td>14.90</td>
+      <td>12.80</td>
+      <td>12.42</td>
       <td>7</td>
       <td>12.1</td>
-      <td>8.1</td>
-      <td>17.2</td>
-      <td>17.2</td>
-      <td>ポッドロワール</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>木幡巧也</td>
-      <td>先</td>
-      <td>9.2</td>
-      <td>-8.8</td>
-      <td>9.2</td>
-      <td>90.9</td>
-      <td>74.7</td>
-      <td>90.9</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>7</td>
       <td>9</td>
-      <td>-34.7</td>
-      <td>15.09</td>
       <td>33.44</td>
+      <td>36.19</td>
+      <td>33.33</td>
       <td>6</td>
       <td>12.1</td>
-      <td>3.6</td>
-      <td>7.7</td>
-      <td>7.7</td>
-      <td>フォルテム</td>
-      <td>牡3</td>
-      <td>55.0</td>
-      <td>△長浜鴻緒</td>
-      <td>先</td>
-      <td>8.4</td>
-      <td>-9.2</td>
-      <td>3.6</td>
-      <td>107.9</td>
-      <td>72.3</td>
-      <td>107.9</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>8</td>
       <td>10</td>
-      <td>29.3</td>
-      <td>11.41</td>
       <td>28.30</td>
+      <td>25.29</td>
+      <td>24.18</td>
       <td>8</td>
       <td>14.5</td>
-      <td>4.2</td>
-      <td>9.0</td>
-      <td>9.0</td>
-      <td>チギリ</td>
-      <td>牝3</td>
-      <td>55.0</td>
-      <td>横山武史</td>
-      <td>差</td>
-      <td>25.6</td>
-      <td>13.5</td>
-      <td>3.4</td>
-      <td>95.7</td>
-      <td>73.7</td>
-      <td>95.7</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>8</td>
       <td>11</td>
-      <td>-5.6</td>
-      <td>3.61</td>
       <td>42.90</td>
+      <td>45.13</td>
+      <td>44.10</td>
       <td>3</td>
       <td>4.7</td>
-      <td>2.8</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>チムグクル</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>戸崎圭太</td>
-      <td>先</td>
-      <td>7.0</td>
-      <td>5.4</td>
-      <td>3.8</td>
-      <td>106.9</td>
-      <td>91.5</td>
-      <td>106.9</td>
     </tr>
   </tbody>
 </table><br><br>
@@ -737,413 +387,158 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>枠 番</th>
       <th>馬番</th>
-      <th>ラスト3F</th>
-      <th>v13.1 穴馬</th>
-      <th>v21.1 複勝率</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
-      <th>複勝B</th>
-      <th>◎ワイドB</th>
-      <th>〇ワイドB</th>
-      <th>馬名</th>
-      <th>性齢</th>
-      <th>斤量</th>
-      <th>騎手</th>
-      <th>脚質</th>
-      <th>上り指MAX</th>
-      <th>上り指AVG</th>
-      <th>上り指1R</th>
-      <th>スピ指MAX</th>
-      <th>スピ指AVG</th>
-      <th>スピ指1R</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1</td>
-      <td>4.4</td>
-      <td>16.73</td>
       <td>20.34</td>
+      <td>18.75</td>
+      <td>18.20</td>
       <td>12</td>
       <td>87.3</td>
-      <td>5.9</td>
-      <td>12.7</td>
-      <td>15.4</td>
-      <td>サムワンライクユー</td>
-      <td>牡5</td>
-      <td>58.0</td>
-      <td>内田博幸</td>
-      <td>差</td>
-      <td>6.3</td>
-      <td>3.1</td>
-      <td>3.9</td>
-      <td>95.1</td>
-      <td>84.3</td>
-      <td>86.4</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1</td>
       <td>2</td>
-      <td>-18.4</td>
-      <td>6.32</td>
       <td>38.43</td>
+      <td>37.16</td>
+      <td>37.31</td>
       <td>2</td>
       <td>6.2</td>
-      <td>3.1</td>
-      <td>6.7</td>
-      <td>NaN</td>
-      <td>ソニックライン</td>
-      <td>セ4</td>
-      <td>58.0</td>
-      <td>三浦皇成</td>
-      <td>追</td>
-      <td>7.6</td>
-      <td>-2.6</td>
-      <td>3.9</td>
-      <td>100.6</td>
-      <td>85.7</td>
-      <td>89.4</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2</td>
       <td>3</td>
-      <td>-12.6</td>
-      <td>10.15</td>
       <td>33.13</td>
+      <td>35.40</td>
+      <td>33.40</td>
       <td>6</td>
       <td>25.2</td>
-      <td>3.6</td>
-      <td>7.8</td>
-      <td>9.4</td>
-      <td>レッドライトニング</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>Ｍ．ディー</td>
-      <td>先</td>
-      <td>6.4</td>
-      <td>-7.6</td>
-      <td>-19.6</td>
-      <td>112.8</td>
-      <td>85.0</td>
-      <td>74.6</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>2</td>
       <td>4</td>
-      <td>-42.1</td>
-      <td>15.36</td>
       <td>14.76</td>
+      <td>17.75</td>
+      <td>13.84</td>
       <td>9</td>
       <td>54.7</td>
-      <td>8.1</td>
-      <td>17.5</td>
-      <td>21.2</td>
-      <td>ソウキュウ</td>
-      <td>牝4</td>
-      <td>56.0</td>
-      <td>丸山元気</td>
-      <td>先</td>
-      <td>0.0</td>
-      <td>-24.0</td>
-      <td>-20.8</td>
-      <td>73.2</td>
-      <td>64.9</td>
-      <td>73.2</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>3</td>
       <td>5</td>
-      <td>-4.9</td>
-      <td>9.81</td>
       <td>30.71</td>
+      <td>30.76</td>
+      <td>29.92</td>
       <td>3</td>
       <td>8.8</td>
-      <td>3.9</td>
-      <td>8.4</td>
-      <td>10.2</td>
-      <td>マリンバンカー</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>岩部純二</td>
-      <td>差</td>
-      <td>5.5</td>
-      <td>-2.9</td>
-      <td>5.5</td>
-      <td>106.2</td>
-      <td>87.7</td>
-      <td>106.2</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>3</td>
       <td>6</td>
-      <td>21.9</td>
-      <td>11.99</td>
       <td>5.31</td>
+      <td>5.13</td>
+      <td>6.63</td>
       <td>15</td>
       <td>167.2</td>
-      <td>22.6</td>
-      <td>48.7</td>
-      <td>58.8</td>
-      <td>グロリアスヒーロー</td>
-      <td>セ6</td>
-      <td>55.0</td>
-      <td>▲石田拓郎</td>
-      <td>差</td>
-      <td>9.9</td>
-      <td>-6.3</td>
-      <td>-22.2</td>
-      <td>83.4</td>
-      <td>77.5</td>
-      <td>70.2</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>4</td>
       <td>7</td>
-      <td>24.0</td>
-      <td>9.31</td>
       <td>7.50</td>
+      <td>6.45</td>
+      <td>7.62</td>
       <td>7</td>
       <td>30.7</td>
-      <td>16.0</td>
-      <td>34.5</td>
-      <td>41.6</td>
-      <td>フイノマジワリ</td>
-      <td>牝4</td>
-      <td>56.0</td>
-      <td>戸崎圭太</td>
-      <td>差</td>
-      <td>-0.6</td>
-      <td>-11.0</td>
-      <td>-3.6</td>
-      <td>83.4</td>
-      <td>65.7</td>
-      <td>83.4</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>4</td>
       <td>8</td>
-      <td>52.0</td>
-      <td>3.91</td>
       <td>5.31</td>
+      <td>6.01</td>
+      <td>7.28</td>
       <td>13</td>
       <td>108.7</td>
-      <td>22.6</td>
-      <td>48.7</td>
-      <td>58.8</td>
-      <td>カルツァクライン</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>津村明秀</td>
-      <td>差</td>
-      <td>4.8</td>
-      <td>-6.5</td>
-      <td>-6.1</td>
-      <td>79.8</td>
-      <td>72.6</td>
-      <td>73.8</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>5</td>
       <td>9</td>
-      <td>15.1</td>
-      <td>7.49</td>
       <td>6.98</td>
+      <td>6.45</td>
+      <td>7.49</td>
       <td>14</td>
       <td>121.7</td>
-      <td>17.2</td>
-      <td>37.0</td>
-      <td>44.7</td>
-      <td>ミランカ</td>
-      <td>牝4</td>
-      <td>56.0</td>
-      <td>木幡巧也</td>
-      <td>追</td>
-      <td>0.5</td>
-      <td>-17.1</td>
-      <td>0.5</td>
-      <td>82.0</td>
-      <td>68.1</td>
-      <td>80.4</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>5</td>
       <td>10</td>
-      <td>-51.6</td>
-      <td>2.70</td>
       <td>38.43</td>
+      <td>38.80</td>
+      <td>39.03</td>
       <td>1</td>
       <td>1.5</td>
-      <td>3.1</td>
-      <td>6.7</td>
-      <td>8.1</td>
-      <td>チザルピーノ</td>
-      <td>セ4</td>
-      <td>58.0</td>
-      <td>Ｄ．レーン</td>
-      <td>先</td>
-      <td>3.3</td>
-      <td>-13.4</td>
-      <td>-14.8</td>
-      <td>104.2</td>
-      <td>83.0</td>
-      <td>98.1</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>6</td>
       <td>11</td>
-      <td>-17.0</td>
-      <td>4.59</td>
       <td>46.42</td>
+      <td>45.86</td>
+      <td>46.06</td>
       <td>4</td>
       <td>10.6</td>
-      <td>2.6</td>
-      <td>NaN</td>
-      <td>6.7</td>
-      <td>ネオシルバー</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>田辺裕信</td>
-      <td>差</td>
-      <td>18.2</td>
-      <td>1.3</td>
-      <td>3.4</td>
-      <td>95.1</td>
-      <td>88.8</td>
-      <td>95.1</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>6</td>
       <td>12</td>
-      <td>37.5</td>
-      <td>4.29</td>
       <td>3.44</td>
+      <td>3.91</td>
+      <td>5.90</td>
       <td>16</td>
       <td>255.9</td>
-      <td>34.9</td>
-      <td>75.1</td>
-      <td>90.8</td>
-      <td>リュクススティール</td>
-      <td>セ5</td>
-      <td>58.0</td>
-      <td>吉田豊</td>
-      <td>先</td>
-      <td>3.8</td>
-      <td>-17.1</td>
-      <td>1.4</td>
-      <td>96.1</td>
-      <td>67.2</td>
-      <td>96.1</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>7</td>
       <td>13</td>
-      <td>46.9</td>
-      <td>12.48</td>
       <td>5.31</td>
+      <td>6.01</td>
+      <td>7.26</td>
       <td>8</td>
       <td>47.1</td>
-      <td>22.6</td>
-      <td>48.7</td>
-      <td>58.8</td>
-      <td>イモータルソウル</td>
-      <td>牡7</td>
-      <td>58.0</td>
-      <td>原優介</td>
-      <td>先</td>
-      <td>9.9</td>
-      <td>1.4</td>
-      <td>9.9</td>
-      <td>87.4</td>
-      <td>75.7</td>
-      <td>87.4</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>7</td>
       <td>14</td>
-      <td>13.6</td>
-      <td>7.54</td>
       <td>5.92</td>
+      <td>6.01</td>
+      <td>7.33</td>
       <td>10</td>
       <td>61.4</td>
-      <td>20.3</td>
-      <td>43.7</td>
-      <td>52.7</td>
-      <td>サンドオブエテル</td>
-      <td>牡4</td>
-      <td>56.0</td>
-      <td>△長浜鴻緒</td>
-      <td>差</td>
-      <td>9.8</td>
-      <td>-6.1</td>
-      <td>-22.0</td>
-      <td>68.9</td>
-      <td>62.5</td>
-      <td>56.0</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>8</td>
       <td>15</td>
-      <td>-20.0</td>
-      <td>16.02</td>
       <td>19.55</td>
+      <td>17.81</td>
+      <td>16.85</td>
       <td>5</td>
       <td>13.6</td>
-      <td>6.1</td>
-      <td>13.2</td>
-      <td>16.0</td>
-      <td>ヤマニンクイッカー</td>
-      <td>牡6</td>
-      <td>58.0</td>
-      <td>佐々木大輔</td>
-      <td>先</td>
-      <td>4.4</td>
-      <td>-11.6</td>
-      <td>-25.7</td>
-      <td>97.4</td>
-      <td>79.1</td>
-      <td>64.9</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>8</td>
       <td>16</td>
-      <td>14.9</td>
-      <td>17.30</td>
       <td>18.45</td>
+      <td>17.75</td>
+      <td>15.86</td>
       <td>11</td>
       <td>71.4</td>
-      <td>6.5</td>
-      <td>14.0</td>
-      <td>16.9</td>
-      <td>ブレイクザアイス</td>
-      <td>牡6</td>
-      <td>58.0</td>
-      <td>松岡正海</td>
-      <td>差</td>
-      <td>3.2</td>
-      <td>0.5</td>
-      <td>1.4</td>
-      <td>102.2</td>
-      <td>86.7</td>
-      <td>102.2</td>
     </tr>
   </tbody>
 </table><br><br>
@@ -1156,413 +551,158 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>枠 番</th>
       <th>馬番</th>
-      <th>ラスト3F</th>
-      <th>v13.1 穴馬</th>
-      <th>v21.1 複勝率</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
-      <th>複勝B</th>
-      <th>◎ワイドB</th>
-      <th>〇ワイドB</th>
-      <th>馬名</th>
-      <th>性齢</th>
-      <th>斤量</th>
-      <th>騎手</th>
-      <th>脚質</th>
-      <th>上り指MAX</th>
-      <th>上り指AVG</th>
-      <th>上り指1R</th>
-      <th>スピ指MAX</th>
-      <th>スピ指AVG</th>
-      <th>スピ指1R</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1</td>
-      <td>28.5</td>
-      <td>12.23</td>
       <td>21.66</td>
+      <td>19.32</td>
+      <td>18.27</td>
       <td>7</td>
       <td>15.0</td>
-      <td>5.5</td>
-      <td>12.4</td>
-      <td>14.0</td>
-      <td>ハワイアンティアレ</td>
-      <td>牝4</td>
-      <td>56.0</td>
-      <td>丸山元気</td>
-      <td>追</td>
-      <td>22.4</td>
-      <td>18.7</td>
-      <td>15.0</td>
-      <td>103.8</td>
-      <td>92.2</td>
-      <td>82.0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1</td>
       <td>2</td>
-      <td>-28.9</td>
-      <td>11.19</td>
       <td>21.98</td>
+      <td>20.28</td>
+      <td>19.07</td>
       <td>6</td>
       <td>13.0</td>
-      <td>5.5</td>
-      <td>12.2</td>
-      <td>13.8</td>
-      <td>トーホウガレオン</td>
-      <td>牡5</td>
-      <td>58.0</td>
-      <td>内田博幸</td>
-      <td>先</td>
-      <td>22.8</td>
-      <td>9.6</td>
-      <td>15.6</td>
-      <td>111.1</td>
-      <td>95.1</td>
-      <td>94.0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2</td>
       <td>3</td>
-      <td>6.2</td>
-      <td>3.48</td>
       <td>39.58</td>
+      <td>39.99</td>
+      <td>43.35</td>
       <td>3</td>
       <td>6.4</td>
-      <td>3.0</td>
-      <td>6.8</td>
-      <td>NaN</td>
-      <td>ドーンコーラス</td>
-      <td>牝4</td>
-      <td>56.0</td>
-      <td>佐々木大輔</td>
-      <td>差</td>
-      <td>28.0</td>
-      <td>18.8</td>
-      <td>13.2</td>
-      <td>107.1</td>
-      <td>92.0</td>
-      <td>87.3</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>2</td>
       <td>4</td>
-      <td>-62.2</td>
-      <td>5.91</td>
       <td>21.98</td>
+      <td>20.56</td>
+      <td>20.13</td>
       <td>9</td>
       <td>16.5</td>
-      <td>5.5</td>
-      <td>12.2</td>
-      <td>13.8</td>
-      <td>ホウオウシェリー</td>
-      <td>牝4</td>
-      <td>56.0</td>
-      <td>原優介</td>
-      <td>逃</td>
-      <td>23.2</td>
-      <td>7.7</td>
-      <td>-11.4</td>
-      <td>96.7</td>
-      <td>89.6</td>
-      <td>87.2</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>3</td>
       <td>5</td>
-      <td>0.5</td>
-      <td>7.89</td>
       <td>5.25</td>
+      <td>4.03</td>
+      <td>5.92</td>
       <td>8</td>
       <td>15.4</td>
-      <td>22.9</td>
-      <td>51.1</td>
-      <td>57.7</td>
-      <td>ペッレグリーニ</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>津村明秀</td>
-      <td>先</td>
-      <td>26.0</td>
-      <td>17.5</td>
-      <td>-3.6</td>
-      <td>98.5</td>
-      <td>83.8</td>
-      <td>68.4</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>3</td>
       <td>6</td>
-      <td>-57.5</td>
-      <td>6.91</td>
       <td>28.09</td>
+      <td>32.76</td>
+      <td>30.66</td>
       <td>2</td>
       <td>5.5</td>
-      <td>4.3</td>
-      <td>9.6</td>
-      <td>10.8</td>
-      <td>メタルスピード</td>
-      <td>牡5</td>
-      <td>58.0</td>
-      <td>横山武史</td>
-      <td>先</td>
-      <td>13.2</td>
-      <td>2.5</td>
-      <td>6.8</td>
-      <td>106.0</td>
-      <td>98.0</td>
-      <td>106.0</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>4</td>
       <td>7</td>
-      <td>14.8</td>
-      <td>13.93</td>
       <td>21.98</td>
+      <td>26.27</td>
+      <td>21.74</td>
       <td>4</td>
       <td>7.9</td>
-      <td>5.5</td>
-      <td>12.2</td>
-      <td>13.8</td>
-      <td>シャンパンマーク</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>戸崎圭太</td>
-      <td>差</td>
-      <td>32.1</td>
-      <td>14.1</td>
-      <td>32.1</td>
-      <td>107.9</td>
-      <td>92.7</td>
-      <td>107.9</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>4</td>
       <td>8</td>
-      <td>-36.1</td>
-      <td>1.61</td>
       <td>44.72</td>
+      <td>47.98</td>
+      <td>52.41</td>
       <td>1</td>
       <td>3.3</td>
-      <td>2.7</td>
-      <td>NaN</td>
-      <td>6.8</td>
-      <td>ガルサブランカ</td>
-      <td>牝4</td>
-      <td>56.0</td>
-      <td>Ｃ．ルメール</td>
-      <td>先</td>
-      <td>26.1</td>
-      <td>16.4</td>
-      <td>18.0</td>
-      <td>109.3</td>
-      <td>98.5</td>
-      <td>109.3</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>5</td>
       <td>9</td>
-      <td>16.2</td>
-      <td>8.62</td>
       <td>14.67</td>
+      <td>15.10</td>
+      <td>12.79</td>
       <td>10</td>
       <td>24.1</td>
-      <td>8.2</td>
-      <td>18.3</td>
-      <td>20.7</td>
-      <td>エバーハピネス</td>
-      <td>牝5</td>
-      <td>56.0</td>
-      <td>吉田豊</td>
-      <td>追</td>
-      <td>25.3</td>
-      <td>10.2</td>
-      <td>14.4</td>
-      <td>117.1</td>
-      <td>93.1</td>
-      <td>87.3</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>5</td>
       <td>10</td>
-      <td>-45.6</td>
-      <td>11.29</td>
       <td>24.87</td>
+      <td>26.27</td>
+      <td>23.29</td>
       <td>5</td>
       <td>12.6</td>
-      <td>4.8</td>
-      <td>10.8</td>
-      <td>12.2</td>
-      <td>ウインアイオライト</td>
-      <td>牝5</td>
-      <td>56.0</td>
-      <td>横山和生</td>
-      <td>先</td>
-      <td>23.4</td>
-      <td>7.3</td>
-      <td>10.3</td>
-      <td>103.8</td>
-      <td>94.7</td>
-      <td>101.1</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>6</td>
       <td>11</td>
-      <td>69.5</td>
-      <td>1.62</td>
       <td>1.05</td>
+      <td>2.20</td>
+      <td>3.97</td>
       <td>16</td>
       <td>242.3</td>
-      <td>114.3</td>
-      <td>255.6</td>
-      <td>288.7</td>
-      <td>ビッグショータイム</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>小林凌大</td>
-      <td>NaN</td>
-      <td>-14.8</td>
-      <td>-14.8</td>
-      <td>-14.8</td>
-      <td>38.2</td>
-      <td>38.2</td>
-      <td>38.2</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>6</td>
       <td>12</td>
-      <td>16.6</td>
-      <td>11.94</td>
       <td>6.65</td>
+      <td>4.03</td>
+      <td>6.20</td>
       <td>15</td>
       <td>113.7</td>
-      <td>18.0</td>
-      <td>40.4</td>
-      <td>45.6</td>
-      <td>ステラバルセロナ</td>
-      <td>牝5</td>
-      <td>56.0</td>
-      <td>田辺裕信</td>
-      <td>差</td>
-      <td>18.0</td>
-      <td>6.1</td>
-      <td>4.4</td>
-      <td>103.0</td>
-      <td>85.8</td>
-      <td>95.6</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>7</td>
       <td>13</td>
-      <td>6.6</td>
-      <td>13.35</td>
       <td>18.03</td>
+      <td>18.36</td>
+      <td>16.67</td>
       <td>11</td>
       <td>30.1</td>
-      <td>6.7</td>
-      <td>14.9</td>
-      <td>16.8</td>
-      <td>サトノヴィレ</td>
-      <td>セ5</td>
-      <td>58.0</td>
-      <td>三浦皇成</td>
-      <td>差</td>
-      <td>23.8</td>
-      <td>11.3</td>
-      <td>23.8</td>
-      <td>110.3</td>
-      <td>96.9</td>
-      <td>105.8</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>7</td>
       <td>14</td>
-      <td>22.5</td>
-      <td>15.30</td>
       <td>9.43</td>
+      <td>6.64</td>
+      <td>7.85</td>
       <td>13</td>
       <td>52.6</td>
-      <td>12.7</td>
-      <td>28.5</td>
-      <td>32.2</td>
-      <td>ワザモノ</td>
-      <td>牡7</td>
-      <td>58.0</td>
-      <td>木幡巧也</td>
-      <td>差</td>
-      <td>29.0</td>
-      <td>14.2</td>
-      <td>-10.7</td>
-      <td>107.9</td>
-      <td>89.7</td>
-      <td>89.8</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>8</td>
       <td>15</td>
-      <td>12.3</td>
-      <td>14.23</td>
       <td>12.07</td>
+      <td>9.55</td>
+      <td>10.02</td>
       <td>12</td>
       <td>50.5</td>
-      <td>9.9</td>
-      <td>22.2</td>
-      <td>25.1</td>
-      <td>ケイケイ</td>
-      <td>セ4</td>
-      <td>58.0</td>
-      <td>大野拓弥</td>
-      <td>先</td>
-      <td>19.6</td>
-      <td>7.9</td>
-      <td>2.6</td>
-      <td>101.8</td>
-      <td>94.7</td>
-      <td>101.8</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>8</td>
       <td>16</td>
-      <td>40.7</td>
-      <td>9.35</td>
       <td>7.98</td>
+      <td>6.64</td>
+      <td>7.67</td>
       <td>14</td>
       <td>89.7</td>
-      <td>15.0</td>
-      <td>33.6</td>
-      <td>38.0</td>
-      <td>エイムフォーエース</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>北村宏司</td>
-      <td>追</td>
-      <td>31.0</td>
-      <td>21.6</td>
-      <td>27.9</td>
-      <td>110.8</td>
-      <td>98.7</td>
-      <td>100.6</td>
     </tr>
   </tbody>
 </table><br><br>
@@ -1575,413 +715,158 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>枠 番</th>
       <th>馬番</th>
-      <th>ラスト3F</th>
-      <th>v13.1 穴馬</th>
-      <th>v21.1 複勝率</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
-      <th>複勝B</th>
-      <th>◎ワイドB</th>
-      <th>〇ワイドB</th>
-      <th>馬名</th>
-      <th>性齢</th>
-      <th>斤量</th>
-      <th>騎手</th>
-      <th>脚質</th>
-      <th>上り指MAX</th>
-      <th>上り指AVG</th>
-      <th>上り指1R</th>
-      <th>スピ指MAX</th>
-      <th>スピ指AVG</th>
-      <th>スピ指1R</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1</td>
-      <td>-2.9</td>
-      <td>17.15</td>
       <td>11.68</td>
+      <td>11.11</td>
+      <td>10.32</td>
       <td>11</td>
       <td>46.1</td>
-      <td>10.3</td>
-      <td>24.8</td>
-      <td>25.1</td>
-      <td>エルゲルージ</td>
-      <td>牡6</td>
-      <td>58.0</td>
-      <td>大野拓弥</td>
-      <td>先</td>
-      <td>3.3</td>
-      <td>1.8</td>
-      <td>3.3</td>
-      <td>107.2</td>
-      <td>96.5</td>
-      <td>107.2</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1</td>
       <td>2</td>
-      <td>-21.5</td>
-      <td>3.48</td>
       <td>32.52</td>
+      <td>30.43</td>
+      <td>29.99</td>
       <td>1</td>
       <td>2.6</td>
-      <td>3.7</td>
-      <td>8.9</td>
-      <td>9.0</td>
-      <td>ウェイワードアクト</td>
-      <td>牡5</td>
-      <td>58.0</td>
-      <td>戸崎圭太</td>
-      <td>先</td>
-      <td>27.1</td>
-      <td>9.6</td>
-      <td>9.8</td>
-      <td>112.3</td>
-      <td>101.6</td>
-      <td>103.6</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2</td>
       <td>3</td>
-      <td>-2.7</td>
-      <td>4.93</td>
       <td>18.11</td>
+      <td>17.56</td>
+      <td>15.70</td>
       <td>8</td>
       <td>16.0</td>
-      <td>6.6</td>
-      <td>16.0</td>
-      <td>16.2</td>
-      <td>レディントン</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>横山武史</td>
-      <td>差</td>
-      <td>22.4</td>
-      <td>17.6</td>
-      <td>21.2</td>
-      <td>122.4</td>
-      <td>104.9</td>
-      <td>122.4</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>2</td>
       <td>4</td>
-      <td>-47.6</td>
-      <td>13.38</td>
       <td>17.01</td>
+      <td>17.56</td>
+      <td>14.97</td>
       <td>12</td>
       <td>54.7</td>
-      <td>7.1</td>
-      <td>17.0</td>
-      <td>17.3</td>
-      <td>ユティタム</td>
-      <td>牡5</td>
-      <td>59.0</td>
-      <td>佐々木大輔</td>
-      <td>先</td>
-      <td>8.1</td>
-      <td>-4.1</td>
-      <td>0.3</td>
-      <td>111.3</td>
-      <td>93.9</td>
-      <td>111.3</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>3</td>
       <td>5</td>
-      <td>9.8</td>
-      <td>7.47</td>
       <td>14.33</td>
+      <td>14.49</td>
+      <td>13.09</td>
       <td>6</td>
       <td>13.6</td>
-      <td>8.4</td>
-      <td>20.2</td>
-      <td>20.5</td>
-      <td>ドゥアイズ</td>
-      <td>牝5</td>
-      <td>57.0</td>
-      <td>Ｃ．ルメール</td>
-      <td>差</td>
-      <td>30.2</td>
-      <td>14.6</td>
-      <td>30.2</td>
-      <td>120.6</td>
-      <td>104.5</td>
-      <td>112.2</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>3</td>
       <td>6</td>
-      <td>22.0</td>
-      <td>4.43</td>
       <td>40.88</td>
+      <td>45.37</td>
+      <td>46.84</td>
       <td>4</td>
       <td>9.0</td>
-      <td>2.9</td>
-      <td>7.1</td>
-      <td>NaN</td>
-      <td>バトゥーキ</td>
-      <td>牡5</td>
-      <td>58.0</td>
-      <td>水口優也</td>
-      <td>追</td>
-      <td>18.2</td>
-      <td>10.5</td>
-      <td>18.2</td>
-      <td>116.4</td>
-      <td>101.9</td>
-      <td>116.4</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>4</td>
       <td>7</td>
-      <td>6.9</td>
-      <td>14.53</td>
       <td>17.01</td>
+      <td>17.56</td>
+      <td>13.96</td>
       <td>10</td>
       <td>29.7</td>
-      <td>7.1</td>
-      <td>17.0</td>
-      <td>17.3</td>
-      <td>タマモロック</td>
-      <td>牡5</td>
-      <td>58.0</td>
-      <td>Ｍ．ディー</td>
-      <td>差</td>
-      <td>10.8</td>
-      <td>2.7</td>
-      <td>6.2</td>
-      <td>112.7</td>
-      <td>103.1</td>
-      <td>103.2</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>4</td>
       <td>8</td>
-      <td>27.8</td>
-      <td>9.83</td>
       <td>4.57</td>
+      <td>3.87</td>
+      <td>5.94</td>
       <td>14</td>
       <td>165.0</td>
-      <td>26.3</td>
-      <td>63.3</td>
-      <td>64.2</td>
-      <td>ピースオブザライフ</td>
-      <td>牝5</td>
-      <td>56.0</td>
-      <td>武藤雅</td>
-      <td>先</td>
-      <td>12.6</td>
-      <td>3.5</td>
-      <td>0.3</td>
-      <td>101.3</td>
-      <td>86.3</td>
-      <td>68.3</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>5</td>
       <td>9</td>
-      <td>19.1</td>
-      <td>10.47</td>
       <td>9.80</td>
+      <td>6.54</td>
+      <td>8.17</td>
       <td>13</td>
       <td>127.2</td>
-      <td>12.2</td>
-      <td>29.5</td>
-      <td>30.0</td>
-      <td>ハチメンロッピ</td>
-      <td>牡5</td>
-      <td>58.0</td>
-      <td>石橋脩</td>
-      <td>差</td>
-      <td>18.9</td>
-      <td>2.6</td>
-      <td>5.9</td>
-      <td>105.3</td>
-      <td>94.4</td>
-      <td>105.3</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>5</td>
       <td>10</td>
-      <td>30.6</td>
-      <td>9.50</td>
       <td>4.57</td>
+      <td>3.87</td>
+      <td>6.35</td>
       <td>15</td>
       <td>176.2</td>
-      <td>26.3</td>
-      <td>63.3</td>
-      <td>64.2</td>
-      <td>ナチュラルハイ</td>
-      <td>牡5</td>
-      <td>60.0</td>
-      <td>原優介</td>
-      <td>差</td>
-      <td>12.1</td>
-      <td>-2.7</td>
-      <td>-9.9</td>
-      <td>104.9</td>
-      <td>89.6</td>
-      <td>74.1</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>6</td>
       <td>11</td>
-      <td>10.6</td>
-      <td>3.80</td>
       <td>41.51</td>
+      <td>45.37</td>
+      <td>47.57</td>
       <td>2</td>
       <td>5.4</td>
-      <td>2.9</td>
-      <td>NaN</td>
-      <td>7.1</td>
-      <td>ハビレ</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>三浦皇成</td>
-      <td>差</td>
-      <td>17.4</td>
-      <td>8.3</td>
-      <td>17.4</td>
-      <td>118.4</td>
-      <td>99.3</td>
-      <td>118.4</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>6</td>
       <td>12</td>
-      <td>11.7</td>
-      <td>9.36</td>
       <td>7.07</td>
+      <td>5.08</td>
+      <td>6.81</td>
       <td>9</td>
       <td>16.5</td>
-      <td>17.0</td>
-      <td>40.9</td>
-      <td>41.5</td>
-      <td>アサヒ</td>
-      <td>牡6</td>
-      <td>57.0</td>
-      <td>田辺裕信</td>
-      <td>差</td>
-      <td>23.2</td>
-      <td>7.2</td>
-      <td>-12.2</td>
-      <td>104.9</td>
-      <td>90.7</td>
-      <td>88.2</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>7</td>
       <td>13</td>
-      <td>0.3</td>
-      <td>10.04</td>
       <td>22.03</td>
+      <td>21.63</td>
+      <td>20.88</td>
       <td>5</td>
       <td>10.3</td>
-      <td>5.4</td>
-      <td>13.1</td>
-      <td>13.3</td>
-      <td>サルヴァトーレ</td>
-      <td>牡5</td>
-      <td>58.0</td>
-      <td>Ｄ．レーン</td>
-      <td>差</td>
-      <td>22.1</td>
-      <td>12.0</td>
-      <td>8.0</td>
-      <td>111.8</td>
-      <td>100.1</td>
-      <td>108.3</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>7</td>
       <td>14</td>
-      <td>10.1</td>
-      <td>9.98</td>
       <td>4.57</td>
+      <td>3.60</td>
+      <td>5.68</td>
       <td>16</td>
       <td>177.4</td>
-      <td>26.3</td>
-      <td>63.3</td>
-      <td>64.2</td>
-      <td>コンバスチョン</td>
-      <td>セ6</td>
-      <td>60.0</td>
-      <td>木幡巧也</td>
-      <td>先</td>
-      <td>19.7</td>
-      <td>-0.0</td>
-      <td>6.9</td>
-      <td>106.9</td>
-      <td>91.4</td>
-      <td>106.9</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>8</td>
       <td>15</td>
-      <td>-39.6</td>
-      <td>7.12</td>
       <td>37.33</td>
+      <td>38.39</td>
+      <td>39.38</td>
       <td>3</td>
       <td>7.8</td>
-      <td>3.2</td>
-      <td>7.7</td>
-      <td>7.9</td>
-      <td>タガノエスコート</td>
-      <td>牡6</td>
-      <td>58.0</td>
-      <td>北村宏司</td>
-      <td>先</td>
-      <td>19.9</td>
-      <td>9.8</td>
-      <td>-7.5</td>
-      <td>111.7</td>
-      <td>100.1</td>
-      <td>80.9</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>8</td>
       <td>16</td>
-      <td>-54.1</td>
-      <td>15.04</td>
       <td>17.01</td>
+      <td>17.56</td>
+      <td>14.37</td>
       <td>7</td>
       <td>15.7</td>
-      <td>7.1</td>
-      <td>17.0</td>
-      <td>17.3</td>
-      <td>カズプレスト</td>
-      <td>牡6</td>
-      <td>57.0</td>
-      <td>津村明秀</td>
-      <td>先</td>
-      <td>4.5</td>
-      <td>-2.1</td>
-      <td>-11.0</td>
-      <td>116.7</td>
-      <td>99.7</td>
-      <td>88.4</td>
     </tr>
   </tbody>
 </table><br><br>
@@ -1994,389 +879,149 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>枠 番</th>
       <th>馬番</th>
-      <th>ラスト3F</th>
-      <th>v13.1 穴馬</th>
-      <th>v21.1 複勝率</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
-      <th>複勝B</th>
-      <th>◎ワイドB</th>
-      <th>〇ワイドB</th>
-      <th>馬名</th>
-      <th>性齢</th>
-      <th>斤量</th>
-      <th>騎手</th>
-      <th>脚質</th>
-      <th>上り指MAX</th>
-      <th>上り指AVG</th>
-      <th>上り指1R</th>
-      <th>スピ指MAX</th>
-      <th>スピ指AVG</th>
-      <th>スピ指1R</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1</td>
-      <td>-7.9</td>
-      <td>10.34</td>
       <td>14.69</td>
+      <td>12.17</td>
+      <td>11.46</td>
       <td>12</td>
       <td>55.1</td>
-      <td>8.2</td>
-      <td>16.1</td>
-      <td>18.5</td>
-      <td>シグムンド</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>内田博幸</td>
-      <td>先</td>
-      <td>11.3</td>
-      <td>5.2</td>
-      <td>0.3</td>
-      <td>98.8</td>
-      <td>80.0</td>
-      <td>98.8</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>2</td>
-      <td>-30.5</td>
-      <td>11.50</td>
       <td>16.98</td>
+      <td>19.23</td>
+      <td>14.94</td>
       <td>3</td>
       <td>8.8</td>
-      <td>7.1</td>
-      <td>13.9</td>
-      <td>16.0</td>
-      <td>ポルポラジール</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>Ｃ．ルメール</td>
-      <td>先</td>
-      <td>-4.8</td>
-      <td>-8.0</td>
-      <td>-14.6</td>
-      <td>90.4</td>
-      <td>81.8</td>
-      <td>88.6</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2</td>
       <td>3</td>
-      <td>15.3</td>
-      <td>14.36</td>
       <td>21.22</td>
+      <td>19.29</td>
+      <td>18.86</td>
       <td>6</td>
       <td>12.8</td>
-      <td>5.7</td>
-      <td>11.1</td>
-      <td>12.8</td>
-      <td>レッドリベルタ</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>戸崎圭太</td>
-      <td>差</td>
-      <td>6.5</td>
-      <td>-4.7</td>
-      <td>-10.0</td>
-      <td>89.3</td>
-      <td>84.1</td>
-      <td>82.0</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>3</td>
       <td>4</td>
-      <td>-12.3</td>
-      <td>5.78</td>
       <td>8.72</td>
+      <td>6.51</td>
+      <td>8.08</td>
       <td>11</td>
       <td>51.1</td>
-      <td>13.8</td>
-      <td>27.1</td>
-      <td>31.1</td>
-      <td>ユアフラッシュ</td>
-      <td>牝5</td>
-      <td>53.0</td>
-      <td>▲川端海翼</td>
-      <td>先</td>
-      <td>8.1</td>
-      <td>-6.1</td>
-      <td>8.1</td>
-      <td>90.9</td>
-      <td>65.1</td>
-      <td>56.4</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>3</td>
       <td>5</td>
-      <td>1.1</td>
-      <td>10.16</td>
       <td>10.09</td>
+      <td>7.17</td>
+      <td>8.73</td>
       <td>15</td>
       <td>134.7</td>
-      <td>11.9</td>
-      <td>23.4</td>
-      <td>26.9</td>
-      <td>オセアバトルプラン</td>
-      <td>牡5</td>
-      <td>55.0</td>
-      <td>▲上里直汰</td>
-      <td>先</td>
-      <td>3.5</td>
-      <td>-16.4</td>
-      <td>3.5</td>
-      <td>87.5</td>
-      <td>79.4</td>
-      <td>78.1</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>4</td>
       <td>6</td>
-      <td>24.8</td>
-      <td>14.05</td>
       <td>14.69</td>
+      <td>12.17</td>
+      <td>12.00</td>
       <td>13</td>
       <td>88.7</td>
-      <td>8.2</td>
-      <td>16.1</td>
-      <td>18.5</td>
-      <td>マウンテンエース</td>
-      <td>牡5</td>
-      <td>58.0</td>
-      <td>佐々木大輔</td>
-      <td>追</td>
-      <td>11.6</td>
-      <td>0.4</td>
-      <td>7.0</td>
-      <td>101.1</td>
-      <td>82.1</td>
-      <td>101.1</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>4</td>
       <td>7</td>
-      <td>2.5</td>
-      <td>13.23</td>
       <td>28.51</td>
+      <td>30.02</td>
+      <td>28.39</td>
       <td>4</td>
       <td>11.9</td>
-      <td>4.2</td>
-      <td>8.3</td>
-      <td>9.5</td>
-      <td>キングオブフジ</td>
-      <td>牡4</td>
-      <td>56.0</td>
-      <td>△長浜鴻緒</td>
-      <td>差</td>
-      <td>3.0</td>
-      <td>-2.1</td>
-      <td>2.6</td>
-      <td>100.0</td>
-      <td>86.7</td>
-      <td>100.0</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>5</td>
       <td>8</td>
-      <td>27.5</td>
-      <td>14.74</td>
       <td>12.38</td>
+      <td>10.04</td>
+      <td>10.16</td>
       <td>14</td>
       <td>107.8</td>
-      <td>9.7</td>
-      <td>19.1</td>
-      <td>21.9</td>
-      <td>ルーラーリッチ</td>
-      <td>セ5</td>
-      <td>58.0</td>
-      <td>吉田豊</td>
-      <td>差</td>
-      <td>7.8</td>
-      <td>-2.6</td>
-      <td>7.8</td>
-      <td>100.3</td>
-      <td>85.6</td>
-      <td>100.3</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>5</td>
       <td>9</td>
-      <td>10.0</td>
-      <td>14.10</td>
       <td>44.21</td>
+      <td>50.20</td>
+      <td>54.19</td>
       <td>7</td>
       <td>14.6</td>
-      <td>2.7</td>
-      <td>5.3</td>
-      <td>NaN</td>
-      <td>タナサンブラック</td>
-      <td>牡5</td>
-      <td>58.0</td>
-      <td>三浦皇成</td>
-      <td>先</td>
-      <td>9.2</td>
-      <td>2.9</td>
-      <td>9.2</td>
-      <td>93.0</td>
-      <td>91.0</td>
-      <td>87.3</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>6</td>
       <td>10</td>
-      <td>17.7</td>
-      <td>11.81</td>
       <td>11.37</td>
+      <td>9.76</td>
+      <td>9.37</td>
       <td>10</td>
       <td>48.6</td>
-      <td>10.6</td>
-      <td>20.8</td>
-      <td>23.9</td>
-      <td>ソムリエ</td>
-      <td>牡5</td>
-      <td>57.0</td>
-      <td>☆横山琉人</td>
-      <td>差</td>
-      <td>6.6</td>
-      <td>-3.9</td>
-      <td>-4.7</td>
-      <td>77.4</td>
-      <td>69.5</td>
-      <td>73.3</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>6</td>
       <td>11</td>
-      <td>-14.2</td>
-      <td>4.22</td>
       <td>28.51</td>
+      <td>31.68</td>
+      <td>31.02</td>
       <td>2</td>
       <td>6.7</td>
-      <td>4.2</td>
-      <td>8.3</td>
-      <td>9.5</td>
-      <td>ロードブレイズ</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>横山和生</td>
-      <td>差</td>
-      <td>3.4</td>
-      <td>-4.0</td>
-      <td>3.4</td>
-      <td>89.8</td>
-      <td>79.6</td>
-      <td>89.8</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>7</td>
       <td>12</td>
-      <td>18.8</td>
-      <td>8.13</td>
       <td>16.98</td>
+      <td>19.23</td>
+      <td>15.94</td>
       <td>5</td>
       <td>12.4</td>
-      <td>7.1</td>
-      <td>13.9</td>
-      <td>16.0</td>
-      <td>ホウオウベルクソン</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>Ｍ．ディー</td>
-      <td>差</td>
-      <td>8.6</td>
-      <td>1.4</td>
-      <td>8.6</td>
-      <td>105.6</td>
-      <td>82.5</td>
-      <td>105.6</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>7</td>
       <td>13</td>
-      <td>-14.5</td>
-      <td>1.33</td>
       <td>50.81</td>
+      <td>56.44</td>
+      <td>59.09</td>
       <td>1</td>
       <td>1.8</td>
-      <td>2.4</td>
-      <td>NaN</td>
-      <td>5.3</td>
-      <td>タイセイアディクト</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>Ｄ．レーン</td>
-      <td>差</td>
-      <td>13.1</td>
-      <td>5.5</td>
-      <td>13.1</td>
-      <td>112.4</td>
-      <td>87.5</td>
-      <td>112.4</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>8</td>
       <td>14</td>
-      <td>30.6</td>
-      <td>16.13</td>
       <td>14.69</td>
+      <td>12.17</td>
+      <td>11.83</td>
       <td>8</td>
       <td>31.9</td>
-      <td>8.2</td>
-      <td>16.1</td>
-      <td>18.5</td>
-      <td>インペリアルライン</td>
-      <td>セ6</td>
-      <td>58.0</td>
-      <td>原優介</td>
-      <td>差</td>
-      <td>17.4</td>
-      <td>2.0</td>
-      <td>-12.3</td>
-      <td>96.0</td>
-      <td>81.4</td>
-      <td>77.6</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>8</td>
       <td>15</td>
-      <td>-42.4</td>
-      <td>9.35</td>
       <td>6.11</td>
+      <td>3.94</td>
+      <td>5.94</td>
       <td>9</td>
       <td>34.3</td>
-      <td>19.6</td>
-      <td>38.7</td>
-      <td>44.4</td>
-      <td>ユメハハテシナク</td>
-      <td>牡5</td>
-      <td>58.0</td>
-      <td>石川裕紀人</td>
-      <td>先</td>
-      <td>12.9</td>
-      <td>-12.5</td>
-      <td>-31.4</td>
-      <td>90.4</td>
-      <td>72.0</td>
-      <td>68.8</td>
     </tr>
   </tbody>
 </table><br><br>
@@ -2389,413 +1034,158 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>枠 番</th>
       <th>馬番</th>
-      <th>ラスト3F</th>
-      <th>v13.1 穴馬</th>
-      <th>v21.1 複勝率</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
-      <th>複勝B</th>
-      <th>◎ワイドB</th>
-      <th>〇ワイドB</th>
-      <th>馬名</th>
-      <th>性齢</th>
-      <th>斤量</th>
-      <th>騎手</th>
-      <th>脚質</th>
-      <th>上り指MAX</th>
-      <th>上り指AVG</th>
-      <th>上り指1R</th>
-      <th>スピ指MAX</th>
-      <th>スピ指AVG</th>
-      <th>スピ指1R</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1</td>
-      <td>15.8</td>
-      <td>7.51</td>
       <td>4.07</td>
+      <td>2.35</td>
+      <td>4.33</td>
       <td>9</td>
       <td>19.7</td>
-      <td>29.5</td>
-      <td>88.4</td>
-      <td>97.2</td>
-      <td>ベルメサイア</td>
-      <td>牝4</td>
-      <td>55.0</td>
-      <td>☆高杉吏麒</td>
-      <td>先</td>
-      <td>2.0</td>
-      <td>-21.7</td>
-      <td>2.0</td>
-      <td>77.1</td>
-      <td>57.7</td>
-      <td>70.6</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1</td>
       <td>2</td>
-      <td>-34.5</td>
-      <td>11.00</td>
       <td>19.62</td>
+      <td>18.70</td>
+      <td>18.41</td>
       <td>4</td>
       <td>7.0</td>
-      <td>6.1</td>
-      <td>18.3</td>
-      <td>20.2</td>
-      <td>ウィップスティッチ</td>
-      <td>牝4</td>
-      <td>56.0</td>
-      <td>北村友一</td>
-      <td>先</td>
-      <td>-11.0</td>
-      <td>-18.7</td>
-      <td>-18.0</td>
-      <td>79.2</td>
-      <td>71.9</td>
-      <td>78.8</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2</td>
       <td>3</td>
-      <td>38.4</td>
-      <td>12.93</td>
       <td>28.34</td>
+      <td>28.55</td>
+      <td>27.61</td>
       <td>5</td>
       <td>9.1</td>
-      <td>4.2</td>
-      <td>12.7</td>
-      <td>14.0</td>
-      <td>ウォーターリーダー</td>
-      <td>牡5</td>
-      <td>58.0</td>
-      <td>武豊</td>
-      <td>差</td>
-      <td>10.7</td>
-      <td>-0.0</td>
-      <td>10.7</td>
-      <td>83.6</td>
-      <td>78.1</td>
-      <td>83.6</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>2</td>
       <td>4</td>
-      <td>9.4</td>
-      <td>10.10</td>
       <td>8.89</td>
+      <td>3.90</td>
+      <td>6.26</td>
       <td>15</td>
       <td>70.3</td>
-      <td>13.5</td>
-      <td>40.5</td>
-      <td>44.5</td>
-      <td>シュニー</td>
-      <td>牝5</td>
-      <td>56.0</td>
-      <td>団野大成</td>
-      <td>差</td>
-      <td>-4.9</td>
-      <td>-14.0</td>
-      <td>-4.9</td>
-      <td>73.7</td>
-      <td>67.6</td>
-      <td>72.6</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>3</td>
       <td>5</td>
-      <td>-13.2</td>
-      <td>22.81</td>
       <td>29.39</td>
+      <td>35.30</td>
+      <td>35.43</td>
       <td>12</td>
       <td>40.2</td>
-      <td>4.1</td>
-      <td>12.2</td>
-      <td>13.5</td>
-      <td>ブーヤカ</td>
-      <td>セ4</td>
-      <td>58.0</td>
-      <td>岩田望来</td>
-      <td>先</td>
-      <td>2.3</td>
-      <td>-13.8</td>
-      <td>-1.6</td>
-      <td>104.2</td>
-      <td>79.3</td>
-      <td>104.2</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>3</td>
       <td>6</td>
-      <td>-43.0</td>
-      <td>14.38</td>
       <td>17.51</td>
+      <td>17.70</td>
+      <td>14.47</td>
       <td>7</td>
       <td>15.3</td>
-      <td>6.9</td>
-      <td>20.6</td>
-      <td>22.6</td>
-      <td>ガウラスパーク</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>亀田温心</td>
-      <td>先</td>
-      <td>-5.6</td>
-      <td>-20.5</td>
-      <td>-5.6</td>
-      <td>106.2</td>
-      <td>76.5</td>
-      <td>106.2</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>4</td>
       <td>7</td>
-      <td>-30.6</td>
-      <td>12.53</td>
       <td>33.34</td>
+      <td>38.70</td>
+      <td>41.52</td>
       <td>1</td>
       <td>4.4</td>
-      <td>3.6</td>
-      <td>NaN</td>
-      <td>11.9</td>
-      <td>ニホンピロカラット</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>田口貫太</td>
-      <td>先</td>
-      <td>6.4</td>
-      <td>-15.9</td>
-      <td>6.4</td>
-      <td>93.8</td>
-      <td>78.0</td>
-      <td>86.7</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>4</td>
       <td>8</td>
-      <td>56.3</td>
-      <td>18.06</td>
       <td>17.51</td>
+      <td>17.70</td>
+      <td>14.34</td>
       <td>8</td>
       <td>16.3</td>
-      <td>6.9</td>
-      <td>20.6</td>
-      <td>22.6</td>
-      <td>ハイクライテリア</td>
-      <td>セ5</td>
-      <td>58.0</td>
-      <td>国分優作</td>
-      <td>追</td>
-      <td>3.7</td>
-      <td>-2.5</td>
-      <td>3.6</td>
-      <td>82.5</td>
-      <td>80.4</td>
-      <td>78.9</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>5</td>
       <td>9</td>
-      <td>31.1</td>
-      <td>11.78</td>
       <td>2.95</td>
+      <td>2.13</td>
+      <td>3.73</td>
       <td>14</td>
       <td>63.1</td>
-      <td>40.7</td>
-      <td>122.0</td>
-      <td>134.1</td>
-      <td>クリノミニスター</td>
-      <td>牡6</td>
-      <td>58.0</td>
-      <td>菅原明良</td>
-      <td>差</td>
-      <td>-7.8</td>
-      <td>-23.9</td>
-      <td>-7.8</td>
-      <td>94.3</td>
-      <td>72.3</td>
-      <td>94.3</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>5</td>
       <td>10</td>
-      <td>-60.8</td>
-      <td>10.26</td>
       <td>29.39</td>
+      <td>29.18</td>
+      <td>29.07</td>
       <td>6</td>
       <td>11.7</td>
-      <td>4.1</td>
-      <td>12.2</td>
-      <td>13.5</td>
-      <td>ランスオブセヘル</td>
-      <td>牝4</td>
-      <td>55.0</td>
-      <td>☆吉村誠之助</td>
-      <td>逃</td>
-      <td>-12.7</td>
-      <td>-20.7</td>
-      <td>-12.7</td>
-      <td>85.5</td>
-      <td>74.0</td>
-      <td>78.8</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>6</td>
       <td>11</td>
-      <td>21.4</td>
-      <td>13.40</td>
       <td>10.40</td>
+      <td>6.43</td>
+      <td>7.76</td>
       <td>16</td>
       <td>147.5</td>
-      <td>11.5</td>
-      <td>34.6</td>
-      <td>38.0</td>
-      <td>イエスウィズキャン</td>
-      <td>牡5</td>
-      <td>58.0</td>
-      <td>川須栄彦</td>
-      <td>先</td>
-      <td>-1.0</td>
-      <td>-14.2</td>
-      <td>-8.5</td>
-      <td>83.6</td>
-      <td>73.8</td>
-      <td>66.8</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>6</td>
       <td>12</td>
-      <td>-31.8</td>
-      <td>7.99</td>
       <td>30.34</td>
+      <td>35.30</td>
+      <td>36.42</td>
       <td>2</td>
       <td>5.6</td>
-      <td>4.0</td>
-      <td>11.9</td>
-      <td>NaN</td>
-      <td>モンシェリ</td>
-      <td>牝4</td>
-      <td>56.0</td>
-      <td>鮫島克駿</td>
-      <td>先</td>
-      <td>1.0</td>
-      <td>-15.0</td>
-      <td>1.0</td>
-      <td>80.8</td>
-      <td>69.1</td>
-      <td>80.8</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>7</td>
       <td>13</td>
-      <td>22.1</td>
-      <td>6.06</td>
       <td>28.96</td>
+      <td>28.55</td>
+      <td>28.04</td>
       <td>13</td>
       <td>61.0</td>
-      <td>4.1</td>
-      <td>12.4</td>
-      <td>13.7</td>
-      <td>アスクヴィヴァユー</td>
-      <td>牡6</td>
-      <td>57.0</td>
-      <td>☆西塚洸二</td>
-      <td>差</td>
-      <td>14.6</td>
-      <td>2.6</td>
-      <td>7.0</td>
-      <td>102.2</td>
-      <td>84.9</td>
-      <td>95.7</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>7</td>
       <td>14</td>
-      <td>-17.9</td>
-      <td>13.07</td>
       <td>12.77</td>
+      <td>11.20</td>
+      <td>10.88</td>
       <td>11</td>
       <td>26.0</td>
-      <td>9.4</td>
-      <td>28.2</td>
-      <td>31.0</td>
-      <td>ダンツビガー</td>
-      <td>牡5</td>
-      <td>58.0</td>
-      <td>古川吉洋</td>
-      <td>逃</td>
-      <td>-5.3</td>
-      <td>-21.8</td>
-      <td>-28.2</td>
-      <td>83.6</td>
-      <td>66.6</td>
-      <td>64.9</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>8</td>
       <td>15</td>
-      <td>16.5</td>
-      <td>17.07</td>
       <td>16.13</td>
+      <td>17.70</td>
+      <td>13.65</td>
       <td>10</td>
       <td>22.7</td>
-      <td>7.4</td>
-      <td>22.3</td>
-      <td>24.5</td>
-      <td>エフエイト</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>和田竜二</td>
-      <td>差</td>
-      <td>2.4</td>
-      <td>-9.6</td>
-      <td>2.4</td>
-      <td>85.5</td>
-      <td>78.4</td>
-      <td>81.2</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>8</td>
       <td>16</td>
-      <td>-0.2</td>
-      <td>14.09</td>
       <td>10.40</td>
+      <td>6.60</td>
+      <td>8.08</td>
       <td>3</td>
       <td>5.6</td>
-      <td>11.5</td>
-      <td>34.6</td>
-      <td>38.0</td>
-      <td>ロンシャンクイーン</td>
-      <td>牝5</td>
-      <td>56.0</td>
-      <td>坂井瑠星</td>
-      <td>先</td>
-      <td>-6.0</td>
-      <td>-15.3</td>
-      <td>-6.0</td>
-      <td>78.4</td>
-      <td>68.8</td>
-      <td>74.9</td>
     </tr>
   </tbody>
 </table><br><br>
@@ -2808,173 +1198,68 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>枠 番</th>
       <th>馬番</th>
-      <th>ラスト3F</th>
-      <th>v13.1 穴馬</th>
-      <th>v21.1 複勝率</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
-      <th>複勝B</th>
-      <th>◎ワイドB</th>
-      <th>〇ワイドB</th>
-      <th>馬名</th>
-      <th>性齢</th>
-      <th>斤量</th>
-      <th>騎手</th>
-      <th>脚質</th>
-      <th>上り指MAX</th>
-      <th>上り指AVG</th>
-      <th>上り指1R</th>
-      <th>スピ指MAX</th>
-      <th>スピ指AVG</th>
-      <th>スピ指1R</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1</td>
-      <td>0.6</td>
-      <td>3.40</td>
       <td>75.46</td>
+      <td>102.00</td>
+      <td>105.79</td>
       <td>4</td>
       <td>5.0</td>
-      <td>1.6</td>
-      <td>NaN</td>
-      <td>2.8</td>
-      <td>ハニーコム</td>
-      <td>牝4</td>
-      <td>56.0</td>
-      <td>Ａ．シュタルケ</td>
-      <td>追</td>
-      <td>17.2</td>
-      <td>10.9</td>
-      <td>12.5</td>
-      <td>111.4</td>
-      <td>94.9</td>
-      <td>95.5</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>2</td>
-      <td>-46.5</td>
-      <td>11.53</td>
       <td>53.85</td>
+      <td>57.47</td>
+      <td>56.91</td>
       <td>2</td>
       <td>4.6</td>
-      <td>2.2</td>
-      <td>3.0</td>
-      <td>3.9</td>
-      <td>タケトンボ</td>
-      <td>牝6</td>
-      <td>56.0</td>
-      <td>丹内祐次</td>
-      <td>先</td>
-      <td>15.8</td>
-      <td>6.5</td>
-      <td>15.8</td>
-      <td>105.8</td>
-      <td>90.1</td>
-      <td>105.8</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>3</td>
-      <td>7.1</td>
-      <td>5.67</td>
       <td>57.25</td>
+      <td>67.01</td>
+      <td>60.32</td>
       <td>1</td>
       <td>1.7</td>
-      <td>2.1</td>
-      <td>2.8</td>
-      <td>NaN</td>
-      <td>ステラクラウン</td>
-      <td>牝4</td>
-      <td>56.0</td>
-      <td>岩田康誠</td>
-      <td>差</td>
-      <td>21.8</td>
-      <td>14.8</td>
-      <td>16.7</td>
-      <td>98.6</td>
-      <td>95.4</td>
-      <td>96.7</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>4</td>
-      <td>9.1</td>
-      <td>11.91</td>
       <td>49.92</td>
+      <td>46.82</td>
+      <td>44.28</td>
       <td>3</td>
       <td>4.9</td>
-      <td>2.4</td>
-      <td>3.2</td>
-      <td>4.2</td>
-      <td>ファミリーツリー</td>
-      <td>牝4</td>
-      <td>56.0</td>
-      <td>武豊</td>
-      <td>先</td>
-      <td>18.5</td>
-      <td>7.9</td>
-      <td>18.5</td>
-      <td>104.0</td>
-      <td>89.7</td>
-      <td>104.0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>5</td>
-      <td>-33.5</td>
-      <td>10.91</td>
       <td>40.29</td>
+      <td>21.09</td>
+      <td>22.68</td>
       <td>5</td>
       <td>13.9</td>
-      <td>3.0</td>
-      <td>3.9</td>
-      <td>5.2</td>
-      <td>エコテーラー</td>
-      <td>牝4</td>
-      <td>56.0</td>
-      <td>池添謙一</td>
-      <td>逃</td>
-      <td>10.8</td>
-      <td>4.8</td>
-      <td>3.4</td>
-      <td>102.9</td>
-      <td>91.6</td>
-      <td>88.5</td>
     </tr>
     <tr>
       <th>5</th>
       <td>6</td>
-      <td>6</td>
-      <td>43.9</td>
-      <td>10.83</td>
       <td>23.23</td>
+      <td>5.60</td>
+      <td>10.02</td>
       <td>6</td>
       <td>123.2</td>
-      <td>5.2</td>
-      <td>6.8</td>
-      <td>9.0</td>
-      <td>ゴーツウキリシマ</td>
-      <td>牝5</td>
-      <td>56.0</td>
-      <td>黒岩悠</td>
-      <td>差</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>0.0</td>
     </tr>
   </tbody>
 </table><br><br>
@@ -2987,461 +1272,176 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>枠 番</th>
       <th>馬番</th>
-      <th>ラスト3F</th>
-      <th>v13.1 穴馬</th>
-      <th>v21.1 複勝率</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
-      <th>複勝B</th>
-      <th>◎ワイドB</th>
-      <th>〇ワイドB</th>
-      <th>馬名</th>
-      <th>性齢</th>
-      <th>斤量</th>
-      <th>騎手</th>
-      <th>脚質</th>
-      <th>上り指MAX</th>
-      <th>上り指AVG</th>
-      <th>上り指1R</th>
-      <th>スピ指MAX</th>
-      <th>スピ指AVG</th>
-      <th>スピ指1R</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1</td>
-      <td>15.9</td>
-      <td>9.39</td>
       <td>1.46</td>
+      <td>2.11</td>
+      <td>4.09</td>
       <td>17</td>
       <td>235.1</td>
-      <td>82.2</td>
-      <td>256.8</td>
-      <td>264.9</td>
-      <td>フェゲフォイア</td>
-      <td>牡5</td>
-      <td>58.0</td>
-      <td>菱田裕二</td>
-      <td>差</td>
-      <td>7.2</td>
-      <td>-7.8</td>
-      <td>-2.8</td>
-      <td>94.9</td>
-      <td>71.4</td>
-      <td>61.1</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1</td>
       <td>2</td>
-      <td>1.8</td>
-      <td>16.40</td>
       <td>24.68</td>
+      <td>24.52</td>
+      <td>22.28</td>
       <td>9</td>
       <td>18.9</td>
-      <td>4.9</td>
-      <td>15.2</td>
-      <td>15.7</td>
-      <td>サク</td>
-      <td>牝6</td>
-      <td>56.0</td>
-      <td>幸英明</td>
-      <td>追</td>
-      <td>26.3</td>
-      <td>12.3</td>
-      <td>26.3</td>
-      <td>103.8</td>
-      <td>95.9</td>
-      <td>103.8</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2</td>
       <td>3</td>
-      <td>-1.5</td>
-      <td>12.55</td>
       <td>28.41</td>
+      <td>31.31</td>
+      <td>30.54</td>
       <td>6</td>
       <td>14.2</td>
-      <td>4.2</td>
-      <td>13.2</td>
-      <td>13.6</td>
-      <td>ラガークイン</td>
-      <td>牝4</td>
-      <td>56.0</td>
-      <td>田口貫太</td>
-      <td>差</td>
-      <td>27.3</td>
-      <td>16.7</td>
-      <td>23.3</td>
-      <td>111.2</td>
-      <td>90.9</td>
-      <td>83.0</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>2</td>
       <td>4</td>
-      <td>-50.6</td>
-      <td>6.24</td>
       <td>25.04</td>
+      <td>24.52</td>
+      <td>23.17</td>
       <td>3</td>
       <td>6.8</td>
-      <td>4.8</td>
-      <td>15.0</td>
-      <td>15.4</td>
-      <td>ダノンクロム</td>
-      <td>牡5</td>
-      <td>58.0</td>
-      <td>坂井瑠星</td>
-      <td>先</td>
-      <td>26.6</td>
-      <td>9.7</td>
-      <td>26.6</td>
-      <td>114.0</td>
-      <td>88.4</td>
-      <td>114.0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>3</td>
       <td>5</td>
-      <td>-17.1</td>
-      <td>11.37</td>
       <td>25.04</td>
+      <td>24.52</td>
+      <td>22.55</td>
       <td>5</td>
       <td>8.3</td>
-      <td>4.8</td>
-      <td>15.0</td>
-      <td>15.4</td>
-      <td>マーシーラン</td>
-      <td>牝4</td>
-      <td>56.0</td>
-      <td>藤岡佑介</td>
-      <td>差</td>
-      <td>23.3</td>
-      <td>13.9</td>
-      <td>23.3</td>
-      <td>104.2</td>
-      <td>92.4</td>
-      <td>93.5</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>3</td>
       <td>6</td>
-      <td>-13.0</td>
-      <td>9.00</td>
       <td>32.00</td>
+      <td>34.32</td>
+      <td>36.64</td>
       <td>4</td>
       <td>7.0</td>
-      <td>3.8</td>
-      <td>NaN</td>
-      <td>12.1</td>
-      <td>スカイサーベイ</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>松山弘平</td>
-      <td>先</td>
-      <td>17.1</td>
-      <td>2.7</td>
-      <td>-16.3</td>
-      <td>105.6</td>
-      <td>93.3</td>
-      <td>73.7</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>4</td>
       <td>7</td>
-      <td>12.7</td>
-      <td>12.54</td>
       <td>20.26</td>
+      <td>19.34</td>
+      <td>17.87</td>
       <td>7</td>
       <td>15.3</td>
-      <td>5.9</td>
-      <td>18.5</td>
-      <td>19.1</td>
-      <td>タガノヘラクレス</td>
-      <td>牡4</td>
-      <td>57.0</td>
-      <td>☆高杉吏麒</td>
-      <td>差</td>
-      <td>25.4</td>
-      <td>14.3</td>
-      <td>23.3</td>
-      <td>105.1</td>
-      <td>95.4</td>
-      <td>105.1</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>4</td>
       <td>8</td>
-      <td>40.5</td>
-      <td>7.34</td>
       <td>8.86</td>
+      <td>8.20</td>
+      <td>7.88</td>
       <td>16</td>
       <td>229.3</td>
-      <td>13.5</td>
-      <td>42.3</td>
-      <td>43.6</td>
-      <td>ピエナオルフェ</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>城戸義政</td>
-      <td>追</td>
-      <td>24.8</td>
-      <td>6.8</td>
-      <td>24.8</td>
-      <td>101.4</td>
-      <td>72.0</td>
-      <td>101.4</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>5</td>
       <td>9</td>
-      <td>20.3</td>
-      <td>14.44</td>
       <td>7.58</td>
+      <td>5.85</td>
+      <td>7.14</td>
       <td>13</td>
       <td>84.5</td>
-      <td>15.8</td>
-      <td>49.5</td>
-      <td>51.0</td>
-      <td>サマーアゲイン</td>
-      <td>牡4</td>
-      <td>54.0</td>
-      <td>★河原田菜々</td>
-      <td>先</td>
-      <td>10.9</td>
-      <td>3.4</td>
-      <td>-18.0</td>
-      <td>82.3</td>
-      <td>74.0</td>
-      <td>66.4</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>5</td>
       <td>10</td>
-      <td>35.7</td>
-      <td>11.87</td>
       <td>7.58</td>
+      <td>5.85</td>
+      <td>7.00</td>
       <td>11</td>
       <td>56.5</td>
-      <td>15.8</td>
-      <td>49.5</td>
-      <td>51.0</td>
-      <td>モアニ</td>
-      <td>牝4</td>
-      <td>54.0</td>
-      <td>◇永島まなみ</td>
-      <td>差</td>
-      <td>8.8</td>
-      <td>4.0</td>
-      <td>6.9</td>
-      <td>80.3</td>
-      <td>76.4</td>
-      <td>80.1</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>6</td>
       <td>11</td>
-      <td>-13.3</td>
-      <td>12.07</td>
       <td>25.04</td>
+      <td>27.21</td>
+      <td>26.07</td>
       <td>10</td>
       <td>36.4</td>
-      <td>4.8</td>
-      <td>15.0</td>
-      <td>15.4</td>
-      <td>バーケンティン</td>
-      <td>牡4</td>
-      <td>57.0</td>
-      <td>☆吉村誠之助</td>
-      <td>先</td>
-      <td>14.2</td>
-      <td>6.3</td>
-      <td>14.2</td>
-      <td>100.5</td>
-      <td>89.2</td>
-      <td>100.5</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>6</td>
       <td>12</td>
-      <td>-16.0</td>
-      <td>6.32</td>
       <td>3.47</td>
+      <td>2.50</td>
+      <td>4.50</td>
       <td>12</td>
       <td>77.7</td>
-      <td>34.6</td>
-      <td>108.1</td>
-      <td>111.4</td>
-      <td>バレル</td>
-      <td>牡6</td>
-      <td>55.0</td>
-      <td>▲鷲頭虎太</td>
-      <td>先</td>
-      <td>-10.4</td>
-      <td>-19.9</td>
-      <td>-25.8</td>
-      <td>81.3</td>
-      <td>73.1</td>
-      <td>70.8</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>7</td>
       <td>13</td>
-      <td>-46.2</td>
-      <td>5.70</td>
       <td>25.04</td>
+      <td>24.52</td>
+      <td>23.21</td>
       <td>2</td>
       <td>6.0</td>
-      <td>4.8</td>
-      <td>15.0</td>
-      <td>15.4</td>
-      <td>ミッキースターダム</td>
-      <td>セ4</td>
-      <td>58.0</td>
-      <td>丹内祐次</td>
-      <td>差</td>
-      <td>18.4</td>
-      <td>11.4</td>
-      <td>17.4</td>
-      <td>116.2</td>
-      <td>93.3</td>
-      <td>101.7</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>7</td>
       <td>14</td>
-      <td>26.1</td>
-      <td>4.50</td>
       <td>3.47</td>
+      <td>2.50</td>
+      <td>4.28</td>
       <td>18</td>
       <td>265.6</td>
-      <td>34.6</td>
-      <td>108.1</td>
-      <td>111.4</td>
-      <td>キーウェーブ</td>
-      <td>牡4</td>
-      <td>55.0</td>
-      <td>▲柴田裕一郎</td>
-      <td>差</td>
-      <td>1.1</td>
-      <td>-5.5</td>
-      <td>-3.4</td>
-      <td>94.4</td>
-      <td>68.6</td>
-      <td>45.1</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>7</td>
       <td>15</td>
-      <td>18.6</td>
-      <td>13.29</td>
       <td>5.37</td>
+      <td>4.54</td>
+      <td>5.86</td>
       <td>14</td>
       <td>101.8</td>
-      <td>22.3</td>
-      <td>69.8</td>
-      <td>72.0</td>
-      <td>クラシックステップ</td>
-      <td>牡6</td>
-      <td>55.0</td>
-      <td>▲和田陽希</td>
-      <td>差</td>
-      <td>13.9</td>
-      <td>3.1</td>
-      <td>-0.9</td>
-      <td>104.1</td>
-      <td>90.3</td>
-      <td>90.6</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>8</td>
       <td>16</td>
-      <td>11.9</td>
-      <td>12.09</td>
       <td>10.74</td>
+      <td>8.20</td>
+      <td>8.67</td>
       <td>15</td>
       <td>203.3</td>
-      <td>11.2</td>
-      <td>34.9</td>
-      <td>36.0</td>
-      <td>ヴァイタルピース</td>
-      <td>セ4</td>
-      <td>58.0</td>
-      <td>和田竜二</td>
-      <td>先</td>
-      <td>19.3</td>
-      <td>3.0</td>
-      <td>15.0</td>
-      <td>113.0</td>
-      <td>89.1</td>
-      <td>100.5</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>8</td>
       <td>17</td>
-      <td>-13.3</td>
-      <td>4.28</td>
       <td>14.92</td>
+      <td>15.70</td>
+      <td>13.98</td>
       <td>1</td>
       <td>2.9</td>
-      <td>8.0</td>
-      <td>25.1</td>
-      <td>25.9</td>
-      <td>ロストシークレット</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>川田将雅</td>
-      <td>差</td>
-      <td>8.3</td>
-      <td>-2.2</td>
-      <td>7.3</td>
-      <td>89.0</td>
-      <td>76.6</td>
-      <td>88.8</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>8</td>
       <td>18</td>
-      <td>-41.4</td>
-      <td>11.65</td>
       <td>31.03</td>
+      <td>34.32</td>
+      <td>34.26</td>
       <td>8</td>
       <td>18.5</td>
-      <td>3.9</td>
-      <td>12.1</td>
-      <td>NaN</td>
-      <td>クスクス</td>
-      <td>牝4</td>
-      <td>56.0</td>
-      <td>池添謙一</td>
-      <td>先</td>
-      <td>15.4</td>
-      <td>5.1</td>
-      <td>3.6</td>
-      <td>93.6</td>
-      <td>73.4</td>
-      <td>58.3</td>
     </tr>
   </tbody>
 </table><br><br>
@@ -3454,245 +1454,95 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>枠 番</th>
       <th>馬番</th>
-      <th>ラスト3F</th>
-      <th>v13.1 穴馬</th>
-      <th>v21.1 複勝率</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
-      <th>複勝B</th>
-      <th>◎ワイドB</th>
-      <th>〇ワイドB</th>
-      <th>馬名</th>
-      <th>性齢</th>
-      <th>斤量</th>
-      <th>騎手</th>
-      <th>脚質</th>
-      <th>上り指MAX</th>
-      <th>上り指AVG</th>
-      <th>上り指1R</th>
-      <th>スピ指MAX</th>
-      <th>スピ指AVG</th>
-      <th>スピ指1R</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1</td>
-      <td>-46.0</td>
-      <td>3.70</td>
       <td>51.53</td>
+      <td>50.50</td>
+      <td>46.64</td>
       <td>3</td>
       <td>5.1</td>
-      <td>2.3</td>
-      <td>3.3</td>
-      <td>4.2</td>
-      <td>シドニーホバート</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>松山弘平</td>
-      <td>先</td>
-      <td>11.4</td>
-      <td>0.3</td>
-      <td>1.5</td>
-      <td>104.3</td>
-      <td>86.5</td>
-      <td>104.3</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>2</td>
-      <td>-27.0</td>
-      <td>16.25</td>
       <td>13.46</td>
+      <td>14.62</td>
+      <td>14.80</td>
       <td>7</td>
       <td>27.6</td>
-      <td>8.9</td>
-      <td>12.5</td>
-      <td>16.0</td>
-      <td>サンコンクエスト</td>
-      <td>牝3</td>
-      <td>55.0</td>
-      <td>幸英明</td>
-      <td>先</td>
-      <td>7.4</td>
-      <td>-10.2</td>
-      <td>7.4</td>
-      <td>74.7</td>
-      <td>62.9</td>
-      <td>74.7</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>3</td>
-      <td>-14.9</td>
-      <td>9.60</td>
       <td>23.06</td>
+      <td>20.47</td>
+      <td>20.09</td>
       <td>5</td>
       <td>13.0</td>
-      <td>5.2</td>
-      <td>7.3</td>
-      <td>9.3</td>
-      <td>ハグ</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>Ａ．シュタルケ</td>
-      <td>先</td>
-      <td>-5.4</td>
-      <td>-12.4</td>
-      <td>-30.7</td>
-      <td>89.8</td>
-      <td>69.2</td>
-      <td>60.6</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>4</td>
-      <td>-28.5</td>
-      <td>14.69</td>
       <td>11.24</td>
+      <td>11.74</td>
+      <td>13.30</td>
       <td>8</td>
       <td>56.4</td>
-      <td>10.7</td>
-      <td>15.0</td>
-      <td>19.1</td>
-      <td>クリオシダード</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>吉村誠之助</td>
-      <td>逃</td>
-      <td>-3.8</td>
-      <td>-11.1</td>
-      <td>-3.8</td>
-      <td>86.0</td>
-      <td>79.8</td>
-      <td>86.0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>5</td>
-      <td>-0.9</td>
-      <td>6.44</td>
       <td>55.78</td>
+      <td>57.48</td>
+      <td>53.18</td>
       <td>4</td>
       <td>7.6</td>
-      <td>2.2</td>
-      <td>3.0</td>
-      <td>3.9</td>
-      <td>シャルクハフト</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>坂井瑠星</td>
-      <td>先</td>
-      <td>9.9</td>
-      <td>-0.5</td>
-      <td>8.1</td>
-      <td>104.6</td>
-      <td>73.7</td>
-      <td>104.6</td>
     </tr>
     <tr>
       <th>5</th>
       <td>6</td>
-      <td>6</td>
-      <td>-9.5</td>
-      <td>4.86</td>
       <td>71.39</td>
+      <td>70.69</td>
+      <td>75.80</td>
       <td>2</td>
       <td>3.2</td>
-      <td>1.7</td>
-      <td>NaN</td>
-      <td>3.0</td>
-      <td>ルヴァンユニベール</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>高倉稜</td>
-      <td>先</td>
-      <td>7.4</td>
-      <td>2.9</td>
-      <td>6.8</td>
-      <td>91.9</td>
-      <td>70.9</td>
-      <td>91.9</td>
     </tr>
     <tr>
       <th>6</th>
       <td>7</td>
-      <td>7</td>
-      <td>53.2</td>
-      <td>12.51</td>
       <td>4.29</td>
+      <td>6.39</td>
+      <td>9.19</td>
       <td>9</td>
       <td>156.9</td>
-      <td>28.0</td>
-      <td>39.2</td>
-      <td>50.1</td>
-      <td>コウジョリョウゾク</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>荻野琢真</td>
-      <td>追</td>
-      <td>-0.2</td>
-      <td>-8.4</td>
-      <td>-16.4</td>
-      <td>79.6</td>
-      <td>68.6</td>
-      <td>61.0</td>
     </tr>
     <tr>
       <th>7</th>
       <td>8</td>
-      <td>8</td>
-      <td>16.1</td>
-      <td>13.34</td>
       <td>13.46</td>
+      <td>12.05</td>
+      <td>14.09</td>
       <td>6</td>
       <td>26.8</td>
-      <td>8.9</td>
-      <td>12.5</td>
-      <td>16.0</td>
-      <td>ハギノコラソン</td>
-      <td>牝3</td>
-      <td>55.0</td>
-      <td>岩田望来</td>
-      <td>差</td>
-      <td>-2.6</td>
-      <td>-9.1</td>
-      <td>-4.4</td>
-      <td>65.9</td>
-      <td>56.7</td>
-      <td>65.9</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>8</td>
       <td>9</td>
-      <td>23.1</td>
-      <td>6.61</td>
       <td>55.78</td>
+      <td>56.05</td>
+      <td>52.92</td>
       <td>1</td>
       <td>2.2</td>
-      <td>2.2</td>
-      <td>3.0</td>
-      <td>NaN</td>
-      <td>エコロスパーダ</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>川田将雅</td>
-      <td>先</td>
-      <td>7.2</td>
-      <td>-0.5</td>
-      <td>7.2</td>
-      <td>76.2</td>
-      <td>65.8</td>
-      <td>76.2</td>
     </tr>
   </tbody>
 </table><br><br>
@@ -3705,413 +1555,158 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>枠 番</th>
       <th>馬番</th>
-      <th>ラスト3F</th>
-      <th>v13.1 穴馬</th>
-      <th>v21.1 複勝率</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
-      <th>複勝B</th>
-      <th>◎ワイドB</th>
-      <th>〇ワイドB</th>
-      <th>馬名</th>
-      <th>性齢</th>
-      <th>斤量</th>
-      <th>騎手</th>
-      <th>脚質</th>
-      <th>上り指MAX</th>
-      <th>上り指AVG</th>
-      <th>上り指1R</th>
-      <th>スピ指MAX</th>
-      <th>スピ指AVG</th>
-      <th>スピ指1R</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1</td>
-      <td>26.3</td>
-      <td>14.54</td>
       <td>15.35</td>
+      <td>13.68</td>
+      <td>11.73</td>
       <td>12</td>
       <td>57.2</td>
-      <td>7.8</td>
-      <td>21.9</td>
-      <td>22.6</td>
-      <td>メイショウシナノ</td>
-      <td>牡5</td>
-      <td>57.0</td>
-      <td>田口貫太</td>
-      <td>先</td>
-      <td>15.5</td>
-      <td>5.8</td>
-      <td>12.2</td>
-      <td>100.0</td>
-      <td>90.0</td>
-      <td>88.4</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1</td>
       <td>2</td>
-      <td>9.3</td>
-      <td>5.20</td>
       <td>5.99</td>
+      <td>2.85</td>
+      <td>5.00</td>
       <td>15</td>
       <td>192.5</td>
-      <td>20.0</td>
-      <td>56.1</td>
-      <td>57.8</td>
-      <td>ヨリノサファイヤ</td>
-      <td>牝5</td>
-      <td>52.0</td>
-      <td>松若風馬</td>
-      <td>先</td>
-      <td>9.6</td>
-      <td>0.5</td>
-      <td>-1.0</td>
-      <td>82.9</td>
-      <td>73.4</td>
-      <td>80.2</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2</td>
       <td>3</td>
-      <td>43.6</td>
-      <td>9.90</td>
       <td>5.99</td>
+      <td>2.40</td>
+      <td>4.73</td>
       <td>16</td>
       <td>223.3</td>
-      <td>20.0</td>
-      <td>56.1</td>
-      <td>57.8</td>
-      <td>バリアントバイオ</td>
-      <td>牡5</td>
-      <td>55.0</td>
-      <td>小沢大仁</td>
-      <td>先</td>
-      <td>3.2</td>
-      <td>0.4</td>
-      <td>-2.6</td>
-      <td>89.5</td>
-      <td>79.6</td>
-      <td>89.5</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>2</td>
       <td>4</td>
-      <td>-12.0</td>
-      <td>15.70</td>
       <td>8.46</td>
+      <td>3.94</td>
+      <td>5.89</td>
       <td>10</td>
       <td>48.9</td>
-      <td>14.2</td>
-      <td>39.7</td>
-      <td>40.9</td>
-      <td>ロードマゼラン</td>
-      <td>セ6</td>
-      <td>56.0</td>
-      <td>丹内祐次</td>
-      <td>先</td>
-      <td>5.3</td>
-      <td>-3.9</td>
-      <td>-2.1</td>
-      <td>85.1</td>
-      <td>80.0</td>
-      <td>84.6</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>3</td>
       <td>5</td>
-      <td>-5.5</td>
-      <td>4.69</td>
       <td>34.65</td>
+      <td>39.08</td>
+      <td>41.20</td>
       <td>1</td>
       <td>2.9</td>
-      <td>3.5</td>
-      <td>9.7</td>
-      <td>NaN</td>
-      <td>ルシュヴァルドール</td>
-      <td>牡4</td>
-      <td>57.0</td>
-      <td>坂井瑠星</td>
-      <td>先</td>
-      <td>15.6</td>
-      <td>3.7</td>
-      <td>11.2</td>
-      <td>95.8</td>
-      <td>85.8</td>
-      <td>95.8</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>3</td>
       <td>6</td>
-      <td>43.0</td>
-      <td>17.32</td>
       <td>10.15</td>
+      <td>6.66</td>
+      <td>8.04</td>
       <td>13</td>
       <td>74.9</td>
-      <td>11.8</td>
-      <td>33.1</td>
-      <td>34.1</td>
-      <td>ゲンパチムサシ</td>
-      <td>牡7</td>
-      <td>54.0</td>
-      <td>和田竜二</td>
-      <td>差</td>
-      <td>27.1</td>
-      <td>7.1</td>
-      <td>2.6</td>
-      <td>106.1</td>
-      <td>83.2</td>
-      <td>75.5</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>4</td>
       <td>7</td>
-      <td>-35.4</td>
-      <td>10.73</td>
       <td>14.41</td>
+      <td>11.31</td>
+      <td>10.90</td>
       <td>6</td>
       <td>18.9</td>
-      <td>8.3</td>
-      <td>23.3</td>
-      <td>24.0</td>
-      <td>リューデスハイム</td>
-      <td>牡4</td>
-      <td>55.0</td>
-      <td>北村友一</td>
-      <td>先</td>
-      <td>4.5</td>
-      <td>-3.0</td>
-      <td>-7.0</td>
-      <td>102.3</td>
-      <td>85.9</td>
-      <td>102.3</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>4</td>
       <td>8</td>
-      <td>-27.5</td>
-      <td>4.16</td>
       <td>33.12</td>
+      <td>39.08</td>
+      <td>40.28</td>
       <td>2</td>
       <td>3.6</td>
-      <td>3.6</td>
-      <td>10.1</td>
-      <td>10.5</td>
-      <td>ソーニーイシュー</td>
-      <td>牡4</td>
-      <td>56.0</td>
-      <td>川田将雅</td>
-      <td>先</td>
-      <td>14.0</td>
-      <td>5.7</td>
-      <td>-9.6</td>
-      <td>101.0</td>
-      <td>89.2</td>
-      <td>86.9</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>5</td>
       <td>9</td>
-      <td>-2.4</td>
-      <td>17.54</td>
       <td>20.81</td>
+      <td>19.82</td>
+      <td>19.00</td>
       <td>11</td>
       <td>56.0</td>
-      <td>5.8</td>
-      <td>16.1</td>
-      <td>16.6</td>
-      <td>ゴールドアローン</td>
-      <td>牝4</td>
-      <td>53.0</td>
-      <td>菊沢一樹</td>
-      <td>差</td>
-      <td>15.7</td>
-      <td>2.7</td>
-      <td>8.1</td>
-      <td>95.2</td>
-      <td>86.8</td>
-      <td>95.2</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>5</td>
       <td>10</td>
-      <td>8.3</td>
-      <td>12.63</td>
       <td>35.74</td>
+      <td>44.14</td>
+      <td>44.55</td>
       <td>3</td>
       <td>4.8</td>
-      <td>3.4</td>
-      <td>NaN</td>
-      <td>9.7</td>
-      <td>ポッドロゴ</td>
-      <td>牡4</td>
-      <td>57.0</td>
-      <td>松山弘平</td>
-      <td>先</td>
-      <td>17.0</td>
-      <td>8.9</td>
-      <td>17.0</td>
-      <td>90.2</td>
-      <td>85.9</td>
-      <td>81.7</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>6</td>
       <td>11</td>
-      <td>-2.3</td>
-      <td>9.60</td>
       <td>12.18</td>
+      <td>9.34</td>
+      <td>10.08</td>
       <td>5</td>
       <td>12.7</td>
-      <td>9.9</td>
-      <td>27.6</td>
-      <td>28.4</td>
-      <td>インザモーメント</td>
-      <td>牡4</td>
-      <td>57.0</td>
-      <td>岩田望来</td>
-      <td>先</td>
-      <td>24.2</td>
-      <td>12.7</td>
-      <td>24.2</td>
-      <td>108.7</td>
-      <td>97.7</td>
-      <td>108.7</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>6</td>
       <td>12</td>
-      <td>-4.0</td>
-      <td>17.56</td>
       <td>15.35</td>
+      <td>13.68</td>
+      <td>12.08</td>
       <td>8</td>
       <td>25.3</td>
-      <td>7.8</td>
-      <td>21.9</td>
-      <td>22.6</td>
-      <td>レッドプロフェシー</td>
-      <td>牡5</td>
-      <td>55.0</td>
-      <td>菱田裕二</td>
-      <td>先</td>
-      <td>10.3</td>
-      <td>2.3</td>
-      <td>10.3</td>
-      <td>86.8</td>
-      <td>78.7</td>
-      <td>76.4</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>7</td>
       <td>13</td>
-      <td>-4.2</td>
-      <td>18.10</td>
       <td>18.69</td>
+      <td>17.94</td>
+      <td>17.48</td>
       <td>9</td>
       <td>31.3</td>
-      <td>6.4</td>
-      <td>18.0</td>
-      <td>18.5</td>
-      <td>アオイイーグル</td>
-      <td>牡5</td>
-      <td>56.0</td>
-      <td>Ｍ．デムーロ</td>
-      <td>差</td>
-      <td>11.1</td>
-      <td>1.5</td>
-      <td>-3.5</td>
-      <td>92.5</td>
-      <td>86.9</td>
-      <td>87.8</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>7</td>
       <td>14</td>
-      <td>9.8</td>
-      <td>9.40</td>
       <td>30.80</td>
+      <td>35.65</td>
+      <td>33.89</td>
       <td>7</td>
       <td>19.3</td>
-      <td>3.9</td>
-      <td>10.9</td>
-      <td>11.2</td>
-      <td>メイプルタピット</td>
-      <td>牡4</td>
-      <td>56.0</td>
-      <td>丸田恭介</td>
-      <td>差</td>
-      <td>13.6</td>
-      <td>5.3</td>
-      <td>13.6</td>
-      <td>90.5</td>
-      <td>81.6</td>
-      <td>80.0</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>8</td>
       <td>15</td>
-      <td>-20.9</td>
-      <td>9.25</td>
       <td>15.35</td>
+      <td>14.75</td>
+      <td>12.74</td>
       <td>4</td>
       <td>12.4</td>
-      <td>7.8</td>
-      <td>21.9</td>
-      <td>22.6</td>
-      <td>カネトシゴウト</td>
-      <td>牡4</td>
-      <td>56.0</td>
-      <td>幸英明</td>
-      <td>先</td>
-      <td>9.3</td>
-      <td>-0.1</td>
-      <td>9.3</td>
-      <td>92.1</td>
-      <td>79.3</td>
-      <td>86.0</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>8</td>
       <td>16</td>
-      <td>-0.4</td>
-      <td>16.44</td>
       <td>22.95</td>
+      <td>25.68</td>
+      <td>22.41</td>
       <td>14</td>
       <td>98.0</td>
-      <td>5.2</td>
-      <td>14.6</td>
-      <td>15.1</td>
-      <td>サノノエスポ</td>
-      <td>牝5</td>
-      <td>52.0</td>
-      <td>吉村誠之助</td>
-      <td>先</td>
-      <td>8.8</td>
-      <td>-4.4</td>
-      <td>0.5</td>
-      <td>91.6</td>
-      <td>84.2</td>
-      <td>91.6</td>
     </tr>
   </tbody>
 </table><br><br>
@@ -4124,413 +1719,158 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>枠 番</th>
       <th>馬番</th>
-      <th>ラスト3F</th>
-      <th>v13.1 穴馬</th>
-      <th>v21.1 複勝率</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
-      <th>複勝B</th>
-      <th>◎ワイドB</th>
-      <th>〇ワイドB</th>
-      <th>馬名</th>
-      <th>性齢</th>
-      <th>斤量</th>
-      <th>騎手</th>
-      <th>脚質</th>
-      <th>上り指MAX</th>
-      <th>上り指AVG</th>
-      <th>上り指1R</th>
-      <th>スピ指MAX</th>
-      <th>スピ指AVG</th>
-      <th>スピ指1R</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1</td>
-      <td>36.5</td>
-      <td>7.64</td>
       <td>11.70</td>
+      <td>9.10</td>
+      <td>8.59</td>
       <td>12</td>
       <td>23.9</td>
-      <td>10.3</td>
-      <td>29.1</td>
-      <td>33.8</td>
-      <td>カワキタマナレア</td>
-      <td>牝3</td>
-      <td>55.0</td>
-      <td>鮫島克駿</td>
-      <td>差</td>
-      <td>18.1</td>
-      <td>6.8</td>
-      <td>16.4</td>
-      <td>92.1</td>
-      <td>82.2</td>
-      <td>74.3</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1</td>
       <td>2</td>
-      <td>-13.7</td>
-      <td>5.42</td>
       <td>35.20</td>
+      <td>39.15</td>
+      <td>42.92</td>
       <td>1</td>
       <td>5.6</td>
-      <td>3.4</td>
-      <td>NaN</td>
-      <td>11.2</td>
-      <td>ウイントワイライト</td>
-      <td>牝3</td>
-      <td>55.0</td>
-      <td>Ａ．シュタルケ</td>
-      <td>逃</td>
-      <td>29.3</td>
-      <td>14.1</td>
-      <td>29.3</td>
-      <td>94.6</td>
-      <td>79.7</td>
-      <td>94.6</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2</td>
       <td>3</td>
-      <td>36.7</td>
-      <td>7.41</td>
       <td>6.39</td>
+      <td>2.85</td>
+      <td>4.98</td>
       <td>4</td>
       <td>9.7</td>
-      <td>18.8</td>
-      <td>53.4</td>
-      <td>61.9</td>
-      <td>ニタモノドウシ</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>菅原明良</td>
-      <td>差</td>
-      <td>18.6</td>
-      <td>11.5</td>
-      <td>-0.2</td>
-      <td>90.0</td>
-      <td>81.6</td>
-      <td>87.6</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>2</td>
       <td>4</td>
-      <td>10.3</td>
-      <td>15.59</td>
       <td>3.15</td>
+      <td>2.15</td>
+      <td>3.98</td>
       <td>16</td>
       <td>90.2</td>
-      <td>38.1</td>
-      <td>108.2</td>
-      <td>125.6</td>
-      <td>オンザブルースカイ</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>菱田裕二</td>
-      <td>先</td>
-      <td>-3.4</td>
-      <td>-17.7</td>
-      <td>-20.5</td>
-      <td>84.0</td>
-      <td>68.4</td>
-      <td>66.5</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>3</td>
       <td>5</td>
-      <td>-13.1</td>
-      <td>3.02</td>
       <td>25.75</td>
+      <td>27.97</td>
+      <td>26.82</td>
       <td>6</td>
       <td>10.5</td>
-      <td>4.7</td>
-      <td>13.2</td>
-      <td>15.4</td>
-      <td>ワース</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>丹内祐次</td>
-      <td>先</td>
-      <td>14.6</td>
-      <td>4.6</td>
-      <td>10.3</td>
-      <td>99.8</td>
-      <td>85.1</td>
-      <td>99.8</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>3</td>
       <td>6</td>
-      <td>-55.9</td>
-      <td>16.84</td>
       <td>13.52</td>
+      <td>11.33</td>
+      <td>10.96</td>
       <td>10</td>
       <td>19.1</td>
-      <td>8.9</td>
-      <td>25.2</td>
-      <td>29.3</td>
-      <td>ベイビーキッス</td>
-      <td>牝3</td>
-      <td>55.0</td>
-      <td>菊沢一樹</td>
-      <td>逃</td>
-      <td>-9.4</td>
-      <td>-17.4</td>
-      <td>-9.4</td>
-      <td>89.4</td>
-      <td>72.7</td>
-      <td>89.4</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>4</td>
       <td>7</td>
-      <td>21.5</td>
-      <td>11.14</td>
       <td>21.89</td>
+      <td>18.92</td>
+      <td>18.01</td>
       <td>14</td>
       <td>37.4</td>
-      <td>5.5</td>
-      <td>15.6</td>
-      <td>18.1</td>
-      <td>モジャーリオ</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>斎藤新</td>
-      <td>差</td>
-      <td>23.4</td>
-      <td>7.9</td>
-      <td>5.8</td>
-      <td>93.7</td>
-      <td>82.3</td>
-      <td>93.7</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>4</td>
       <td>8</td>
-      <td>17.9</td>
-      <td>13.21</td>
       <td>16.90</td>
+      <td>14.78</td>
+      <td>13.23</td>
       <td>15</td>
       <td>60.5</td>
-      <td>7.1</td>
-      <td>20.2</td>
-      <td>23.4</td>
-      <td>アブキールベイ</td>
-      <td>牝3</td>
-      <td>55.0</td>
-      <td>岩田望来</td>
-      <td>差</td>
-      <td>15.0</td>
-      <td>7.5</td>
-      <td>15.0</td>
-      <td>88.4</td>
-      <td>82.6</td>
-      <td>75.7</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>5</td>
       <td>9</td>
-      <td>10.4</td>
-      <td>9.29</td>
       <td>12.46</td>
+      <td>9.35</td>
+      <td>9.21</td>
       <td>7</td>
       <td>10.8</td>
-      <td>9.6</td>
-      <td>27.4</td>
-      <td>31.7</td>
-      <td>ダンツエラン</td>
-      <td>牝3</td>
-      <td>55.0</td>
-      <td>団野大成</td>
-      <td>差</td>
-      <td>13.3</td>
-      <td>0.3</td>
-      <td>-14.1</td>
-      <td>98.1</td>
-      <td>87.3</td>
-      <td>77.6</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>5</td>
       <td>10</td>
-      <td>-40.9</td>
-      <td>4.16</td>
       <td>28.13</td>
+      <td>31.04</td>
+      <td>29.61</td>
       <td>9</td>
       <td>15.0</td>
-      <td>4.3</td>
-      <td>12.1</td>
-      <td>14.1</td>
-      <td>サウスバンク</td>
-      <td>牝3</td>
-      <td>55.0</td>
-      <td>西塚洸二</td>
-      <td>先</td>
-      <td>12.1</td>
-      <td>-0.1</td>
-      <td>12.1</td>
-      <td>101.7</td>
-      <td>82.9</td>
-      <td>84.8</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>6</td>
       <td>11</td>
-      <td>1.0</td>
-      <td>2.62</td>
       <td>28.13</td>
+      <td>33.48</td>
+      <td>30.80</td>
       <td>3</td>
       <td>6.9</td>
-      <td>4.3</td>
-      <td>12.1</td>
-      <td>14.1</td>
-      <td>カンシン</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>坂井瑠星</td>
-      <td>先</td>
-      <td>18.9</td>
-      <td>-2.0</td>
-      <td>18.9</td>
-      <td>108.4</td>
-      <td>85.6</td>
-      <td>108.4</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>6</td>
       <td>12</td>
-      <td>-50.7</td>
-      <td>2.72</td>
       <td>29.01</td>
+      <td>35.72</td>
+      <td>33.71</td>
       <td>8</td>
       <td>13.8</td>
-      <td>4.1</td>
-      <td>11.8</td>
-      <td>13.6</td>
-      <td>レイピア</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>柴田裕一郎</td>
-      <td>先</td>
-      <td>7.0</td>
-      <td>-13.1</td>
-      <td>7.0</td>
-      <td>100.9</td>
-      <td>82.4</td>
-      <td>100.9</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>7</td>
       <td>13</td>
-      <td>28.3</td>
-      <td>2.14</td>
       <td>30.34</td>
+      <td>35.72</td>
+      <td>36.15</td>
       <td>5</td>
       <td>10.0</td>
-      <td>4.0</td>
-      <td>11.2</td>
-      <td>NaN</td>
-      <td>ムイ</td>
-      <td>牝3</td>
-      <td>55.0</td>
-      <td>今村聖奈</td>
-      <td>先</td>
-      <td>24.2</td>
-      <td>11.3</td>
-      <td>24.2</td>
-      <td>103.0</td>
-      <td>89.2</td>
-      <td>89.7</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>7</td>
       <td>14</td>
-      <td>-21.5</td>
-      <td>5.02</td>
       <td>20.60</td>
+      <td>17.97</td>
+      <td>17.36</td>
       <td>2</td>
       <td>5.8</td>
-      <td>5.8</td>
-      <td>16.5</td>
-      <td>19.2</td>
-      <td>ポッドベイダー</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>荻野極</td>
-      <td>先</td>
-      <td>16.7</td>
-      <td>-0.6</td>
-      <td>16.7</td>
-      <td>94.3</td>
-      <td>79.7</td>
-      <td>88.3</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>8</td>
       <td>15</td>
-      <td>-10.3</td>
-      <td>9.13</td>
       <td>9.86</td>
+      <td>6.50</td>
+      <td>7.66</td>
       <td>13</td>
       <td>25.6</td>
-      <td>12.2</td>
-      <td>34.6</td>
-      <td>40.1</td>
-      <td>クラスペディア</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>小崎綾也</td>
-      <td>先</td>
-      <td>21.1</td>
-      <td>8.0</td>
-      <td>-2.6</td>
-      <td>95.5</td>
-      <td>86.9</td>
-      <td>85.2</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>8</td>
       <td>16</td>
-      <td>-12.7</td>
-      <td>8.61</td>
       <td>6.94</td>
+      <td>3.95</td>
+      <td>5.99</td>
       <td>11</td>
       <td>22.7</td>
-      <td>17.3</td>
-      <td>49.1</td>
-      <td>57.0</td>
-      <td>ドラゴンウェルズ</td>
-      <td>牡3</td>
-      <td>57.0</td>
-      <td>北村友一</td>
-      <td>逃</td>
-      <td>0.3</td>
-      <td>-14.4</td>
-      <td>-23.6</td>
-      <td>92.1</td>
-      <td>83.8</td>
-      <td>64.1</td>
     </tr>
   </tbody>
 </table><br><br>
@@ -4543,341 +1883,131 @@
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>枠 番</th>
       <th>馬番</th>
-      <th>ラスト3F</th>
-      <th>v13.1 穴馬</th>
-      <th>v21.1 複勝率</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
-      <th>複勝B</th>
-      <th>◎ワイドB</th>
-      <th>〇ワイドB</th>
-      <th>馬名</th>
-      <th>性齢</th>
-      <th>斤量</th>
-      <th>騎手</th>
-      <th>脚質</th>
-      <th>上り指MAX</th>
-      <th>上り指AVG</th>
-      <th>上り指1R</th>
-      <th>スピ指MAX</th>
-      <th>スピ指AVG</th>
-      <th>スピ指1R</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>1</td>
-      <td>-25.5</td>
-      <td>12.00</td>
       <td>34.86</td>
+      <td>39.22</td>
+      <td>38.40</td>
       <td>9</td>
       <td>35.3</td>
-      <td>3.4</td>
-      <td>6.5</td>
-      <td>NaN</td>
-      <td>モズトキキ</td>
-      <td>牝4</td>
-      <td>54.0</td>
-      <td>◇永島まなみ</td>
-      <td>先</td>
-      <td>23.0</td>
-      <td>3.1</td>
-      <td>0.0</td>
-      <td>112.7</td>
-      <td>89.0</td>
-      <td>0.0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>2</td>
-      <td>-57.8</td>
-      <td>1.51</td>
       <td>52.70</td>
+      <td>64.28</td>
+      <td>70.20</td>
       <td>1</td>
       <td>2.6</td>
-      <td>2.3</td>
-      <td>NaN</td>
-      <td>6.5</td>
-      <td>ジュンヴァンケット</td>
-      <td>セ4</td>
-      <td>58.0</td>
-      <td>坂井瑠星</td>
-      <td>逃</td>
-      <td>12.4</td>
-      <td>6.4</td>
-      <td>5.3</td>
-      <td>113.1</td>
-      <td>100.0</td>
-      <td>105.4</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>3</td>
-      <td>-19.9</td>
-      <td>12.45</td>
       <td>20.52</td>
+      <td>21.90</td>
+      <td>18.54</td>
       <td>10</td>
       <td>40.3</td>
-      <td>5.8</td>
-      <td>11.1</td>
-      <td>16.8</td>
-      <td>ベント</td>
-      <td>セ4</td>
-      <td>58.0</td>
-      <td>国分優作</td>
-      <td>先</td>
-      <td>13.6</td>
-      <td>-5.1</td>
-      <td>13.6</td>
-      <td>91.9</td>
-      <td>71.4</td>
-      <td>91.9</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>4</td>
-      <td>3.2</td>
-      <td>9.34</td>
       <td>9.30</td>
+      <td>4.83</td>
+      <td>7.61</td>
       <td>11</td>
       <td>47.5</td>
-      <td>12.9</td>
-      <td>24.5</td>
-      <td>37.0</td>
-      <td>スカプラリオ</td>
-      <td>牝5</td>
-      <td>53.0</td>
-      <td>▲田山旺佑</td>
-      <td>先</td>
-      <td>17.8</td>
-      <td>6.5</td>
-      <td>8.5</td>
-      <td>92.1</td>
-      <td>80.6</td>
-      <td>92.1</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>4</td>
       <td>5</td>
-      <td>-0.3</td>
-      <td>13.57</td>
       <td>24.86</td>
+      <td>23.13</td>
+      <td>22.13</td>
       <td>8</td>
       <td>23.9</td>
-      <td>4.8</td>
-      <td>9.2</td>
-      <td>13.8</td>
-      <td>エクセルゴールド</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>菊沢一樹</td>
-      <td>先</td>
-      <td>13.3</td>
-      <td>-5.3</td>
-      <td>13.3</td>
-      <td>104.6</td>
-      <td>77.2</td>
-      <td>104.6</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>5</td>
       <td>6</td>
-      <td>-15.2</td>
-      <td>13.23</td>
       <td>30.74</td>
+      <td>31.45</td>
+      <td>29.75</td>
       <td>4</td>
       <td>9.8</td>
-      <td>3.9</td>
-      <td>7.4</td>
-      <td>11.2</td>
-      <td>モズアンタレス</td>
-      <td>牝5</td>
-      <td>56.0</td>
-      <td>和田竜二</td>
-      <td>先</td>
-      <td>20.3</td>
-      <td>9.5</td>
-      <td>20.3</td>
-      <td>103.4</td>
-      <td>97.5</td>
-      <td>98.1</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>5</td>
       <td>7</td>
-      <td>15.7</td>
-      <td>11.42</td>
       <td>9.30</td>
+      <td>4.83</td>
+      <td>7.31</td>
       <td>6</td>
       <td>17.0</td>
-      <td>12.9</td>
-      <td>24.5</td>
-      <td>37.0</td>
-      <td>ビップジーニー</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>Ｍ．デムーロ</td>
-      <td>先</td>
-      <td>16.3</td>
-      <td>-17.3</td>
-      <td>16.3</td>
-      <td>107.7</td>
-      <td>68.8</td>
-      <td>96.4</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>6</td>
       <td>8</td>
-      <td>4.8</td>
-      <td>11.50</td>
       <td>30.29</td>
+      <td>31.45</td>
+      <td>27.95</td>
       <td>7</td>
       <td>21.9</td>
-      <td>4.0</td>
-      <td>7.5</td>
-      <td>11.4</td>
-      <td>サンドロナイト</td>
-      <td>牝4</td>
-      <td>52.0</td>
-      <td>▲和田陽希</td>
-      <td>差</td>
-      <td>14.9</td>
-      <td>0.9</td>
-      <td>3.5</td>
-      <td>88.0</td>
-      <td>72.0</td>
-      <td>78.8</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>6</td>
       <td>9</td>
-      <td>36.3</td>
-      <td>15.46</td>
       <td>4.26</td>
+      <td>2.63</td>
+      <td>5.21</td>
       <td>13</td>
       <td>67.3</td>
-      <td>28.2</td>
-      <td>53.5</td>
-      <td>80.8</td>
-      <td>ルヴァンノワール</td>
-      <td>牝7</td>
-      <td>56.0</td>
-      <td>荻野極</td>
-      <td>差</td>
-      <td>13.2</td>
-      <td>6.0</td>
-      <td>13.2</td>
-      <td>87.7</td>
-      <td>77.7</td>
-      <td>84.8</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>7</td>
       <td>10</td>
-      <td>-4.2</td>
-      <td>3.33</td>
       <td>25.22</td>
+      <td>24.28</td>
+      <td>23.48</td>
       <td>2</td>
       <td>3.8</td>
-      <td>4.8</td>
-      <td>9.0</td>
-      <td>13.6</td>
-      <td>リチャードバローズ</td>
-      <td>牡4</td>
-      <td>58.0</td>
-      <td>北村友一</td>
-      <td>先</td>
-      <td>20.2</td>
-      <td>16.2</td>
-      <td>9.1</td>
-      <td>107.9</td>
-      <td>100.1</td>
-      <td>93.6</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>7</td>
       <td>11</td>
-      <td>-19.3</td>
-      <td>14.25</td>
       <td>24.24</td>
+      <td>21.97</td>
+      <td>21.25</td>
       <td>3</td>
       <td>5.2</td>
-      <td>5.0</td>
-      <td>9.4</td>
-      <td>14.2</td>
-      <td>キタサンダムール</td>
-      <td>牝5</td>
-      <td>56.0</td>
-      <td>岩田望来</td>
-      <td>先</td>
-      <td>16.3</td>
-      <td>-3.0</td>
-      <td>-3.1</td>
-      <td>84.4</td>
-      <td>73.7</td>
-      <td>66.9</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>8</td>
       <td>12</td>
-      <td>16.1</td>
-      <td>13.71</td>
       <td>20.52</td>
+      <td>21.90</td>
+      <td>18.26</td>
       <td>5</td>
       <td>14.5</td>
-      <td>5.8</td>
-      <td>11.1</td>
-      <td>16.8</td>
-      <td>アンビバレント</td>
-      <td>牡5</td>
-      <td>57.0</td>
-      <td>☆高杉吏麒</td>
-      <td>先</td>
-      <td>14.8</td>
-      <td>5.7</td>
-      <td>13.0</td>
-      <td>111.4</td>
-      <td>94.2</td>
-      <td>104.6</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>8</td>
       <td>13</td>
-      <td>37.1</td>
-      <td>16.60</td>
       <td>13.18</td>
+      <td>8.16</td>
+      <td>9.92</td>
       <td>12</td>
       <td>53.3</td>
-      <td>9.1</td>
-      <td>17.3</td>
-      <td>26.1</td>
-      <td>ベルウッドブラボー</td>
-      <td>牡6</td>
-      <td>58.0</td>
-      <td>吉田隼人</td>
-      <td>先</td>
-      <td>23.8</td>
-      <td>9.1</td>
-      <td>13.8</td>
-      <td>108.2</td>
-      <td>99.3</td>
-      <td>98.1</td>
     </tr>
   </tbody>
 </table><br><br></body></html>
