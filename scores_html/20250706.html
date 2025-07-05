@@ -1,0 +1,2417 @@
+﻿
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/v/zf/jq-3.6.0/dt-1.13.4/b-2.3.6/b-html5-2.3.6/date-1.4.1/fh-3.3.2/sb-1.4.2/datatables.min.css" rel="stylesheet"/>
+    
+    <script src="https://cdn.datatables.net/v/zf/jq-3.6.0/dt-1.13.4/b-2.3.6/b-html5-2.3.6/date-1.4.1/fh-3.3.2/sb-1.4.2/datatables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.my-table').DataTable({
+                select: true,
+                displayLength: 20,
+                buttons: ['copy'],
+                fixedHeader: true,
+                dom: 'iQrtBlp',
+            });
+        });
+    </script>
+
+    <style>
+        /* 全体のフォントと背景色 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        /* ヘッダーとサマリーのスタイル */
+        .header-title {
+            font-size: 2.5em;
+            margin: 20px 0;
+            color: #333;
+            text-align: center;
+        }
+        .summary-title {
+            font-size: 2.5em;
+            margin: 10px 0;
+            color: #444;
+        }
+        /* テーブルのスタイル */
+        .my-table {
+            font-size: 0.7em;
+            width: 90%;
+            margin: 20px 0;
+            height: 20px; /* 行の高さを固定 */
+            line-height: 20px; /* 行の高さに合わせて縦方向の中央揃え */
+            /*overflow: hidden;  セルからはみ出したテキストを隠す */
+            white-space: nowrap;  /*テキストを折り返さず1行にする */
+            text-overflow: ellipsis; /* 省略記号(...)を表示 */
+        }
+        /* レース情報のスタイル */
+        .race-info {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        /* 大きなフォントサイズのクラス */
+        .large-font {
+            font-size: 1.5em; /* 大きなフォントサイズを指定 */
+            color: #222;
+        }
+        
+         /* 枠の色 */
+        .frame-1 { background-color: white; }
+        .frame-2 { background-color: black; color: white; }
+        .frame-3 { background-color: red; color: white; }
+        .frame-4 { background-color: blue; color: white; }
+        .frame-5 { background-color: yellow; }
+        .frame-6 { background-color: green; color: white; }
+        .frame-7 { background-color: orange; color: white; }
+        .frame-8 { background-color: pink; }
+
+        /* スコア色分け */
+        .highest { background-color: Tomato; }
+        .top-25 { background-color: Yellow; }
+        .bottom-25 { background-color: #90D7EC; }
+        /* 特定値の色分け */
+        .value-1 { background-color: yellow; }
+        .value-2 { background-color: skyblue; }
+        .value-3 { background-color: orange; }
+
+        /* 範囲色分け */
+        .range-low { background-color: Tomato; }
+        .range-high { background-color: skyblue; }
+    </style>
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // すべてのテーブルを取得
+            const tables = document.querySelectorAll('.my-table');
+
+            tables.forEach(table => {
+                // 「枠」列の色を設定（列インデックス1が「枠」）
+
+                // 色付けする列のインデックスと列名を定義
+                const scoreColumns = [2, 3, 4];
+                const specificValueColumn = 5;
+                const rangeColumn = 6;
+
+                // スコア列の色付け
+                scoreColumns.forEach(colIndex => {
+                    const cells = Array.from(table.querySelectorAll(`tbody tr td:nth-child(${colIndex + 1})`));
+                    const values = cells.map(cell => parseFloat(cell.textContent) || 0).sort((a, b) => a - b);
+
+                    const max = values[values.length - 1];
+                    const top25Threshold = values[Math.floor(values.length * 0.75)];
+                    const top50Threshold = values[Math.floor(values.length * 0.50)];
+                    const bottom25Threshold = values[Math.floor(values.length * 0.25)];
+
+                    cells.forEach(cell => {
+                        const cellValue = parseFloat(cell.textContent) || 0;
+                        if (cellValue === max) {
+                            cell.classList.add('highest');
+                        } else if (cellValue >= top25Threshold) {
+                            cell.classList.add('top-25');
+                        } else if (cellValue <= bottom25Threshold) {
+                            cell.classList.add('bottom-25');
+                        }
+                    });
+                });
+
+                // 特定値に基づく色分け（列インデックス 5）
+                table.querySelectorAll(`tbody tr td:nth-child(${specificValueColumn + 1})`).forEach(cell => {
+                    const cellValue = parseInt(cell.textContent, 10);
+                    if (cellValue === 1) {
+                        cell.classList.add('value-1');
+                    } else if (cellValue === 2) {
+                        cell.classList.add('value-2');
+                    } else if (cellValue === 3) {
+                        cell.classList.add('value-3');
+                    }
+                });
+
+                // 範囲に基づく色分け（列インデックス 6）
+                table.querySelectorAll(`tbody tr td:nth-child(${rangeColumn + 1})`).forEach(cell => {
+                    const cellValue = parseFloat(cell.textContent) || 0;
+                    if (cellValue < 10) {
+                        cell.classList.add('range-low');
+                    } else if (cellValue >= 100) {
+                        cell.classList.add('range-high');
+                    }
+                });
+            });
+        });
+    </script>
+
+    
+    <header>
+        <div class="header-title">20250706 SUMMARY </div>
+    </header>
+     
+            <div class="race-info">
+                <head><span class="large-font">
+                福島08R 14:05発走 芝1800m 1勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>21.06</td>
+      <td>19.64</td>
+      <td>17.06</td>
+      <td>4</td>
+      <td>9.8</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>3.03</td>
+      <td>2.36</td>
+      <td>4.43</td>
+      <td>9</td>
+      <td>21.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>39.33</td>
+      <td>42.94</td>
+      <td>44.48</td>
+      <td>6</td>
+      <td>13.5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>11.25</td>
+      <td>7.32</td>
+      <td>9.15</td>
+      <td>13</td>
+      <td>47.6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>27.91</td>
+      <td>30.68</td>
+      <td>28.73</td>
+      <td>10</td>
+      <td>22.4</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>19.82</td>
+      <td>19.64</td>
+      <td>16.56</td>
+      <td>2</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>21.06</td>
+      <td>19.64</td>
+      <td>16.94</td>
+      <td>8</td>
+      <td>18.5</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>3.03</td>
+      <td>2.60</td>
+      <td>4.93</td>
+      <td>11</td>
+      <td>40.5</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>33.86</td>
+      <td>36.72</td>
+      <td>35.87</td>
+      <td>1</td>
+      <td>2.4</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>4.68</td>
+      <td>3.13</td>
+      <td>5.55</td>
+      <td>14</td>
+      <td>71.4</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>21.84</td>
+      <td>19.71</td>
+      <td>19.93</td>
+      <td>5</td>
+      <td>10.1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>33.86</td>
+      <td>36.72</td>
+      <td>35.67</td>
+      <td>7</td>
+      <td>14.2</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>21.84</td>
+      <td>19.71</td>
+      <td>19.27</td>
+      <td>12</td>
+      <td>45.2</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>37.45</td>
+      <td>39.17</td>
+      <td>41.43</td>
+      <td>3</td>
+      <td>7.6</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                福島09R 14:35発走 ダート1150m 2勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>12.38</td>
+      <td>11.56</td>
+      <td>10.88</td>
+      <td>10</td>
+      <td>23.6</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>36.93</td>
+      <td>39.94</td>
+      <td>39.91</td>
+      <td>8</td>
+      <td>12.8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>27.02</td>
+      <td>28.53</td>
+      <td>25.69</td>
+      <td>2</td>
+      <td>6.9</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>29.51</td>
+      <td>29.47</td>
+      <td>28.10</td>
+      <td>3</td>
+      <td>8.1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>5.10</td>
+      <td>4.03</td>
+      <td>5.92</td>
+      <td>15</td>
+      <td>58.7</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>36.93</td>
+      <td>39.94</td>
+      <td>40.09</td>
+      <td>1</td>
+      <td>3.2</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>23.82</td>
+      <td>22.50</td>
+      <td>21.11</td>
+      <td>5</td>
+      <td>10.3</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>44.61</td>
+      <td>47.71</td>
+      <td>51.40</td>
+      <td>4</td>
+      <td>8.8</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>7.21</td>
+      <td>6.19</td>
+      <td>7.20</td>
+      <td>13</td>
+      <td>47.3</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>8.43</td>
+      <td>6.81</td>
+      <td>8.12</td>
+      <td>7</td>
+      <td>12.8</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>8.43</td>
+      <td>6.81</td>
+      <td>8.14</td>
+      <td>6</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>9.50</td>
+      <td>9.28</td>
+      <td>8.59</td>
+      <td>11</td>
+      <td>25.7</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>18.79</td>
+      <td>18.27</td>
+      <td>15.82</td>
+      <td>14</td>
+      <td>50.3</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>5.10</td>
+      <td>4.03</td>
+      <td>6.28</td>
+      <td>12</td>
+      <td>35.6</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>15.90</td>
+      <td>15.38</td>
+      <td>13.56</td>
+      <td>9</td>
+      <td>21.7</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>10.35</td>
+      <td>9.54</td>
+      <td>9.21</td>
+      <td>16</td>
+      <td>59.8</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                福島10R 15:10発走 芝1800m 2勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>3.92</td>
+      <td>6.03</td>
+      <td>6.96</td>
+      <td>9</td>
+      <td>26.2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>61.20</td>
+      <td>52.30</td>
+      <td>57.92</td>
+      <td>1</td>
+      <td>2.1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>28.26</td>
+      <td>27.82</td>
+      <td>24.92</td>
+      <td>2</td>
+      <td>6.6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>12.27</td>
+      <td>13.63</td>
+      <td>11.88</td>
+      <td>6</td>
+      <td>16.1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>8.39</td>
+      <td>9.30</td>
+      <td>9.07</td>
+      <td>15</td>
+      <td>69.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>15.51</td>
+      <td>17.82</td>
+      <td>14.16</td>
+      <td>8</td>
+      <td>20.8</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>16.83</td>
+      <td>17.82</td>
+      <td>16.00</td>
+      <td>7</td>
+      <td>16.6</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>1.65</td>
+      <td>5.15</td>
+      <td>6.73</td>
+      <td>13</td>
+      <td>52.4</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>3.92</td>
+      <td>6.47</td>
+      <td>7.74</td>
+      <td>4</td>
+      <td>11.9</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>32.05</td>
+      <td>29.36</td>
+      <td>29.34</td>
+      <td>5</td>
+      <td>15.8</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>8.55</td>
+      <td>9.30</td>
+      <td>9.56</td>
+      <td>14</td>
+      <td>52.9</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>1.65</td>
+      <td>5.15</td>
+      <td>6.69</td>
+      <td>16</td>
+      <td>96.4</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>16.83</td>
+      <td>17.82</td>
+      <td>15.25</td>
+      <td>10</td>
+      <td>29.8</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>48.45</td>
+      <td>43.99</td>
+      <td>45.61</td>
+      <td>3</td>
+      <td>7.4</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>31.97</td>
+      <td>28.73</td>
+      <td>28.56</td>
+      <td>11</td>
+      <td>30.7</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>8.55</td>
+      <td>9.30</td>
+      <td>9.62</td>
+      <td>12</td>
+      <td>37.4</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                福島11R 15:45発走 ダート1700m オープン  ハンデ <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>24.93</td>
+      <td>24.45</td>
+      <td>22.77</td>
+      <td>4</td>
+      <td>5.9</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>13.73</td>
+      <td>12.56</td>
+      <td>12.21</td>
+      <td>12</td>
+      <td>31.8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>4.38</td>
+      <td>4.38</td>
+      <td>6.81</td>
+      <td>5</td>
+      <td>11.3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>49.00</td>
+      <td>51.84</td>
+      <td>52.75</td>
+      <td>3</td>
+      <td>5.3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>16.29</td>
+      <td>16.71</td>
+      <td>14.71</td>
+      <td>9</td>
+      <td>26.7</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>9.57</td>
+      <td>10.37</td>
+      <td>10.08</td>
+      <td>11</td>
+      <td>30.1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>8.90</td>
+      <td>7.40</td>
+      <td>8.77</td>
+      <td>13</td>
+      <td>35.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>13.56</td>
+      <td>12.56</td>
+      <td>11.80</td>
+      <td>15</td>
+      <td>52.3</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>59.20</td>
+      <td>58.28</td>
+      <td>65.07</td>
+      <td>2</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>23.52</td>
+      <td>22.31</td>
+      <td>21.10</td>
+      <td>7</td>
+      <td>15.6</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>21.10</td>
+      <td>20.97</td>
+      <td>19.95</td>
+      <td>6</td>
+      <td>11.6</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>13.56</td>
+      <td>12.56</td>
+      <td>12.08</td>
+      <td>8</td>
+      <td>22.3</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>25.93</td>
+      <td>28.51</td>
+      <td>24.61</td>
+      <td>1</td>
+      <td>4.6</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>9.57</td>
+      <td>10.37</td>
+      <td>9.65</td>
+      <td>10</td>
+      <td>29.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>6.77</td>
+      <td>6.72</td>
+      <td>7.63</td>
+      <td>14</td>
+      <td>49.6</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                福島12R 16:30発走 ダート1150m 1勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>37.49</td>
+      <td>41.67</td>
+      <td>45.45</td>
+      <td>1</td>
+      <td>4.2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>12.74</td>
+      <td>9.96</td>
+      <td>9.76</td>
+      <td>4</td>
+      <td>9.7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>21.83</td>
+      <td>19.13</td>
+      <td>18.42</td>
+      <td>9</td>
+      <td>20.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>10.38</td>
+      <td>8.62</td>
+      <td>8.88</td>
+      <td>11</td>
+      <td>24.6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>29.33</td>
+      <td>33.03</td>
+      <td>31.18</td>
+      <td>2</td>
+      <td>5.2</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>17.47</td>
+      <td>15.73</td>
+      <td>14.13</td>
+      <td>14</td>
+      <td>31.5</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>16.10</td>
+      <td>14.58</td>
+      <td>12.93</td>
+      <td>13</td>
+      <td>31.1</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>36.34</td>
+      <td>39.91</td>
+      <td>40.25</td>
+      <td>6</td>
+      <td>10.9</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>23.14</td>
+      <td>21.13</td>
+      <td>20.20</td>
+      <td>8</td>
+      <td>14.7</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>36.34</td>
+      <td>39.91</td>
+      <td>40.28</td>
+      <td>5</td>
+      <td>10.1</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>29.33</td>
+      <td>29.77</td>
+      <td>28.57</td>
+      <td>3</td>
+      <td>7.7</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>8.88</td>
+      <td>5.51</td>
+      <td>7.31</td>
+      <td>10</td>
+      <td>23.4</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>0.44</td>
+      <td>2.29</td>
+      <td>3.87</td>
+      <td>12</td>
+      <td>28.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>16.10</td>
+      <td>15.73</td>
+      <td>13.53</td>
+      <td>7</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>4.07</td>
+      <td>3.04</td>
+      <td>5.25</td>
+      <td>15</td>
+      <td>44.0</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                小倉07R 13:25発走 芝1800m 1勝クラス  牝馬限定 <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>20.59</td>
+      <td>12.02</td>
+      <td>14.37</td>
+      <td>7</td>
+      <td>23.6</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>28.46</td>
+      <td>26.62</td>
+      <td>22.33</td>
+      <td>4</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>13.77</td>
+      <td>6.61</td>
+      <td>9.32</td>
+      <td>9</td>
+      <td>44.6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>38.90</td>
+      <td>39.72</td>
+      <td>37.08</td>
+      <td>3</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>46.99</td>
+      <td>52.01</td>
+      <td>49.55</td>
+      <td>1</td>
+      <td>2.7</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>57.82</td>
+      <td>70.50</td>
+      <td>75.68</td>
+      <td>2</td>
+      <td>3.7</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>46.99</td>
+      <td>55.89</td>
+      <td>52.41</td>
+      <td>5</td>
+      <td>10.6</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>12.93</td>
+      <td>4.27</td>
+      <td>7.98</td>
+      <td>8</td>
+      <td>25.2</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>33.53</td>
+      <td>32.36</td>
+      <td>31.29</td>
+      <td>6</td>
+      <td>11.1</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                小倉08R 13:55発走 ダート1000m 1勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>22.88</td>
+      <td>20.50</td>
+      <td>18.76</td>
+      <td>3</td>
+      <td>8.2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>6.54</td>
+      <td>4.50</td>
+      <td>6.58</td>
+      <td>13</td>
+      <td>30.4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>7.03</td>
+      <td>4.50</td>
+      <td>6.90</td>
+      <td>12</td>
+      <td>30.4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>43.48</td>
+      <td>44.66</td>
+      <td>48.56</td>
+      <td>2</td>
+      <td>4.6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>12.74</td>
+      <td>10.67</td>
+      <td>11.28</td>
+      <td>5</td>
+      <td>10.1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>11.96</td>
+      <td>10.67</td>
+      <td>10.07</td>
+      <td>11</td>
+      <td>26.6</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>36.00</td>
+      <td>40.75</td>
+      <td>38.33</td>
+      <td>4</td>
+      <td>9.6</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>19.05</td>
+      <td>20.43</td>
+      <td>16.85</td>
+      <td>10</td>
+      <td>25.8</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>2.33</td>
+      <td>2.71</td>
+      <td>4.93</td>
+      <td>14</td>
+      <td>84.6</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>23.22</td>
+      <td>20.50</td>
+      <td>19.39</td>
+      <td>9</td>
+      <td>23.2</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>32.99</td>
+      <td>35.41</td>
+      <td>34.11</td>
+      <td>1</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>43.48</td>
+      <td>44.66</td>
+      <td>48.17</td>
+      <td>8</td>
+      <td>18.6</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>11.96</td>
+      <td>10.67</td>
+      <td>10.36</td>
+      <td>6</td>
+      <td>14.8</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>26.33</td>
+      <td>29.34</td>
+      <td>25.71</td>
+      <td>7</td>
+      <td>17.7</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                小倉09R 14:25発走 芝1200m 1勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>11.56</td>
+      <td>11.87</td>
+      <td>13.95</td>
+      <td>8</td>
+      <td>21.9</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>76.36</td>
+      <td>76.61</td>
+      <td>80.83</td>
+      <td>3</td>
+      <td>6.5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>9.64</td>
+      <td>7.72</td>
+      <td>12.47</td>
+      <td>6</td>
+      <td>11.5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>68.95</td>
+      <td>69.34</td>
+      <td>65.09</td>
+      <td>1</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>59.63</td>
+      <td>62.77</td>
+      <td>60.19</td>
+      <td>2</td>
+      <td>6.2</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>32.86</td>
+      <td>35.05</td>
+      <td>29.91</td>
+      <td>5</td>
+      <td>9.7</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>31.38</td>
+      <td>28.92</td>
+      <td>25.56</td>
+      <td>4</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>9.64</td>
+      <td>7.72</td>
+      <td>12.00</td>
+      <td>7</td>
+      <td>12.4</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                小倉10R 15:00発走 芝2600m 2勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>76.46</td>
+      <td>66.97</td>
+      <td>67.87</td>
+      <td>1</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>4.60</td>
+      <td>7.91</td>
+      <td>13.00</td>
+      <td>5</td>
+      <td>11.3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>79.57</td>
+      <td>77.06</td>
+      <td>76.16</td>
+      <td>3</td>
+      <td>3.6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1.93</td>
+      <td>7.91</td>
+      <td>11.94</td>
+      <td>7</td>
+      <td>26.9</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>24.69</td>
+      <td>24.45</td>
+      <td>23.60</td>
+      <td>6</td>
+      <td>13.5</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>79.57</td>
+      <td>77.06</td>
+      <td>76.39</td>
+      <td>2</td>
+      <td>3.3</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>33.18</td>
+      <td>38.64</td>
+      <td>31.05</td>
+      <td>4</td>
+      <td>7.4</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                小倉11R 15:35発走 芝1200m G3  ハンデ <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>12.73</td>
+      <td>10.07</td>
+      <td>9.95</td>
+      <td>9</td>
+      <td>21.4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>7.33</td>
+      <td>3.51</td>
+      <td>5.18</td>
+      <td>16</td>
+      <td>46.2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>10.72</td>
+      <td>8.31</td>
+      <td>8.98</td>
+      <td>13</td>
+      <td>26.2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>28.01</td>
+      <td>31.73</td>
+      <td>31.10</td>
+      <td>8</td>
+      <td>20.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>24.69</td>
+      <td>27.58</td>
+      <td>26.70</td>
+      <td>10</td>
+      <td>22.1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>27.93</td>
+      <td>31.73</td>
+      <td>30.44</td>
+      <td>1</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>7.47</td>
+      <td>5.39</td>
+      <td>6.19</td>
+      <td>2</td>
+      <td>7.1</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>10.72</td>
+      <td>8.31</td>
+      <td>8.09</td>
+      <td>12</td>
+      <td>25.4</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>24.69</td>
+      <td>29.74</td>
+      <td>28.02</td>
+      <td>4</td>
+      <td>7.6</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>16.48</td>
+      <td>15.91</td>
+      <td>14.00</td>
+      <td>15</td>
+      <td>31.6</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>12.73</td>
+      <td>10.07</td>
+      <td>9.60</td>
+      <td>14</td>
+      <td>27.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>10.72</td>
+      <td>8.31</td>
+      <td>8.75</td>
+      <td>18</td>
+      <td>70.7</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>8.74</td>
+      <td>5.93</td>
+      <td>7.19</td>
+      <td>11</td>
+      <td>22.7</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>10.72</td>
+      <td>8.31</td>
+      <td>8.55</td>
+      <td>6</td>
+      <td>9.6</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>38.28</td>
+      <td>46.71</td>
+      <td>48.59</td>
+      <td>3</td>
+      <td>7.4</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>5.29</td>
+      <td>3.26</td>
+      <td>4.78</td>
+      <td>17</td>
+      <td>62.7</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>17</td>
+      <td>14.71</td>
+      <td>13.39</td>
+      <td>12.10</td>
+      <td>7</td>
+      <td>10.1</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>18</td>
+      <td>28.01</td>
+      <td>31.73</td>
+      <td>31.79</td>
+      <td>5</td>
+      <td>8.2</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                小倉12R 16:15発走 ダート1700m 1勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>11.17</td>
+      <td>9.32</td>
+      <td>9.98</td>
+      <td>9</td>
+      <td>29.7</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>38.61</td>
+      <td>39.00</td>
+      <td>38.80</td>
+      <td>7</td>
+      <td>18.8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>9.41</td>
+      <td>9.06</td>
+      <td>8.64</td>
+      <td>5</td>
+      <td>13.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>6.56</td>
+      <td>5.16</td>
+      <td>6.84</td>
+      <td>14</td>
+      <td>41.5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>39.02</td>
+      <td>39.00</td>
+      <td>40.04</td>
+      <td>6</td>
+      <td>13.5</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>4.64</td>
+      <td>3.65</td>
+      <td>5.71</td>
+      <td>13</td>
+      <td>39.5</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>26.85</td>
+      <td>27.86</td>
+      <td>25.05</td>
+      <td>12</td>
+      <td>38.6</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>22.37</td>
+      <td>22.84</td>
+      <td>21.31</td>
+      <td>3</td>
+      <td>8.8</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>40.58</td>
+      <td>44.05</td>
+      <td>44.84</td>
+      <td>1</td>
+      <td>2.1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>11.17</td>
+      <td>9.32</td>
+      <td>9.87</td>
+      <td>10</td>
+      <td>33.4</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>24.58</td>
+      <td>25.62</td>
+      <td>23.09</td>
+      <td>2</td>
+      <td>7.1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>24.58</td>
+      <td>25.62</td>
+      <td>23.67</td>
+      <td>8</td>
+      <td>25.9</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>11.17</td>
+      <td>9.32</td>
+      <td>9.39</td>
+      <td>16</td>
+      <td>62.3</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>6.63</td>
+      <td>6.04</td>
+      <td>7.23</td>
+      <td>15</td>
+      <td>49.9</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>0.33</td>
+      <td>2.14</td>
+      <td>4.24</td>
+      <td>11</td>
+      <td>33.7</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>22.37</td>
+      <td>21.97</td>
+      <td>21.29</td>
+      <td>4</td>
+      <td>12.1</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                函館07R 13:15発走 ダート1000m 1勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>48.45</td>
+      <td>53.03</td>
+      <td>58.14</td>
+      <td>2</td>
+      <td>4.1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>15.41</td>
+      <td>12.37</td>
+      <td>12.20</td>
+      <td>6</td>
+      <td>18.2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>25.87</td>
+      <td>23.77</td>
+      <td>22.94</td>
+      <td>3</td>
+      <td>4.8</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>40.11</td>
+      <td>47.24</td>
+      <td>45.49</td>
+      <td>5</td>
+      <td>13.5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>25.87</td>
+      <td>25.02</td>
+      <td>24.17</td>
+      <td>10</td>
+      <td>35.1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>5.54</td>
+      <td>2.85</td>
+      <td>5.18</td>
+      <td>9</td>
+      <td>27.6</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>32.05</td>
+      <td>34.02</td>
+      <td>31.00</td>
+      <td>1</td>
+      <td>2.4</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>36.76</td>
+      <td>42.43</td>
+      <td>40.67</td>
+      <td>7</td>
+      <td>23.3</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>15.41</td>
+      <td>12.37</td>
+      <td>12.60</td>
+      <td>11</td>
+      <td>44.6</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>13.33</td>
+      <td>8.02</td>
+      <td>9.33</td>
+      <td>8</td>
+      <td>25.4</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>9.16</td>
+      <td>4.85</td>
+      <td>7.08</td>
+      <td>12</td>
+      <td>94.7</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>32.05</td>
+      <td>34.02</td>
+      <td>31.21</td>
+      <td>4</td>
+      <td>11.9</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                函館08R 13:45発走 ダート1700m 1勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>6.14</td>
+      <td>2.80</td>
+      <td>5.55</td>
+      <td>11</td>
+      <td>77.3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1.37</td>
+      <td>1.46</td>
+      <td>3.74</td>
+      <td>13</td>
+      <td>95.6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>28.67</td>
+      <td>30.34</td>
+      <td>27.90</td>
+      <td>4</td>
+      <td>27.5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>15.74</td>
+      <td>12.02</td>
+      <td>12.43</td>
+      <td>5</td>
+      <td>36.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>10.15</td>
+      <td>4.66</td>
+      <td>7.60</td>
+      <td>12</td>
+      <td>86.1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>28.67</td>
+      <td>30.34</td>
+      <td>27.81</td>
+      <td>7</td>
+      <td>44.4</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>28.67</td>
+      <td>32.99</td>
+      <td>30.34</td>
+      <td>9</td>
+      <td>48.1</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>38.32</td>
+      <td>44.24</td>
+      <td>46.85</td>
+      <td>6</td>
+      <td>37.6</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>35.53</td>
+      <td>41.80</td>
+      <td>39.00</td>
+      <td>2</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>15.74</td>
+      <td>11.03</td>
+      <td>11.54</td>
+      <td>8</td>
+      <td>46.8</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>32.44</td>
+      <td>32.99</td>
+      <td>32.07</td>
+      <td>1</td>
+      <td>1.9</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>26.02</td>
+      <td>22.32</td>
+      <td>21.75</td>
+      <td>10</td>
+      <td>52.5</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>32.52</td>
+      <td>32.99</td>
+      <td>33.43</td>
+      <td>3</td>
+      <td>5.2</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                函館09R 14:15発走 芝1200m 2勝クラス  牝馬限定 <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>46.91</td>
+      <td>66.09</td>
+      <td>70.02</td>
+      <td>1</td>
+      <td>2.4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>22.73</td>
+      <td>16.19</td>
+      <td>16.05</td>
+      <td>6</td>
+      <td>23.6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>25.04</td>
+      <td>21.53</td>
+      <td>19.72</td>
+      <td>5</td>
+      <td>22.9</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>14.92</td>
+      <td>5.64</td>
+      <td>9.34</td>
+      <td>10</td>
+      <td>47.5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>31.03</td>
+      <td>36.74</td>
+      <td>32.46</td>
+      <td>7</td>
+      <td>26.6</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>25.04</td>
+      <td>21.11</td>
+      <td>18.49</td>
+      <td>4</td>
+      <td>9.7</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>45.10</td>
+      <td>55.92</td>
+      <td>61.57</td>
+      <td>3</td>
+      <td>5.3</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>25.04</td>
+      <td>21.11</td>
+      <td>18.77</td>
+      <td>8</td>
+      <td>33.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>28.41</td>
+      <td>27.02</td>
+      <td>26.90</td>
+      <td>2</td>
+      <td>2.8</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>25.04</td>
+      <td>25.58</td>
+      <td>21.59</td>
+      <td>11</td>
+      <td>72.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>10.74</td>
+      <td>3.07</td>
+      <td>5.10</td>
+      <td>9</td>
+      <td>47.2</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                函館10R 14:50発走 芝2600m 2勝クラス  ハンデ <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>37.11</td>
+      <td>40.99</td>
+      <td>35.61</td>
+      <td>3</td>
+      <td>6.8</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>52.73</td>
+      <td>56.92</td>
+      <td>56.44</td>
+      <td>2</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>11.23</td>
+      <td>9.66</td>
+      <td>11.09</td>
+      <td>10</td>
+      <td>54.5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>13.14</td>
+      <td>10.64</td>
+      <td>12.62</td>
+      <td>7</td>
+      <td>12.5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>5.14</td>
+      <td>4.55</td>
+      <td>8.00</td>
+      <td>9</td>
+      <td>21.1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>30.45</td>
+      <td>28.64</td>
+      <td>26.64</td>
+      <td>5</td>
+      <td>8.7</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>69.50</td>
+      <td>74.53</td>
+      <td>78.66</td>
+      <td>6</td>
+      <td>9.4</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>13.14</td>
+      <td>10.37</td>
+      <td>12.34</td>
+      <td>8</td>
+      <td>20.7</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>30.45</td>
+      <td>28.54</td>
+      <td>25.28</td>
+      <td>4</td>
+      <td>7.2</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>37.11</td>
+      <td>35.16</td>
+      <td>33.32</td>
+      <td>1</td>
+      <td>3.2</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                函館11R 15:25発走 ダート1700m オープン <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>10.35</td>
+      <td>3.81</td>
+      <td>7.05</td>
+      <td>9</td>
+      <td>24.8</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>45.69</td>
+      <td>57.27</td>
+      <td>56.70</td>
+      <td>2</td>
+      <td>5.1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>17.62</td>
+      <td>9.72</td>
+      <td>11.83</td>
+      <td>10</td>
+      <td>36.5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>42.36</td>
+      <td>49.77</td>
+      <td>46.85</td>
+      <td>3</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>53.00</td>
+      <td>62.78</td>
+      <td>65.83</td>
+      <td>1</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>34.19</td>
+      <td>30.34</td>
+      <td>29.60</td>
+      <td>5</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>14.85</td>
+      <td>8.30</td>
+      <td>10.83</td>
+      <td>6</td>
+      <td>13.7</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>22.82</td>
+      <td>18.17</td>
+      <td>17.89</td>
+      <td>7</td>
+      <td>18.7</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>38.78</td>
+      <td>44.85</td>
+      <td>38.96</td>
+      <td>4</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>20.36</td>
+      <td>15.00</td>
+      <td>14.46</td>
+      <td>8</td>
+      <td>20.8</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                函館12R 16:05発走 芝1200m 1勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>v21.1 std sig</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>9.98</td>
+      <td>9.80</td>
+      <td>11.80</td>
+      <td>8</td>
+      <td>21.8</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>11.67</td>
+      <td>10.79</td>
+      <td>12.85</td>
+      <td>7</td>
+      <td>20.3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>19.64</td>
+      <td>22.14</td>
+      <td>18.62</td>
+      <td>4</td>
+      <td>9.4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>46.86</td>
+      <td>47.69</td>
+      <td>46.25</td>
+      <td>6</td>
+      <td>11.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>9.98</td>
+      <td>9.80</td>
+      <td>11.81</td>
+      <td>10</td>
+      <td>37.9</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>4.57</td>
+      <td>6.38</td>
+      <td>9.62</td>
+      <td>5</td>
+      <td>9.4</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>59.38</td>
+      <td>57.71</td>
+      <td>56.70</td>
+      <td>3</td>
+      <td>5.9</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>37.40</td>
+      <td>37.05</td>
+      <td>34.35</td>
+      <td>1</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>75.99</td>
+      <td>74.77</td>
+      <td>77.04</td>
+      <td>2</td>
+      <td>3.5</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>24.54</td>
+      <td>23.88</td>
+      <td>20.96</td>
+      <td>9</td>
+      <td>24.8</td>
+    </tr>
+  </tbody>
+</table><br><br></body></html>
