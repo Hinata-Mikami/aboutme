@@ -1,0 +1,2561 @@
+﻿
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/v/zf/jq-3.6.0/dt-1.13.4/b-2.3.6/b-html5-2.3.6/date-1.4.1/fh-3.3.2/sb-1.4.2/datatables.min.css" rel="stylesheet"/>
+    
+    <script src="https://cdn.datatables.net/v/zf/jq-3.6.0/dt-1.13.4/b-2.3.6/b-html5-2.3.6/date-1.4.1/fh-3.3.2/sb-1.4.2/datatables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.my-table').DataTable({
+                select: true,
+                displayLength: 20,
+                buttons: ['copy'],
+                fixedHeader: true,
+                dom: 'iQrtBlp',
+            });
+        });
+    </script>
+
+    <style>
+        /* 全体のフォントと背景色 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        /* ヘッダーとサマリーのスタイル */
+        .header-title {
+            font-size: 2.5em;
+            margin: 20px 0;
+            color: #333;
+            text-align: center;
+        }
+        .summary-title {
+            font-size: 2.5em;
+            margin: 10px 0;
+            color: #444;
+        }
+        /* テーブルのスタイル */
+        .my-table {
+            font-size: 0.7em;
+            width: 90%;
+            margin: 20px 0;
+            height: 20px; /* 行の高さを固定 */
+            line-height: 20px; /* 行の高さに合わせて縦方向の中央揃え */
+            /*overflow: hidden;  セルからはみ出したテキストを隠す */
+            white-space: nowrap;  /*テキストを折り返さず1行にする */
+            text-overflow: ellipsis; /* 省略記号(...)を表示 */
+        }
+        /* レース情報のスタイル */
+        .race-info {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        /* 大きなフォントサイズのクラス */
+        .large-font {
+            font-size: 1.5em; /* 大きなフォントサイズを指定 */
+            color: #222;
+        }
+        
+         /* 枠の色 */
+        .frame-1 { background-color: white; }
+        .frame-2 { background-color: black; color: white; }
+        .frame-3 { background-color: red; color: white; }
+        .frame-4 { background-color: blue; color: white; }
+        .frame-5 { background-color: yellow; }
+        .frame-6 { background-color: green; color: white; }
+        .frame-7 { background-color: orange; color: white; }
+        .frame-8 { background-color: pink; }
+
+        /* スコア色分け */
+        .highest { background-color: Tomato; }
+        .top-25 { background-color: Yellow; }
+        .bottom-25 { background-color: #90D7EC; }
+        /* 特定値の色分け */
+        .value-1 { background-color: yellow; }
+        .value-2 { background-color: skyblue; }
+        .value-3 { background-color: orange; }
+
+        /* 範囲色分け */
+        .range-low { background-color: Tomato; }
+        .range-high { background-color: skyblue; }
+    </style>
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // すべてのテーブルを取得
+            const tables = document.querySelectorAll('.my-table');
+
+            tables.forEach(table => {
+                // 「枠」列の色を設定（列インデックス1が「枠」）
+
+                // 色付けする列のインデックスと列名を定義
+                const scoreColumns = [2, 3, 4];
+                const specificValueColumn = 6;
+                const rangeColumn = 7;
+
+                // スコア列の色付け
+                scoreColumns.forEach(colIndex => {
+                    const cells = Array.from(table.querySelectorAll(`tbody tr td:nth-child(${colIndex + 1})`));
+                    const values = cells.map(cell => parseFloat(cell.textContent) || 0).sort((a, b) => a - b);
+
+                    const max = values[values.length - 1];
+                    const top25Threshold = values[Math.floor(values.length * 0.75)];
+                    const top50Threshold = values[Math.floor(values.length * 0.50)];
+                    const bottom25Threshold = values[Math.floor(values.length * 0.25)];
+
+                    cells.forEach(cell => {
+                        const cellValue = parseFloat(cell.textContent) || 0;
+                        if (cellValue === max) {
+                            cell.classList.add('highest');
+                        } else if (cellValue >= top25Threshold) {
+                            cell.classList.add('top-25');
+                        } else if (cellValue <= bottom25Threshold) {
+                            cell.classList.add('bottom-25');
+                        }
+                    });
+                });
+
+                // 特定値に基づく色分け（列インデックス 5）
+                table.querySelectorAll(`tbody tr td:nth-child(${specificValueColumn + 1})`).forEach(cell => {
+                    const cellValue = parseInt(cell.textContent, 10);
+                    if (cellValue === 1) {
+                        cell.classList.add('value-1');
+                    } else if (cellValue === 2) {
+                        cell.classList.add('value-2');
+                    } else if (cellValue === 3) {
+                        cell.classList.add('value-3');
+                    }
+                });
+
+                // 範囲に基づく色分け（列インデックス 6）
+                table.querySelectorAll(`tbody tr td:nth-child(${rangeColumn + 1})`).forEach(cell => {
+                    const cellValue = parseFloat(cell.textContent) || 0;
+                    if (cellValue < 10) {
+                        cell.classList.add('range-low');
+                    } else if (cellValue >= 100) {
+                        cell.classList.add('range-high');
+                    }
+                });
+            });
+        });
+    </script>
+
+    
+    <header>
+        <div class="header-title">20250719 SUMMARY </div>
+    </header>
+     
+            <div class="race-info">
+                <head><span class="large-font">
+                福島06R 13:05発走 ダート1700m 1勝クラス  牝馬限定 <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+      <th>馬名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>38.23</td>
+      <td>39.62</td>
+      <td>6</td>
+      <td>14.1</td>
+      <td>フィザルモニカ</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>35.69</td>
+      <td>39.31</td>
+      <td>4</td>
+      <td>6.5</td>
+      <td>レディーフランシス</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>6.49</td>
+      <td>4.07</td>
+      <td>10</td>
+      <td>19.7</td>
+      <td>アルプスオジョー</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>16.92</td>
+      <td>15.20</td>
+      <td>11</td>
+      <td>41.8</td>
+      <td>ミランカ</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>27.42</td>
+      <td>28.53</td>
+      <td>5</td>
+      <td>12.0</td>
+      <td>タマモカンパネラ</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>2.97</td>
+      <td>2.63</td>
+      <td>13</td>
+      <td>84.3</td>
+      <td>ウェルキン</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>24.34</td>
+      <td>22.33</td>
+      <td>3</td>
+      <td>6.2</td>
+      <td>ラルガメンテ</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>33.27</td>
+      <td>37.14</td>
+      <td>1</td>
+      <td>3.1</td>
+      <td>セギレエルビエント</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>24.34</td>
+      <td>22.33</td>
+      <td>7</td>
+      <td>14.2</td>
+      <td>オーケーマヒナ</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>38.64</td>
+      <td>39.62</td>
+      <td>8</td>
+      <td>14.7</td>
+      <td>ホシニネガイヲ</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>27.42</td>
+      <td>28.53</td>
+      <td>2</td>
+      <td>5.9</td>
+      <td>パースウェイド</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>7.79</td>
+      <td>5.74</td>
+      <td>12</td>
+      <td>71.5</td>
+      <td>キセキノエンジェル</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>2.15</td>
+      <td>2.39</td>
+      <td>14</td>
+      <td>115.2</td>
+      <td>エンピリカルルール</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>14.32</td>
+      <td>12.57</td>
+      <td>9</td>
+      <td>18.2</td>
+      <td>フィールオーサム</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                福島09R 14:35発走 芝2600m 1勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+      <th>馬名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>9.71</td>
+      <td>7.77</td>
+      <td>7</td>
+      <td>24.1</td>
+      <td>ロードアフェット</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>55.82</td>
+      <td>55.03</td>
+      <td>3</td>
+      <td>4.4</td>
+      <td>プルミエソルティ</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>51.38</td>
+      <td>55.03</td>
+      <td>1</td>
+      <td>2.9</td>
+      <td>ビリングス</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>47.04</td>
+      <td>43.40</td>
+      <td>4</td>
+      <td>6.8</td>
+      <td>ルークスヘリオス</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>68.94</td>
+      <td>70.27</td>
+      <td>2</td>
+      <td>3.3</td>
+      <td>フィーリウス</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>3.80</td>
+      <td>4.67</td>
+      <td>8</td>
+      <td>32.4</td>
+      <td>タイセイアーサー</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>51.38</td>
+      <td>55.03</td>
+      <td>5</td>
+      <td>11.5</td>
+      <td>モアナフリューゲル</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>11.92</td>
+      <td>8.79</td>
+      <td>6</td>
+      <td>11.8</td>
+      <td>ハチワレ</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                福島10R 15:10発走 ダート1150m 2勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+      <th>馬名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>18.65</td>
+      <td>17.92</td>
+      <td>6</td>
+      <td>17.1</td>
+      <td>イナフセド</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>3.87</td>
+      <td>3.94</td>
+      <td>16</td>
+      <td>140.4</td>
+      <td>ロイヤルダンス</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>47.90</td>
+      <td>46.62</td>
+      <td>5</td>
+      <td>8.2</td>
+      <td>ワークソング</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>35.70</td>
+      <td>35.60</td>
+      <td>7</td>
+      <td>18.8</td>
+      <td>ミロワール</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>46.47</td>
+      <td>46.13</td>
+      <td>4</td>
+      <td>6.3</td>
+      <td>アスクアイルビゼア</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>12.13</td>
+      <td>13.66</td>
+      <td>3</td>
+      <td>5.3</td>
+      <td>ビッグドリーム</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>15.33</td>
+      <td>17.85</td>
+      <td>10</td>
+      <td>38.4</td>
+      <td>ヘルメース</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>3.87</td>
+      <td>3.94</td>
+      <td>15</td>
+      <td>85.2</td>
+      <td>ヤングワールド</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>16.64</td>
+      <td>17.85</td>
+      <td>12</td>
+      <td>49.2</td>
+      <td>ランウインディ</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>28.84</td>
+      <td>29.43</td>
+      <td>1</td>
+      <td>3.9</td>
+      <td>ルージュアズライト</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>5.99</td>
+      <td>6.04</td>
+      <td>8</td>
+      <td>21.7</td>
+      <td>セキテイオー</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>27.53</td>
+      <td>25.64</td>
+      <td>2</td>
+      <td>4.6</td>
+      <td>カネショウレジェン</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>12.13</td>
+      <td>11.30</td>
+      <td>13</td>
+      <td>57.5</td>
+      <td>ブライトルピナス</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>6.68</td>
+      <td>6.48</td>
+      <td>9</td>
+      <td>27.9</td>
+      <td>ニシノクラウン</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>3.87</td>
+      <td>3.94</td>
+      <td>11</td>
+      <td>41.8</td>
+      <td>サイモンギフト</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>14.40</td>
+      <td>13.66</td>
+      <td>14</td>
+      <td>65.3</td>
+      <td>ヴィクトリーロード</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                福島11R 15:45発走 芝1800m 3勝クラス  ハンデ <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+      <th>馬名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>25.09</td>
+      <td>25.35</td>
+      <td>4</td>
+      <td>7.0</td>
+      <td>ワイドアラジン</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>39.08</td>
+      <td>50.54</td>
+      <td>6</td>
+      <td>9.3</td>
+      <td>アンリーロード</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>27.75</td>
+      <td>25.35</td>
+      <td>7</td>
+      <td>10.0</td>
+      <td>ココクレーター</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>30.58</td>
+      <td>26.77</td>
+      <td>5</td>
+      <td>9.1</td>
+      <td>イケイケドンドン</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>43.46</td>
+      <td>53.07</td>
+      <td>8</td>
+      <td>10.8</td>
+      <td>グラニット</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>13.28</td>
+      <td>5.19</td>
+      <td>11</td>
+      <td>52.2</td>
+      <td>ロジマンボ</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>34.69</td>
+      <td>39.58</td>
+      <td>3</td>
+      <td>6.3</td>
+      <td>ユキノロイヤル</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>20.41</td>
+      <td>13.24</td>
+      <td>2</td>
+      <td>5.7</td>
+      <td>マイネルティグレ</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>15.76</td>
+      <td>7.33</td>
+      <td>9</td>
+      <td>20.0</td>
+      <td>ダニーデン</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>10.82</td>
+      <td>3.04</td>
+      <td>10</td>
+      <td>46.3</td>
+      <td>ディープリッチ</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>39.08</td>
+      <td>50.54</td>
+      <td>1</td>
+      <td>3.6</td>
+      <td>ボーモンド</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                福島12R 16:30発走 ダート1150m 1勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+      <th>馬名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>12.18</td>
+      <td>9.41</td>
+      <td>6</td>
+      <td>24.4</td>
+      <td>オコジュ</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>8.02</td>
+      <td>5.31</td>
+      <td>11</td>
+      <td>97.9</td>
+      <td>アイファーチーター</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>62.86</td>
+      <td>76.10</td>
+      <td>1</td>
+      <td>1.4</td>
+      <td>ピコテンダー</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>37.97</td>
+      <td>40.48</td>
+      <td>2</td>
+      <td>5.1</td>
+      <td>エコロヴァイス</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>10.26</td>
+      <td>7.49</td>
+      <td>10</td>
+      <td>72.9</td>
+      <td>オオゾラヒバリ</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>33.56</td>
+      <td>29.13</td>
+      <td>7</td>
+      <td>26.0</td>
+      <td>キボウノホシ</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>38.07</td>
+      <td>40.48</td>
+      <td>5</td>
+      <td>20.6</td>
+      <td>アルヴァレス</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>19.99</td>
+      <td>16.40</td>
+      <td>8</td>
+      <td>29.0</td>
+      <td>スターチスブーケ</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>11.88</td>
+      <td>8.78</td>
+      <td>9</td>
+      <td>36.1</td>
+      <td>ニシノルミリオン</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>38.07</td>
+      <td>40.48</td>
+      <td>3</td>
+      <td>10.9</td>
+      <td>グラスブランシュ</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>27.15</td>
+      <td>25.92</td>
+      <td>4</td>
+      <td>20.2</td>
+      <td>サザンレイク</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                小倉07R 13:25発走 芝1200m 1勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+      <th>馬名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>31.07</td>
+      <td>30.24</td>
+      <td>7</td>
+      <td>17.3</td>
+      <td>アンダースコア</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>42.58</td>
+      <td>47.22</td>
+      <td>2</td>
+      <td>5.3</td>
+      <td>ジェニファー</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>15.07</td>
+      <td>6.66</td>
+      <td>6</td>
+      <td>11.9</td>
+      <td>レディメローラ</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>34.03</td>
+      <td>30.34</td>
+      <td>8</td>
+      <td>32.3</td>
+      <td>ファルシオン</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>39.02</td>
+      <td>43.42</td>
+      <td>3</td>
+      <td>5.5</td>
+      <td>ナムライリス</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>65.86</td>
+      <td>78.12</td>
+      <td>1</td>
+      <td>2.5</td>
+      <td>ベルビースタローン</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>27.46</td>
+      <td>23.13</td>
+      <td>5</td>
+      <td>7.6</td>
+      <td>バニーラビット</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>5.88</td>
+      <td>3.63</td>
+      <td>9</td>
+      <td>80.8</td>
+      <td>ミジョカスマイル</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>39.02</td>
+      <td>37.24</td>
+      <td>4</td>
+      <td>5.6</td>
+      <td>デボラ</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                小倉08R 13:55発走 芝2000m 1勝クラス  牝馬限定 <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+      <th>馬名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>40.33</td>
+      <td>44.50</td>
+      <td>3</td>
+      <td>4.8</td>
+      <td>マトラコーニッシュ</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>36.97</td>
+      <td>39.62</td>
+      <td>7</td>
+      <td>11.9</td>
+      <td>ブルーミングローズ</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>32.23</td>
+      <td>30.59</td>
+      <td>4</td>
+      <td>8.6</td>
+      <td>サラダ</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>2.61</td>
+      <td>1.91</td>
+      <td>8</td>
+      <td>22.9</td>
+      <td>ルージュサリナス</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>17.37</td>
+      <td>10.02</td>
+      <td>10</td>
+      <td>44.1</td>
+      <td>グラヴィテ</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>21.34</td>
+      <td>17.44</td>
+      <td>9</td>
+      <td>36.8</td>
+      <td>マハナ</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>44.60</td>
+      <td>47.81</td>
+      <td>1</td>
+      <td>3.6</td>
+      <td>サタデーサンライズ</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>15.50</td>
+      <td>10.02</td>
+      <td>2</td>
+      <td>3.8</td>
+      <td>モルティフレーバー</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>48.72</td>
+      <td>55.02</td>
+      <td>6</td>
+      <td>9.6</td>
+      <td>サイレントグルーヴ</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>40.33</td>
+      <td>43.08</td>
+      <td>5</td>
+      <td>8.8</td>
+      <td>オリバナム</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                小倉09R 14:25発走 芝1200m オープン  2歳 <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+      <th>馬名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>40.47</td>
+      <td>35.28</td>
+      <td>1</td>
+      <td>1.9</td>
+      <td>カラクニダケ</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>7.90</td>
+      <td>8.43</td>
+      <td>10</td>
+      <td>58.7</td>
+      <td>アメアメフレフレ</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>9.47</td>
+      <td>10.21</td>
+      <td>11</td>
+      <td>67.6</td>
+      <td>ラムールデュヴォン</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>19.43</td>
+      <td>17.05</td>
+      <td>9</td>
+      <td>55.1</td>
+      <td>ナンテヒダ</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>1.52</td>
+      <td>5.46</td>
+      <td>18</td>
+      <td>148.8</td>
+      <td>アポロマインド</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>40.47</td>
+      <td>35.28</td>
+      <td>2</td>
+      <td>4.9</td>
+      <td>ウイントッペン</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>1.25</td>
+      <td>4.67</td>
+      <td>17</td>
+      <td>93.0</td>
+      <td>カシノユメミヅキ</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>40.47</td>
+      <td>35.28</td>
+      <td>6</td>
+      <td>16.7</td>
+      <td>ダイチノナポリ</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>3.62</td>
+      <td>5.46</td>
+      <td>14</td>
+      <td>84.2</td>
+      <td>ラブデウザ</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>5.59</td>
+      <td>8.20</td>
+      <td>12</td>
+      <td>76.9</td>
+      <td>エイヨーニニギ</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>15.55</td>
+      <td>16.14</td>
+      <td>5</td>
+      <td>16.0</td>
+      <td>コウユーネロガ</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>37.09</td>
+      <td>33.79</td>
+      <td>3</td>
+      <td>8.0</td>
+      <td>アンヘリータス</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>26.10</td>
+      <td>23.18</td>
+      <td>7</td>
+      <td>17.1</td>
+      <td>ニシノメイホウ</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>0.28</td>
+      <td>3.56</td>
+      <td>15</td>
+      <td>84.2</td>
+      <td>カシノサスケ</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>5.59</td>
+      <td>7.30</td>
+      <td>16</td>
+      <td>85.8</td>
+      <td>ニシカラキタユウマ</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>1.52</td>
+      <td>5.46</td>
+      <td>13</td>
+      <td>84.2</td>
+      <td>ダイラントウ</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>17</td>
+      <td>32.34</td>
+      <td>31.93</td>
+      <td>4</td>
+      <td>15.3</td>
+      <td>エイシンディアマン</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>18</td>
+      <td>11.34</td>
+      <td>13.32</td>
+      <td>8</td>
+      <td>36.0</td>
+      <td>アクティングエリア</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                小倉10R 15:00発走 ダート1700m 2勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+      <th>馬名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>3.56</td>
+      <td>5.99</td>
+      <td>15</td>
+      <td>66.3</td>
+      <td>インジケーター</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>5.50</td>
+      <td>8.00</td>
+      <td>14</td>
+      <td>42.5</td>
+      <td>タイセイミニスター</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>29.13</td>
+      <td>27.64</td>
+      <td>4</td>
+      <td>10.6</td>
+      <td>イサナ</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>6.14</td>
+      <td>8.99</td>
+      <td>10</td>
+      <td>28.9</td>
+      <td>マサハヤウォルズ</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>11.15</td>
+      <td>11.20</td>
+      <td>7</td>
+      <td>13.9</td>
+      <td>コパノアントニオ</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>15.30</td>
+      <td>17.70</td>
+      <td>6</td>
+      <td>10.7</td>
+      <td>メイショウカシワデ</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>10.24</td>
+      <td>11.20</td>
+      <td>9</td>
+      <td>27.3</td>
+      <td>トゥーテイルズ</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>3.56</td>
+      <td>5.99</td>
+      <td>12</td>
+      <td>36.6</td>
+      <td>スカイドゥエラー</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>17.14</td>
+      <td>17.70</td>
+      <td>3</td>
+      <td>4.7</td>
+      <td>ネーヴェフレスカ</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>48.09</td>
+      <td>45.73</td>
+      <td>8</td>
+      <td>18.0</td>
+      <td>ジーニアスバローズ</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>36.49</td>
+      <td>35.02</td>
+      <td>1</td>
+      <td>4.6</td>
+      <td>レッドダンルース</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>3.56</td>
+      <td>5.99</td>
+      <td>16</td>
+      <td>150.8</td>
+      <td>サヴァビアン</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>5.50</td>
+      <td>8.00</td>
+      <td>11</td>
+      <td>35.0</td>
+      <td>プウスカンドゥール</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>3.56</td>
+      <td>6.43</td>
+      <td>13</td>
+      <td>36.8</td>
+      <td>サクハル</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>46.24</td>
+      <td>38.69</td>
+      <td>2</td>
+      <td>4.6</td>
+      <td>レイナデアルシーラ</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>54.85</td>
+      <td>45.73</td>
+      <td>5</td>
+      <td>10.6</td>
+      <td>ジューンエオス</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                小倉11R 15:35発走 芝1200m 3勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+      <th>馬名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>25.39</td>
+      <td>25.45</td>
+      <td>10</td>
+      <td>24.2</td>
+      <td>エイムインライフ</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>2.80</td>
+      <td>2.19</td>
+      <td>17</td>
+      <td>118.9</td>
+      <td>ショウナンマッハ</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>6.00</td>
+      <td>4.07</td>
+      <td>14</td>
+      <td>43.4</td>
+      <td>プロスペリダード</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>31.74</td>
+      <td>34.12</td>
+      <td>2</td>
+      <td>4.6</td>
+      <td>ミルテンベルク</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>22.96</td>
+      <td>23.41</td>
+      <td>9</td>
+      <td>24.0</td>
+      <td>テーオーダヴィンチ</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>31.74</td>
+      <td>34.12</td>
+      <td>1</td>
+      <td>4.4</td>
+      <td>セシリエプラージュ</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>27.98</td>
+      <td>32.25</td>
+      <td>3</td>
+      <td>6.9</td>
+      <td>アンクルクロス</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>34.67</td>
+      <td>35.63</td>
+      <td>13</td>
+      <td>31.7</td>
+      <td>メイショウフンケイ</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>14.42</td>
+      <td>12.47</td>
+      <td>11</td>
+      <td>25.7</td>
+      <td>デイトナモード</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>3.88</td>
+      <td>2.60</td>
+      <td>16</td>
+      <td>102.7</td>
+      <td>メイショウクリフト</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>6.69</td>
+      <td>4.71</td>
+      <td>12</td>
+      <td>30.3</td>
+      <td>ニシノコウダイ</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>1.63</td>
+      <td>2.16</td>
+      <td>15</td>
+      <td>48.5</td>
+      <td>アルトシュタット</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>16.67</td>
+      <td>16.30</td>
+      <td>5</td>
+      <td>12.3</td>
+      <td>パクスロマーナ</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>15.36</td>
+      <td>16.30</td>
+      <td>8</td>
+      <td>15.6</td>
+      <td>トールキン</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>26.98</td>
+      <td>25.45</td>
+      <td>4</td>
+      <td>7.4</td>
+      <td>レッドエヴァンス</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>14.42</td>
+      <td>12.47</td>
+      <td>6</td>
+      <td>13.2</td>
+      <td>ワンダーキサラ</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>17</td>
+      <td>16.67</td>
+      <td>16.30</td>
+      <td>7</td>
+      <td>15.5</td>
+      <td>シュタールヴィント</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                小倉12R 16:15発走 ダート1700m 1勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+      <th>馬名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>22.12</td>
+      <td>21.88</td>
+      <td>8</td>
+      <td>19.8</td>
+      <td>メイショウクモイ</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>8.47</td>
+      <td>6.45</td>
+      <td>15</td>
+      <td>96.4</td>
+      <td>ソルアマゾン</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>33.44</td>
+      <td>35.43</td>
+      <td>5</td>
+      <td>8.3</td>
+      <td>スリーキングス</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>2.70</td>
+      <td>2.13</td>
+      <td>13</td>
+      <td>64.2</td>
+      <td>フォードテソーロ</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>19.51</td>
+      <td>17.83</td>
+      <td>6</td>
+      <td>10.0</td>
+      <td>テーオーライマン</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>26.07</td>
+      <td>27.74</td>
+      <td>4</td>
+      <td>7.0</td>
+      <td>グランキングオー</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>11.62</td>
+      <td>9.28</td>
+      <td>12</td>
+      <td>43.4</td>
+      <td>タガノエクレール</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>11.62</td>
+      <td>9.28</td>
+      <td>10</td>
+      <td>38.8</td>
+      <td>チャチャピンク</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>19.51</td>
+      <td>17.76</td>
+      <td>9</td>
+      <td>24.8</td>
+      <td>タケノシンセイ</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>30.24</td>
+      <td>33.21</td>
+      <td>2</td>
+      <td>5.4</td>
+      <td>チムニートップス</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>33.44</td>
+      <td>35.43</td>
+      <td>1</td>
+      <td>3.6</td>
+      <td>ダノンヴェステル</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>26.07</td>
+      <td>27.74</td>
+      <td>7</td>
+      <td>13.2</td>
+      <td>アートレスマインド</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>11.62</td>
+      <td>11.24</td>
+      <td>14</td>
+      <td>73.0</td>
+      <td>アンノウンウォリア</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>1.14</td>
+      <td>2.13</td>
+      <td>16</td>
+      <td>137.7</td>
+      <td>スターメイデン</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>36.53</td>
+      <td>38.83</td>
+      <td>3</td>
+      <td>6.9</td>
+      <td>ゼロスネーク</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>5.90</td>
+      <td>3.64</td>
+      <td>11</td>
+      <td>40.8</td>
+      <td>カールスタード</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                函館07R 13:15発走 芝1200m 1勝クラス  牝馬限定 <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+      <th>馬名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>30.93</td>
+      <td>34.98</td>
+      <td>4</td>
+      <td>9.5</td>
+      <td>エスペシャリー</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>33.36</td>
+      <td>38.35</td>
+      <td>1</td>
+      <td>3.9</td>
+      <td>ブルーアイドガール</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>7.64</td>
+      <td>5.07</td>
+      <td>8</td>
+      <td>16.9</td>
+      <td>イリュージョン</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>5.35</td>
+      <td>2.79</td>
+      <td>15</td>
+      <td>63.1</td>
+      <td>シンデレラスマイル</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>18.58</td>
+      <td>17.54</td>
+      <td>11</td>
+      <td>21.1</td>
+      <td>サンポーニャ</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>24.97</td>
+      <td>25.20</td>
+      <td>9</td>
+      <td>17.8</td>
+      <td>ルージュレベッカ</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>16.67</td>
+      <td>17.54</td>
+      <td>6</td>
+      <td>10.4</td>
+      <td>グッバイウェーブ</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>30.93</td>
+      <td>34.98</td>
+      <td>5</td>
+      <td>10.1</td>
+      <td>キタノクニカラ</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>10.84</td>
+      <td>6.54</td>
+      <td>14</td>
+      <td>55.4</td>
+      <td>ホウオウドルーリー</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>8.84</td>
+      <td>5.94</td>
+      <td>13</td>
+      <td>42.7</td>
+      <td>エイシンオニキス</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>13.70</td>
+      <td>11.10</td>
+      <td>2</td>
+      <td>5.6</td>
+      <td>イリスアスール</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>38.71</td>
+      <td>45.33</td>
+      <td>3</td>
+      <td>6.9</td>
+      <td>クインズスピカ</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>14.87</td>
+      <td>14.48</td>
+      <td>7</td>
+      <td>16.9</td>
+      <td>グランテレーズ</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>12.87</td>
+      <td>9.16</td>
+      <td>10</td>
+      <td>20.5</td>
+      <td>エリカエスティーム</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>5.97</td>
+      <td>3.59</td>
+      <td>16</td>
+      <td>132.4</td>
+      <td>エンプレスフレーム</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>25.77</td>
+      <td>27.40</td>
+      <td>12</td>
+      <td>24.5</td>
+      <td>クイーンズデイ</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                函館08R 13:45発走 ダート1700m 1勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+      <th>馬名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>24.90</td>
+      <td>22.64</td>
+      <td>5</td>
+      <td>12.9</td>
+      <td>ハミルトン</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>38.99</td>
+      <td>39.41</td>
+      <td>4</td>
+      <td>10.4</td>
+      <td>メイショウソムリエ</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>3.80</td>
+      <td>3.64</td>
+      <td>10</td>
+      <td>147.2</td>
+      <td>スノーホルンロード</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>45.64</td>
+      <td>42.85</td>
+      <td>3</td>
+      <td>9.2</td>
+      <td>メイショウタイピン</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>3.80</td>
+      <td>3.64</td>
+      <td>9</td>
+      <td>98.1</td>
+      <td>タイムレス</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>18.32</td>
+      <td>17.36</td>
+      <td>6</td>
+      <td>14.2</td>
+      <td>アスゴッド</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>27.44</td>
+      <td>27.44</td>
+      <td>8</td>
+      <td>46.3</td>
+      <td>ランスノーブル</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>63.23</td>
+      <td>67.75</td>
+      <td>2</td>
+      <td>4.4</td>
+      <td>ライフゲート</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>22.51</td>
+      <td>20.99</td>
+      <td>1</td>
+      <td>1.6</td>
+      <td>カペルブリュッケ</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>51.38</td>
+      <td>54.29</td>
+      <td>7</td>
+      <td>24.7</td>
+      <td>ルルシュシュ</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                函館09R 14:15発走 芝1800m 1勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+      <th>馬名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>14.48</td>
+      <td>12.76</td>
+      <td>4</td>
+      <td>12.8</td>
+      <td>シンゼンカガ</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>46.28</td>
+      <td>49.80</td>
+      <td>1</td>
+      <td>2.5</td>
+      <td>サクラファレル</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>33.59</td>
+      <td>39.41</td>
+      <td>2</td>
+      <td>3.1</td>
+      <td>インパクトシー</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>11.89</td>
+      <td>10.24</td>
+      <td>13</td>
+      <td>75.5</td>
+      <td>ヴィーナスバブル</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>21.66</td>
+      <td>20.24</td>
+      <td>11</td>
+      <td>33.3</td>
+      <td>ツーエムクロノス</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>44.08</td>
+      <td>49.80</td>
+      <td>3</td>
+      <td>9.0</td>
+      <td>サトノブリジャール</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>21.66</td>
+      <td>20.24</td>
+      <td>6</td>
+      <td>17.0</td>
+      <td>ウインポセイドン</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>21.66</td>
+      <td>20.17</td>
+      <td>7</td>
+      <td>20.7</td>
+      <td>ソルトブリーズ</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>21.66</td>
+      <td>20.24</td>
+      <td>5</td>
+      <td>13.6</td>
+      <td>ゴーゴータカシ</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>3.00</td>
+      <td>2.67</td>
+      <td>9</td>
+      <td>27.4</td>
+      <td>ラウダブル</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>30.79</td>
+      <td>32.53</td>
+      <td>8</td>
+      <td>25.6</td>
+      <td>サクラアドリア</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>6.56</td>
+      <td>4.45</td>
+      <td>12</td>
+      <td>61.1</td>
+      <td>スペシャルバニー</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>6.56</td>
+      <td>4.13</td>
+      <td>14</td>
+      <td>256.8</td>
+      <td>エリム</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>16.12</td>
+      <td>13.32</td>
+      <td>10</td>
+      <td>31.9</td>
+      <td>サンウリエル</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                函館10R 14:50発走 芝1800m 2勝クラス  牝馬限定 <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+      <th>馬名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>17.36</td>
+      <td>17.27</td>
+      <td>11</td>
+      <td>33.4</td>
+      <td>ナムララジベラ</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>8.82</td>
+      <td>4.52</td>
+      <td>14</td>
+      <td>112.1</td>
+      <td>ムガ</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>45.18</td>
+      <td>53.60</td>
+      <td>1</td>
+      <td>2.7</td>
+      <td>ジョイフルニュース</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>10.31</td>
+      <td>6.95</td>
+      <td>8</td>
+      <td>15.3</td>
+      <td>サクソンジェンヌ</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>29.14</td>
+      <td>32.05</td>
+      <td>3</td>
+      <td>7.9</td>
+      <td>オルノア</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>15.02</td>
+      <td>10.72</td>
+      <td>12</td>
+      <td>61.8</td>
+      <td>コスモディナー</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>36.66</td>
+      <td>40.93</td>
+      <td>5</td>
+      <td>9.6</td>
+      <td>リラボニート</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>23.91</td>
+      <td>21.68</td>
+      <td>10</td>
+      <td>20.3</td>
+      <td>ピンクジン</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>12.66</td>
+      <td>10.42</td>
+      <td>2</td>
+      <td>7.4</td>
+      <td>レイピカケ</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>8.82</td>
+      <td>4.52</td>
+      <td>9</td>
+      <td>19.4</td>
+      <td>ウインルピナス</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>33.17</td>
+      <td>40.61</td>
+      <td>6</td>
+      <td>9.7</td>
+      <td>テリオスサラ</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>6.24</td>
+      <td>4.05</td>
+      <td>7</td>
+      <td>14.3</td>
+      <td>ルーチェロッサ</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>23.57</td>
+      <td>20.60</td>
+      <td>13</td>
+      <td>66.5</td>
+      <td>レッセパッセ</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>29.14</td>
+      <td>32.05</td>
+      <td>4</td>
+      <td>8.5</td>
+      <td>カテリーナ</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                函館11R 15:25発走 ダート1700m オープン  ハンデ <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+      <th>馬名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>9.35</td>
+      <td>6.89</td>
+      <td>9</td>
+      <td>30.0</td>
+      <td>カンピオーネ</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>30.91</td>
+      <td>29.25</td>
+      <td>4</td>
+      <td>6.4</td>
+      <td>テーオードレフォン</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>43.92</td>
+      <td>44.52</td>
+      <td>5</td>
+      <td>9.3</td>
+      <td>ピュアキアン</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>9.35</td>
+      <td>7.59</td>
+      <td>6</td>
+      <td>10.2</td>
+      <td>ワールドタキオン</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>9.35</td>
+      <td>9.21</td>
+      <td>10</td>
+      <td>38.0</td>
+      <td>ショウナンライシン</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>35.06</td>
+      <td>40.29</td>
+      <td>2</td>
+      <td>4.5</td>
+      <td>ハビレ</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>23.00</td>
+      <td>21.51</td>
+      <td>8</td>
+      <td>20.6</td>
+      <td>ペプチドソレイユ</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>51.41</td>
+      <td>53.18</td>
+      <td>3</td>
+      <td>6.2</td>
+      <td>レディントン</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>4.28</td>
+      <td>4.17</td>
+      <td>14</td>
+      <td>77.4</td>
+      <td>ボルザコフスキー</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>9.45</td>
+      <td>9.21</td>
+      <td>11</td>
+      <td>41.7</td>
+      <td>マリアナトレンチ</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>14.47</td>
+      <td>12.89</td>
+      <td>12</td>
+      <td>47.7</td>
+      <td>ジャスパーゴールド</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>13.42</td>
+      <td>12.89</td>
+      <td>13</td>
+      <td>52.3</td>
+      <td>クラヴィコード</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>35.06</td>
+      <td>38.07</td>
+      <td>1</td>
+      <td>4.2</td>
+      <td>ダンテバローズ</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>10.94</td>
+      <td>10.34</td>
+      <td>7</td>
+      <td>10.6</td>
+      <td>ナチュラルハイ</td>
+    </tr>
+  </tbody>
+</table><br><br>
+            <div class="race-info">
+                <head><span class="large-font">
+                函館12R 16:05発走 芝1200m 1勝クラス <br>
+                </span></head>
+            </div>
+            <table border="1" class="dataframe my-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>馬番</th>
+      <th>v21.1 bsc iso</th>
+      <th>v21.1 std iso</th>
+      <th>人 気</th>
+      <th>単勝 オッズ</th>
+      <th>馬名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>11.10</td>
+      <td>9.29</td>
+      <td>10</td>
+      <td>27.1</td>
+      <td>ランスオブサウンド</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>36.77</td>
+      <td>38.89</td>
+      <td>7</td>
+      <td>21.7</td>
+      <td>ラセーヌシュメール</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>13.34</td>
+      <td>11.26</td>
+      <td>4</td>
+      <td>11.2</td>
+      <td>クレセントウイング</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>17.28</td>
+      <td>17.79</td>
+      <td>2</td>
+      <td>7.0</td>
+      <td>マジカルフェアリー</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>14.20</td>
+      <td>13.61</td>
+      <td>14</td>
+      <td>68.8</td>
+      <td>アルマロクザン</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>29.35</td>
+      <td>29.32</td>
+      <td>1</td>
+      <td>1.9</td>
+      <td>マジカルシャイン</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>5.55</td>
+      <td>5.14</td>
+      <td>16</td>
+      <td>100.8</td>
+      <td>ジーティースピカ</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>5.16</td>
+      <td>3.92</td>
+      <td>12</td>
+      <td>55.9</td>
+      <td>ゴレイジョウ</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>34.58</td>
+      <td>35.48</td>
+      <td>6</td>
+      <td>13.7</td>
+      <td>ミクストベリーズ</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>3.59</td>
+      <td>3.51</td>
+      <td>13</td>
+      <td>58.2</td>
+      <td>カップッチョ</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>12.12</td>
+      <td>11.26</td>
+      <td>5</td>
+      <td>11.8</td>
+      <td>オベイユアマスター</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>14.20</td>
+      <td>13.61</td>
+      <td>8</td>
+      <td>22.6</td>
+      <td>ビッグフラワー</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>19.26</td>
+      <td>17.85</td>
+      <td>15</td>
+      <td>76.3</td>
+      <td>ヴィヴァラリス</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>9.16</td>
+      <td>9.04</td>
+      <td>9</td>
+      <td>26.7</td>
+      <td>エスペラント</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>48.47</td>
+      <td>52.23</td>
+      <td>3</td>
+      <td>10.9</td>
+      <td>スマッシュアウト</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>25.88</td>
+      <td>27.78</td>
+      <td>11</td>
+      <td>43.1</td>
+      <td>ドランクマン</td>
+    </tr>
+  </tbody>
+</table><br><br></body></html>
