@@ -59,6 +59,11 @@
             color: #222;
         }
         
+        .mid-font {
+            font-size: 2.0em; /* 大きなフォントサイズを指定 */
+            color: #222;
+        }
+        
          /* 枠の色 */
         .frame-1 { background-color: white; }
         .frame-2 { background-color: black; color: white; }
@@ -153,15 +158,14 @@
     <header>
         <div class="header-title">20250614 SUMMARY </div>
     </header>
-     
+    <br>
+     <span class="mid-font">東京08R 14:05発走 CAT-IV : 1 = 3 - (12, 5, 10)</span><br><span class="mid-font">東京09R 14:35発走 CAT-III : 10 = 1 - (4, 14, 9)</span><br><span class="mid-font">東京10R 15:10発走 CAT-III : 10 = 6 - (7, 2, 10)</span><br><span class="mid-font">東京11R 15:45発走 CAT-III : 8 = 9 - (6, 1, 5)</span><br><span class="mid-font">東京12R 16:30発走 CAT-II : 7 = 14 - (12, 16, 7)</span><br><span class="mid-font">阪神07R 13:25発走 CAT-IV : 15 = 9 - (2, 16, 7)</span><br><span class="mid-font">阪神09R 14:25発走 CAT-II : 8 = 4 - (5, 10, 2)</span><br><span class="mid-font">阪神11R 15:35発走 CAT-II : 1 = 7 - (6, 10, 13)</span><br><span class="mid-font">阪神12R 16:15発走 CAT-IV : 1 = 16 - (8, 13, 5)</span><br><span class="mid-font">函館07R 13:15発走 CAT-III : 2 = 12 - (14, 6, 1)</span><br><span class="mid-font">函館09R 14:15発走 CAT-IV : 3 = 8 - (1, 3, 4)</span><br><span class="mid-font">函館10R 14:50発走 CAT-IV : 10 = 15 - (12, 11, 3)</span><br><span class="mid-font">函館11R 15:25発走 CAT-IV : 14 = 7 - (4, 1, 2)</span><br><span class="mid-font">函館12R 16:05発走 CAT-II : 2 = 11 - (5, 6, 13)</span><br><br><br> 
             <div class="race-info">
                 <head><span class="large-font">
                 東京08R 14:05発走 芝1400m 1勝クラス </span><br>
-                波乱度 : 87.6<br>
-                ver 27.0 (穴馬モデル)<br>
+                CAT-IV (波乱度 : 92.3)<br>
                 ☆I:1(9人気) ☆II:18(16人気)<br>
-                ver 25.3<br>
-                ◎:3(4人気) 〇:12(7人気)  ▲:17(1人気)  △I:10(3人気)  △II:5(6人気)<br>
+                ◎:3(4人気) 〇:12(7人気)  ▲:5(6人気)  △I:10(3人気)  △II:13(5人気)<br>
                 </head>
             </div>
             <table border="1" class="dataframe my-table">
@@ -171,7 +175,7 @@
       <th>枠 番</th>
       <th>馬番</th>
       <th>v21.1</th>
-      <th>v25.3</th>
+      <th>v11.5</th>
       <th>v27.0</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
@@ -183,10 +187,10 @@
       <th>ラスト3F</th>
       <th>上り指MAX</th>
       <th>上り指AVG</th>
-      <th>上り指1R</th>
       <th>スピ指MAX</th>
       <th>スピ指AVG</th>
-      <th>スピ指1R</th>
+      <th>最 高</th>
+      <th>平均</th>
     </tr>
   </thead>
   <tbody>
@@ -195,7 +199,7 @@
       <td>1</td>
       <td>1</td>
       <td>13.18</td>
-      <td>14.05</td>
+      <td>15.20</td>
       <td>14.44</td>
       <td>9</td>
       <td>47.5</td>
@@ -207,17 +211,17 @@
       <td>26.3</td>
       <td>12.0</td>
       <td>-2.2</td>
-      <td>-7.9</td>
       <td>96.5</td>
       <td>90.6</td>
-      <td>87.4</td>
+      <td>NaN</td>
+      <td>87.0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
       <td>2</td>
       <td>6.96</td>
-      <td>4.14</td>
+      <td>4.18</td>
       <td>4.17</td>
       <td>15</td>
       <td>124.2</td>
@@ -229,17 +233,17 @@
       <td>19.1</td>
       <td>-4.1</td>
       <td>-28.7</td>
-      <td>-44.4</td>
       <td>74.5</td>
       <td>53.7</td>
-      <td>45.3</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2</td>
       <td>3</td>
       <td>54.76</td>
-      <td>52.95</td>
+      <td>41.41</td>
       <td>7.14</td>
       <td>4</td>
       <td>12.0</td>
@@ -251,17 +255,17 @@
       <td>-23.1</td>
       <td>26.8</td>
       <td>14.4</td>
-      <td>11.7</td>
       <td>112.4</td>
       <td>86.3</td>
-      <td>112.4</td>
+      <td>100.0</td>
+      <td>78.0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>2</td>
       <td>4</td>
       <td>36.05</td>
-      <td>32.75</td>
+      <td>15.65</td>
       <td>2.76</td>
       <td>2</td>
       <td>4.5</td>
@@ -273,17 +277,17 @@
       <td>-3.5</td>
       <td>13.5</td>
       <td>-1.9</td>
-      <td>13.5</td>
       <td>103.0</td>
       <td>85.6</td>
-      <td>103.0</td>
+      <td>NaN</td>
+      <td>83.0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>3</td>
       <td>5</td>
       <td>28.18</td>
-      <td>33.63</td>
+      <td>31.48</td>
       <td>6.87</td>
       <td>6</td>
       <td>18.9</td>
@@ -295,17 +299,17 @@
       <td>28.0</td>
       <td>21.0</td>
       <td>11.7</td>
-      <td>21.0</td>
       <td>97.8</td>
       <td>87.1</td>
-      <td>95.3</td>
+      <td>96.0</td>
+      <td>87.0</td>
     </tr>
     <tr>
       <th>5</th>
       <td>3</td>
       <td>6</td>
       <td>3.45</td>
-      <td>3.42</td>
+      <td>2.14</td>
       <td>3.05</td>
       <td>18</td>
       <td>530.2</td>
@@ -317,17 +321,17 @@
       <td>17.2</td>
       <td>-2.5</td>
       <td>-15.3</td>
-      <td>-33.5</td>
       <td>90.3</td>
       <td>63.3</td>
-      <td>55.4</td>
+      <td>78.0</td>
+      <td>71.0</td>
     </tr>
     <tr>
       <th>6</th>
       <td>4</td>
       <td>7</td>
       <td>13.99</td>
-      <td>19.29</td>
+      <td>14.06</td>
       <td>8.79</td>
       <td>10</td>
       <td>49.9</td>
@@ -339,17 +343,17 @@
       <td>-1.2</td>
       <td>18.1</td>
       <td>-5.9</td>
-      <td>-8.4</td>
       <td>96.3</td>
       <td>70.4</td>
-      <td>64.1</td>
+      <td>85.0</td>
+      <td>72.0</td>
     </tr>
     <tr>
       <th>7</th>
       <td>4</td>
       <td>8</td>
       <td>12.20</td>
-      <td>8.74</td>
+      <td>11.63</td>
       <td>6.62</td>
       <td>8</td>
       <td>33.4</td>
@@ -361,17 +365,17 @@
       <td>17.6</td>
       <td>18.8</td>
       <td>5.0</td>
-      <td>-10.1</td>
       <td>101.4</td>
       <td>85.5</td>
-      <td>62.3</td>
+      <td>80.0</td>
+      <td>80.0</td>
     </tr>
     <tr>
       <th>8</th>
       <td>5</td>
       <td>9</td>
       <td>5.94</td>
-      <td>8.40</td>
+      <td>6.62</td>
       <td>12.95</td>
       <td>11</td>
       <td>55.8</td>
@@ -383,17 +387,17 @@
       <td>25.6</td>
       <td>24.6</td>
       <td>0.2</td>
-      <td>-2.7</td>
       <td>96.6</td>
       <td>81.8</td>
-      <td>92.0</td>
+      <td>91.0</td>
+      <td>84.0</td>
     </tr>
     <tr>
       <th>9</th>
       <td>5</td>
       <td>10</td>
       <td>50.87</td>
-      <td>41.09</td>
+      <td>26.36</td>
       <td>4.25</td>
       <td>3</td>
       <td>8.9</td>
@@ -405,17 +409,17 @@
       <td>-7.1</td>
       <td>15.2</td>
       <td>11.3</td>
-      <td>11.4</td>
       <td>101.0</td>
       <td>83.4</td>
-      <td>101.0</td>
+      <td>91.0</td>
+      <td>82.0</td>
     </tr>
     <tr>
       <th>10</th>
       <td>6</td>
       <td>11</td>
       <td>14.98</td>
-      <td>12.92</td>
+      <td>8.51</td>
       <td>4.91</td>
       <td>14</td>
       <td>106.7</td>
@@ -427,17 +431,17 @@
       <td>-19.2</td>
       <td>-4.3</td>
       <td>-16.6</td>
-      <td>-9.9</td>
       <td>92.0</td>
       <td>72.4</td>
       <td>92.0</td>
+      <td>79.0</td>
     </tr>
     <tr>
       <th>11</th>
       <td>6</td>
       <td>12</td>
       <td>44.80</td>
-      <td>46.26</td>
+      <td>39.11</td>
       <td>9.42</td>
       <td>7</td>
       <td>22.3</td>
@@ -449,17 +453,17 @@
       <td>-25.6</td>
       <td>19.7</td>
       <td>8.5</td>
-      <td>8.6</td>
       <td>102.0</td>
       <td>96.3</td>
-      <td>102.0</td>
+      <td>94.0</td>
+      <td>90.0</td>
     </tr>
     <tr>
       <th>12</th>
       <td>7</td>
       <td>13</td>
       <td>21.18</td>
-      <td>21.56</td>
+      <td>25.18</td>
       <td>9.95</td>
       <td>5</td>
       <td>13.4</td>
@@ -471,17 +475,17 @@
       <td>33.7</td>
       <td>25.6</td>
       <td>15.0</td>
-      <td>12.6</td>
       <td>95.7</td>
       <td>73.1</td>
-      <td>67.5</td>
+      <td>88.0</td>
+      <td>76.0</td>
     </tr>
     <tr>
       <th>13</th>
       <td>7</td>
       <td>14</td>
       <td>17.46</td>
-      <td>18.67</td>
+      <td>13.68</td>
       <td>12.07</td>
       <td>13</td>
       <td>71.1</td>
@@ -493,17 +497,17 @@
       <td>-4.0</td>
       <td>21.6</td>
       <td>6.9</td>
-      <td>-18.6</td>
       <td>101.0</td>
       <td>87.3</td>
-      <td>70.1</td>
+      <td>89.0</td>
+      <td>86.0</td>
     </tr>
     <tr>
       <th>14</th>
       <td>7</td>
       <td>15</td>
       <td>15.65</td>
-      <td>20.47</td>
+      <td>17.65</td>
       <td>10.63</td>
       <td>12</td>
       <td>67.7</td>
@@ -515,17 +519,17 @@
       <td>-8.7</td>
       <td>7.2</td>
       <td>-0.3</td>
-      <td>-6.1</td>
       <td>103.2</td>
       <td>88.2</td>
-      <td>84.1</td>
+      <td>95.0</td>
+      <td>82.0</td>
     </tr>
     <tr>
       <th>15</th>
       <td>8</td>
       <td>16</td>
       <td>2.33</td>
-      <td>2.29</td>
+      <td>1.76</td>
       <td>2.90</td>
       <td>17</td>
       <td>416.3</td>
@@ -537,17 +541,17 @@
       <td>4.5</td>
       <td>-4.2</td>
       <td>-8.6</td>
-      <td>-15.6</td>
       <td>86.3</td>
       <td>77.2</td>
-      <td>74.8</td>
+      <td>76.0</td>
+      <td>74.0</td>
     </tr>
     <tr>
       <th>16</th>
       <td>8</td>
       <td>17</td>
       <td>43.47</td>
-      <td>44.33</td>
+      <td>25.17</td>
       <td>3.21</td>
       <td>1</td>
       <td>1.9</td>
@@ -559,17 +563,17 @@
       <td>-14.9</td>
       <td>23.2</td>
       <td>9.2</td>
-      <td>-0.6</td>
       <td>104.2</td>
       <td>90.0</td>
-      <td>96.3</td>
+      <td>93.0</td>
+      <td>84.0</td>
     </tr>
     <tr>
       <th>17</th>
       <td>8</td>
       <td>18</td>
       <td>15.00</td>
-      <td>14.45</td>
+      <td>9.87</td>
       <td>13.09</td>
       <td>16</td>
       <td>189.5</td>
@@ -581,21 +585,19 @@
       <td>10.0</td>
       <td>14.2</td>
       <td>4.2</td>
-      <td>6.1</td>
       <td>97.5</td>
       <td>80.0</td>
-      <td>97.5</td>
+      <td>91.0</td>
+      <td>82.0</td>
     </tr>
   </tbody>
 </table><br><br>
             <div class="race-info">
                 <head><span class="large-font">
                 東京09R 14:35発走 ダート2100m 2勝クラス </span><br>
-                波乱度 : 76.5<br>
-                ver 27.0 (穴馬モデル)<br>
-                ☆I:5(12人気) ☆II:7(8人気)<br>
-                ver 25.3<br>
-                ◎:1(1人気) 〇:14(3人気)  ▲:9(2人気)  △I:4(5人気)  △II:16(9人気)<br>
+                CAT-III (波乱度 : 89.5)<br>
+                ☆I:10(6人気) ☆II:5(12人気)<br>
+                ◎:1(1人気) 〇:4(5人気)  ▲:14(3人気)  △I:9(2人気)  △II:11(4人気)<br>
                 </head>
             </div>
             <table border="1" class="dataframe my-table">
@@ -605,7 +607,7 @@
       <th>枠 番</th>
       <th>馬番</th>
       <th>v21.1</th>
-      <th>v25.3</th>
+      <th>v11.5</th>
       <th>v27.0</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
@@ -617,10 +619,10 @@
       <th>ラスト3F</th>
       <th>上り指MAX</th>
       <th>上り指AVG</th>
-      <th>上り指1R</th>
       <th>スピ指MAX</th>
       <th>スピ指AVG</th>
-      <th>スピ指1R</th>
+      <th>最 高</th>
+      <th>平均</th>
     </tr>
   </thead>
   <tbody>
@@ -629,7 +631,7 @@
       <td>1</td>
       <td>1</td>
       <td>56.82</td>
-      <td>51.15</td>
+      <td>59.12</td>
       <td>1.47</td>
       <td>1</td>
       <td>2.0</td>
@@ -641,17 +643,17 @@
       <td>-10.7</td>
       <td>13.1</td>
       <td>5.6</td>
-      <td>9.5</td>
       <td>112.4</td>
       <td>87.9</td>
-      <td>87.7</td>
+      <td>98</td>
+      <td>92</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
       <td>2</td>
       <td>5.42</td>
-      <td>3.33</td>
+      <td>9.79</td>
       <td>4.61</td>
       <td>14</td>
       <td>163.4</td>
@@ -663,17 +665,17 @@
       <td>40.1</td>
       <td>2.8</td>
       <td>-9.1</td>
-      <td>-28.8</td>
       <td>84.2</td>
       <td>67.1</td>
-      <td>32.7</td>
+      <td>28</td>
+      <td>75</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2</td>
       <td>3</td>
       <td>32.03</td>
-      <td>32.31</td>
+      <td>30.47</td>
       <td>9.30</td>
       <td>7</td>
       <td>30.8</td>
@@ -685,17 +687,17 @@
       <td>-37.5</td>
       <td>11.3</td>
       <td>3.3</td>
-      <td>0.5</td>
       <td>98.8</td>
       <td>78.6</td>
-      <td>88.4</td>
+      <td>97</td>
+      <td>84</td>
     </tr>
     <tr>
       <th>3</th>
       <td>2</td>
       <td>4</td>
       <td>30.55</td>
-      <td>37.62</td>
+      <td>48.60</td>
       <td>8.28</td>
       <td>5</td>
       <td>14.7</td>
@@ -707,17 +709,17 @@
       <td>-16.3</td>
       <td>12.7</td>
       <td>2.9</td>
-      <td>-5.6</td>
       <td>97.2</td>
       <td>83.9</td>
-      <td>71.5</td>
+      <td>97</td>
+      <td>86</td>
     </tr>
     <tr>
       <th>4</th>
       <td>3</td>
       <td>5</td>
       <td>20.61</td>
-      <td>22.54</td>
+      <td>18.86</td>
       <td>11.00</td>
       <td>12</td>
       <td>102.7</td>
@@ -729,17 +731,17 @@
       <td>-6.8</td>
       <td>12.5</td>
       <td>-3.9</td>
-      <td>-11.8</td>
       <td>89.2</td>
       <td>82.8</td>
-      <td>85.2</td>
+      <td>102</td>
+      <td>86</td>
     </tr>
     <tr>
       <th>5</th>
       <td>3</td>
       <td>6</td>
       <td>4.88</td>
-      <td>5.08</td>
+      <td>8.67</td>
       <td>7.78</td>
       <td>13</td>
       <td>125.5</td>
@@ -751,17 +753,17 @@
       <td>52.2</td>
       <td>5.0</td>
       <td>-3.6</td>
-      <td>1.2</td>
       <td>73.0</td>
       <td>67.6</td>
-      <td>68.7</td>
+      <td>93</td>
+      <td>82</td>
     </tr>
     <tr>
       <th>6</th>
       <td>4</td>
       <td>7</td>
       <td>14.99</td>
-      <td>14.27</td>
+      <td>9.55</td>
       <td>10.04</td>
       <td>8</td>
       <td>34.5</td>
@@ -773,17 +775,17 @@
       <td>37.6</td>
       <td>13.1</td>
       <td>1.8</td>
-      <td>13.1</td>
       <td>84.5</td>
       <td>73.7</td>
-      <td>84.5</td>
+      <td>93</td>
+      <td>82</td>
     </tr>
     <tr>
       <th>7</th>
       <td>4</td>
       <td>8</td>
       <td>7.21</td>
-      <td>7.05</td>
+      <td>6.31</td>
       <td>5.05</td>
       <td>16</td>
       <td>291.1</td>
@@ -795,17 +797,17 @@
       <td>60.3</td>
       <td>9.3</td>
       <td>1.0</td>
-      <td>-0.9</td>
       <td>105.5</td>
       <td>93.8</td>
-      <td>89.7</td>
+      <td>95</td>
+      <td>85</td>
     </tr>
     <tr>
       <th>8</th>
       <td>5</td>
       <td>9</td>
       <td>40.16</td>
-      <td>37.78</td>
+      <td>43.50</td>
       <td>4.09</td>
       <td>2</td>
       <td>5.2</td>
@@ -817,18 +819,18 @@
       <td>-63.9</td>
       <td>0.9</td>
       <td>-11.5</td>
-      <td>0.9</td>
       <td>105.2</td>
       <td>78.4</td>
-      <td>105.2</td>
+      <td>99</td>
+      <td>88</td>
     </tr>
     <tr>
       <th>9</th>
       <td>5</td>
       <td>10</td>
-      <td>23.80</td>
-      <td>22.85</td>
-      <td>5.21</td>
+      <td>21.47</td>
+      <td>29.93</td>
+      <td>11.23</td>
       <td>6</td>
       <td>15.5</td>
       <td>ノットイナフ</td>
@@ -836,20 +838,20 @@
       <td>58.0</td>
       <td>石橋脩</td>
       <td>差</td>
-      <td>18.4</td>
+      <td>8.5</td>
       <td>9.5</td>
       <td>-5.6</td>
-      <td>9.5</td>
       <td>81.3</td>
       <td>74.3</td>
-      <td>78.7</td>
+      <td>99</td>
+      <td>86</td>
     </tr>
     <tr>
       <th>10</th>
       <td>6</td>
       <td>11</td>
       <td>21.79</td>
-      <td>20.87</td>
+      <td>37.38</td>
       <td>9.53</td>
       <td>4</td>
       <td>8.4</td>
@@ -861,17 +863,17 @@
       <td>-36.7</td>
       <td>7.7</td>
       <td>-8.6</td>
-      <td>7.7</td>
       <td>82.2</td>
       <td>67.3</td>
-      <td>82.2</td>
+      <td>86</td>
+      <td>72</td>
     </tr>
     <tr>
       <th>11</th>
       <td>6</td>
       <td>12</td>
       <td>3.59</td>
-      <td>3.72</td>
+      <td>3.48</td>
       <td>4.84</td>
       <td>15</td>
       <td>274.9</td>
@@ -883,17 +885,17 @@
       <td>16.4</td>
       <td>-10.6</td>
       <td>-14.6</td>
-      <td>-14.6</td>
       <td>83.6</td>
       <td>75.4</td>
-      <td>76.4</td>
+      <td>80</td>
+      <td>76</td>
     </tr>
     <tr>
       <th>12</th>
       <td>7</td>
       <td>13</td>
       <td>22.67</td>
-      <td>22.07</td>
+      <td>29.56</td>
       <td>8.79</td>
       <td>10</td>
       <td>49.0</td>
@@ -905,17 +907,17 @@
       <td>21.1</td>
       <td>11.1</td>
       <td>4.5</td>
-      <td>8.6</td>
       <td>101.8</td>
       <td>81.2</td>
-      <td>101.8</td>
+      <td>93</td>
+      <td>83</td>
     </tr>
     <tr>
       <th>13</th>
       <td>7</td>
       <td>14</td>
       <td>49.06</td>
-      <td>49.71</td>
+      <td>47.32</td>
       <td>3.08</td>
       <td>3</td>
       <td>5.9</td>
@@ -927,17 +929,17 @@
       <td>-11.6</td>
       <td>11.0</td>
       <td>-2.4</td>
-      <td>11.0</td>
       <td>92.2</td>
       <td>85.0</td>
-      <td>92.2</td>
+      <td>103</td>
+      <td>91</td>
     </tr>
     <tr>
       <th>14</th>
       <td>8</td>
       <td>15</td>
       <td>22.33</td>
-      <td>23.20</td>
+      <td>14.10</td>
       <td>9.42</td>
       <td>11</td>
       <td>79.5</td>
@@ -949,17 +951,17 @@
       <td>6.7</td>
       <td>2.7</td>
       <td>-4.6</td>
-      <td>2.7</td>
       <td>86.0</td>
       <td>72.3</td>
-      <td>86.0</td>
+      <td>98</td>
+      <td>89</td>
     </tr>
     <tr>
       <th>15</th>
       <td>8</td>
       <td>16</td>
       <td>41.07</td>
-      <td>35.95</td>
+      <td>24.32</td>
       <td>4.55</td>
       <td>9</td>
       <td>45.3</td>
@@ -971,21 +973,19 @@
       <td>-38.5</td>
       <td>2.3</td>
       <td>-3.6</td>
-      <td>-0.5</td>
       <td>99.6</td>
       <td>84.6</td>
-      <td>99.6</td>
+      <td>96</td>
+      <td>88</td>
     </tr>
   </tbody>
 </table><br><br>
             <div class="race-info">
                 <head><span class="large-font">
                 東京10R 15:10発走 ダート1600m 3勝クラス </span><br>
-                波乱度 : 73.9<br>
-                ver 27.0 (穴馬モデル)<br>
+                CAT-III (波乱度 : 87.8)<br>
                 ☆I:10(7人気) ☆II:16(4人気)<br>
-                ver 25.3<br>
-                ◎:6(1人気) 〇:2(2人気)  ▲:7(3人気)  △I:10(7人気)  △II:3(9人気)<br>
+                ◎:6(1人気) 〇:7(3人気)  ▲:2(2人気)  △I:10(7人気)  △II:4(5人気)<br>
                 </head>
             </div>
             <table border="1" class="dataframe my-table">
@@ -995,7 +995,7 @@
       <th>枠 番</th>
       <th>馬番</th>
       <th>v21.1</th>
-      <th>v25.3</th>
+      <th>v11.5</th>
       <th>v27.0</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
@@ -1007,10 +1007,10 @@
       <th>ラスト3F</th>
       <th>上り指MAX</th>
       <th>上り指AVG</th>
-      <th>上り指1R</th>
       <th>スピ指MAX</th>
       <th>スピ指AVG</th>
-      <th>スピ指1R</th>
+      <th>最 高</th>
+      <th>平均</th>
     </tr>
   </thead>
   <tbody>
@@ -1019,7 +1019,7 @@
       <td>1</td>
       <td>1</td>
       <td>15.46</td>
-      <td>16.29</td>
+      <td>21.36</td>
       <td>10.93</td>
       <td>8</td>
       <td>15.3</td>
@@ -1031,17 +1031,17 @@
       <td>61.9</td>
       <td>17.8</td>
       <td>11.2</td>
-      <td>17.8</td>
       <td>108.8</td>
       <td>91.4</td>
-      <td>74.9</td>
+      <td>104.0</td>
+      <td>97.0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
       <td>2</td>
       <td>28.49</td>
-      <td>36.32</td>
+      <td>36.82</td>
       <td>5.53</td>
       <td>2</td>
       <td>3.8</td>
@@ -1053,17 +1053,17 @@
       <td>20.1</td>
       <td>21.5</td>
       <td>17.2</td>
-      <td>21.5</td>
       <td>102.4</td>
       <td>93.8</td>
-      <td>102.4</td>
+      <td>104.0</td>
+      <td>94.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2</td>
       <td>3</td>
       <td>22.49</td>
-      <td>29.07</td>
+      <td>27.10</td>
       <td>6.64</td>
       <td>9</td>
       <td>18.7</td>
@@ -1075,17 +1075,17 @@
       <td>-32.4</td>
       <td>14.6</td>
       <td>2.2</td>
-      <td>0.0</td>
       <td>114.3</td>
       <td>106.6</td>
-      <td>0.0</td>
+      <td>NaN</td>
+      <td>100.0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>2</td>
       <td>4</td>
       <td>27.30</td>
-      <td>23.43</td>
+      <td>27.87</td>
       <td>10.06</td>
       <td>5</td>
       <td>13.2</td>
@@ -1097,17 +1097,17 @@
       <td>52.7</td>
       <td>32.2</td>
       <td>20.1</td>
-      <td>14.4</td>
       <td>120.4</td>
       <td>102.6</td>
-      <td>120.4</td>
+      <td>106.0</td>
+      <td>98.0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>3</td>
       <td>5</td>
       <td>17.82</td>
-      <td>14.13</td>
+      <td>9.85</td>
       <td>4.75</td>
       <td>11</td>
       <td>34.6</td>
@@ -1119,17 +1119,17 @@
       <td>9.4</td>
       <td>21.9</td>
       <td>-6.1</td>
-      <td>21.9</td>
       <td>96.6</td>
       <td>88.0</td>
-      <td>95.2</td>
+      <td>104.0</td>
+      <td>89.0</td>
     </tr>
     <tr>
       <th>5</th>
       <td>3</td>
       <td>6</td>
       <td>50.57</td>
-      <td>48.92</td>
+      <td>58.39</td>
       <td>2.60</td>
       <td>1</td>
       <td>3.4</td>
@@ -1141,17 +1141,17 @@
       <td>5.5</td>
       <td>20.6</td>
       <td>15.7</td>
-      <td>14.4</td>
       <td>124.4</td>
       <td>105.8</td>
-      <td>124.4</td>
+      <td>106.0</td>
+      <td>103.0</td>
     </tr>
     <tr>
       <th>6</th>
       <td>4</td>
       <td>7</td>
       <td>25.46</td>
-      <td>30.28</td>
+      <td>40.44</td>
       <td>4.89</td>
       <td>3</td>
       <td>6.8</td>
@@ -1163,17 +1163,17 @@
       <td>-62.5</td>
       <td>1.8</td>
       <td>-6.2</td>
-      <td>1.8</td>
       <td>104.2</td>
       <td>90.3</td>
-      <td>100.2</td>
+      <td>103.0</td>
+      <td>91.0</td>
     </tr>
     <tr>
       <th>7</th>
       <td>4</td>
       <td>8</td>
       <td>9.05</td>
-      <td>8.48</td>
+      <td>7.59</td>
       <td>9.21</td>
       <td>13</td>
       <td>140.8</td>
@@ -1185,18 +1185,18 @@
       <td>-3.0</td>
       <td>10.5</td>
       <td>-5.8</td>
-      <td>-21.9</td>
       <td>88.9</td>
       <td>80.5</td>
-      <td>67.8</td>
+      <td>95.0</td>
+      <td>89.0</td>
     </tr>
     <tr>
       <th>8</th>
       <td>5</td>
       <td>9</td>
-      <td>17.25</td>
-      <td>13.00</td>
-      <td>6.61</td>
+      <td>11.15</td>
+      <td>12.06</td>
+      <td>6.28</td>
       <td>6</td>
       <td>14.0</td>
       <td>バトルハーデン</td>
@@ -1204,20 +1204,20 @@
       <td>58.0</td>
       <td>田辺裕信</td>
       <td>差</td>
-      <td>27.5</td>
+      <td>21.8</td>
       <td>25.8</td>
       <td>16.5</td>
-      <td>25.8</td>
       <td>121.5</td>
       <td>98.9</td>
-      <td>102.7</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>9</th>
       <td>5</td>
       <td>10</td>
       <td>22.17</td>
-      <td>30.04</td>
+      <td>28.05</td>
       <td>14.87</td>
       <td>7</td>
       <td>14.8</td>
@@ -1229,17 +1229,17 @@
       <td>-28.4</td>
       <td>9.5</td>
       <td>-1.3</td>
-      <td>-7.8</td>
       <td>104.1</td>
       <td>96.3</td>
-      <td>95.6</td>
+      <td>100.0</td>
+      <td>98.0</td>
     </tr>
     <tr>
       <th>10</th>
       <td>6</td>
       <td>11</td>
       <td>8.27</td>
-      <td>8.71</td>
+      <td>5.07</td>
       <td>5.82</td>
       <td>15</td>
       <td>159.6</td>
@@ -1251,17 +1251,17 @@
       <td>-0.6</td>
       <td>18.0</td>
       <td>7.7</td>
-      <td>5.2</td>
       <td>93.0</td>
       <td>92.1</td>
       <td>93.0</td>
+      <td>88.0</td>
     </tr>
     <tr>
       <th>11</th>
       <td>6</td>
       <td>12</td>
       <td>16.18</td>
-      <td>14.60</td>
+      <td>6.37</td>
       <td>5.67</td>
       <td>10</td>
       <td>24.8</td>
@@ -1273,9 +1273,9 @@
       <td>-21.3</td>
       <td>17.0</td>
       <td>1.8</td>
-      <td>-4.9</td>
       <td>86.0</td>
       <td>77.9</td>
+      <td>97.0</td>
       <td>86.0</td>
     </tr>
     <tr>
@@ -1283,7 +1283,7 @@
       <td>7</td>
       <td>13</td>
       <td>6.04</td>
-      <td>3.69</td>
+      <td>3.68</td>
       <td>4.72</td>
       <td>16</td>
       <td>204.5</td>
@@ -1295,17 +1295,17 @@
       <td>32.4</td>
       <td>9.5</td>
       <td>2.8</td>
-      <td>7.2</td>
       <td>88.5</td>
       <td>82.1</td>
-      <td>85.5</td>
+      <td>97.0</td>
+      <td>88.0</td>
     </tr>
     <tr>
       <th>13</th>
       <td>7</td>
       <td>14</td>
       <td>4.41</td>
-      <td>3.04</td>
+      <td>3.75</td>
       <td>5.14</td>
       <td>14</td>
       <td>154.6</td>
@@ -1317,17 +1317,17 @@
       <td>70.7</td>
       <td>21.5</td>
       <td>0.9</td>
-      <td>21.5</td>
       <td>96.5</td>
       <td>66.0</td>
-      <td>96.5</td>
+      <td>89.0</td>
+      <td>78.0</td>
     </tr>
     <tr>
       <th>14</th>
       <td>8</td>
       <td>15</td>
       <td>5.98</td>
-      <td>8.08</td>
+      <td>8.51</td>
       <td>5.70</td>
       <td>12</td>
       <td>47.7</td>
@@ -1339,17 +1339,17 @@
       <td>-21.5</td>
       <td>6.5</td>
       <td>-25.2</td>
-      <td>-6.7</td>
       <td>75.5</td>
       <td>69.1</td>
-      <td>75.5</td>
+      <td>90.0</td>
+      <td>80.0</td>
     </tr>
     <tr>
       <th>15</th>
       <td>8</td>
       <td>16</td>
       <td>18.30</td>
-      <td>18.55</td>
+      <td>23.93</td>
       <td>10.96</td>
       <td>4</td>
       <td>9.4</td>
@@ -1361,21 +1361,19 @@
       <td>-61.1</td>
       <td>6.4</td>
       <td>-6.2</td>
-      <td>-7.6</td>
       <td>93.6</td>
       <td>86.5</td>
-      <td>84.2</td>
+      <td>97.0</td>
+      <td>90.0</td>
     </tr>
   </tbody>
 </table><br><br>
             <div class="race-info">
                 <head><span class="large-font">
                 東京11R 15:45発走 芝1800m オープン </span><br>
-                波乱度 : 78.1<br>
-                ver 27.0 (穴馬モデル)<br>
+                CAT-III (波乱度 : 89.7)<br>
                 ☆I:8(5人気) ☆II:2(10人気)<br>
-                ver 25.3<br>
-                ◎:6(2人気) 〇:5(1人気)  ▲:1(6人気)  △I:3(4人気)  △II:9(3人気)<br>
+                ◎:9(3人気) 〇:6(2人気)  ▲:1(6人気)  △I:5(1人気)  △II:3(4人気)<br>
                 </head>
             </div>
             <table border="1" class="dataframe my-table">
@@ -1385,7 +1383,7 @@
       <th>枠 番</th>
       <th>馬番</th>
       <th>v21.1</th>
-      <th>v25.3</th>
+      <th>v11.5</th>
       <th>v27.0</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
@@ -1397,10 +1395,10 @@
       <th>ラスト3F</th>
       <th>上り指MAX</th>
       <th>上り指AVG</th>
-      <th>上り指1R</th>
       <th>スピ指MAX</th>
       <th>スピ指AVG</th>
-      <th>スピ指1R</th>
+      <th>最 高</th>
+      <th>平均</th>
     </tr>
   </thead>
   <tbody>
@@ -1409,7 +1407,7 @@
       <td>1</td>
       <td>1</td>
       <td>20.98</td>
-      <td>32.27</td>
+      <td>27.78</td>
       <td>9.58</td>
       <td>6</td>
       <td>12.0</td>
@@ -1421,17 +1419,17 @@
       <td>-23.7</td>
       <td>21.0</td>
       <td>13.7</td>
-      <td>10.9</td>
       <td>106.9</td>
       <td>93.5</td>
-      <td>81.5</td>
+      <td>107.0</td>
+      <td>101</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
       <td>2</td>
       <td>8.65</td>
-      <td>9.38</td>
+      <td>9.61</td>
       <td>11.25</td>
       <td>10</td>
       <td>74.2</td>
@@ -1443,17 +1441,17 @@
       <td>4.2</td>
       <td>20.8</td>
       <td>1.2</td>
-      <td>-4.9</td>
       <td>105.9</td>
       <td>93.3</td>
-      <td>105.6</td>
+      <td>102.0</td>
+      <td>93</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2</td>
       <td>3</td>
       <td>19.35</td>
-      <td>26.93</td>
+      <td>22.39</td>
       <td>9.88</td>
       <td>4</td>
       <td>7.1</td>
@@ -1465,17 +1463,17 @@
       <td>-22.4</td>
       <td>16.4</td>
       <td>9.2</td>
-      <td>1.6</td>
       <td>108.2</td>
       <td>100.0</td>
-      <td>104.5</td>
+      <td>104.0</td>
+      <td>97</td>
     </tr>
     <tr>
       <th>3</th>
       <td>3</td>
       <td>4</td>
       <td>21.28</td>
-      <td>22.48</td>
+      <td>15.64</td>
       <td>9.39</td>
       <td>12</td>
       <td>101.5</td>
@@ -1487,17 +1485,17 @@
       <td>36.0</td>
       <td>22.4</td>
       <td>16.2</td>
-      <td>12.3</td>
       <td>118.0</td>
       <td>110.1</td>
-      <td>114.6</td>
+      <td>109.0</td>
+      <td>102</td>
     </tr>
     <tr>
       <th>4</th>
       <td>3</td>
       <td>5</td>
       <td>43.23</td>
-      <td>41.27</td>
+      <td>26.57</td>
       <td>4.53</td>
       <td>1</td>
       <td>3.1</td>
@@ -1509,17 +1507,17 @@
       <td>-3.2</td>
       <td>28.4</td>
       <td>18.2</td>
-      <td>10.9</td>
       <td>129.6</td>
       <td>111.9</td>
-      <td>129.6</td>
+      <td>105.0</td>
+      <td>99</td>
     </tr>
     <tr>
       <th>5</th>
       <td>4</td>
       <td>6</td>
       <td>49.71</td>
-      <td>43.08</td>
+      <td>30.15</td>
       <td>5.44</td>
       <td>2</td>
       <td>4.3</td>
@@ -1531,18 +1529,18 @@
       <td>1.2</td>
       <td>26.7</td>
       <td>17.5</td>
-      <td>13.6</td>
       <td>132.3</td>
       <td>117.4</td>
-      <td>132.3</td>
+      <td>110.0</td>
+      <td>103</td>
     </tr>
     <tr>
       <th>6</th>
       <td>4</td>
       <td>7</td>
-      <td>14.24</td>
-      <td>11.79</td>
-      <td>5.95</td>
+      <td>13.86</td>
+      <td>14.09</td>
+      <td>7.48</td>
       <td>8</td>
       <td>33.0</td>
       <td>サクセスシュート</td>
@@ -1550,20 +1548,20 @@
       <td>57.0</td>
       <td>田辺裕信</td>
       <td>追</td>
-      <td>61.2</td>
+      <td>48.0</td>
       <td>27.0</td>
       <td>23.1</td>
-      <td>24.5</td>
       <td>116.4</td>
       <td>98.8</td>
-      <td>116.4</td>
+      <td>NaN</td>
+      <td>94</td>
     </tr>
     <tr>
       <th>7</th>
       <td>5</td>
       <td>8</td>
       <td>20.04</td>
-      <td>23.10</td>
+      <td>12.16</td>
       <td>13.95</td>
       <td>5</td>
       <td>8.4</td>
@@ -1575,18 +1573,18 @@
       <td>1.4</td>
       <td>26.0</td>
       <td>16.7</td>
-      <td>16.0</td>
       <td>119.7</td>
       <td>105.5</td>
-      <td>112.3</td>
+      <td>105.0</td>
+      <td>99</td>
     </tr>
     <tr>
       <th>8</th>
       <td>5</td>
       <td>9</td>
-      <td>23.59</td>
-      <td>23.63</td>
-      <td>5.37</td>
+      <td>20.33</td>
+      <td>41.30</td>
+      <td>4.86</td>
       <td>3</td>
       <td>5.5</td>
       <td>トーセンリョウ</td>
@@ -1594,21 +1592,21 @@
       <td>57.0</td>
       <td>Ｍ．ディー</td>
       <td>追</td>
-      <td>42.8</td>
+      <td>28.0</td>
       <td>28.6</td>
       <td>22.8</td>
-      <td>21.9</td>
       <td>132.3</td>
       <td>113.5</td>
-      <td>132.3</td>
+      <td>108.0</td>
+      <td>100</td>
     </tr>
     <tr>
       <th>9</th>
       <td>6</td>
       <td>10</td>
-      <td>9.74</td>
-      <td>6.79</td>
-      <td>5.14</td>
+      <td>6.94</td>
+      <td>5.59</td>
+      <td>8.39</td>
       <td>11</td>
       <td>89.9</td>
       <td>グリューネグリーン</td>
@@ -1616,21 +1614,21 @@
       <td>57.0</td>
       <td>横山琉人</td>
       <td>差</td>
-      <td>-21.7</td>
+      <td>-26.2</td>
       <td>16.1</td>
       <td>6.7</td>
-      <td>12.0</td>
       <td>111.6</td>
       <td>100.2</td>
-      <td>111.6</td>
+      <td>100.0</td>
+      <td>89</td>
     </tr>
     <tr>
       <th>10</th>
       <td>6</td>
       <td>11</td>
-      <td>6.60</td>
-      <td>4.39</td>
-      <td>5.63</td>
+      <td>3.74</td>
+      <td>3.94</td>
+      <td>7.74</td>
       <td>13</td>
       <td>102.0</td>
       <td>ギャラクシーナイト</td>
@@ -1638,20 +1636,20 @@
       <td>57.0</td>
       <td>丸田恭介</td>
       <td>先</td>
-      <td>24.6</td>
+      <td>14.3</td>
       <td>18.8</td>
       <td>-2.4</td>
-      <td>-10.4</td>
       <td>115.4</td>
       <td>87.6</td>
-      <td>98.3</td>
+      <td>106.0</td>
+      <td>91</td>
     </tr>
     <tr>
       <th>11</th>
       <td>7</td>
       <td>12</td>
       <td>18.79</td>
-      <td>18.89</td>
+      <td>21.81</td>
       <td>5.24</td>
       <td>7</td>
       <td>13.2</td>
@@ -1663,17 +1661,17 @@
       <td>20.6</td>
       <td>30.6</td>
       <td>20.6</td>
-      <td>25.9</td>
       <td>134.2</td>
       <td>117.6</td>
-      <td>119.9</td>
+      <td>102.0</td>
+      <td>101</td>
     </tr>
     <tr>
       <th>12</th>
       <td>7</td>
       <td>13</td>
       <td>9.99</td>
-      <td>6.89</td>
+      <td>8.17</td>
       <td>5.61</td>
       <td>14</td>
       <td>151.8</td>
@@ -1685,17 +1683,17 @@
       <td>-12.5</td>
       <td>19.0</td>
       <td>4.3</td>
-      <td>-9.2</td>
       <td>117.6</td>
       <td>99.0</td>
-      <td>79.1</td>
+      <td>103.0</td>
+      <td>91</td>
     </tr>
     <tr>
       <th>13</th>
       <td>8</td>
       <td>14</td>
       <td>5.79</td>
-      <td>7.08</td>
+      <td>4.45</td>
       <td>6.97</td>
       <td>15</td>
       <td>281.1</td>
@@ -1707,17 +1705,17 @@
       <td>0.9</td>
       <td>18.6</td>
       <td>-1.1</td>
-      <td>-13.0</td>
       <td>101.0</td>
       <td>83.2</td>
-      <td>67.4</td>
+      <td>110.0</td>
+      <td>91</td>
     </tr>
     <tr>
       <th>14</th>
       <td>8</td>
       <td>15</td>
       <td>12.77</td>
-      <td>12.33</td>
+      <td>10.86</td>
       <td>10.16</td>
       <td>9</td>
       <td>57.1</td>
@@ -1729,21 +1727,19 @@
       <td>5.9</td>
       <td>19.4</td>
       <td>14.6</td>
-      <td>19.4</td>
       <td>122.5</td>
       <td>109.7</td>
-      <td>99.5</td>
+      <td>107.0</td>
+      <td>98</td>
     </tr>
   </tbody>
 </table><br><br>
             <div class="race-info">
                 <head><span class="large-font">
                 東京12R 16:30発走 ダート1400m 1勝クラス  牝馬限定 </span><br>
-                波乱度 : 54.2<br>
-                ver 27.0 (穴馬モデル)<br>
+                CAT-II (波乱度 : 68.8)<br>
                 ☆I:7(7人気) ☆II:6(10人気)<br>
-                ver 25.3<br>
-                ◎:14(3人気) 〇:12(1人気)  ▲:16(2人気)  △I:7(7人気)  △II:11(11人気)<br>
+                ◎:14(3人気) 〇:12(1人気)  ▲:16(2人気)  △I:7(7人気)  △II:13(8人気)<br>
                 </head>
             </div>
             <table border="1" class="dataframe my-table">
@@ -1753,7 +1749,7 @@
       <th>枠 番</th>
       <th>馬番</th>
       <th>v21.1</th>
-      <th>v25.3</th>
+      <th>v11.5</th>
       <th>v27.0</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
@@ -1765,10 +1761,10 @@
       <th>ラスト3F</th>
       <th>上り指MAX</th>
       <th>上り指AVG</th>
-      <th>上り指1R</th>
       <th>スピ指MAX</th>
       <th>スピ指AVG</th>
-      <th>スピ指1R</th>
+      <th>最 高</th>
+      <th>平均</th>
     </tr>
   </thead>
   <tbody>
@@ -1777,7 +1773,7 @@
       <td>1</td>
       <td>1</td>
       <td>13.25</td>
-      <td>12.14</td>
+      <td>11.76</td>
       <td>13.84</td>
       <td>9</td>
       <td>35.6</td>
@@ -1789,18 +1785,18 @@
       <td>4.1</td>
       <td>-14.4</td>
       <td>-24.8</td>
-      <td>-23.9</td>
       <td>64.8</td>
       <td>58.5</td>
-      <td>64.8</td>
+      <td>78</td>
+      <td>71</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
       <td>2</td>
-      <td>23.94</td>
-      <td>16.21</td>
-      <td>5.58</td>
+      <td>18.41</td>
+      <td>19.62</td>
+      <td>14.87</td>
       <td>4</td>
       <td>9.9</td>
       <td>アトリウムチャペル</td>
@@ -1808,20 +1804,20 @@
       <td>56.0</td>
       <td>Ｄ．レーン</td>
       <td>差</td>
-      <td>25.1</td>
+      <td>16.1</td>
       <td>25.3</td>
       <td>3.5</td>
-      <td>0.2</td>
       <td>92.5</td>
       <td>74.5</td>
-      <td>72.6</td>
+      <td>85</td>
+      <td>76</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2</td>
       <td>3</td>
       <td>4.45</td>
-      <td>5.34</td>
+      <td>3.84</td>
       <td>4.90</td>
       <td>13</td>
       <td>127.7</td>
@@ -1833,17 +1829,17 @@
       <td>-14.3</td>
       <td>-4.0</td>
       <td>-23.1</td>
-      <td>-38.9</td>
       <td>65.3</td>
       <td>55.7</td>
-      <td>61.9</td>
+      <td>68</td>
+      <td>65</td>
     </tr>
     <tr>
       <th>3</th>
       <td>2</td>
       <td>4</td>
       <td>11.68</td>
-      <td>7.05</td>
+      <td>7.52</td>
       <td>5.84</td>
       <td>14</td>
       <td>200.1</td>
@@ -1855,17 +1851,17 @@
       <td>23.7</td>
       <td>5.8</td>
       <td>-14.0</td>
-      <td>-42.4</td>
       <td>79.8</td>
       <td>56.2</td>
-      <td>50.6</td>
+      <td>75</td>
+      <td>53</td>
     </tr>
     <tr>
       <th>4</th>
       <td>3</td>
       <td>5</td>
       <td>5.48</td>
-      <td>6.78</td>
+      <td>10.30</td>
       <td>6.30</td>
       <td>15</td>
       <td>227.0</td>
@@ -1877,17 +1873,17 @@
       <td>22.6</td>
       <td>-11.6</td>
       <td>-21.0</td>
-      <td>-16.4</td>
       <td>76.5</td>
       <td>59.3</td>
-      <td>76.5</td>
+      <td>86</td>
+      <td>66</td>
     </tr>
     <tr>
       <th>5</th>
       <td>3</td>
       <td>6</td>
       <td>14.19</td>
-      <td>11.29</td>
+      <td>8.97</td>
       <td>15.09</td>
       <td>10</td>
       <td>52.7</td>
@@ -1899,17 +1895,17 @@
       <td>3.1</td>
       <td>-19.4</td>
       <td>-27.9</td>
-      <td>-19.4</td>
       <td>70.3</td>
       <td>61.9</td>
-      <td>70.3</td>
+      <td>82</td>
+      <td>76</td>
     </tr>
     <tr>
       <th>6</th>
       <td>4</td>
       <td>7</td>
       <td>39.50</td>
-      <td>39.11</td>
+      <td>36.31</td>
       <td>15.29</td>
       <td>7</td>
       <td>26.2</td>
@@ -1921,17 +1917,17 @@
       <td>-17.4</td>
       <td>-2.1</td>
       <td>-13.6</td>
-      <td>-5.2</td>
       <td>83.0</td>
       <td>74.0</td>
-      <td>83.0</td>
+      <td>83</td>
+      <td>77</td>
     </tr>
     <tr>
       <th>7</th>
       <td>4</td>
       <td>8</td>
       <td>23.59</td>
-      <td>17.02</td>
+      <td>11.78</td>
       <td>5.97</td>
       <td>5</td>
       <td>15.2</td>
@@ -1943,18 +1939,18 @@
       <td>20.2</td>
       <td>-8.2</td>
       <td>-18.1</td>
-      <td>-13.9</td>
       <td>71.7</td>
       <td>66.3</td>
-      <td>70.3</td>
+      <td>84</td>
+      <td>78</td>
     </tr>
     <tr>
       <th>8</th>
       <td>5</td>
       <td>9</td>
-      <td>12.73</td>
-      <td>11.45</td>
-      <td>6.08</td>
+      <td>9.31</td>
+      <td>15.87</td>
+      <td>8.80</td>
       <td>6</td>
       <td>20.1</td>
       <td>アイアンソリッド</td>
@@ -1962,20 +1958,20 @@
       <td>53.0</td>
       <td>菅原明良</td>
       <td>先</td>
-      <td>-24.6</td>
+      <td>-36.4</td>
       <td>-17.6</td>
       <td>-25.4</td>
-      <td>-20.7</td>
       <td>78.6</td>
       <td>67.2</td>
-      <td>78.6</td>
+      <td>81</td>
+      <td>75</td>
     </tr>
     <tr>
       <th>9</th>
       <td>5</td>
       <td>10</td>
       <td>7.66</td>
-      <td>4.79</td>
+      <td>5.03</td>
       <td>4.45</td>
       <td>12</td>
       <td>109.9</td>
@@ -1987,17 +1983,17 @@
       <td>73.4</td>
       <td>-0.2</td>
       <td>-10.9</td>
-      <td>-17.9</td>
       <td>64.8</td>
       <td>59.6</td>
-      <td>55.5</td>
+      <td>75</td>
+      <td>68</td>
     </tr>
     <tr>
       <th>10</th>
       <td>6</td>
       <td>11</td>
       <td>19.13</td>
-      <td>19.88</td>
+      <td>12.13</td>
       <td>14.52</td>
       <td>11</td>
       <td>85.2</td>
@@ -2009,17 +2005,17 @@
       <td>12.0</td>
       <td>10.3</td>
       <td>-6.7</td>
-      <td>-9.2</td>
       <td>83.7</td>
       <td>67.4</td>
-      <td>63.3</td>
+      <td>82</td>
+      <td>72</td>
     </tr>
     <tr>
       <th>11</th>
       <td>6</td>
       <td>12</td>
       <td>46.30</td>
-      <td>49.62</td>
+      <td>60.58</td>
       <td>1.77</td>
       <td>1</td>
       <td>2.8</td>
@@ -2031,17 +2027,17 @@
       <td>-52.2</td>
       <td>-1.2</td>
       <td>-9.9</td>
-      <td>-2.2</td>
       <td>83.5</td>
       <td>76.4</td>
-      <td>75.4</td>
+      <td>95</td>
+      <td>83</td>
     </tr>
     <tr>
       <th>12</th>
       <td>7</td>
       <td>13</td>
       <td>17.69</td>
-      <td>18.05</td>
+      <td>19.74</td>
       <td>11.87</td>
       <td>8</td>
       <td>27.1</td>
@@ -2053,18 +2049,18 @@
       <td>-18.4</td>
       <td>-16.1</td>
       <td>-30.1</td>
-      <td>-16.1</td>
       <td>71.3</td>
       <td>61.8</td>
-      <td>67.0</td>
+      <td>82</td>
+      <td>74</td>
     </tr>
     <tr>
       <th>13</th>
       <td>7</td>
       <td>14</td>
-      <td>67.15</td>
-      <td>67.29</td>
-      <td>2.24</td>
+      <td>72.26</td>
+      <td>63.97</td>
+      <td>1.63</td>
       <td>3</td>
       <td>3.9</td>
       <td>ルージュナリッシュ</td>
@@ -2072,20 +2068,20 @@
       <td>53.0</td>
       <td>Ｍ．ディー</td>
       <td>先</td>
-      <td>-24.8</td>
+      <td>-38.5</td>
       <td>20.9</td>
       <td>9.8</td>
-      <td>-1.7</td>
       <td>98.7</td>
       <td>92.5</td>
-      <td>92.5</td>
+      <td>92</td>
+      <td>92</td>
     </tr>
     <tr>
       <th>14</th>
       <td>8</td>
       <td>15</td>
       <td>3.92</td>
-      <td>2.22</td>
+      <td>2.51</td>
       <td>3.80</td>
       <td>16</td>
       <td>333.5</td>
@@ -2097,18 +2093,18 @@
       <td>22.5</td>
       <td>-8.3</td>
       <td>-21.8</td>
-      <td>-24.6</td>
       <td>67.6</td>
       <td>47.9</td>
-      <td>45.7</td>
+      <td>70</td>
+      <td>52</td>
     </tr>
     <tr>
       <th>15</th>
       <td>8</td>
       <td>16</td>
-      <td>44.22</td>
-      <td>40.64</td>
-      <td>5.87</td>
+      <td>50.96</td>
+      <td>46.46</td>
+      <td>4.47</td>
       <td>2</td>
       <td>3.7</td>
       <td>モーニングマジック</td>
@@ -2116,24 +2112,22 @@
       <td>53.0</td>
       <td>三浦皇成</td>
       <td>先</td>
-      <td>-2.4</td>
+      <td>-16.2</td>
       <td>15.2</td>
       <td>-14.6</td>
-      <td>15.2</td>
       <td>84.5</td>
       <td>60.2</td>
-      <td>84.5</td>
+      <td>89</td>
+      <td>72</td>
     </tr>
   </tbody>
 </table><br><br>
             <div class="race-info">
                 <head><span class="large-font">
                 阪神07R 13:25発走 ダート1200m 1勝クラス </span><br>
-                波乱度 : 90.1<br>
-                ver 27.0 (穴馬モデル)<br>
+                CAT-IV (波乱度 : 91.7)<br>
                 ☆I:15(10人気) ☆II:4(8人気)<br>
-                ver 25.3<br>
-                ◎:9(1人気) 〇:2(6人気)  ▲:14(3人気)  △I:7(4人気)  △II:10(5人気)<br>
+                ◎:9(1人気) 〇:2(6人気)  ▲:16(2人気)  △I:7(4人気)  △II:14(3人気)<br>
                 </head>
             </div>
             <table border="1" class="dataframe my-table">
@@ -2143,7 +2137,7 @@
       <th>枠 番</th>
       <th>馬番</th>
       <th>v21.1</th>
-      <th>v25.3</th>
+      <th>v11.5</th>
       <th>v27.0</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
@@ -2155,10 +2149,10 @@
       <th>ラスト3F</th>
       <th>上り指MAX</th>
       <th>上り指AVG</th>
-      <th>上り指1R</th>
       <th>スピ指MAX</th>
       <th>スピ指AVG</th>
-      <th>スピ指1R</th>
+      <th>最 高</th>
+      <th>平均</th>
     </tr>
   </thead>
   <tbody>
@@ -2167,7 +2161,7 @@
       <td>1</td>
       <td>1</td>
       <td>17.06</td>
-      <td>14.23</td>
+      <td>14.30</td>
       <td>5.89</td>
       <td>14</td>
       <td>130.0</td>
@@ -2179,17 +2173,17 @@
       <td>2.4</td>
       <td>-22.3</td>
       <td>-26.6</td>
-      <td>-23.5</td>
       <td>82.7</td>
       <td>66.8</td>
-      <td>66.3</td>
+      <td>88</td>
+      <td>74</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
       <td>2</td>
       <td>41.04</td>
-      <td>42.02</td>
+      <td>43.54</td>
       <td>8.31</td>
       <td>6</td>
       <td>16.7</td>
@@ -2201,17 +2195,17 @@
       <td>-5.6</td>
       <td>11.4</td>
       <td>-12.2</td>
-      <td>-1.2</td>
       <td>96.8</td>
       <td>72.4</td>
-      <td>91.6</td>
+      <td>97</td>
+      <td>86</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2</td>
       <td>3</td>
       <td>19.31</td>
-      <td>11.28</td>
+      <td>10.09</td>
       <td>4.20</td>
       <td>11</td>
       <td>91.6</td>
@@ -2223,17 +2217,17 @@
       <td>-9.4</td>
       <td>7.8</td>
       <td>-28.8</td>
-      <td>-70.5</td>
       <td>89.4</td>
       <td>60.4</td>
-      <td>17.5</td>
+      <td>84</td>
+      <td>67</td>
     </tr>
     <tr>
       <th>3</th>
       <td>2</td>
       <td>4</td>
       <td>8.57</td>
-      <td>9.31</td>
+      <td>10.27</td>
       <td>12.22</td>
       <td>8</td>
       <td>29.5</td>
@@ -2245,17 +2239,17 @@
       <td>54.0</td>
       <td>2.6</td>
       <td>-10.4</td>
-      <td>-28.0</td>
       <td>82.1</td>
       <td>72.2</td>
-      <td>51.8</td>
+      <td>82</td>
+      <td>75</td>
     </tr>
     <tr>
       <th>4</th>
       <td>3</td>
       <td>5</td>
       <td>18.11</td>
-      <td>15.65</td>
+      <td>12.36</td>
       <td>6.33</td>
       <td>15</td>
       <td>259.8</td>
@@ -2267,17 +2261,17 @@
       <td>16.3</td>
       <td>9.7</td>
       <td>-12.3</td>
-      <td>-28.1</td>
       <td>93.4</td>
       <td>69.6</td>
-      <td>64.9</td>
+      <td>83</td>
+      <td>76</td>
     </tr>
     <tr>
       <th>5</th>
       <td>3</td>
       <td>6</td>
       <td>26.34</td>
-      <td>16.57</td>
+      <td>26.84</td>
       <td>6.26</td>
       <td>7</td>
       <td>17.7</td>
@@ -2289,17 +2283,17 @@
       <td>-2.7</td>
       <td>-9.5</td>
       <td>-18.6</td>
-      <td>-12.0</td>
       <td>94.3</td>
       <td>70.5</td>
-      <td>94.3</td>
+      <td>84</td>
+      <td>67</td>
     </tr>
     <tr>
       <th>6</th>
       <td>4</td>
       <td>7</td>
       <td>37.50</td>
-      <td>27.67</td>
+      <td>32.87</td>
       <td>5.55</td>
       <td>4</td>
       <td>14.4</td>
@@ -2311,17 +2305,17 @@
       <td>-28.9</td>
       <td>-2.3</td>
       <td>-25.1</td>
-      <td>-2.3</td>
       <td>97.0</td>
       <td>67.1</td>
-      <td>97.0</td>
+      <td>99</td>
+      <td>63</td>
     </tr>
     <tr>
       <th>7</th>
       <td>4</td>
       <td>8</td>
       <td>2.65</td>
-      <td>2.81</td>
+      <td>4.10</td>
       <td>3.60</td>
       <td>16</td>
       <td>370.0</td>
@@ -2333,18 +2327,18 @@
       <td>48.9</td>
       <td>0.0</td>
       <td>-23.1</td>
-      <td>-20.5</td>
       <td>71.6</td>
       <td>63.9</td>
-      <td>63.7</td>
+      <td>69</td>
+      <td>60</td>
     </tr>
     <tr>
       <th>8</th>
       <td>5</td>
       <td>9</td>
-      <td>47.00</td>
-      <td>56.25</td>
-      <td>3.63</td>
+      <td>51.66</td>
+      <td>55.85</td>
+      <td>3.71</td>
       <td>1</td>
       <td>2.0</td>
       <td>バッハアルプゼー</td>
@@ -2352,20 +2346,20 @@
       <td>55.0</td>
       <td>菱田裕二</td>
       <td>逃</td>
-      <td>-27.1</td>
+      <td>-43.8</td>
       <td>4.4</td>
       <td>-18.4</td>
-      <td>4.4</td>
       <td>107.4</td>
       <td>84.0</td>
-      <td>107.4</td>
+      <td>98</td>
+      <td>83</td>
     </tr>
     <tr>
       <th>9</th>
       <td>5</td>
       <td>10</td>
       <td>25.29</td>
-      <td>25.74</td>
+      <td>24.15</td>
       <td>9.03</td>
       <td>5</td>
       <td>14.6</td>
@@ -2377,17 +2371,17 @@
       <td>-4.9</td>
       <td>-10.3</td>
       <td>-18.0</td>
-      <td>-14.4</td>
       <td>78.6</td>
       <td>68.4</td>
-      <td>78.6</td>
+      <td>85</td>
+      <td>75</td>
     </tr>
     <tr>
       <th>10</th>
       <td>6</td>
       <td>11</td>
       <td>34.69</td>
-      <td>22.31</td>
+      <td>14.86</td>
       <td>6.40</td>
       <td>9</td>
       <td>30.1</td>
@@ -2399,18 +2393,18 @@
       <td>10.1</td>
       <td>-9.1</td>
       <td>-20.8</td>
-      <td>-28.9</td>
       <td>81.4</td>
       <td>67.7</td>
-      <td>81.4</td>
+      <td>81</td>
+      <td>73</td>
     </tr>
     <tr>
       <th>11</th>
       <td>6</td>
       <td>12</td>
-      <td>10.54</td>
-      <td>10.09</td>
-      <td>3.84</td>
+      <td>7.54</td>
+      <td>13.97</td>
+      <td>6.45</td>
       <td>13</td>
       <td>122.9</td>
       <td>リーサムギニー</td>
@@ -2418,20 +2412,20 @@
       <td>58.0</td>
       <td>藤懸貴志</td>
       <td>差</td>
-      <td>62.7</td>
+      <td>42.1</td>
       <td>17.4</td>
       <td>7.0</td>
-      <td>17.4</td>
       <td>96.9</td>
       <td>91.9</td>
-      <td>92.6</td>
+      <td>65</td>
+      <td>53</td>
     </tr>
     <tr>
       <th>12</th>
       <td>7</td>
       <td>13</td>
       <td>11.82</td>
-      <td>17.21</td>
+      <td>13.57</td>
       <td>11.30</td>
       <td>12</td>
       <td>104.6</td>
@@ -2443,17 +2437,17 @@
       <td>4.1</td>
       <td>12.4</td>
       <td>-10.8</td>
-      <td>-8.6</td>
       <td>98.5</td>
       <td>74.5</td>
-      <td>78.6</td>
+      <td>73</td>
+      <td>73</td>
     </tr>
     <tr>
       <th>13</th>
       <td>7</td>
       <td>14</td>
       <td>24.76</td>
-      <td>28.59</td>
+      <td>32.12</td>
       <td>4.73</td>
       <td>3</td>
       <td>5.3</td>
@@ -2465,17 +2459,17 @@
       <td>-12.1</td>
       <td>-7.8</td>
       <td>-18.0</td>
-      <td>-12.8</td>
       <td>84.0</td>
       <td>74.2</td>
-      <td>84.0</td>
+      <td>83</td>
+      <td>77</td>
     </tr>
     <tr>
       <th>14</th>
       <td>8</td>
       <td>15</td>
       <td>12.47</td>
-      <td>14.24</td>
+      <td>13.46</td>
       <td>13.11</td>
       <td>10</td>
       <td>58.2</td>
@@ -2487,17 +2481,17 @@
       <td>-9.1</td>
       <td>0.3</td>
       <td>-19.6</td>
-      <td>-26.5</td>
       <td>73.0</td>
       <td>66.5</td>
-      <td>64.8</td>
+      <td>78</td>
+      <td>70</td>
     </tr>
     <tr>
       <th>15</th>
       <td>8</td>
       <td>16</td>
       <td>26.94</td>
-      <td>22.42</td>
+      <td>38.18</td>
       <td>8.23</td>
       <td>2</td>
       <td>4.9</td>
@@ -2509,21 +2503,19 @@
       <td>-38.5</td>
       <td>-8.5</td>
       <td>-21.8</td>
-      <td>-14.4</td>
       <td>84.1</td>
       <td>73.4</td>
-      <td>68.2</td>
+      <td>86</td>
+      <td>73</td>
     </tr>
   </tbody>
 </table><br><br>
             <div class="race-info">
                 <head><span class="large-font">
                 阪神08R 13:55発走 芝2400m 2勝クラス </span><br>
-                波乱度 : 3.8<br>
-                ver 27.0 (穴馬モデル)<br>
-                ☆I:3(5人気) ☆II:1(4人気)<br>
-                ver 25.3<br>
-                ◎:4(1人気) 〇:5(3人気)  ▲:6(2人気)  △I:1(4人気)  △II:3(5人気)<br>
+                CAT-I (波乱度 : 2.2)<br>
+                ☆I:2(6人気) ☆II:3(5人気)<br>
+                ◎:6(2人気) 〇:4(1人気)  ▲:5(3人気)  △I:1(4人気)  △II:3(5人気)<br>
                 </head>
             </div>
             <table border="1" class="dataframe my-table">
@@ -2533,7 +2525,7 @@
       <th>枠 番</th>
       <th>馬番</th>
       <th>v21.1</th>
-      <th>v25.3</th>
+      <th>v11.5</th>
       <th>v27.0</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
@@ -2545,10 +2537,10 @@
       <th>ラスト3F</th>
       <th>上り指MAX</th>
       <th>上り指AVG</th>
-      <th>上り指1R</th>
       <th>スピ指MAX</th>
       <th>スピ指AVG</th>
-      <th>スピ指1R</th>
+      <th>最 高</th>
+      <th>平均</th>
     </tr>
   </thead>
   <tbody>
@@ -2557,7 +2549,7 @@
       <td>1</td>
       <td>1</td>
       <td>20.96</td>
-      <td>20.15</td>
+      <td>29.15</td>
       <td>6.20</td>
       <td>4</td>
       <td>20.2</td>
@@ -2569,18 +2561,18 @@
       <td>23.9</td>
       <td>9.2</td>
       <td>4.1</td>
-      <td>5.8</td>
       <td>93.0</td>
       <td>88.6</td>
-      <td>85.4</td>
+      <td>87.0</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
       <td>2</td>
-      <td>16.31</td>
-      <td>11.92</td>
-      <td>5.85</td>
+      <td>11.60</td>
+      <td>11.83</td>
+      <td>13.00</td>
       <td>6</td>
       <td>72.2</td>
       <td>ローレルキャニオン</td>
@@ -2588,20 +2580,20 @@
       <td>58.0</td>
       <td>和田竜二</td>
       <td>先</td>
-      <td>31.5</td>
+      <td>24.0</td>
       <td>20.3</td>
       <td>11.5</td>
-      <td>4.2</td>
       <td>110.5</td>
       <td>94.8</td>
-      <td>104.7</td>
+      <td>94.0</td>
+      <td>86.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
       <td>3</td>
       <td>15.58</td>
-      <td>14.54</td>
+      <td>25.08</td>
       <td>8.78</td>
       <td>5</td>
       <td>47.8</td>
@@ -2613,17 +2605,17 @@
       <td>0.9</td>
       <td>13.3</td>
       <td>1.1</td>
-      <td>-16.4</td>
       <td>87.8</td>
       <td>81.3</td>
-      <td>74.1</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
       <td>4</td>
       <td>73.28</td>
-      <td>80.91</td>
+      <td>69.25</td>
       <td>4.21</td>
       <td>1</td>
       <td>1.5</td>
@@ -2635,17 +2627,17 @@
       <td>-0.6</td>
       <td>21.4</td>
       <td>13.9</td>
-      <td>21.4</td>
       <td>113.0</td>
       <td>98.9</td>
-      <td>107.6</td>
+      <td>104.0</td>
+      <td>89.0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
       <td>5</td>
       <td>58.60</td>
-      <td>62.15</td>
+      <td>44.93</td>
       <td>5.52</td>
       <td>3</td>
       <td>10.8</td>
@@ -2657,17 +2649,17 @@
       <td>13.4</td>
       <td>19.6</td>
       <td>14.7</td>
-      <td>12.7</td>
       <td>107.1</td>
       <td>87.9</td>
-      <td>74.4</td>
+      <td>98.0</td>
+      <td>94.0</td>
     </tr>
     <tr>
       <th>5</th>
       <td>6</td>
       <td>6</td>
       <td>62.28</td>
-      <td>57.43</td>
+      <td>79.88</td>
       <td>4.66</td>
       <td>2</td>
       <td>2.2</td>
@@ -2679,21 +2671,19 @@
       <td>-5.3</td>
       <td>21.8</td>
       <td>14.4</td>
-      <td>9.0</td>
       <td>106.9</td>
       <td>87.6</td>
-      <td>106.9</td>
+      <td>92.0</td>
+      <td>80.0</td>
     </tr>
   </tbody>
 </table><br><br>
             <div class="race-info">
                 <head><span class="large-font">
                 阪神09R 14:25発走 芝1600m 1勝クラス  牝馬限定 </span><br>
-                波乱度 : 78.9<br>
-                ver 27.0 (穴馬モデル)<br>
+                CAT-II (波乱度 : 65.9)<br>
                 ☆I:8(7人気) ☆II:6(5人気)<br>
-                ver 25.3<br>
-                ◎:4(1人気) 〇:5(3人気)  ▲:10(2人気)  △I:2(4人気)  △II:11(8人気)<br>
+                ◎:4(1人気) 〇:5(3人気)  ▲:10(2人気)  △I:2(4人気)  △II:8(7人気)<br>
                 </head>
             </div>
             <table border="1" class="dataframe my-table">
@@ -2703,7 +2693,7 @@
       <th>枠 番</th>
       <th>馬番</th>
       <th>v21.1</th>
-      <th>v25.3</th>
+      <th>v11.5</th>
       <th>v27.0</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
@@ -2715,10 +2705,10 @@
       <th>ラスト3F</th>
       <th>上り指MAX</th>
       <th>上り指AVG</th>
-      <th>上り指1R</th>
       <th>スピ指MAX</th>
       <th>スピ指AVG</th>
-      <th>スピ指1R</th>
+      <th>最 高</th>
+      <th>平均</th>
     </tr>
   </thead>
   <tbody>
@@ -2727,7 +2717,7 @@
       <td>1</td>
       <td>1</td>
       <td>4.32</td>
-      <td>2.95</td>
+      <td>4.79</td>
       <td>4.58</td>
       <td>13</td>
       <td>263.6</td>
@@ -2739,17 +2729,17 @@
       <td>21.5</td>
       <td>5.4</td>
       <td>-19.0</td>
-      <td>-20.2</td>
       <td>79.0</td>
       <td>55.0</td>
-      <td>71.4</td>
+      <td>67.0</td>
+      <td>67.0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
       <td>2</td>
       <td>26.48</td>
-      <td>34.70</td>
+      <td>35.74</td>
       <td>8.00</td>
       <td>4</td>
       <td>9.0</td>
@@ -2761,17 +2751,17 @@
       <td>-25.2</td>
       <td>7.2</td>
       <td>-9.4</td>
-      <td>-6.9</td>
       <td>81.4</td>
       <td>67.5</td>
-      <td>75.4</td>
+      <td>91.0</td>
+      <td>77.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
       <td>3</td>
       <td>30.24</td>
-      <td>22.00</td>
+      <td>19.38</td>
       <td>5.21</td>
       <td>12</td>
       <td>172.1</td>
@@ -2783,17 +2773,17 @@
       <td>2.6</td>
       <td>17.1</td>
       <td>3.6</td>
-      <td>17.1</td>
       <td>98.0</td>
       <td>80.2</td>
-      <td>95.5</td>
+      <td>90.0</td>
+      <td>79.0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
       <td>4</td>
       <td>53.51</td>
-      <td>48.10</td>
+      <td>56.68</td>
       <td>3.17</td>
       <td>1</td>
       <td>2.2</td>
@@ -2805,18 +2795,18 @@
       <td>-41.6</td>
       <td>14.8</td>
       <td>11.8</td>
-      <td>6.9</td>
       <td>103.0</td>
       <td>91.6</td>
-      <td>92.9</td>
+      <td>90.0</td>
+      <td>85.0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>4</td>
       <td>5</td>
-      <td>51.57</td>
-      <td>45.00</td>
-      <td>4.05</td>
+      <td>48.13</td>
+      <td>42.30</td>
+      <td>9.56</td>
       <td>3</td>
       <td>6.8</td>
       <td>グローブアマランス</td>
@@ -2824,20 +2814,20 @@
       <td>56.0</td>
       <td>和田竜二</td>
       <td>差</td>
-      <td>23.2</td>
+      <td>8.6</td>
       <td>28.3</td>
       <td>15.5</td>
-      <td>23.0</td>
       <td>106.9</td>
       <td>91.9</td>
-      <td>70.9</td>
+      <td>93.0</td>
+      <td>87.0</td>
     </tr>
     <tr>
       <th>5</th>
       <td>5</td>
       <td>6</td>
       <td>33.81</td>
-      <td>31.00</td>
+      <td>26.00</td>
       <td>13.01</td>
       <td>5</td>
       <td>10.7</td>
@@ -2849,17 +2839,17 @@
       <td>33.6</td>
       <td>22.5</td>
       <td>2.8</td>
-      <td>22.5</td>
       <td>92.3</td>
       <td>73.8</td>
-      <td>92.3</td>
+      <td>98.0</td>
+      <td>86.0</td>
     </tr>
     <tr>
       <th>6</th>
       <td>5</td>
       <td>7</td>
       <td>14.52</td>
-      <td>14.17</td>
+      <td>11.76</td>
       <td>5.12</td>
       <td>9</td>
       <td>56.0</td>
@@ -2871,17 +2861,17 @@
       <td>-37.2</td>
       <td>-6.6</td>
       <td>-25.6</td>
-      <td>-21.4</td>
       <td>76.3</td>
       <td>62.0</td>
-      <td>76.3</td>
+      <td>87.0</td>
+      <td>79.0</td>
     </tr>
     <tr>
       <th>7</th>
       <td>6</td>
       <td>8</td>
       <td>27.73</td>
-      <td>20.59</td>
+      <td>27.01</td>
       <td>14.68</td>
       <td>7</td>
       <td>27.4</td>
@@ -2893,17 +2883,17 @@
       <td>34.7</td>
       <td>17.8</td>
       <td>7.6</td>
-      <td>17.8</td>
       <td>93.7</td>
       <td>79.0</td>
-      <td>93.7</td>
+      <td>94.0</td>
+      <td>87.0</td>
     </tr>
     <tr>
       <th>8</th>
       <td>6</td>
       <td>9</td>
       <td>16.95</td>
-      <td>13.98</td>
+      <td>9.91</td>
       <td>10.30</td>
       <td>10</td>
       <td>70.6</td>
@@ -2915,17 +2905,17 @@
       <td>24.2</td>
       <td>14.4</td>
       <td>2.4</td>
-      <td>3.2</td>
       <td>91.5</td>
       <td>75.9</td>
-      <td>91.5</td>
+      <td>86.0</td>
+      <td>80.0</td>
     </tr>
     <tr>
       <th>9</th>
       <td>7</td>
       <td>10</td>
       <td>39.28</td>
-      <td>43.42</td>
+      <td>40.83</td>
       <td>7.63</td>
       <td>2</td>
       <td>3.3</td>
@@ -2937,17 +2927,17 @@
       <td>11.8</td>
       <td>31.3</td>
       <td>21.7</td>
-      <td>31.3</td>
       <td>99.7</td>
       <td>79.9</td>
-      <td>99.7</td>
+      <td>87.0</td>
+      <td>71.0</td>
     </tr>
     <tr>
       <th>10</th>
       <td>7</td>
       <td>11</td>
       <td>38.68</td>
-      <td>33.17</td>
+      <td>13.64</td>
       <td>5.85</td>
       <td>8</td>
       <td>55.1</td>
@@ -2959,17 +2949,17 @@
       <td>-15.3</td>
       <td>19.6</td>
       <td>8.8</td>
-      <td>19.6</td>
       <td>96.5</td>
       <td>83.1</td>
-      <td>84.8</td>
+      <td>84.0</td>
+      <td>81.0</td>
     </tr>
     <tr>
       <th>11</th>
       <td>8</td>
       <td>12</td>
       <td>16.50</td>
-      <td>15.27</td>
+      <td>7.50</td>
       <td>11.10</td>
       <td>11</td>
       <td>124.7</td>
@@ -2981,17 +2971,17 @@
       <td>27.7</td>
       <td>15.4</td>
       <td>9.2</td>
-      <td>15.4</td>
       <td>102.4</td>
       <td>84.4</td>
-      <td>91.7</td>
+      <td>89.0</td>
+      <td>79.0</td>
     </tr>
     <tr>
       <th>12</th>
       <td>8</td>
       <td>13</td>
       <td>7.80</td>
-      <td>8.12</td>
+      <td>11.90</td>
       <td>7.07</td>
       <td>6</td>
       <td>16.4</td>
@@ -3003,21 +2993,19 @@
       <td>-30.0</td>
       <td>-8.1</td>
       <td>-18.2</td>
-      <td>-16.8</td>
       <td>78.7</td>
       <td>69.0</td>
-      <td>64.4</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
   </tbody>
 </table><br><br>
             <div class="race-info">
                 <head><span class="large-font">
                 阪神10R 15:01発走 ダート1200m 2勝クラス </span><br>
-                波乱度 : 64.9<br>
-                ver 27.0 (穴馬モデル)<br>
+                CAT-I (波乱度 : 55.3)<br>
                 ☆I:9(5人気) ☆II:15(14人気)<br>
-                ver 25.3<br>
-                ◎:16(1人気) 〇:14(3人気)  ▲:1(4人気)  △I:11(9人気)  △II:10(7人気)<br>
+                ◎:16(1人気) 〇:14(3人気)  ▲:9(5人気)  △I:11(9人気)  △II:1(4人気)<br>
                 </head>
             </div>
             <table border="1" class="dataframe my-table">
@@ -3027,7 +3015,7 @@
       <th>枠 番</th>
       <th>馬番</th>
       <th>v21.1</th>
-      <th>v25.3</th>
+      <th>v11.5</th>
       <th>v27.0</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
@@ -3039,10 +3027,10 @@
       <th>ラスト3F</th>
       <th>上り指MAX</th>
       <th>上り指AVG</th>
-      <th>上り指1R</th>
       <th>スピ指MAX</th>
       <th>スピ指AVG</th>
-      <th>スピ指1R</th>
+      <th>最 高</th>
+      <th>平均</th>
     </tr>
   </thead>
   <tbody>
@@ -3051,7 +3039,7 @@
       <td>1</td>
       <td>1</td>
       <td>39.21</td>
-      <td>40.79</td>
+      <td>21.93</td>
       <td>5.08</td>
       <td>4</td>
       <td>9.7</td>
@@ -3063,17 +3051,17 @@
       <td>11.9</td>
       <td>11.4</td>
       <td>-4.9</td>
-      <td>11.4</td>
       <td>109.4</td>
       <td>89.7</td>
-      <td>109.4</td>
+      <td>102</td>
+      <td>90</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
       <td>2</td>
       <td>17.34</td>
-      <td>18.87</td>
+      <td>13.43</td>
       <td>5.31</td>
       <td>13</td>
       <td>90.7</td>
@@ -3085,17 +3073,17 @@
       <td>20.0</td>
       <td>11.4</td>
       <td>-5.4</td>
-      <td>-10.2</td>
       <td>91.7</td>
       <td>84.6</td>
-      <td>84.7</td>
+      <td>95</td>
+      <td>89</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2</td>
       <td>3</td>
       <td>9.08</td>
-      <td>10.09</td>
+      <td>6.08</td>
       <td>8.18</td>
       <td>16</td>
       <td>207.0</td>
@@ -3107,17 +3095,17 @@
       <td>48.4</td>
       <td>-1.4</td>
       <td>-8.9</td>
-      <td>-17.9</td>
       <td>92.6</td>
       <td>77.7</td>
-      <td>76.1</td>
+      <td>93</td>
+      <td>87</td>
     </tr>
     <tr>
       <th>3</th>
       <td>2</td>
       <td>4</td>
       <td>33.18</td>
-      <td>28.06</td>
+      <td>12.92</td>
       <td>5.40</td>
       <td>2</td>
       <td>3.3</td>
@@ -3129,18 +3117,18 @@
       <td>2.4</td>
       <td>8.4</td>
       <td>-7.0</td>
-      <td>-0.8</td>
       <td>88.2</td>
       <td>83.4</td>
-      <td>80.0</td>
+      <td>90</td>
+      <td>85</td>
     </tr>
     <tr>
       <th>4</th>
       <td>3</td>
       <td>5</td>
-      <td>11.83</td>
-      <td>10.23</td>
-      <td>5.58</td>
+      <td>9.77</td>
+      <td>7.50</td>
+      <td>10.77</td>
       <td>15</td>
       <td>109.1</td>
       <td>ミロワール</td>
@@ -3148,20 +3136,20 @@
       <td>56.0</td>
       <td>高杉吏麒</td>
       <td>逃</td>
-      <td>28.3</td>
+      <td>21.5</td>
       <td>-2.6</td>
       <td>-6.8</td>
-      <td>-10.2</td>
       <td>83.4</td>
       <td>79.7</td>
-      <td>83.4</td>
+      <td>94</td>
+      <td>89</td>
     </tr>
     <tr>
       <th>5</th>
       <td>3</td>
       <td>6</td>
       <td>18.77</td>
-      <td>14.53</td>
+      <td>11.49</td>
       <td>5.77</td>
       <td>11</td>
       <td>72.8</td>
@@ -3173,17 +3161,17 @@
       <td>54.5</td>
       <td>11.6</td>
       <td>0.4</td>
-      <td>3.9</td>
       <td>90.6</td>
       <td>82.8</td>
-      <td>87.0</td>
+      <td>92</td>
+      <td>85</td>
     </tr>
     <tr>
       <th>6</th>
       <td>4</td>
       <td>7</td>
       <td>6.27</td>
-      <td>6.74</td>
+      <td>6.32</td>
       <td>6.44</td>
       <td>12</td>
       <td>72.8</td>
@@ -3195,17 +3183,17 @@
       <td>-6.8</td>
       <td>-11.0</td>
       <td>-23.6</td>
-      <td>-11.0</td>
       <td>89.6</td>
       <td>69.8</td>
-      <td>63.9</td>
+      <td>90</td>
+      <td>77</td>
     </tr>
     <tr>
       <th>7</th>
       <td>4</td>
       <td>8</td>
       <td>4.52</td>
-      <td>6.11</td>
+      <td>5.82</td>
       <td>7.08</td>
       <td>10</td>
       <td>61.0</td>
@@ -3217,17 +3205,17 @@
       <td>21.7</td>
       <td>-9.4</td>
       <td>-18.0</td>
-      <td>-9.4</td>
       <td>84.8</td>
       <td>74.1</td>
-      <td>77.8</td>
+      <td>77</td>
+      <td>80</td>
     </tr>
     <tr>
       <th>8</th>
       <td>5</td>
       <td>9</td>
       <td>19.62</td>
-      <td>25.67</td>
+      <td>28.84</td>
       <td>12.00</td>
       <td>5</td>
       <td>13.6</td>
@@ -3239,17 +3227,17 @@
       <td>-6.2</td>
       <td>-0.7</td>
       <td>-16.2</td>
-      <td>-0.7</td>
       <td>94.0</td>
       <td>83.7</td>
-      <td>94.0</td>
+      <td>93</td>
+      <td>87</td>
     </tr>
     <tr>
       <th>9</th>
       <td>5</td>
       <td>10</td>
       <td>37.80</td>
-      <td>29.13</td>
+      <td>13.92</td>
       <td>4.18</td>
       <td>7</td>
       <td>22.6</td>
@@ -3261,17 +3249,17 @@
       <td>13.1</td>
       <td>5.0</td>
       <td>-11.7</td>
-      <td>1.0</td>
       <td>101.2</td>
       <td>78.8</td>
-      <td>90.8</td>
+      <td>99</td>
+      <td>82</td>
     </tr>
     <tr>
       <th>10</th>
       <td>6</td>
       <td>11</td>
       <td>31.78</td>
-      <td>39.01</td>
+      <td>26.36</td>
       <td>10.67</td>
       <td>9</td>
       <td>43.2</td>
@@ -3283,17 +3271,17 @@
       <td>-5.1</td>
       <td>9.4</td>
       <td>-8.0</td>
-      <td>9.4</td>
       <td>100.6</td>
       <td>91.4</td>
-      <td>97.0</td>
+      <td>98</td>
+      <td>91</td>
     </tr>
     <tr>
       <th>11</th>
       <td>6</td>
       <td>12</td>
       <td>36.57</td>
-      <td>23.47</td>
+      <td>16.65</td>
       <td>6.87</td>
       <td>8</td>
       <td>26.0</td>
@@ -3305,17 +3293,17 @@
       <td>-11.5</td>
       <td>2.3</td>
       <td>-8.0</td>
-      <td>-2.6</td>
       <td>98.5</td>
       <td>90.8</td>
-      <td>98.5</td>
+      <td>93</td>
+      <td>90</td>
     </tr>
     <tr>
       <th>12</th>
       <td>7</td>
       <td>13</td>
       <td>4.98</td>
-      <td>6.21</td>
+      <td>13.75</td>
       <td>6.36</td>
       <td>6</td>
       <td>15.3</td>
@@ -3327,17 +3315,17 @@
       <td>-18.1</td>
       <td>1.8</td>
       <td>-25.1</td>
-      <td>-25.1</td>
       <td>98.5</td>
       <td>77.1</td>
-      <td>94.4</td>
+      <td>2</td>
+      <td>69</td>
     </tr>
     <tr>
       <th>13</th>
       <td>7</td>
       <td>14</td>
       <td>50.76</td>
-      <td>52.54</td>
+      <td>56.85</td>
       <td>2.53</td>
       <td>3</td>
       <td>4.5</td>
@@ -3349,17 +3337,17 @@
       <td>-21.9</td>
       <td>10.8</td>
       <td>2.5</td>
-      <td>-1.0</td>
       <td>108.0</td>
       <td>98.7</td>
-      <td>108.0</td>
+      <td>100</td>
+      <td>96</td>
     </tr>
     <tr>
       <th>14</th>
       <td>8</td>
       <td>15</td>
       <td>7.93</td>
-      <td>8.52</td>
+      <td>7.92</td>
       <td>11.34</td>
       <td>14</td>
       <td>104.4</td>
@@ -3371,17 +3359,17 @@
       <td>-31.8</td>
       <td>-4.7</td>
       <td>-22.0</td>
-      <td>-13.8</td>
       <td>88.3</td>
       <td>77.8</td>
-      <td>88.3</td>
+      <td>84</td>
+      <td>76</td>
     </tr>
     <tr>
       <th>15</th>
       <td>8</td>
       <td>16</td>
       <td>59.67</td>
-      <td>62.21</td>
+      <td>64.03</td>
       <td>1.61</td>
       <td>1</td>
       <td>3.2</td>
@@ -3393,21 +3381,19 @@
       <td>-33.0</td>
       <td>10.7</td>
       <td>4.2</td>
-      <td>10.7</td>
       <td>118.9</td>
       <td>101.1</td>
-      <td>118.9</td>
+      <td>106</td>
+      <td>97</td>
     </tr>
   </tbody>
 </table><br><br>
             <div class="race-info">
                 <head><span class="large-font">
                 阪神11R 15:35発走 ダート1800m オープン  ハンデ </span><br>
-                波乱度 : 45.8<br>
-                ver 27.0 (穴馬モデル)<br>
+                CAT-II (波乱度 : 77.5)<br>
                 ☆I:1(8人気) ☆II:2(7人気)<br>
-                ver 25.3<br>
-                ◎:7(2人気) 〇:12(1人気)  ▲:13(3人気)  △I:2(7人気)  △II:3(5人気)<br>
+                ◎:7(2人気) 〇:6(4人気)  ▲:10(9人気)  △I:13(3人気)  △II:3(5人気)<br>
                 </head>
             </div>
             <table border="1" class="dataframe my-table">
@@ -3417,7 +3403,7 @@
       <th>枠 番</th>
       <th>馬番</th>
       <th>v21.1</th>
-      <th>v25.3</th>
+      <th>v11.5</th>
       <th>v27.0</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
@@ -3429,10 +3415,10 @@
       <th>ラスト3F</th>
       <th>上り指MAX</th>
       <th>上り指AVG</th>
-      <th>上り指1R</th>
       <th>スピ指MAX</th>
       <th>スピ指AVG</th>
-      <th>スピ指1R</th>
+      <th>最 高</th>
+      <th>平均</th>
     </tr>
   </thead>
   <tbody>
@@ -3441,7 +3427,7 @@
       <td>1</td>
       <td>1</td>
       <td>8.97</td>
-      <td>10.47</td>
+      <td>14.17</td>
       <td>12.54</td>
       <td>8</td>
       <td>78.2</td>
@@ -3453,17 +3439,17 @@
       <td>40.3</td>
       <td>5.6</td>
       <td>0.2</td>
-      <td>-6.0</td>
       <td>112.2</td>
       <td>97.1</td>
-      <td>92.8</td>
+      <td>111.0</td>
+      <td>103.0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
       <td>2</td>
       <td>23.90</td>
-      <td>25.75</td>
+      <td>17.01</td>
       <td>12.41</td>
       <td>7</td>
       <td>52.3</td>
@@ -3475,17 +3461,17 @@
       <td>-8.0</td>
       <td>7.6</td>
       <td>-0.4</td>
-      <td>6.2</td>
       <td>105.5</td>
       <td>94.9</td>
-      <td>105.5</td>
+      <td>109.0</td>
+      <td>102.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
       <td>3</td>
       <td>17.53</td>
-      <td>22.89</td>
+      <td>22.68</td>
       <td>9.26</td>
       <td>5</td>
       <td>12.1</td>
@@ -3497,17 +3483,17 @@
       <td>-6.1</td>
       <td>7.0</td>
       <td>-3.1</td>
-      <td>7.0</td>
       <td>106.8</td>
       <td>90.4</td>
-      <td>106.3</td>
+      <td>104.0</td>
+      <td>100.0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
       <td>4</td>
       <td>12.39</td>
-      <td>7.03</td>
+      <td>7.62</td>
       <td>7.14</td>
       <td>10</td>
       <td>108.4</td>
@@ -3519,10 +3505,10 @@
       <td>10.1</td>
       <td>13.2</td>
       <td>3.8</td>
-      <td>-14.5</td>
       <td>108.7</td>
       <td>98.7</td>
-      <td>77.6</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>4</th>
@@ -3551,7 +3537,7 @@
       <td>5</td>
       <td>6</td>
       <td>22.58</td>
-      <td>21.07</td>
+      <td>30.28</td>
       <td>4.66</td>
       <td>4</td>
       <td>6.8</td>
@@ -3563,17 +3549,17 @@
       <td>-44.0</td>
       <td>7.7</td>
       <td>1.8</td>
-      <td>7.7</td>
       <td>113.0</td>
       <td>94.2</td>
-      <td>94.5</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>6</th>
       <td>5</td>
       <td>7</td>
       <td>53.90</td>
-      <td>54.94</td>
+      <td>54.27</td>
       <td>4.54</td>
       <td>2</td>
       <td>5.0</td>
@@ -3585,17 +3571,17 @@
       <td>-64.9</td>
       <td>6.5</td>
       <td>-0.6</td>
-      <td>-10.8</td>
       <td>113.8</td>
       <td>105.8</td>
-      <td>100.2</td>
+      <td>114.0</td>
+      <td>111.0</td>
     </tr>
     <tr>
       <th>7</th>
       <td>6</td>
       <td>8</td>
       <td>4.74</td>
-      <td>5.10</td>
+      <td>4.64</td>
       <td>5.80</td>
       <td>11</td>
       <td>163.1</td>
@@ -3607,17 +3593,17 @@
       <td>64.8</td>
       <td>8.9</td>
       <td>2.5</td>
-      <td>-4.7</td>
       <td>88.2</td>
       <td>78.6</td>
-      <td>78.7</td>
+      <td>108.0</td>
+      <td>97.0</td>
     </tr>
     <tr>
       <th>8</th>
       <td>6</td>
       <td>9</td>
       <td>8.59</td>
-      <td>10.28</td>
+      <td>12.66</td>
       <td>5.81</td>
       <td>12</td>
       <td>184.4</td>
@@ -3629,17 +3615,17 @@
       <td>60.0</td>
       <td>8.5</td>
       <td>3.0</td>
-      <td>-4.1</td>
       <td>104.2</td>
       <td>92.3</td>
-      <td>83.0</td>
+      <td>105.0</td>
+      <td>102.0</td>
     </tr>
     <tr>
       <th>9</th>
       <td>7</td>
       <td>10</td>
       <td>16.18</td>
-      <td>13.39</td>
+      <td>24.73</td>
       <td>5.90</td>
       <td>9</td>
       <td>81.6</td>
@@ -3651,17 +3637,17 @@
       <td>-50.6</td>
       <td>-3.2</td>
       <td>-18.0</td>
-      <td>-3.3</td>
       <td>113.4</td>
       <td>78.7</td>
-      <td>113.4</td>
+      <td>101.0</td>
+      <td>86.0</td>
     </tr>
     <tr>
       <th>10</th>
       <td>7</td>
       <td>11</td>
       <td>7.46</td>
-      <td>9.45</td>
+      <td>8.66</td>
       <td>5.03</td>
       <td>6</td>
       <td>17.4</td>
@@ -3673,17 +3659,17 @@
       <td>52.6</td>
       <td>12.3</td>
       <td>4.5</td>
-      <td>0.9</td>
       <td>100.9</td>
       <td>93.0</td>
-      <td>100.9</td>
+      <td>107.0</td>
+      <td>99.0</td>
     </tr>
     <tr>
       <th>11</th>
       <td>8</td>
       <td>12</td>
       <td>42.63</td>
-      <td>47.27</td>
+      <td>18.96</td>
       <td>6.76</td>
       <td>1</td>
       <td>1.8</td>
@@ -3695,17 +3681,17 @@
       <td>-29.5</td>
       <td>11.0</td>
       <td>8.3</td>
-      <td>6.5</td>
       <td>100.6</td>
       <td>91.5</td>
-      <td>86.2</td>
+      <td>104.0</td>
+      <td>98.0</td>
     </tr>
     <tr>
       <th>12</th>
       <td>8</td>
       <td>13</td>
       <td>38.28</td>
-      <td>27.11</td>
+      <td>24.47</td>
       <td>6.94</td>
       <td>3</td>
       <td>6.5</td>
@@ -3717,21 +3703,19 @@
       <td>7.4</td>
       <td>22.9</td>
       <td>5.5</td>
-      <td>9.6</td>
       <td>109.7</td>
       <td>102.0</td>
-      <td>101.7</td>
+      <td>104.0</td>
+      <td>104.0</td>
     </tr>
   </tbody>
 </table><br><br>
             <div class="race-info">
                 <head><span class="large-font">
                 阪神12R 16:15発走 芝1200m 1勝クラス </span><br>
-                波乱度 : 68.8<br>
-                ver 27.0 (穴馬モデル)<br>
+                CAT-IV (波乱度 : 95.7)<br>
                 ☆I:1(7人気) ☆II:3(5人気)<br>
-                ver 25.3<br>
-                ◎:8(1人気) 〇:16(4人気)  ▲:5(9人気)  △I:13(10人気)  △II:11(2人気)<br>
+                ◎:16(4人気) 〇:8(1人気)  ▲:13(10人気)  △I:5(9人気)  △II:3(5人気)<br>
                 </head>
             </div>
             <table border="1" class="dataframe my-table">
@@ -3741,7 +3725,7 @@
       <th>枠 番</th>
       <th>馬番</th>
       <th>v21.1</th>
-      <th>v25.3</th>
+      <th>v11.5</th>
       <th>v27.0</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
@@ -3753,10 +3737,10 @@
       <th>ラスト3F</th>
       <th>上り指MAX</th>
       <th>上り指AVG</th>
-      <th>上り指1R</th>
       <th>スピ指MAX</th>
       <th>スピ指AVG</th>
-      <th>スピ指1R</th>
+      <th>最 高</th>
+      <th>平均</th>
     </tr>
   </thead>
   <tbody>
@@ -3765,7 +3749,7 @@
       <td>1</td>
       <td>1</td>
       <td>14.16</td>
-      <td>18.36</td>
+      <td>17.54</td>
       <td>10.40</td>
       <td>7</td>
       <td>15.0</td>
@@ -3777,17 +3761,17 @@
       <td>44.3</td>
       <td>16.4</td>
       <td>-5.7</td>
-      <td>15.9</td>
       <td>104.0</td>
       <td>79.9</td>
       <td>92.0</td>
+      <td>72.0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
       <td>2</td>
       <td>11.92</td>
-      <td>9.45</td>
+      <td>8.65</td>
       <td>8.32</td>
       <td>14</td>
       <td>89.0</td>
@@ -3799,17 +3783,17 @@
       <td>-42.0</td>
       <td>10.6</td>
       <td>-24.4</td>
-      <td>-39.3</td>
       <td>80.6</td>
       <td>64.1</td>
-      <td>41.4</td>
+      <td>90.0</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2</td>
       <td>3</td>
       <td>22.01</td>
-      <td>23.11</td>
+      <td>20.20</td>
       <td>8.82</td>
       <td>5</td>
       <td>9.9</td>
@@ -3821,17 +3805,17 @@
       <td>36.1</td>
       <td>9.0</td>
       <td>-2.6</td>
-      <td>-11.9</td>
       <td>97.5</td>
       <td>74.9</td>
-      <td>52.0</td>
+      <td>92.0</td>
+      <td>82.0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>2</td>
       <td>4</td>
       <td>16.15</td>
-      <td>17.05</td>
+      <td>15.50</td>
       <td>8.64</td>
       <td>3</td>
       <td>6.6</td>
@@ -3843,17 +3827,17 @@
       <td>-29.0</td>
       <td>1.4</td>
       <td>-22.7</td>
-      <td>1.4</td>
       <td>74.5</td>
       <td>59.4</td>
-      <td>74.5</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>4</th>
       <td>3</td>
       <td>5</td>
       <td>36.68</td>
-      <td>29.84</td>
+      <td>23.95</td>
       <td>4.47</td>
       <td>9</td>
       <td>17.3</td>
@@ -3865,17 +3849,17 @@
       <td>1.3</td>
       <td>23.2</td>
       <td>-10.7</td>
-      <td>23.2</td>
       <td>87.3</td>
       <td>73.8</td>
-      <td>87.3</td>
+      <td>NaN</td>
+      <td>82.0</td>
     </tr>
     <tr>
       <th>5</th>
       <td>3</td>
       <td>6</td>
       <td>9.55</td>
-      <td>10.16</td>
+      <td>15.14</td>
       <td>8.15</td>
       <td>8</td>
       <td>15.5</td>
@@ -3887,17 +3871,17 @@
       <td>16.6</td>
       <td>-7.2</td>
       <td>-12.6</td>
-      <td>-22.6</td>
       <td>76.1</td>
       <td>64.3</td>
-      <td>76.1</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>6</th>
       <td>4</td>
       <td>7</td>
       <td>4.37</td>
-      <td>5.60</td>
+      <td>7.51</td>
       <td>4.06</td>
       <td>16</td>
       <td>197.3</td>
@@ -3909,17 +3893,17 @@
       <td>19.9</td>
       <td>-0.6</td>
       <td>-25.0</td>
-      <td>-28.0</td>
       <td>63.7</td>
       <td>53.7</td>
-      <td>57.8</td>
+      <td>66.0</td>
+      <td>66.0</td>
     </tr>
     <tr>
       <th>7</th>
       <td>4</td>
       <td>8</td>
       <td>42.81</td>
-      <td>46.05</td>
+      <td>34.63</td>
       <td>4.87</td>
       <td>1</td>
       <td>3.2</td>
@@ -3931,17 +3915,17 @@
       <td>-16.5</td>
       <td>11.8</td>
       <td>-4.4</td>
-      <td>8.0</td>
       <td>98.4</td>
       <td>76.8</td>
-      <td>72.7</td>
+      <td>86.0</td>
+      <td>81.0</td>
     </tr>
     <tr>
       <th>8</th>
       <td>5</td>
       <td>9</td>
       <td>7.88</td>
-      <td>10.97</td>
+      <td>8.26</td>
       <td>8.12</td>
       <td>11</td>
       <td>41.9</td>
@@ -3953,17 +3937,17 @@
       <td>23.4</td>
       <td>28.6</td>
       <td>11.6</td>
-      <td>-0.0</td>
       <td>90.2</td>
       <td>74.8</td>
-      <td>70.4</td>
+      <td>79.0</td>
+      <td>68.0</td>
     </tr>
     <tr>
       <th>9</th>
       <td>5</td>
       <td>10</td>
       <td>17.17</td>
-      <td>9.84</td>
+      <td>14.48</td>
       <td>5.81</td>
       <td>6</td>
       <td>13.4</td>
@@ -3975,17 +3959,17 @@
       <td>-17.6</td>
       <td>4.0</td>
       <td>-8.0</td>
-      <td>4.0</td>
       <td>82.0</td>
       <td>64.2</td>
-      <td>82.0</td>
+      <td>73.0</td>
+      <td>72.0</td>
     </tr>
     <tr>
       <th>10</th>
       <td>6</td>
       <td>11</td>
       <td>21.13</td>
-      <td>23.98</td>
+      <td>19.99</td>
       <td>8.13</td>
       <td>2</td>
       <td>5.0</td>
@@ -3997,17 +3981,17 @@
       <td>12.5</td>
       <td>20.8</td>
       <td>3.2</td>
-      <td>-19.1</td>
       <td>95.9</td>
       <td>76.6</td>
-      <td>60.7</td>
+      <td>80.0</td>
+      <td>73.0</td>
     </tr>
     <tr>
       <th>11</th>
       <td>6</td>
       <td>12</td>
       <td>14.87</td>
-      <td>11.23</td>
+      <td>12.91</td>
       <td>6.72</td>
       <td>13</td>
       <td>88.6</td>
@@ -4019,17 +4003,17 @@
       <td>22.1</td>
       <td>6.2</td>
       <td>-12.0</td>
-      <td>-24.8</td>
       <td>85.5</td>
       <td>71.8</td>
-      <td>70.4</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>12</th>
       <td>7</td>
       <td>13</td>
       <td>30.25</td>
-      <td>26.76</td>
+      <td>33.65</td>
       <td>3.28</td>
       <td>10</td>
       <td>40.9</td>
@@ -4041,17 +4025,17 @@
       <td>0.1</td>
       <td>0.6</td>
       <td>-8.7</td>
-      <td>-0.1</td>
       <td>95.0</td>
       <td>70.2</td>
-      <td>90.2</td>
+      <td>94.0</td>
+      <td>82.0</td>
     </tr>
     <tr>
       <th>13</th>
       <td>7</td>
       <td>14</td>
       <td>14.44</td>
-      <td>10.58</td>
+      <td>8.90</td>
       <td>7.21</td>
       <td>15</td>
       <td>157.4</td>
@@ -4063,17 +4047,17 @@
       <td>18.9</td>
       <td>17.3</td>
       <td>-11.4</td>
-      <td>17.3</td>
       <td>81.4</td>
       <td>66.4</td>
-      <td>80.8</td>
+      <td>79.0</td>
+      <td>72.0</td>
     </tr>
     <tr>
       <th>14</th>
       <td>8</td>
       <td>15</td>
       <td>7.95</td>
-      <td>5.02</td>
+      <td>7.62</td>
       <td>5.99</td>
       <td>12</td>
       <td>54.5</td>
@@ -4085,17 +4069,17 @@
       <td>35.1</td>
       <td>-4.4</td>
       <td>-20.0</td>
-      <td>-41.0</td>
       <td>93.9</td>
       <td>74.7</td>
-      <td>60.6</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>15</th>
       <td>8</td>
       <td>16</td>
       <td>31.98</td>
-      <td>40.09</td>
+      <td>35.60</td>
       <td>7.44</td>
       <td>4</td>
       <td>7.7</td>
@@ -4107,21 +4091,19 @@
       <td>1.9</td>
       <td>7.3</td>
       <td>2.1</td>
-      <td>1.4</td>
       <td>95.7</td>
       <td>91.3</td>
-      <td>88.6</td>
+      <td>84.0</td>
+      <td>82.0</td>
     </tr>
   </tbody>
 </table><br><br>
             <div class="race-info">
                 <head><span class="large-font">
                 函館07R 13:15発走 芝1200m 1勝クラス </span><br>
-                波乱度 : 80.4<br>
-                ver 27.0 (穴馬モデル)<br>
+                CAT-III (波乱度 : 89.9)<br>
                 ☆I:2(9人気) ☆II:7(10人気)<br>
-                ver 25.3<br>
-                ◎:12(3人気) 〇:8(1人気)  ▲:14(4人気)  △I:1(7人気)  △II:6(2人気)<br>
+                ◎:12(3人気) 〇:14(4人気)  ▲:6(2人気)  △I:1(7人気)  △II:13(5人気)<br>
                 </head>
             </div>
             <table border="1" class="dataframe my-table">
@@ -4131,7 +4113,7 @@
       <th>枠 番</th>
       <th>馬番</th>
       <th>v21.1</th>
-      <th>v25.3</th>
+      <th>v11.5</th>
       <th>v27.0</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
@@ -4143,10 +4125,10 @@
       <th>ラスト3F</th>
       <th>上り指MAX</th>
       <th>上り指AVG</th>
-      <th>上り指1R</th>
       <th>スピ指MAX</th>
       <th>スピ指AVG</th>
-      <th>スピ指1R</th>
+      <th>最 高</th>
+      <th>平均</th>
     </tr>
   </thead>
   <tbody>
@@ -4155,7 +4137,7 @@
       <td>1</td>
       <td>1</td>
       <td>40.33</td>
-      <td>33.98</td>
+      <td>32.91</td>
       <td>3.66</td>
       <td>7</td>
       <td>18.7</td>
@@ -4167,17 +4149,17 @@
       <td>17.3</td>
       <td>15.3</td>
       <td>1.1</td>
-      <td>15.3</td>
       <td>94.8</td>
       <td>79.5</td>
-      <td>94.8</td>
+      <td>93</td>
+      <td>85</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
       <td>2</td>
       <td>20.96</td>
-      <td>19.09</td>
+      <td>19.53</td>
       <td>18.04</td>
       <td>9</td>
       <td>24.0</td>
@@ -4189,17 +4171,17 @@
       <td>15.9</td>
       <td>12.1</td>
       <td>1.8</td>
-      <td>-6.9</td>
       <td>86.3</td>
       <td>75.5</td>
-      <td>55.1</td>
+      <td>87</td>
+      <td>81</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
       <td>3</td>
       <td>20.55</td>
-      <td>17.76</td>
+      <td>16.66</td>
       <td>13.11</td>
       <td>11</td>
       <td>36.5</td>
@@ -4211,17 +4193,17 @@
       <td>-3.4</td>
       <td>11.4</td>
       <td>-9.1</td>
-      <td>-21.2</td>
       <td>85.8</td>
       <td>69.9</td>
-      <td>55.5</td>
+      <td>93</td>
+      <td>76</td>
     </tr>
     <tr>
       <th>3</th>
       <td>3</td>
       <td>4</td>
       <td>7.69</td>
-      <td>6.80</td>
+      <td>8.56</td>
       <td>10.15</td>
       <td>14</td>
       <td>153.0</td>
@@ -4233,17 +4215,17 @@
       <td>23.2</td>
       <td>11.0</td>
       <td>-9.3</td>
-      <td>8.4</td>
       <td>92.9</td>
       <td>74.9</td>
-      <td>90.2</td>
+      <td>78</td>
+      <td>77</td>
     </tr>
     <tr>
       <th>4</th>
       <td>4</td>
       <td>5</td>
       <td>8.19</td>
-      <td>6.79</td>
+      <td>8.74</td>
       <td>6.14</td>
       <td>13</td>
       <td>128.0</td>
@@ -4255,17 +4237,17 @@
       <td>46.7</td>
       <td>11.8</td>
       <td>-13.7</td>
-      <td>11.8</td>
       <td>96.0</td>
       <td>67.3</td>
-      <td>96.0</td>
+      <td>87</td>
+      <td>77</td>
     </tr>
     <tr>
       <th>5</th>
       <td>4</td>
       <td>6</td>
       <td>35.14</td>
-      <td>28.30</td>
+      <td>35.42</td>
       <td>5.92</td>
       <td>2</td>
       <td>3.8</td>
@@ -4277,17 +4259,17 @@
       <td>-2.7</td>
       <td>5.1</td>
       <td>-19.3</td>
-      <td>2.9</td>
       <td>100.0</td>
       <td>65.9</td>
-      <td>100.0</td>
+      <td>88</td>
+      <td>74</td>
     </tr>
     <tr>
       <th>6</th>
       <td>5</td>
       <td>7</td>
       <td>20.58</td>
-      <td>17.15</td>
+      <td>20.01</td>
       <td>14.45</td>
       <td>10</td>
       <td>31.8</td>
@@ -4299,17 +4281,17 @@
       <td>-6.0</td>
       <td>2.6</td>
       <td>-12.7</td>
-      <td>2.6</td>
       <td>83.2</td>
       <td>76.7</td>
-      <td>83.2</td>
+      <td>84</td>
+      <td>84</td>
     </tr>
     <tr>
       <th>7</th>
       <td>5</td>
       <td>8</td>
       <td>42.25</td>
-      <td>43.48</td>
+      <td>17.54</td>
       <td>3.21</td>
       <td>1</td>
       <td>3.4</td>
@@ -4321,17 +4303,17 @@
       <td>48.9</td>
       <td>24.4</td>
       <td>15.9</td>
-      <td>15.2</td>
       <td>94.5</td>
       <td>81.5</td>
-      <td>94.5</td>
+      <td>91</td>
+      <td>82</td>
     </tr>
     <tr>
       <th>8</th>
       <td>6</td>
       <td>9</td>
       <td>16.12</td>
-      <td>7.54</td>
+      <td>9.29</td>
       <td>4.83</td>
       <td>6</td>
       <td>11.6</td>
@@ -4343,17 +4325,17 @@
       <td>-14.6</td>
       <td>4.5</td>
       <td>-17.9</td>
-      <td>-35.0</td>
       <td>81.2</td>
       <td>68.3</td>
-      <td>54.9</td>
+      <td>75</td>
+      <td>70</td>
     </tr>
     <tr>
       <th>9</th>
       <td>6</td>
       <td>10</td>
       <td>18.85</td>
-      <td>13.08</td>
+      <td>17.71</td>
       <td>6.06</td>
       <td>8</td>
       <td>22.5</td>
@@ -4365,17 +4347,17 @@
       <td>10.0</td>
       <td>-11.1</td>
       <td>-18.5</td>
-      <td>-13.8</td>
       <td>63.6</td>
       <td>56.8</td>
-      <td>42.6</td>
+      <td>96</td>
+      <td>78</td>
     </tr>
     <tr>
       <th>10</th>
       <td>7</td>
       <td>11</td>
       <td>8.63</td>
-      <td>9.06</td>
+      <td>11.00</td>
       <td>9.89</td>
       <td>12</td>
       <td>74.9</td>
@@ -4387,17 +4369,17 @@
       <td>10.1</td>
       <td>16.0</td>
       <td>-11.5</td>
-      <td>-10.6</td>
       <td>65.2</td>
       <td>57.1</td>
-      <td>65.2</td>
+      <td>81</td>
+      <td>71</td>
     </tr>
     <tr>
       <th>11</th>
       <td>7</td>
       <td>12</td>
       <td>43.71</td>
-      <td>51.22</td>
+      <td>46.70</td>
       <td>3.02</td>
       <td>3</td>
       <td>6.2</td>
@@ -4409,17 +4391,17 @@
       <td>-10.1</td>
       <td>15.9</td>
       <td>-1.2</td>
-      <td>11.8</td>
       <td>102.6</td>
       <td>82.7</td>
-      <td>97.0</td>
+      <td>94</td>
+      <td>86</td>
     </tr>
     <tr>
       <th>12</th>
       <td>8</td>
       <td>13</td>
       <td>36.99</td>
-      <td>26.09</td>
+      <td>26.86</td>
       <td>4.85</td>
       <td>5</td>
       <td>10.0</td>
@@ -4431,17 +4413,17 @@
       <td>-23.5</td>
       <td>-3.2</td>
       <td>-14.8</td>
-      <td>-3.2</td>
       <td>80.8</td>
       <td>64.9</td>
-      <td>80.8</td>
+      <td>88</td>
+      <td>85</td>
     </tr>
     <tr>
       <th>13</th>
       <td>8</td>
       <td>14</td>
       <td>36.07</td>
-      <td>35.91</td>
+      <td>44.47</td>
       <td>4.34</td>
       <td>4</td>
       <td>7.3</td>
@@ -4453,21 +4435,19 @@
       <td>-41.8</td>
       <td>2.4</td>
       <td>-8.1</td>
-      <td>-1.4</td>
       <td>90.9</td>
       <td>82.2</td>
-      <td>87.2</td>
+      <td>96</td>
+      <td>82</td>
     </tr>
   </tbody>
 </table><br><br>
             <div class="race-info">
                 <head><span class="large-font">
                 函館08R 13:45発走 ダート1000m 1勝クラス </span><br>
-                波乱度 : 54.9<br>
-                ver 27.0 (穴馬モデル)<br>
+                CAT-I (波乱度 : 44.8)<br>
                 ☆I:6(9人気) ☆II:8(6人気)<br>
-                ver 25.3<br>
-                ◎:5(1人気) 〇:11(2人気)  ▲:1(5人気)  △I:8(6人気)  △II:4(3人気)<br>
+                ◎:5(1人気) 〇:1(5人気)  ▲:11(2人気)  △I:8(6人気)  △II:2(7人気)<br>
                 </head>
             </div>
             <table border="1" class="dataframe my-table">
@@ -4477,7 +4457,7 @@
       <th>枠 番</th>
       <th>馬番</th>
       <th>v21.1</th>
-      <th>v25.3</th>
+      <th>v11.5</th>
       <th>v27.0</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
@@ -4489,10 +4469,10 @@
       <th>ラスト3F</th>
       <th>上り指MAX</th>
       <th>上り指AVG</th>
-      <th>上り指1R</th>
       <th>スピ指MAX</th>
       <th>スピ指AVG</th>
-      <th>スピ指1R</th>
+      <th>最 高</th>
+      <th>平均</th>
     </tr>
   </thead>
   <tbody>
@@ -4501,7 +4481,7 @@
       <td>1</td>
       <td>1</td>
       <td>36.98</td>
-      <td>42.82</td>
+      <td>44.13</td>
       <td>10.75</td>
       <td>5</td>
       <td>10.5</td>
@@ -4513,17 +4493,17 @@
       <td>-3.3</td>
       <td>11.9</td>
       <td>-10.6</td>
-      <td>-9.0</td>
       <td>105.5</td>
       <td>85.1</td>
-      <td>77.2</td>
+      <td>93</td>
+      <td>81</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
       <td>2</td>
       <td>28.35</td>
-      <td>18.76</td>
+      <td>21.16</td>
       <td>7.61</td>
       <td>7</td>
       <td>17.3</td>
@@ -4535,17 +4515,17 @@
       <td>-8.9</td>
       <td>-9.5</td>
       <td>-36.8</td>
-      <td>-28.6</td>
       <td>85.4</td>
       <td>57.7</td>
-      <td>85.4</td>
+      <td>82</td>
+      <td>58</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
       <td>3</td>
       <td>7.33</td>
-      <td>8.63</td>
+      <td>10.39</td>
       <td>12.32</td>
       <td>12</td>
       <td>176.5</td>
@@ -4557,17 +4537,17 @@
       <td>60.5</td>
       <td>7.2</td>
       <td>-7.3</td>
-      <td>7.2</td>
       <td>91.6</td>
       <td>79.8</td>
-      <td>79.6</td>
+      <td>85</td>
+      <td>73</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
       <td>4</td>
       <td>29.22</td>
-      <td>22.03</td>
+      <td>20.84</td>
       <td>12.71</td>
       <td>3</td>
       <td>7.3</td>
@@ -4579,17 +4559,17 @@
       <td>-32.0</td>
       <td>-13.1</td>
       <td>-21.5</td>
-      <td>-40.5</td>
       <td>80.0</td>
       <td>69.2</td>
-      <td>56.7</td>
+      <td>83</td>
+      <td>75</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
       <td>5</td>
       <td>55.56</td>
-      <td>60.64</td>
+      <td>59.75</td>
       <td>5.09</td>
       <td>1</td>
       <td>2.3</td>
@@ -4601,17 +4581,17 @@
       <td>-29.0</td>
       <td>-9.4</td>
       <td>-23.7</td>
-      <td>-34.7</td>
       <td>83.7</td>
       <td>78.0</td>
-      <td>80.0</td>
+      <td>93</td>
+      <td>83</td>
     </tr>
     <tr>
       <th>5</th>
       <td>5</td>
       <td>6</td>
       <td>11.76</td>
-      <td>12.56</td>
+      <td>14.20</td>
       <td>14.33</td>
       <td>9</td>
       <td>47.5</td>
@@ -4623,17 +4603,17 @@
       <td>5.3</td>
       <td>7.1</td>
       <td>-10.2</td>
-      <td>-10.9</td>
       <td>87.1</td>
       <td>74.4</td>
-      <td>60.7</td>
+      <td>88</td>
+      <td>77</td>
     </tr>
     <tr>
       <th>6</th>
       <td>6</td>
       <td>7</td>
       <td>11.48</td>
-      <td>10.28</td>
+      <td>8.16</td>
       <td>9.23</td>
       <td>10</td>
       <td>68.2</td>
@@ -4645,17 +4625,17 @@
       <td>10.2</td>
       <td>-22.8</td>
       <td>-22.8</td>
-      <td>-22.8</td>
       <td>76.6</td>
       <td>76.6</td>
-      <td>76.6</td>
+      <td>81</td>
+      <td>48</td>
     </tr>
     <tr>
       <th>7</th>
       <td>6</td>
       <td>8</td>
       <td>21.40</td>
-      <td>22.52</td>
+      <td>27.53</td>
       <td>14.23</td>
       <td>6</td>
       <td>14.9</td>
@@ -4667,17 +4647,17 @@
       <td>-10.3</td>
       <td>-4.8</td>
       <td>-14.4</td>
-      <td>-24.5</td>
       <td>92.8</td>
       <td>77.9</td>
-      <td>62.2</td>
+      <td>86</td>
+      <td>78</td>
     </tr>
     <tr>
       <th>8</th>
       <td>7</td>
       <td>9</td>
       <td>7.48</td>
-      <td>9.19</td>
+      <td>15.29</td>
       <td>13.31</td>
       <td>8</td>
       <td>38.2</td>
@@ -4689,17 +4669,17 @@
       <td>36.4</td>
       <td>-11.7</td>
       <td>-16.0</td>
-      <td>-19.1</td>
       <td>76.5</td>
       <td>70.8</td>
-      <td>76.5</td>
+      <td>93</td>
+      <td>74</td>
     </tr>
     <tr>
       <th>9</th>
       <td>7</td>
       <td>10</td>
       <td>12.61</td>
-      <td>5.58</td>
+      <td>7.27</td>
       <td>5.50</td>
       <td>11</td>
       <td>127.6</td>
@@ -4711,17 +4691,17 @@
       <td>11.7</td>
       <td>-12.6</td>
       <td>-26.4</td>
-      <td>-23.7</td>
       <td>73.6</td>
       <td>66.1</td>
-      <td>73.6</td>
+      <td>71</td>
+      <td>69</td>
     </tr>
     <tr>
       <th>10</th>
       <td>8</td>
       <td>11</td>
       <td>47.69</td>
-      <td>50.98</td>
+      <td>34.35</td>
       <td>5.69</td>
       <td>2</td>
       <td>3.4</td>
@@ -4733,17 +4713,17 @@
       <td>-43.2</td>
       <td>-7.0</td>
       <td>-21.1</td>
-      <td>-7.0</td>
       <td>84.5</td>
       <td>73.8</td>
-      <td>84.5</td>
+      <td>92</td>
+      <td>74</td>
     </tr>
     <tr>
       <th>11</th>
       <td>8</td>
       <td>12</td>
       <td>26.16</td>
-      <td>21.07</td>
+      <td>15.93</td>
       <td>4.91</td>
       <td>4</td>
       <td>9.2</td>
@@ -4755,21 +4735,19 @@
       <td>20.7</td>
       <td>21.8</td>
       <td>-10.6</td>
-      <td>-25.0</td>
       <td>95.7</td>
       <td>80.3</td>
-      <td>76.4</td>
+      <td>86</td>
+      <td>78</td>
     </tr>
   </tbody>
 </table><br><br>
             <div class="race-info">
                 <head><span class="large-font">
                 函館09R 14:15発走 芝2000m 1勝クラス </span><br>
-                波乱度 : 70.0<br>
-                ver 27.0 (穴馬モデル)<br>
+                CAT-IV (波乱度 : 95.5)<br>
                 ☆I:3(6人気) ☆II:8(3人気)<br>
-                ver 25.3<br>
-                ◎:8(3人気) 〇:1(2人気)  ▲:10(5人気)  △I:3(6人気)  △II:4(8人気)<br>
+                ◎:8(3人気) 〇:1(2人気)  ▲:3(6人気)  △I:4(8人気)  △II:10(5人気)<br>
                 </head>
             </div>
             <table border="1" class="dataframe my-table">
@@ -4779,7 +4757,7 @@
       <th>枠 番</th>
       <th>馬番</th>
       <th>v21.1</th>
-      <th>v25.3</th>
+      <th>v11.5</th>
       <th>v27.0</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
@@ -4791,10 +4769,10 @@
       <th>ラスト3F</th>
       <th>上り指MAX</th>
       <th>上り指AVG</th>
-      <th>上り指1R</th>
       <th>スピ指MAX</th>
       <th>スピ指AVG</th>
-      <th>スピ指1R</th>
+      <th>最 高</th>
+      <th>平均</th>
     </tr>
   </thead>
   <tbody>
@@ -4803,7 +4781,7 @@
       <td>1</td>
       <td>1</td>
       <td>39.41</td>
-      <td>35.99</td>
+      <td>32.77</td>
       <td>7.72</td>
       <td>2</td>
       <td>3.8</td>
@@ -4815,17 +4793,17 @@
       <td>-3.5</td>
       <td>18.0</td>
       <td>9.1</td>
-      <td>2.7</td>
       <td>105.7</td>
       <td>86.7</td>
-      <td>64.9</td>
+      <td>98.0</td>
+      <td>86.0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
       <td>2</td>
       <td>8.48</td>
-      <td>14.17</td>
+      <td>15.31</td>
       <td>8.48</td>
       <td>4</td>
       <td>5.8</td>
@@ -4837,17 +4815,17 @@
       <td>14.0</td>
       <td>13.3</td>
       <td>1.1</td>
-      <td>0.8</td>
       <td>95.4</td>
       <td>79.3</td>
-      <td>95.4</td>
+      <td>78.0</td>
+      <td>75.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
       <td>3</td>
       <td>25.77</td>
-      <td>30.85</td>
+      <td>30.82</td>
       <td>14.69</td>
       <td>6</td>
       <td>16.0</td>
@@ -4859,17 +4837,17 @@
       <td>-19.3</td>
       <td>14.7</td>
       <td>4.9</td>
-      <td>2.7</td>
       <td>103.1</td>
       <td>95.8</td>
-      <td>97.6</td>
+      <td>93.0</td>
+      <td>87.0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
       <td>4</td>
       <td>26.17</td>
-      <td>30.36</td>
+      <td>26.18</td>
       <td>8.82</td>
       <td>8</td>
       <td>34.0</td>
@@ -4881,17 +4859,17 @@
       <td>9.8</td>
       <td>10.2</td>
       <td>3.5</td>
-      <td>10.2</td>
       <td>101.6</td>
       <td>85.7</td>
-      <td>101.6</td>
+      <td>93.0</td>
+      <td>86.0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
       <td>5</td>
       <td>33.87</td>
-      <td>29.43</td>
+      <td>23.62</td>
       <td>5.26</td>
       <td>9</td>
       <td>40.0</td>
@@ -4903,17 +4881,17 @@
       <td>4.1</td>
       <td>21.6</td>
       <td>1.8</td>
-      <td>-15.8</td>
       <td>92.5</td>
       <td>80.6</td>
-      <td>72.1</td>
+      <td>90.0</td>
+      <td>86.0</td>
     </tr>
     <tr>
       <th>5</th>
       <td>5</td>
       <td>6</td>
       <td>18.02</td>
-      <td>15.48</td>
+      <td>12.97</td>
       <td>5.45</td>
       <td>10</td>
       <td>41.2</td>
@@ -4925,10 +4903,10 @@
       <td>26.5</td>
       <td>12.5</td>
       <td>3.7</td>
-      <td>-7.5</td>
       <td>96.2</td>
       <td>84.8</td>
-      <td>58.0</td>
+      <td>92.0</td>
+      <td>81.0</td>
     </tr>
     <tr>
       <th>6</th>
@@ -4957,7 +4935,7 @@
       <td>6</td>
       <td>8</td>
       <td>39.22</td>
-      <td>51.40</td>
+      <td>44.06</td>
       <td>11.85</td>
       <td>3</td>
       <td>5.5</td>
@@ -4969,17 +4947,17 @@
       <td>-18.3</td>
       <td>29.0</td>
       <td>0.4</td>
-      <td>29.0</td>
       <td>97.7</td>
       <td>82.5</td>
-      <td>97.7</td>
+      <td>87.0</td>
+      <td>87.0</td>
     </tr>
     <tr>
       <th>8</th>
       <td>7</td>
       <td>9</td>
       <td>15.94</td>
-      <td>13.90</td>
+      <td>14.96</td>
       <td>10.50</td>
       <td>7</td>
       <td>31.8</td>
@@ -4991,17 +4969,17 @@
       <td>19.5</td>
       <td>11.0</td>
       <td>2.7</td>
-      <td>11.0</td>
       <td>73.5</td>
       <td>70.5</td>
-      <td>71.6</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>9</th>
       <td>7</td>
       <td>10</td>
       <td>35.76</td>
-      <td>33.16</td>
+      <td>24.93</td>
       <td>5.96</td>
       <td>5</td>
       <td>10.0</td>
@@ -5013,17 +4991,17 @@
       <td>24.7</td>
       <td>23.5</td>
       <td>11.5</td>
-      <td>23.5</td>
       <td>99.2</td>
       <td>88.6</td>
-      <td>99.2</td>
+      <td>92.0</td>
+      <td>88.0</td>
     </tr>
     <tr>
       <th>10</th>
       <td>8</td>
       <td>11</td>
       <td>17.62</td>
-      <td>16.01</td>
+      <td>13.73</td>
       <td>10.92</td>
       <td>11</td>
       <td>72.4</td>
@@ -5035,17 +5013,17 @@
       <td>6.7</td>
       <td>14.6</td>
       <td>3.4</td>
-      <td>14.6</td>
       <td>97.5</td>
       <td>71.0</td>
-      <td>97.5</td>
+      <td>86.0</td>
+      <td>73.0</td>
     </tr>
     <tr>
       <th>11</th>
       <td>8</td>
       <td>12</td>
       <td>29.59</td>
-      <td>29.94</td>
+      <td>21.89</td>
       <td>6.89</td>
       <td>1</td>
       <td>2.8</td>
@@ -5057,21 +5035,19 @@
       <td>-28.5</td>
       <td>20.4</td>
       <td>9.1</td>
-      <td>-2.2</td>
       <td>94.2</td>
       <td>93.2</td>
-      <td>92.2</td>
+      <td>78.0</td>
+      <td>78.0</td>
     </tr>
   </tbody>
 </table><br><br>
             <div class="race-info">
                 <head><span class="large-font">
                 函館10R 14:50発走 芝1800m 2勝クラス </span><br>
-                波乱度 : 82.0<br>
-                ver 27.0 (穴馬モデル)<br>
+                CAT-IV (波乱度 : 99.7)<br>
                 ☆I:10(13人気) ☆II:3(11人気)<br>
-                ver 25.3<br>
-                ◎:15(5人気) 〇:11(3人気)  ▲:16(8人気)  △I:3(11人気)  △II:12(1人気)<br>
+                ◎:15(5人気) 〇:12(1人気)  ▲:11(3人気)  △I:3(11人気)  △II:14(7人気)<br>
                 </head>
             </div>
             <table border="1" class="dataframe my-table">
@@ -5081,7 +5057,7 @@
       <th>枠 番</th>
       <th>馬番</th>
       <th>v21.1</th>
-      <th>v25.3</th>
+      <th>v11.5</th>
       <th>v27.0</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
@@ -5093,10 +5069,10 @@
       <th>ラスト3F</th>
       <th>上り指MAX</th>
       <th>上り指AVG</th>
-      <th>上り指1R</th>
       <th>スピ指MAX</th>
       <th>スピ指AVG</th>
-      <th>スピ指1R</th>
+      <th>最 高</th>
+      <th>平均</th>
     </tr>
   </thead>
   <tbody>
@@ -5105,7 +5081,7 @@
       <td>1</td>
       <td>1</td>
       <td>22.09</td>
-      <td>14.56</td>
+      <td>15.36</td>
       <td>4.29</td>
       <td>4</td>
       <td>6.3</td>
@@ -5117,17 +5093,17 @@
       <td>6.3</td>
       <td>17.6</td>
       <td>4.6</td>
-      <td>12.2</td>
       <td>95.0</td>
       <td>78.2</td>
       <td>95.0</td>
+      <td>82.0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
       <td>2</td>
       <td>15.12</td>
-      <td>15.85</td>
+      <td>17.77</td>
       <td>7.85</td>
       <td>10</td>
       <td>27.8</td>
@@ -5139,17 +5115,17 @@
       <td>44.2</td>
       <td>25.8</td>
       <td>15.7</td>
-      <td>11.9</td>
       <td>98.5</td>
       <td>89.1</td>
-      <td>86.1</td>
+      <td>95.0</td>
+      <td>89.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2</td>
       <td>3</td>
       <td>21.16</td>
-      <td>25.26</td>
+      <td>23.65</td>
       <td>12.53</td>
       <td>11</td>
       <td>58.4</td>
@@ -5161,17 +5137,17 @@
       <td>-8.0</td>
       <td>18.1</td>
       <td>8.1</td>
-      <td>8.5</td>
       <td>108.2</td>
       <td>96.9</td>
-      <td>82.2</td>
+      <td>96.0</td>
+      <td>90.0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>2</td>
       <td>4</td>
       <td>12.64</td>
-      <td>18.87</td>
+      <td>17.90</td>
       <td>10.64</td>
       <td>9</td>
       <td>21.0</td>
@@ -5183,17 +5159,17 @@
       <td>35.7</td>
       <td>12.8</td>
       <td>5.6</td>
-      <td>0.8</td>
       <td>102.2</td>
       <td>90.3</td>
-      <td>93.4</td>
+      <td>97.0</td>
+      <td>90.0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>3</td>
       <td>5</td>
       <td>3.80</td>
-      <td>3.10</td>
+      <td>5.42</td>
       <td>5.80</td>
       <td>15</td>
       <td>186.4</td>
@@ -5205,17 +5181,17 @@
       <td>51.0</td>
       <td>-1.7</td>
       <td>-9.8</td>
-      <td>-17.1</td>
       <td>68.0</td>
       <td>54.3</td>
-      <td>68.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>5</th>
       <td>3</td>
       <td>6</td>
       <td>20.66</td>
-      <td>21.33</td>
+      <td>18.00</td>
       <td>10.53</td>
       <td>6</td>
       <td>11.0</td>
@@ -5227,17 +5203,17 @@
       <td>9.0</td>
       <td>17.7</td>
       <td>7.4</td>
-      <td>-13.2</td>
       <td>96.8</td>
       <td>84.5</td>
-      <td>64.9</td>
+      <td>95.0</td>
+      <td>90.0</td>
     </tr>
     <tr>
       <th>6</th>
       <td>4</td>
       <td>7</td>
       <td>12.52</td>
-      <td>10.96</td>
+      <td>13.84</td>
       <td>5.60</td>
       <td>14</td>
       <td>103.7</td>
@@ -5249,17 +5225,17 @@
       <td>-1.3</td>
       <td>17.9</td>
       <td>6.5</td>
-      <td>0.4</td>
       <td>95.2</td>
       <td>86.1</td>
-      <td>76.1</td>
+      <td>90.0</td>
+      <td>85.0</td>
     </tr>
     <tr>
       <th>7</th>
       <td>4</td>
       <td>8</td>
       <td>15.22</td>
-      <td>17.89</td>
+      <td>14.70</td>
       <td>12.44</td>
       <td>2</td>
       <td>5.9</td>
@@ -5271,17 +5247,17 @@
       <td>-31.8</td>
       <td>16.8</td>
       <td>-1.6</td>
-      <td>16.8</td>
       <td>92.5</td>
       <td>81.6</td>
-      <td>92.5</td>
+      <td>90.0</td>
+      <td>88.0</td>
     </tr>
     <tr>
       <th>8</th>
       <td>5</td>
       <td>9</td>
       <td>15.99</td>
-      <td>11.98</td>
+      <td>17.94</td>
       <td>4.28</td>
       <td>12</td>
       <td>87.3</td>
@@ -5293,17 +5269,17 @@
       <td>35.5</td>
       <td>11.0</td>
       <td>0.2</td>
-      <td>11.0</td>
       <td>103.8</td>
       <td>83.9</td>
-      <td>103.8</td>
+      <td>94.0</td>
+      <td>92.0</td>
     </tr>
     <tr>
       <th>9</th>
       <td>5</td>
       <td>10</td>
       <td>19.86</td>
-      <td>21.03</td>
+      <td>18.87</td>
       <td>15.32</td>
       <td>13</td>
       <td>91.8</td>
@@ -5315,17 +5291,17 @@
       <td>25.8</td>
       <td>22.9</td>
       <td>9.4</td>
-      <td>22.9</td>
       <td>113.8</td>
       <td>88.3</td>
-      <td>113.8</td>
+      <td>97.0</td>
+      <td>89.0</td>
     </tr>
     <tr>
       <th>10</th>
       <td>6</td>
       <td>11</td>
       <td>32.69</td>
-      <td>33.72</td>
+      <td>29.92</td>
       <td>4.54</td>
       <td>3</td>
       <td>5.9</td>
@@ -5337,17 +5313,17 @@
       <td>-21.0</td>
       <td>18.0</td>
       <td>5.2</td>
-      <td>18.0</td>
       <td>114.6</td>
       <td>89.7</td>
-      <td>114.6</td>
+      <td>101.0</td>
+      <td>90.0</td>
     </tr>
     <tr>
       <th>11</th>
       <td>6</td>
       <td>12</td>
       <td>19.63</td>
-      <td>24.18</td>
+      <td>34.33</td>
       <td>8.62</td>
       <td>1</td>
       <td>3.2</td>
@@ -5359,17 +5335,17 @@
       <td>-4.3</td>
       <td>21.1</td>
       <td>9.3</td>
-      <td>-6.8</td>
       <td>111.0</td>
       <td>90.8</td>
-      <td>69.5</td>
+      <td>96.0</td>
+      <td>91.0</td>
     </tr>
     <tr>
       <th>12</th>
       <td>7</td>
       <td>13</td>
       <td>7.20</td>
-      <td>7.13</td>
+      <td>6.55</td>
       <td>7.25</td>
       <td>16</td>
       <td>305.5</td>
@@ -5381,17 +5357,17 @@
       <td>-9.6</td>
       <td>11.2</td>
       <td>-2.1</td>
-      <td>2.4</td>
       <td>104.4</td>
       <td>80.5</td>
-      <td>77.8</td>
+      <td>88.0</td>
+      <td>82.0</td>
     </tr>
     <tr>
       <th>13</th>
       <td>7</td>
       <td>14</td>
       <td>11.68</td>
-      <td>14.19</td>
+      <td>19.40</td>
       <td>9.63</td>
       <td>7</td>
       <td>16.4</td>
@@ -5403,17 +5379,17 @@
       <td>7.4</td>
       <td>13.6</td>
       <td>5.8</td>
-      <td>0.9</td>
       <td>100.0</td>
       <td>87.5</td>
-      <td>79.1</td>
+      <td>90.0</td>
+      <td>89.0</td>
     </tr>
     <tr>
       <th>14</th>
       <td>8</td>
       <td>15</td>
       <td>34.50</td>
-      <td>40.31</td>
+      <td>42.20</td>
       <td>6.89</td>
       <td>5</td>
       <td>9.9</td>
@@ -5425,17 +5401,17 @@
       <td>-36.3</td>
       <td>10.9</td>
       <td>-2.4</td>
-      <td>10.9</td>
       <td>111.5</td>
       <td>89.3</td>
-      <td>111.5</td>
+      <td>99.0</td>
+      <td>92.0</td>
     </tr>
     <tr>
       <th>15</th>
       <td>8</td>
       <td>16</td>
       <td>31.62</td>
-      <td>26.22</td>
+      <td>11.66</td>
       <td>5.46</td>
       <td>8</td>
       <td>17.8</td>
@@ -5447,21 +5423,19 @@
       <td>-44.0</td>
       <td>17.6</td>
       <td>11.7</td>
-      <td>17.6</td>
       <td>117.9</td>
       <td>96.5</td>
-      <td>83.8</td>
+      <td>97.0</td>
+      <td>92.0</td>
     </tr>
   </tbody>
 </table><br><br>
             <div class="race-info">
                 <head><span class="large-font">
                 函館11R 15:25発走 芝1200m G3 </span><br>
-                波乱度 : 96.6<br>
-                ver 27.0 (穴馬モデル)<br>
+                CAT-IV (波乱度 : 90.1)<br>
                 ☆I:14(13人気) ☆II:6(8人気)<br>
-                ver 25.3<br>
-                ◎:7(1人気) 〇:2(4人気)  ▲:4(2人気)  △I:1(3人気)  △II:14(13人気)<br>
+                ◎:7(1人気) 〇:4(2人気)  ▲:1(3人気)  △I:2(4人気)  △II:9(14人気)<br>
                 </head>
             </div>
             <table border="1" class="dataframe my-table">
@@ -5471,7 +5445,7 @@
       <th>枠 番</th>
       <th>馬番</th>
       <th>v21.1</th>
-      <th>v25.3</th>
+      <th>v11.5</th>
       <th>v27.0</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
@@ -5483,10 +5457,10 @@
       <th>ラスト3F</th>
       <th>上り指MAX</th>
       <th>上り指AVG</th>
-      <th>上り指1R</th>
       <th>スピ指MAX</th>
       <th>スピ指AVG</th>
-      <th>スピ指1R</th>
+      <th>最 高</th>
+      <th>平均</th>
     </tr>
   </thead>
   <tbody>
@@ -5495,7 +5469,7 @@
       <td>1</td>
       <td>1</td>
       <td>19.89</td>
-      <td>24.36</td>
+      <td>35.60</td>
       <td>4.88</td>
       <td>3</td>
       <td>7.1</td>
@@ -5507,17 +5481,17 @@
       <td>-38.2</td>
       <td>17.7</td>
       <td>2.8</td>
-      <td>-1.3</td>
       <td>108.0</td>
       <td>97.1</td>
-      <td>108.0</td>
+      <td>105.0</td>
+      <td>99.0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
       <td>2</td>
       <td>24.76</td>
-      <td>28.38</td>
+      <td>24.84</td>
       <td>11.00</td>
       <td>4</td>
       <td>12.3</td>
@@ -5529,17 +5503,17 @@
       <td>-23.9</td>
       <td>26.5</td>
       <td>2.8</td>
-      <td>0.4</td>
       <td>108.6</td>
       <td>94.7</td>
-      <td>102.1</td>
+      <td>108.0</td>
+      <td>95.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2</td>
       <td>3</td>
       <td>8.40</td>
-      <td>11.29</td>
+      <td>12.49</td>
       <td>5.90</td>
       <td>6</td>
       <td>23.8</td>
@@ -5551,17 +5525,17 @@
       <td>-25.6</td>
       <td>-5.4</td>
       <td>-13.7</td>
-      <td>-5.4</td>
       <td>100.8</td>
       <td>97.3</td>
-      <td>94.5</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>3</th>
       <td>2</td>
       <td>4</td>
       <td>21.77</td>
-      <td>27.35</td>
+      <td>40.06</td>
       <td>4.52</td>
       <td>2</td>
       <td>6.2</td>
@@ -5573,17 +5547,17 @@
       <td>-2.5</td>
       <td>13.0</td>
       <td>5.3</td>
-      <td>0.7</td>
       <td>110.3</td>
       <td>99.2</td>
-      <td>105.4</td>
+      <td>108.0</td>
+      <td>101.0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>3</td>
       <td>5</td>
       <td>22.82</td>
-      <td>16.16</td>
+      <td>15.72</td>
       <td>5.43</td>
       <td>9</td>
       <td>46.3</td>
@@ -5595,17 +5569,17 @@
       <td>18.9</td>
       <td>15.7</td>
       <td>6.8</td>
-      <td>15.7</td>
       <td>114.2</td>
       <td>105.8</td>
-      <td>114.2</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>5</th>
       <td>3</td>
       <td>6</td>
       <td>11.56</td>
-      <td>9.89</td>
+      <td>15.49</td>
       <td>13.29</td>
       <td>8</td>
       <td>36.2</td>
@@ -5617,17 +5591,17 @@
       <td>-18.1</td>
       <td>17.6</td>
       <td>1.6</td>
-      <td>-9.7</td>
       <td>108.6</td>
       <td>98.5</td>
-      <td>87.4</td>
+      <td>106.0</td>
+      <td>97.0</td>
     </tr>
     <tr>
       <th>6</th>
       <td>4</td>
       <td>7</td>
       <td>47.06</td>
-      <td>40.18</td>
+      <td>53.12</td>
       <td>1.94</td>
       <td>1</td>
       <td>1.7</td>
@@ -5639,17 +5613,17 @@
       <td>34.2</td>
       <td>25.6</td>
       <td>20.3</td>
-      <td>21.7</td>
       <td>112.3</td>
       <td>106.3</td>
-      <td>105.0</td>
+      <td>117.0</td>
+      <td>112.0</td>
     </tr>
     <tr>
       <th>7</th>
       <td>4</td>
       <td>8</td>
       <td>14.35</td>
-      <td>10.02</td>
+      <td>17.85</td>
       <td>4.93</td>
       <td>6</td>
       <td>16.4</td>
@@ -5661,17 +5635,17 @@
       <td>8.4</td>
       <td>-2.2</td>
       <td>-2.2</td>
-      <td>-2.2</td>
       <td>95.2</td>
       <td>95.2</td>
-      <td>95.2</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>8</th>
       <td>5</td>
       <td>9</td>
       <td>10.66</td>
-      <td>12.98</td>
+      <td>22.80</td>
       <td>7.99</td>
       <td>14</td>
       <td>172.7</td>
@@ -5683,17 +5657,17 @@
       <td>-18.7</td>
       <td>17.0</td>
       <td>-3.6</td>
-      <td>-15.5</td>
       <td>103.1</td>
       <td>88.6</td>
-      <td>78.6</td>
+      <td>103.0</td>
+      <td>98.0</td>
     </tr>
     <tr>
       <th>9</th>
       <td>5</td>
       <td>10</td>
       <td>13.43</td>
-      <td>15.84</td>
+      <td>16.60</td>
       <td>10.53</td>
       <td>11</td>
       <td>94.3</td>
@@ -5705,17 +5679,17 @@
       <td>-15.0</td>
       <td>10.4</td>
       <td>0.1</td>
-      <td>-7.0</td>
       <td>104.2</td>
       <td>90.6</td>
-      <td>91.4</td>
+      <td>106.0</td>
+      <td>95.0</td>
     </tr>
     <tr>
       <th>10</th>
       <td>6</td>
       <td>11</td>
       <td>13.65</td>
-      <td>16.47</td>
+      <td>20.32</td>
       <td>8.93</td>
       <td>5</td>
       <td>16.3</td>
@@ -5727,17 +5701,17 @@
       <td>-13.3</td>
       <td>17.6</td>
       <td>-0.9</td>
-      <td>-21.2</td>
       <td>112.9</td>
       <td>90.8</td>
-      <td>75.9</td>
+      <td>107.0</td>
+      <td>93.0</td>
     </tr>
     <tr>
       <th>11</th>
       <td>6</td>
       <td>12</td>
       <td>13.93</td>
-      <td>12.21</td>
+      <td>8.74</td>
       <td>6.43</td>
       <td>12</td>
       <td>116.6</td>
@@ -5749,17 +5723,17 @@
       <td>38.2</td>
       <td>19.0</td>
       <td>11.1</td>
-      <td>3.1</td>
       <td>113.2</td>
       <td>101.7</td>
-      <td>88.5</td>
+      <td>102.0</td>
+      <td>97.0</td>
     </tr>
     <tr>
       <th>12</th>
       <td>7</td>
       <td>13</td>
       <td>9.47</td>
-      <td>9.26</td>
+      <td>8.01</td>
       <td>8.99</td>
       <td>15</td>
       <td>234.2</td>
@@ -5771,17 +5745,17 @@
       <td>34.4</td>
       <td>16.7</td>
       <td>10.4</td>
-      <td>10.6</td>
       <td>109.8</td>
       <td>96.2</td>
-      <td>99.5</td>
+      <td>106.0</td>
+      <td>93.0</td>
     </tr>
     <tr>
       <th>13</th>
       <td>7</td>
       <td>14</td>
       <td>19.21</td>
-      <td>18.49</td>
+      <td>16.52</td>
       <td>15.79</td>
       <td>13</td>
       <td>120.8</td>
@@ -5793,17 +5767,17 @@
       <td>5.3</td>
       <td>25.7</td>
       <td>5.9</td>
-      <td>25.7</td>
       <td>110.6</td>
       <td>104.8</td>
-      <td>110.6</td>
+      <td>105.0</td>
+      <td>99.0</td>
     </tr>
     <tr>
       <th>14</th>
       <td>8</td>
       <td>15</td>
       <td>22.01</td>
-      <td>17.39</td>
+      <td>21.69</td>
       <td>9.31</td>
       <td>7</td>
       <td>31.5</td>
@@ -5815,17 +5789,17 @@
       <td>29.1</td>
       <td>22.0</td>
       <td>12.2</td>
-      <td>-1.7</td>
       <td>105.8</td>
       <td>102.5</td>
-      <td>100.6</td>
+      <td>103.0</td>
+      <td>99.0</td>
     </tr>
     <tr>
       <th>15</th>
       <td>8</td>
       <td>16</td>
       <td>9.66</td>
-      <td>11.14</td>
+      <td>14.21</td>
       <td>9.39</td>
       <td>10</td>
       <td>81.6</td>
@@ -5837,21 +5811,19 @@
       <td>39.8</td>
       <td>19.6</td>
       <td>15.3</td>
-      <td>18.3</td>
       <td>112.3</td>
       <td>104.2</td>
-      <td>112.3</td>
+      <td>104.0</td>
+      <td>97.0</td>
     </tr>
   </tbody>
 </table><br><br>
             <div class="race-info">
                 <head><span class="large-font">
                 函館12R 16:05発走 ダート1700m 1勝クラス </span><br>
-                波乱度 : 58.9<br>
-                ver 27.0 (穴馬モデル)<br>
+                CAT-II (波乱度 : 68.0)<br>
                 ☆I:2(10人気) ☆II:9(6人気)<br>
-                ver 25.3<br>
-                ◎:11(2人気) 〇:13(1人気)  ▲:6(3人気)  △I:10(4人気)  △II:5(7人気)<br>
+                ◎:11(2人気) 〇:5(7人気)  ▲:6(3人気)  △I:13(1人気)  △II:10(4人気)<br>
                 </head>
             </div>
             <table border="1" class="dataframe my-table">
@@ -5861,7 +5833,7 @@
       <th>枠 番</th>
       <th>馬番</th>
       <th>v21.1</th>
-      <th>v25.3</th>
+      <th>v11.5</th>
       <th>v27.0</th>
       <th>人 気</th>
       <th>単勝 オッズ</th>
@@ -5873,10 +5845,10 @@
       <th>ラスト3F</th>
       <th>上り指MAX</th>
       <th>上り指AVG</th>
-      <th>上り指1R</th>
       <th>スピ指MAX</th>
       <th>スピ指AVG</th>
-      <th>スピ指1R</th>
+      <th>最 高</th>
+      <th>平均</th>
     </tr>
   </thead>
   <tbody>
@@ -5885,7 +5857,7 @@
       <td>1</td>
       <td>1</td>
       <td>3.79</td>
-      <td>4.23</td>
+      <td>4.68</td>
       <td>5.63</td>
       <td>12</td>
       <td>141.3</td>
@@ -5897,17 +5869,17 @@
       <td>44.6</td>
       <td>-0.7</td>
       <td>-15.0</td>
-      <td>-23.2</td>
       <td>68.3</td>
       <td>58.0</td>
-      <td>48.6</td>
+      <td>75</td>
+      <td>62</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
       <td>2</td>
       <td>17.62</td>
-      <td>18.92</td>
+      <td>15.29</td>
       <td>13.57</td>
       <td>10</td>
       <td>69.2</td>
@@ -5919,17 +5891,17 @@
       <td>8.0</td>
       <td>0.3</td>
       <td>-8.2</td>
-      <td>0.3</td>
       <td>83.4</td>
       <td>76.9</td>
-      <td>80.4</td>
+      <td>88</td>
+      <td>73</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
       <td>3</td>
       <td>20.76</td>
-      <td>15.91</td>
+      <td>16.30</td>
       <td>5.37</td>
       <td>5</td>
       <td>11.3</td>
@@ -5941,17 +5913,17 @@
       <td>4.0</td>
       <td>0.0</td>
       <td>-15.0</td>
-      <td>-33.1</td>
       <td>88.8</td>
       <td>75.2</td>
-      <td>62.3</td>
+      <td>90</td>
+      <td>78</td>
     </tr>
     <tr>
       <th>3</th>
       <td>3</td>
       <td>4</td>
       <td>18.36</td>
-      <td>12.86</td>
+      <td>9.46</td>
       <td>7.21</td>
       <td>11</td>
       <td>81.2</td>
@@ -5963,17 +5935,17 @@
       <td>19.5</td>
       <td>2.4</td>
       <td>-5.5</td>
-      <td>-3.4</td>
       <td>71.0</td>
       <td>62.7</td>
-      <td>47.9</td>
+      <td>83</td>
+      <td>75</td>
     </tr>
     <tr>
       <th>4</th>
       <td>4</td>
       <td>5</td>
       <td>34.84</td>
-      <td>26.32</td>
+      <td>31.88</td>
       <td>5.31</td>
       <td>7</td>
       <td>19.0</td>
@@ -5985,17 +5957,17 @@
       <td>21.2</td>
       <td>-6.2</td>
       <td>-13.2</td>
-      <td>-13.7</td>
       <td>76.5</td>
       <td>66.6</td>
-      <td>76.5</td>
+      <td>84</td>
+      <td>74</td>
     </tr>
     <tr>
       <th>5</th>
       <td>4</td>
       <td>6</td>
       <td>41.65</td>
-      <td>43.87</td>
+      <td>30.97</td>
       <td>8.76</td>
       <td>3</td>
       <td>5.1</td>
@@ -6007,17 +5979,17 @@
       <td>3.3</td>
       <td>8.5</td>
       <td>-2.5</td>
-      <td>2.1</td>
       <td>92.1</td>
       <td>82.0</td>
-      <td>92.1</td>
+      <td>89</td>
+      <td>84</td>
     </tr>
     <tr>
       <th>6</th>
       <td>5</td>
       <td>7</td>
       <td>15.80</td>
-      <td>13.29</td>
+      <td>10.52</td>
       <td>6.70</td>
       <td>8</td>
       <td>26.3</td>
@@ -6029,18 +6001,18 @@
       <td>25.3</td>
       <td>-16.9</td>
       <td>-24.3</td>
-      <td>-28.1</td>
       <td>64.8</td>
       <td>54.5</td>
-      <td>59.2</td>
+      <td>76</td>
+      <td>65</td>
     </tr>
     <tr>
       <th>7</th>
       <td>5</td>
       <td>8</td>
-      <td>13.58</td>
-      <td>11.49</td>
-      <td>5.31</td>
+      <td>10.65</td>
+      <td>11.47</td>
+      <td>8.40</td>
       <td>14</td>
       <td>199.0</td>
       <td>サイモンポーリア</td>
@@ -6048,20 +6020,20 @@
       <td>56.0</td>
       <td>松若風馬</td>
       <td>先</td>
-      <td>12.1</td>
+      <td>9.0</td>
       <td>6.3</td>
       <td>-16.6</td>
-      <td>-7.7</td>
       <td>81.1</td>
       <td>67.8</td>
-      <td>76.7</td>
+      <td>85</td>
+      <td>63</td>
     </tr>
     <tr>
       <th>8</th>
       <td>6</td>
       <td>9</td>
       <td>21.09</td>
-      <td>12.76</td>
+      <td>16.18</td>
       <td>9.28</td>
       <td>6</td>
       <td>17.5</td>
@@ -6073,17 +6045,17 @@
       <td>-36.5</td>
       <td>-6.1</td>
       <td>-33.8</td>
-      <td>-50.0</td>
       <td>79.1</td>
       <td>58.4</td>
-      <td>49.0</td>
+      <td>78</td>
+      <td>68</td>
     </tr>
     <tr>
       <th>9</th>
       <td>6</td>
       <td>10</td>
       <td>33.62</td>
-      <td>36.15</td>
+      <td>21.43</td>
       <td>3.85</td>
       <td>4</td>
       <td>7.8</td>
@@ -6095,17 +6067,17 @@
       <td>-2.7</td>
       <td>3.3</td>
       <td>-3.1</td>
-      <td>0.8</td>
       <td>85.4</td>
       <td>73.5</td>
-      <td>85.4</td>
+      <td>85</td>
+      <td>76</td>
     </tr>
     <tr>
       <th>10</th>
       <td>7</td>
       <td>11</td>
       <td>65.89</td>
-      <td>53.66</td>
+      <td>56.43</td>
       <td>4.26</td>
       <td>2</td>
       <td>3.6</td>
@@ -6117,17 +6089,17 @@
       <td>-29.7</td>
       <td>-0.8</td>
       <td>-11.2</td>
-      <td>-21.8</td>
       <td>89.0</td>
       <td>70.3</td>
-      <td>69.1</td>
+      <td>94</td>
+      <td>78</td>
     </tr>
     <tr>
       <th>11</th>
       <td>7</td>
       <td>12</td>
       <td>7.00</td>
-      <td>4.26</td>
+      <td>4.44</td>
       <td>4.49</td>
       <td>13</td>
       <td>168.7</td>
@@ -6139,17 +6111,17 @@
       <td>5.0</td>
       <td>-7.2</td>
       <td>-26.2</td>
-      <td>-7.2</td>
       <td>62.8</td>
       <td>54.2</td>
-      <td>55.2</td>
+      <td>66</td>
+      <td>54</td>
     </tr>
     <tr>
       <th>12</th>
       <td>8</td>
       <td>13</td>
       <td>40.52</td>
-      <td>52.55</td>
+      <td>28.39</td>
       <td>3.31</td>
       <td>1</td>
       <td>2.9</td>
@@ -6161,17 +6133,17 @@
       <td>11.6</td>
       <td>0.8</td>
       <td>-8.4</td>
-      <td>-9.0</td>
       <td>90.4</td>
       <td>75.5</td>
-      <td>90.4</td>
+      <td>92</td>
+      <td>84</td>
     </tr>
     <tr>
       <th>13</th>
       <td>8</td>
       <td>14</td>
       <td>5.68</td>
-      <td>5.07</td>
+      <td>3.91</td>
       <td>4.62</td>
       <td>9</td>
       <td>29.7</td>
@@ -6183,10 +6155,10 @@
       <td>21.0</td>
       <td>-4.9</td>
       <td>-12.4</td>
-      <td>-16.4</td>
       <td>86.7</td>
       <td>68.0</td>
-      <td>60.3</td>
+      <td>66</td>
+      <td>44</td>
     </tr>
   </tbody>
 </table><br><br></body></html>
