@@ -1,0 +1,1909 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>20260404 - AI Race Dashboard</title>
+        <style>
+            body { font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; background: #f5f7fa; color: #333; padding: 10px 20px; margin: 0; }
+            .page-title { text-align: center; font-size: 28px; color: #333; margin-bottom: 20px; letter-spacing: 2px; font-weight: bold; }
+            
+            /* サマリーセクション用 CSS */
+            .summary-container { background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 40px; border-top: 5px solid #283593; }
+            .summary-title { font-size: 20px; color: #283593; margin-top: 0; margin-bottom: 15px; border-bottom: 2px solid #e8eaf6; padding-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+            .target-card { background: #f8f9fa; border-left: 5px solid #ccc; border-radius: 6px; padding: 15px; margin-bottom: 12px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; }
+            .target-card-info { flex: 1; min-width: 300px; }
+            .target-card-buy { background: #fff; border: 1px solid #e0e0e0; padding: 10px 20px; border-radius: 6px; text-align: center; min-width: 200px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+            .badge-cat { color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 13px; margin-right: 10px; }
+            .target-title { font-size: 18px; font-weight: bold; color: #333; }
+            .target-desc { font-size: 12px; color: #666; margin-top: 6px; line-height: 1.4; }
+            .buy-type { display: inline-block; font-size: 11px; background: #333; color: #fff; padding: 2px 8px; border-radius: 10px; margin-bottom: 6px; }
+            .buy-numbers { font-size: 20px; font-weight: bold; color: #1565c0; letter-spacing: 1px; }
+            .buy-sep { margin: 0 8px; color: #999; font-weight: normal; }
+            
+            /* レース個別 CSS */
+            .race-container { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 20px; margin-bottom: 40px; width: 100%; box-sizing: border-box; overflow: hidden; }
+            .header-section { border-bottom: 2px solid #3949ab; padding-bottom: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 15px; }
+            h1 { margin: 0; font-size: 22px; color: #1a237e; }
+            .race-info-badges { display: flex; gap: 6px; margin-left: 10px; flex-wrap: wrap; align-items: center; }
+            .info-badge { font-size: 10px; font-weight: bold; color: white; background-color: #616161; padding: 2px 6px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; height: 16px; white-space: nowrap; }
+            .info-badge-tan { background-color: #ffb74d; color: #333; }
+            .info-badge-shiba-start { background-color: #4db6ac; }
+            .info-badge-turn { background-color: #64b5f6; }
+            .info-badge-mesu { background-color: #f48fb1; color: #333; }
+            .info-badge-2sai { background-color: #ef9a9a; color: #333; }
+            .info-badge-3sai { background-color: #ce93d8; color: #333; }
+            
+            .meta-container { display: flex; gap: 15px; flex-wrap: wrap; }
+            .meta-box { background: #e8eaf6; padding: 8px 15px; border-radius: 6px; border-left: 4px solid #3f51b5; min-width: 180px; flex-grow: 1; }
+            .meta-box strong { font-size: 12px; color: #5c6bc0; display: block; margin-bottom: 4px; }
+            .meta-box span { font-size: 18px; font-weight: bold; line-height: 1; }
+            .meta-box .sub { font-size: 12px; color: #666; margin-left: 8px; font-weight: normal; }
+            
+            .table-wrapper { overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch; padding-bottom: 10px; }
+            table { border-collapse: collapse; font-size: 13px; table-layout: fixed; min-width: 1280px; width: 100%; }
+            th { background: #3949ab; color: white; padding: 10px 15px 10px 4px; font-size: 12px; text-align: center; white-space: nowrap; cursor: pointer; user-select: none; position: relative; }
+            th:hover { background: #283593; }
+            th::after { content: '↕'; position: absolute; right: 2px; top: 50%; transform: translateY(-50%); font-size: 10px; color: rgba(255,255,255,0.4); }
+            th.asc::after { content: '▲'; color: #fff; }
+            th.desc::after { content: '▼'; color: #fff; }
+            
+            td { padding: 8px 4px; border-bottom: 1px solid #eee; text-align: center; vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            tr:last-child td { border-bottom: none; }
+            tr:hover { background-color: #f8f9fa; }
+            
+            .waku-circle-table { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; font-weight: bold; font-size: 14px; border: 1px solid #bbb; box-shadow: 1px 1px 3px rgba(0,0,0,0.15); box-sizing: border-box; margin: 0; }
+            .waku-circle-map { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; font-weight: bold; font-size: 14px; border: 1px solid #bbb; box-shadow: 1px 2px 4px rgba(0,0,0,0.3); box-sizing: border-box; transition: all 0.3s ease; margin: 0; }
+
+            .horse-name { font-weight: bold; font-size: 13px; text-align: left; overflow: hidden; text-overflow: ellipsis; }
+            .jockey { text-align: left; font-size: 11px; color: #555; overflow: hidden; text-overflow: ellipsis; }
+            .ninki-badge { display: inline-block; width: 22px; height: 22px; line-height: 22px; border-radius: 4px; font-weight: bold; text-align: center; }
+
+            .pace-dashboard { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 8px; padding: 15px; margin-bottom: 20px; }
+            .pace-dashboard h3 { margin: 0 0 10px 0; font-size: 16px; color: #1565c0; border-bottom: 1px solid #90caf9; padding-bottom: 5px; }
+            .dashboard-content { display: flex; flex-wrap: nowrap; gap: 15px; align-items: stretch; overflow-x: auto; padding-bottom: 10px; }
+            
+            .map-wrapper { flex: 0 0 450px; min-width: 450px; background: #fff; border-radius: 6px; border: 1px solid #bbdefb; position: relative; }
+            .map-area { position: relative; width: 100%; height: 100%; min-height: 180px; background-image: repeating-linear-gradient(180deg, transparent, transparent 33px, rgba(25, 118, 210, 0.05) 33px, rgba(25, 118, 210, 0.05) 34px); background-position: 0 16px; }
+            
+            .agari-super { position: relative; animation: glow-red 1.5s infinite alternate; z-index: 50 !important; }
+            .agari-super::after { content: '★'; position: absolute; top: -8px; right: -8px; font-size: 16px; color: #f44336; text-shadow: 1px 1px 2px rgba(0,0,0,0.4); pointer-events: none; }
+            .agari-good { position: relative; z-index: 40 !important; }
+            .agari-good::after { content: '★'; position: absolute; top: -6px; right: -6px; font-size: 14px; color: #ffb300; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); pointer-events: none; }
+            @keyframes glow-red { from { box-shadow: 0 0 2px #f44336; } to { box-shadow: 0 0 8px #f44336; } }
+
+            .mini-chart { flex: 1 1 200px; min-width: 220px; background: #fff; padding: 10px; border-radius: 6px; border: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; }
+            .mini-bar-container { display: flex; align-items: center; margin-bottom: 8px; height: 26px; }
+            .mini-bar-container:last-child { margin-bottom: 0; }
+            .mini-bar-label { font-size: 11px; width: 30px; display: flex; justify-content: center; margin-right: 8px; }
+            .mini-bar-track { background: #e0e0e0; height: 14px; border-radius: 7px; flex-grow: 1; overflow: hidden; }
+            .mini-bar-fill-nige { background: #4dd0e1; height: 100%; border-radius: 7px; }
+            .mini-bar-fill-agari { background: #ffb74d; height: 100%; border-radius: 7px; }
+            .mini-bar-fill-cond { background: #81c784; height: 100%; border-radius: 7px; } 
+            .mini-bar-value { font-size: 13px; width: 35px; text-align: right; margin-left: 8px; color: #555; line-height: 1; font-weight: bold; }
+        </style>
+    </head>
+    <body>
+        <div class="page-title">Race Dashboard (20260404)</div>
+    
+    <div class="summary-container">
+        <h2 class="summary-title">本日の勝負レース抽出結果</h2>
+    <div style="padding: 20px; text-align: center; color: #666; background: #f8f9fa; border-radius: 8px;">本日は条件に合致する勝負レースはありませんでした。</div></div>
+        <div class="race-container" id="202606030311">
+            <div class="header-section">
+                <div style="display:flex; align-items:center; flex-wrap:wrap;">
+                    <h1>中山11R ダービー卿CT (芝1600m)</h1>
+                    <div class="race-info-badges"><span class="info-badge info-badge-turn">初角すぐ</span></div>
+                </div>
+                <div class="meta-container">
+                    <div class="meta-box">
+                        <strong>馬場指数予測</strong>
+                        <span>-11.3</span> <span class="sub">[-17.4 〜 -2.4]</span>
+                    </div>
+                    <div class="meta-box">
+                        <strong>RPCI (ペース) 予測</strong>
+                        <span>50.6 <span style="color:#43a047; margin-left:4px; font-size:16px;">M (ミドル)</span></span> 
+                        <span class="sub">[47.4 〜 51.8]</span>
+                    </div>
+                </div>
+            </div>
+        <div class="pace-dashboard"><h3>展開マップ</h3><div class="dashboard-content"><div class="map-wrapper"><div class="map-area" style="height: 196px;"><div style="position: absolute; top: 0; left: 0; width: 25%; height: 100%; background: rgba(227, 242, 253, 0.3); border-right: 1px dashed #90caf9;"><span style="position: absolute; bottom: 4px; left: 6px; font-size: 11px; font-weight: bold; color: #1976d2;">逃げ</span></div><div style="position: absolute; top: 0; left: 25%; width: 25%; height: 100%; background: rgba(227, 242, 253, 0.1); border-right: 1px dashed #90caf9;"><span style="position: absolute; bottom: 4px; left: 6px; font-size: 11px; font-weight: bold; color: #1976d2;">先行</span></div><div style="position: absolute; top: 0; left: 50%; width: 25%; height: 100%; background: rgba(227, 242, 253, 0.1); border-right: 1px dashed #90caf9;"><span style="position: absolute; bottom: 4px; left: 6px; font-size: 11px; font-weight: bold; color: #1976d2;">差し</span></div><div style="position: absolute; top: 0; left: 75%; width: 25%; height: 100%; background: rgba(227, 242, 253, 0.3);"><span style="position: absolute; bottom: 4px; left: 6px; font-size: 11px; font-weight: bold; color: #1976d2;">追込</span></div><div style="position: absolute; top: 6px; left: 15px; font-size: 14px; color: #d32f2f; font-weight: bold;">← ゴール</div><div style="position: absolute; top: 6px; right: 15px; font-size: 11px; color: #777; font-weight: bold;">↑ 内ラチ沿い</div><div style="position: absolute; bottom: 6px; right: 15px; font-size: 11px; color: #777; font-weight: bold;">↓ 大外回し</div><div class="waku-circle-map agari-good" style="position: absolute; left: 62.38898669649523%; top: 30px; transform: translate(-50%, -50%); background-color:#ffffff; color:#333333; z-index:99;">1</div><div class="waku-circle-map agari-good" style="position: absolute; left: 62.6047827911068%; top: 64px; transform: translate(-50%, -50%); background-color:#ffffff; color:#333333; z-index:98;">2</div><div class="waku-circle-map" style="position: absolute; left: 22.13771903212353%; top: 30px; transform: translate(-50%, -50%); background-color:#333333; color:#ffffff; z-index:99;">3</div><div class="waku-circle-map" style="position: absolute; left: 28.21748410935271%; top: 30px; transform: translate(-50%, -50%); background-color:#333333; color:#ffffff; z-index:99;">4</div><div class="waku-circle-map agari-good" style="position: absolute; left: 39.05854755403356%; top: 30px; transform: translate(-50%, -50%); background-color:#e53935; color:#ffffff; z-index:99;">5</div><div class="waku-circle-map" style="position: absolute; left: 62.818734409919145%; top: 98px; transform: translate(-50%, -50%); background-color:#e53935; color:#ffffff; z-index:97;">6</div><div class="waku-circle-map agari-super" style="position: absolute; left: 78.41694948047339%; top: 30px; transform: translate(-50%, -50%); background-color:#1e88e5; color:#ffffff; z-index:99;">7</div><div class="waku-circle-map" style="position: absolute; left: 41.27901712127837%; top: 64px; transform: translate(-50%, -50%); background-color:#1e88e5; color:#ffffff; z-index:98;">8</div><div class="waku-circle-map" style="position: absolute; left: 62.42832169864553%; top: 132px; transform: translate(-50%, -50%); background-color:#fdd835; color:#333333; z-index:96;">9</div><div class="waku-circle-map" style="position: absolute; left: 24.64760208907982%; top: 64px; transform: translate(-50%, -50%); background-color:#fdd835; color:#333333; z-index:98;">10</div><div class="waku-circle-map agari-super" style="position: absolute; left: 68.37755049989471%; top: 30px; transform: translate(-50%, -50%); background-color:#43a047; color:#ffffff; z-index:99;">11</div><div class="waku-circle-map" style="position: absolute; left: 56.7588439224763%; top: 30px; transform: translate(-50%, -50%); background-color:#43a047; color:#ffffff; z-index:99;">12</div><div class="waku-circle-map" style="position: absolute; left: 57.37499587890931%; top: 64px; transform: translate(-50%, -50%); background-color:#fb8c00; color:#333333; z-index:98;">13</div><div class="waku-circle-map agari-super" style="position: absolute; left: 68.63757942599204%; top: 64px; transform: translate(-50%, -50%); background-color:#fb8c00; color:#333333; z-index:98;">14</div><div class="waku-circle-map" style="position: absolute; left: 45.0930706343791%; top: 30px; transform: translate(-50%, -50%); background-color:#f48fb1; color:#333333; z-index:99;">15</div><div class="waku-circle-map" style="position: absolute; left: 56.37137241756968%; top: 98px; transform: translate(-50%, -50%); background-color:#f48fb1; color:#333333; z-index:97;">16</div></div></div><div class="mini-chart"><div style="font-size:13px; font-weight:bold; color:#0097a7; margin-bottom:10px; text-align:center;">逃げ指数 トップ5</div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#333333; color:#ffffff;">3</div></div><div class="mini-bar-track"><div class="mini-bar-fill-nige" style="width:100%;"></div></div><div class="mini-bar-value">50.1</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#fdd835; color:#333333;">10</div></div><div class="mini-bar-track"><div class="mini-bar-fill-nige" style="width:74.81577590124283%;"></div></div><div class="mini-bar-value">37.5</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#333333; color:#ffffff;">4</div></div><div class="mini-bar-track"><div class="mini-bar-fill-nige" style="width:70.99103038245782%;"></div></div><div class="mini-bar-value">35.6</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#e53935; color:#ffffff;">5</div></div><div class="mini-bar-track"><div class="mini-bar-fill-nige" style="width:14.255232723424168%;"></div></div><div class="mini-bar-value">7.1</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#1e88e5; color:#ffffff;">8</div></div><div class="mini-bar-track"><div class="mini-bar-fill-nige" style="width:11.02925470933559%;"></div></div><div class="mini-bar-value">5.5</div></div></div><div class="mini-chart"><div style="font-size:13px; font-weight:bold; color:#e65100; margin-bottom:10px; text-align:center;">上がりスコア トップ5</div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#fb8c00; color:#333333;">14</div></div><div class="mini-bar-track"><div class="mini-bar-fill-agari" style="width:100%;"></div></div><div class="mini-bar-value">26.0</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#43a047; color:#ffffff;">11</div></div><div class="mini-bar-track"><div class="mini-bar-fill-agari" style="width:93.84530951725426%;"></div></div><div class="mini-bar-value">24.4</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#1e88e5; color:#ffffff;">7</div></div><div class="mini-bar-track"><div class="mini-bar-fill-agari" style="width:90.07548933609083%;"></div></div><div class="mini-bar-value">23.4</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#ffffff; color:#333333;">2</div></div><div class="mini-bar-track"><div class="mini-bar-fill-agari" style="width:85.45802626439836%;"></div></div><div class="mini-bar-value">22.2</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#ffffff; color:#333333;">1</div></div><div class="mini-bar-track"><div class="mini-bar-fill-agari" style="width:77.35848607888101%;"></div></div><div class="mini-bar-value">20.1</div></div></div><div class="mini-chart"><div style="font-size:13px; font-weight:bold; color:#2e7d32; margin-bottom:10px; text-align:center;">同条件1年平均 トップ5</div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#fb8c00; color:#333333;">14</div></div><div class="mini-bar-track"><div class="mini-bar-fill-cond" style="width:100%;"></div></div><div class="mini-bar-value">101.8</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#f48fb1; color:#333333;">16</div></div><div class="mini-bar-track"><div class="mini-bar-fill-cond" style="width:99.75429975429975%;"></div></div><div class="mini-bar-value">101.5</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#fdd835; color:#333333;">10</div></div><div class="mini-bar-track"><div class="mini-bar-fill-cond" style="width:99.09909909909909%;"></div></div><div class="mini-bar-value">100.8</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#1e88e5; color:#ffffff;">8</div></div><div class="mini-bar-track"><div class="mini-bar-fill-cond" style="width:97.46109746109747%;"></div></div><div class="mini-bar-value">99.2</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#fb8c00; color:#333333;">13</div></div><div class="mini-bar-track"><div class="mini-bar-fill-cond" style="width:96.64209664209665%;"></div></div><div class="mini-bar-value">98.3</div></div></div></div></div>
+            <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:35px;">馬番</th>
+                        <th style="width:35px;">人気</th>
+                        <th style="width:45px;">単勝</th>
+                        
+                        <th style="width:50px;">rank1.1</th>
+                        <th style="width:55px;">rank3_all</th>
+                        <th style="width:55px;">rank3_last</th>
+                        <th style="width:65px;">bin1.1.1</th>
+                        <th style="width:65px;">bin1.1.3</th>
+                        <th style="width:65px;">bin_穴馬</th>
+                        
+                        <th style="width:130px;">予測能力値<br>(10%-mid-90%)</th>
+                        <th style="width:85px;">残差<br>(10%-mid-90%)</th>
+                        <th style="width:130px;">予測ポジション</th>
+                        <th style="width:65px;">逃げ指数</th>
+                        <th style="width:105px; text-align:left;">馬名</th>
+                        <th style="width:70px; text-align:left;">騎手</th>
+                        <th style="width:35px;">斤量</th>
+                        <th style="width:45px;">上がり<br>スコア</th>
+                        <th style="width:45px;">同条件<br>1年平均</th>
+                        <th style="width:35px;">戦数</th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                <tr>
+                    <td data-sort="13"><div class="waku-circle-table" style="background-color:#fb8c00; color:#333333; width:26px; height:26px; font-size:14px;">13</div></td>
+                    <td data-sort="7.0">7</td>
+                    <td data-sort="12.4">12.4</td>
+                    
+                    <td data-sort="-0.035051777716360075"><span style="color: #1976d2; font-weight: bold;">-3.5</span></td>
+                    <td data-sort="-0.0023373009309684057"><span style="color: #1976d2; font-weight: bold;">-0.2</span><br><span style="font-size:9px; color:#d32f2f;">z:1.57</span></td>
+                    <td data-sort="-0.17809382879214875"><span style="color: #1976d2; font-weight: bold;">-17.8</span><br><span style="font-size:9px; color:#d32f2f;">z:1.69</span></td>
+                    <td data-sort="0.48804402989888673">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 65.07253731985156%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">48.8</div>
+        </div>
+        </td>
+                    <td data-sort="0.23928933575005037">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 31.90524476667338%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">23.9</div>
+        </div>
+        </td>
+                    <td data-sort="0.2752392883436305">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 36.69857177915073%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">27.5</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="90.80160131708261">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 51.67430724937607%; width: 45.649440899044805%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 70.37096765774523%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">90.8 <span style="font-size:9px; color:#888;">(82.0~103.5)</span></div>
+        </td>
+                    <td data-sort="-2.392094053257479"><span style="color:#e53935; font-weight:bold;">-2.4</span><br><span style="font-size:10px; color:#666; line-height:1;">(-16.2~6.9)</span></td>
+                    <td data-sort="0.11189470606095826">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 77.14430378003544%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 59.21874484863664%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">0.1 <span style="font-size:9px; color:#888;">(-0.9~0.4)</span></div>
+        </td>
+                    <td data-sort="0.012402649009998781">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 1.6536865346665042%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">1.2</div>
+        </div>
+        </td>
+                    <td data-sort="イミグラントソング" class="horse-name">イミグラントソング</td>
+                    <td data-sort="石川" class="jockey">石川</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="18.76143265111851">18.8</td>
+                    <td data-sort="98.33333333333333">98.3</td>
+                    <td data-sort="7.0">7</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="8"><div class="waku-circle-table" style="background-color:#1e88e5; color:#ffffff; width:26px; height:26px; font-size:14px;">8</div></td>
+                    <td data-sort="2.0"><span class="ninki-badge" style="background-color:#81d4fa; color:#000;">2</span></td>
+                    <td data-sort="6.8"><span style="color:#d32f2f; font-weight:bold;">6.8</span></td>
+                    
+                    <td data-sort="-0.45752391237997025"><span style="color: #1976d2; font-weight: bold;">-45.8</span></td>
+                    <td data-sort="-0.2862870631310196"><span style="color: #1976d2; font-weight: bold;">-28.6</span><br><span style="font-size:9px; color:#d32f2f;">z:1.04</span></td>
+                    <td data-sort="-0.5891905074510513"><span style="color: #1976d2; font-weight: bold;">-58.9</span><br><span style="font-size:9px; color:#777;">z:0.81</span></td>
+                    <td data-sort="0.433135715532135">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 57.751428737618006%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">43.3</div>
+        </div>
+        </td>
+                    <td data-sort="0.23887707249435375">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 31.850276332580503%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">23.9</div>
+        </div>
+        </td>
+                    <td data-sort="0.3160775489144263">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 42.14367318859018%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">31.6</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="86.40840241344254">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 42.25693253394592%; width: 48.89603525310971%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 61.054939207489156%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">86.4 <span style="font-size:9px; color:#888;">(77.5~100.6)</span></div>
+        </td>
+                    <td data-sort="-2.5152438874405902"><span style="color:#e53935; font-weight:bold;">-2.5</span><br><span style="font-size:10px; color:#666; line-height:1;">(-16.4~7.7)</span></td>
+                    <td data-sort="-0.24032708507105402">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 49.974190295459934%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 39.09877140159796%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">-0.2 <span style="font-size:9px; color:#888;">(-0.9~-0.0)</span></div>
+        </td>
+                    <td data-sort="0.055289404883130375">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 7.37192065108405%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">5.5</div>
+        </div>
+        </td>
+                    <td data-sort="ファーヴェント" class="horse-name">ファーヴェント</td>
+                    <td data-sort="横山武" class="jockey">横山武</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="17.4351975249881">17.4</td>
+                    <td data-sort="99.16666666666667">99.2</td>
+                    <td data-sort="15.0">15</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="14"><div class="waku-circle-table" style="background-color:#fb8c00; color:#333333; width:26px; height:26px; font-size:14px;">14</div></td>
+                    <td data-sort="12.0">12</td>
+                    <td data-sort="19.6">19.6</td>
+                    
+                    <td data-sort="-0.4637737834064318"><span style="color: #1976d2; font-weight: bold;">-46.4</span></td>
+                    <td data-sort="-0.40949145013884347"><span style="color: #1976d2; font-weight: bold;">-40.9</span><br><span style="font-size:9px; color:#777;">z:0.80</span></td>
+                    <td data-sort="-0.6082542638341588"><span style="color: #1976d2; font-weight: bold;">-60.8</span><br><span style="font-size:9px; color:#777;">z:0.76</span></td>
+                    <td data-sort="0.4013813900790784">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 53.517518677210454%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">40.1</div>
+        </div>
+        </td>
+                    <td data-sort="0.1227792182611817">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 16.370562434824226%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">12.3</div>
+        </div>
+        </td>
+                    <td data-sort="0.26695835119978917">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 35.59444682663855%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">26.7</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="91.31902897362393">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 58.079269785678214%; width: 41.89811029203826%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 71.46820246887435%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">91.3 <span style="font-size:9px; color:#888;">(85.0~104.8)</span></div>
+        </td>
+                    <td data-sort="-2.795276003486488"><span style="color:#e53935; font-weight:bold;">-2.8</span><br><span style="font-size:10px; color:#666; line-height:1;">(-16.2~6.8)</span></td>
+                    <td data-sort="0.2927014789918462">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 85.38441441002635%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 69.54697428249005%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">0.3 <span style="font-size:9px; color:#888;">(-0.9~0.6)</span></div>
+        </td>
+                    <td data-sort="0.004257176884249364">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 0.5676235845665819%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">0.4</div>
+        </div>
+        </td>
+                    <td data-sort="ジュンブロッサム" class="horse-name">ジュンブロッサム</td>
+                    <td data-sort="荻野極" class="jockey">荻野極</td>
+                    <td data-sort="58.5">58.5</td>
+                    <td data-sort="26.01777724892908">26.0</td>
+                    <td data-sort="101.75">101.8</td>
+                    <td data-sort="25.0">25</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="3"><div class="waku-circle-table" style="background-color:#333333; color:#ffffff; width:26px; height:26px; font-size:14px;">3</div></td>
+                    <td data-sort="11.0">11</td>
+                    <td data-sort="15.8">15.8</td>
+                    
+                    <td data-sort="-0.5003801927757774"><span style="color: #1976d2; font-weight: bold;">-50.0</span></td>
+                    <td data-sort="-0.2945901214361458"><span style="color: #1976d2; font-weight: bold;">-29.5</span><br><span style="font-size:9px; color:#d32f2f;">z:1.02</span></td>
+                    <td data-sort="-0.4825572561821837"><span style="color: #1976d2; font-weight: bold;">-48.3</span><br><span style="font-size:9px; color:#d32f2f;">z:1.03</span></td>
+                    <td data-sort="0.500204307581664">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 66.6939076775552%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">50.0</div>
+        </div>
+        </td>
+                    <td data-sort="0.25633985977123724">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 34.1786479694983%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">25.6</div>
+        </div>
+        </td>
+                    <td data-sort="0.24465872741271183">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 32.62116365502825%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">24.5</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="79.48474019255579">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 6.111416123743825%; width: 78.23325804552975%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 46.372919193257495%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">79.5 <span style="font-size:9px; color:#888;">(60.5~97.4)</span></div>
+        </td>
+                    <td data-sort="-2.511166212904874"><span style="color:#e53935; font-weight:bold;">-2.5</span><br><span style="font-size:10px; color:#666; line-height:1;">(-18.3~7.6)</span></td>
+                    <td data-sort="-0.65918836707651">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 30.9151167188415%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 15.172148790154413%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">-0.7 <span style="font-size:9px; color:#888;">(-0.9~-0.4)</span></div>
+        </td>
+                    <td data-sort="0.501297742596617">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 66.83969901288226%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">50.1</div>
+        </div>
+        </td>
+                    <td data-sort="エンペラーズソード" class="horse-name">エンペラーズソード</td>
+                    <td data-sort="丹内" class="jockey">丹内</td>
+                    <td data-sort="55.0">55.0</td>
+                    <td data-sort="15.233998096144692">15.2</td>
+                    <td data-sort="93.7">93.7</td>
+                    <td data-sort="16.0">16</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="2"><div class="waku-circle-table" style="background-color:#ffffff; color:#333333; width:26px; height:26px; font-size:14px;">2</div></td>
+                    <td data-sort="1.0"><span class="ninki-badge" style="background-color:#fff59d; color:#000;">1</span></td>
+                    <td data-sort="6.7"><span style="color:#d32f2f; font-weight:bold;">6.7</span></td>
+                    
+                    <td data-sort="-0.5765629455402571"><span style="color: #1976d2; font-weight: bold;">-57.7</span></td>
+                    <td data-sort="-0.43945304985810807"><span style="color: #1976d2; font-weight: bold;">-43.9</span><br><span style="font-size:9px; color:#777;">z:0.75</span></td>
+                    <td data-sort="-0.581806389108676"><span style="color: #1976d2; font-weight: bold;">-58.2</span><br><span style="font-size:9px; color:#777;">z:0.82</span></td>
+                    <td data-sort="0.4487258199717506">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 59.83010932956675%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">44.9</div>
+        </div>
+        </td>
+                    <td data-sort="0.1286913209241846">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 17.158842789891278%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">12.9</div>
+        </div>
+        </td>
+                    <td data-sort="0.3252645308300212">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 43.3686041106695%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">32.5</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="82.6897723400347">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 16.396381440104292%; width: 69.6870456282252%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 53.16937237573443%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">82.7 <span style="font-size:9px; color:#888;">(65.3~98.2)</span></div>
+        </td>
+                    <td data-sort="-2.451019948862015"><span style="color:#e53935; font-weight:bold;">-2.5</span><br><span style="font-size:10px; color:#666; line-height:1;">(-15.8~6.7)</span></td>
+                    <td data-sort="0.22633601722258373">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 80.31200464168869%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 65.7559784888835%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">0.2 <span style="font-size:9px; color:#888;">(-0.9~0.5)</span></div>
+        </td>
+                    <td data-sort="0.008704428703467637">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 1.160590493795685%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">0.9</div>
+        </div>
+        </td>
+                    <td data-sort="ミニトランザット" class="horse-name">ミニトランザット</td>
+                    <td data-sort="西村淳" class="jockey">西村淳</td>
+                    <td data-sort="56.0">56.0</td>
+                    <td data-sort="22.234278914802474">22.2</td>
+                    <td data-sort="97.66666666666667">97.7</td>
+                    <td data-sort="9.0">9</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="10"><div class="waku-circle-table" style="background-color:#fdd835; color:#333333; width:26px; height:26px; font-size:14px;">10</div></td>
+                    <td data-sort="4.0">4</td>
+                    <td data-sort="9.0"><span style="color:#d32f2f; font-weight:bold;">9.0</span></td>
+                    
+                    <td data-sort="-0.7508230509222389"><span style="color: #1976d2; font-weight: bold;">-75.1</span></td>
+                    <td data-sort="-0.6053657020059203"><span style="color: #1976d2; font-weight: bold;">-60.5</span><br><span style="font-size:9px; color:#777;">z:0.44</span></td>
+                    <td data-sort="-0.7068533540458732"><span style="color: #1976d2; font-weight: bold;">-70.7</span><br><span style="font-size:9px; color:#777;">z:0.55</span></td>
+                    <td data-sort="0.46573573415605146">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 62.09809788747352%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">46.6</div>
+        </div>
+        </td>
+                    <td data-sort="0.2599408080323077">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 34.65877440430769%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">26.0</div>
+        </div>
+        </td>
+                    <td data-sort="0.3688978999086794">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 49.18638665449059%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">36.9</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="79.6037621443427">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 7.296601733512677%; width: 77.51289058706683%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 46.62531201984522%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">79.6 <span style="font-size:9px; color:#888;">(61.1~97.6)</span></div>
+        </td>
+                    <td data-sort="-2.5925340055308297"><span style="color:#e53935; font-weight:bold;">-2.6</span><br><span style="font-size:10px; color:#666; line-height:1;">(-19.1~7.5)</span></td>
+                    <td data-sort="-0.6042656115756105">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 30.356537594853595%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 18.309502611349775%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">-0.6 <span style="font-size:9px; color:#888;">(-0.9~-0.4)</span></div>
+        </td>
+                    <td data-sort="0.37504979569907404">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 50.00663942654321%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">37.5</div>
+        </div>
+        </td>
+                    <td data-sort="ケイアイセナ" class="horse-name">ケイアイセナ</td>
+                    <td data-sort="津村" class="jockey">津村</td>
+                    <td data-sort="57.5">57.5</td>
+                    <td data-sort="7.703974297953356">7.7</td>
+                    <td data-sort="100.83333333333333">100.8</td>
+                    <td data-sort="22.0">22</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="15"><div class="waku-circle-table" style="background-color:#f48fb1; color:#333333; width:26px; height:26px; font-size:14px;">15</div></td>
+                    <td data-sort="5.0">5</td>
+                    <td data-sort="10.1">10.1</td>
+                    
+                    <td data-sort="-0.8723173857028421"><span style="color: #1976d2; font-weight: bold;">-87.2</span></td>
+                    <td data-sort="-0.520102420901636"><span style="color: #1976d2; font-weight: bold;">-52.0</span><br><span style="font-size:9px; color:#777;">z:0.60</span></td>
+                    <td data-sort="-0.7599544979430854"><span style="color: #1976d2; font-weight: bold;">-76.0</span><br><span style="font-size:9px; color:#777;">z:0.44</span></td>
+                    <td data-sort="0.49344983956265526">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 65.79331194168736%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">49.3</div>
+        </div>
+        </td>
+                    <td data-sort="0.13659155782625862">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 18.212207710167817%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">13.7</div>
+        </div>
+        </td>
+                    <td data-sort="0.35444032345953325">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 47.25870979460443%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">35.4</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="81.17212992935866">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 7.930392835329167%; width: 80.01938432622121%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 49.95112522023722%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">81.2 <span style="font-size:9px; color:#888;">(61.4~99.1)</span></div>
+        </td>
+                    <td data-sort="-2.5242389040454385"><span style="color:#e53935; font-weight:bold;">-2.5</span><br><span style="font-size:10px; color:#666; line-height:1;">(-15.9~6.8)</span></td>
+                    <td data-sort="-0.15686569511234802">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 60.42077288370179%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 43.86633829297388%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">-0.2 <span style="font-size:9px; color:#888;">(-0.9~0.1)</span></div>
+        </td>
+                    <td data-sort="0.026693865040177435">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 3.5591820053569907%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">2.7</div>
+        </div>
+        </td>
+                    <td data-sort="シリウスコルト" class="horse-name">シリウスコルト</td>
+                    <td data-sort="三浦" class="jockey">三浦</td>
+                    <td data-sort="58.0">58.0</td>
+                    <td data-sort="17.876682532127557">17.9</td>
+                    <td data-sort="98.0">98.0</td>
+                    <td data-sort="18.0">18</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="5"><div class="waku-circle-table" style="background-color:#e53935; color:#ffffff; width:26px; height:26px; font-size:14px;">5</div></td>
+                    <td data-sort="8.0">8</td>
+                    <td data-sort="12.8">12.8</td>
+                    
+                    <td data-sort="-0.8815696115185865"><span style="color: #1976d2; font-weight: bold;">-88.2</span></td>
+                    <td data-sort="-0.45572362495878266"><span style="color: #1976d2; font-weight: bold;">-45.6</span><br><span style="font-size:9px; color:#777;">z:0.72</span></td>
+                    <td data-sort="-0.7597449279688651"><span style="color: #1976d2; font-weight: bold;">-76.0</span><br><span style="font-size:9px; color:#777;">z:0.44</span></td>
+                    <td data-sort="0.44380256075901475">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 59.17367476786863%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">44.4</div>
+        </div>
+        </td>
+                    <td data-sort="0.12940547646346406">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 17.254063528461874%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">12.9</div>
+        </div>
+        </td>
+                    <td data-sort="0.32566063554353086">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 43.42141807247078%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">32.6</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="81.59141374625518">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 13.290447491062594%; width: 69.04719108075157%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 50.84024043050087%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">81.6 <span style="font-size:9px; color:#888;">(63.9~96.4)</span></div>
+        </td>
+                    <td data-sort="-2.5152438874405902"><span style="color:#e53935; font-weight:bold;">-2.5</span><br><span style="font-size:10px; color:#666; line-height:1;">(-16.4~7.1)</span></td>
+                    <td data-sort="-0.28891672226589105">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 56.13579992233401%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 36.32318444254195%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">-0.3 <span style="font-size:9px; color:#888;">(-0.9~0.1)</span></div>
+        </td>
+                    <td data-sort="0.0714611598444196">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 9.528154645922614%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">7.1</div>
+        </div>
+        </td>
+                    <td data-sort="ブエナオンダ" class="horse-name">ブエナオンダ</td>
+                    <td data-sort="佐々木" class="jockey">佐々木</td>
+                    <td data-sort="58.0">58.0</td>
+                    <td data-sort="20.118338886244644">20.1</td>
+                    <td data-sort="97.42857142857143">97.4</td>
+                    <td data-sort="19.0">19</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="4"><div class="waku-circle-table" style="background-color:#333333; color:#ffffff; width:26px; height:26px; font-size:14px;">4</div></td>
+                    <td data-sort="3.0"><span class="ninki-badge" style="background-color:#ef9a9a; color:#000;">3</span></td>
+                    <td data-sort="7.4"><span style="color:#d32f2f; font-weight:bold;">7.4</span></td>
+                    
+                    <td data-sort="-1.0730493950174778"><span style="color: #1976d2; font-weight: bold;">-107.3</span></td>
+                    <td data-sort="-0.9730711539405321"><span style="color: #1976d2; font-weight: bold;">-97.3</span><br><span style="font-size:9px; color:#777;">z:-0.26</span></td>
+                    <td data-sort="-0.9810710968763781"><span style="color: #1976d2; font-weight: bold;">-98.1</span><br><span style="font-size:9px; color:#777;">z:-0.03</span></td>
+                    <td data-sort="0.3208890637383118">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 42.78520849844158%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">32.1</div>
+        </div>
+        </td>
+                    <td data-sort="0.21200523271943003">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 28.26736436259067%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">21.2</div>
+        </div>
+        </td>
+                    <td data-sort="0.29277306733623937">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 39.03640897816525%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">29.3</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="79.53466559715474">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 6.279282015542719%; width: 69.79833272845218%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 46.47878885676146%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">79.5 <span style="font-size:9px; color:#888;">(60.6~93.5)</span></div>
+        </td>
+                    <td data-sort="-2.4490563124432745"><span style="color:#e53935; font-weight:bold;">-2.4</span><br><span style="font-size:10px; color:#666; line-height:1;">(-16.5~7.5)</span></td>
+                    <td data-sort="-0.5261473276089168">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 37.79805170673568%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 22.77185513669089%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">-0.5 <span style="font-size:9px; color:#888;">(-0.9~-0.3)</span></div>
+        </td>
+                    <td data-sort="0.3558764327533395">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 47.4501910337786%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">35.6</div>
+        </div>
+        </td>
+                    <td data-sort="メタルスピード" class="horse-name">メタルスピード</td>
+                    <td data-sort="岩田康" class="jockey">岩田康</td>
+                    <td data-sort="55.0">55.0</td>
+                    <td data-sort="2.9361684911946693">2.9</td>
+                    <td data-sort="91.33333333333333">91.3</td>
+                    <td data-sort="36.0">36</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="7"><div class="waku-circle-table" style="background-color:#1e88e5; color:#ffffff; width:26px; height:26px; font-size:14px;">7</div></td>
+                    <td data-sort="14.0">14</td>
+                    <td data-sort="24.4">24.4</td>
+                    
+                    <td data-sort="-1.149125339879639"><span style="color: #1976d2; font-weight: bold;">-114.9</span></td>
+                    <td data-sort="-1.1723482857780416"><span style="color: #1976d2; font-weight: bold;">-117.2</span><br><span style="font-size:9px; color:#777;">z:-0.63</span></td>
+                    <td data-sort="-1.046789461838384"><span style="color: #1976d2; font-weight: bold;">-104.7</span><br><span style="font-size:9px; color:#777;">z:-0.17</span></td>
+                    <td data-sort="0.21884699906533495">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 29.179599875377992%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">21.9</div>
+        </div>
+        </td>
+                    <td data-sort="0.10283687452026738">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 13.711583269368985%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">10.3</div>
+        </div>
+        </td>
+                    <td data-sort="0.2634337479855747">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 35.124499731409955%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">26.3</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="92.8315969064468">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 57.780569248470215%; width: 42.219430751529785%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 74.67568890511275%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">92.8 <span style="font-size:9px; color:#888;">(84.9~104.8)</span></div>
+        </td>
+                    <td data-sort="-2.6036877296800047"><span style="color:#e53935; font-weight:bold;">-2.6</span><br><span style="font-size:10px; color:#666; line-height:1;">(-16.0~7.3)</span></td>
+                    <td data-sort="0.5723472636878694">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 100%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 85.52118685059175%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">0.6 <span style="font-size:9px; color:#888;">(-0.9~0.8)</span></div>
+        </td>
+                    <td data-sort="0.0035560322238248005">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 0.47413762984330676%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">0.4</div>
+        </div>
+        </td>
+                    <td data-sort="タイムトゥヘヴン" class="horse-name">タイムトゥヘヴン</td>
+                    <td data-sort="田辺" class="jockey">田辺</td>
+                    <td data-sort="56.0">56.0</td>
+                    <td data-sort="23.435640171346975">23.4</td>
+                    <td data-sort="97.66666666666667">97.7</td>
+                    <td data-sort="37.0">37</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="11"><div class="waku-circle-table" style="background-color:#43a047; color:#ffffff; width:26px; height:26px; font-size:14px;">11</div></td>
+                    <td data-sort="13.0">13</td>
+                    <td data-sort="20.1">20.1</td>
+                    
+                    <td data-sort="-1.1573488926701412"><span style="color: #1976d2; font-weight: bold;">-115.7</span></td>
+                    <td data-sort="-0.8311234280679894"><span style="color: #1976d2; font-weight: bold;">-83.1</span><br><span style="font-size:9px; color:#777;">z:0.01</span></td>
+                    <td data-sort="-0.9860730996095894"><span style="color: #1976d2; font-weight: bold;">-98.6</span><br><span style="font-size:9px; color:#777;">z:-0.04</span></td>
+                    <td data-sort="0.315547832371785">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 42.073044316238004%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">31.6</div>
+        </div>
+        </td>
+                    <td data-sort="0.06808410584138186">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 9.077880778850915%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">6.8</div>
+        </div>
+        </td>
+                    <td data-sort="0.27199927686078107">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 36.26657024810414%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">27.2</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="82.48868920004703">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 16.325108888144598%; width: 69.45924828606685%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 52.742964126510905%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">82.5 <span style="font-size:9px; color:#888;">(65.3~98.1)</span></div>
+        </td>
+                    <td data-sort="-2.343990670140775"><span style="color:#e53935; font-weight:bold;">-2.3</span><br><span style="font-size:10px; color:#666; line-height:1;">(-15.4~8.6)</span></td>
+                    <td data-sort="0.2870113712031097">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 89.13950591572922%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 69.2219381248684%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">0.3 <span style="font-size:9px; color:#888;">(-0.9~0.6)</span></div>
+        </td>
+                    <td data-sort="0.0061350282298192815">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 0.8180037639759042%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">0.6</div>
+        </div>
+        </td>
+                    <td data-sort="スズハローム" class="horse-name">スズハローム</td>
+                    <td data-sort="藤懸" class="jockey">藤懸</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="24.416463588767257">24.4</td>
+                    <td data-sort="90.0">90.0</td>
+                    <td data-sort="20.0">20</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="1"><div class="waku-circle-table" style="background-color:#ffffff; color:#333333; width:26px; height:26px; font-size:14px;">1</div></td>
+                    <td data-sort="9.0">9</td>
+                    <td data-sort="13.0">13.0</td>
+                    
+                    <td data-sort="-1.4919660632167435"><span style="color: #1976d2; font-weight: bold;">-149.2</span></td>
+                    <td data-sort="-1.305900132535521"><span style="color: #1976d2; font-weight: bold;">-130.6</span><br><span style="font-size:9px; color:#777;">z:-0.88</span></td>
+                    <td data-sort="-1.388154073871641"><span style="color: #1976d2; font-weight: bold;">-138.8</span><br><span style="font-size:9px; color:#777;">z:-0.90</span></td>
+                    <td data-sort="0.2250227641331336">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 30.003035217751144%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">22.5</div>
+        </div>
+        </td>
+                    <td data-sort="0.07516403502921903">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 10.021871337229204%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">7.5</div>
+        </div>
+        </td>
+                    <td data-sort="0.2862494463997768">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 38.16659285330357%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">28.6</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="84.53878500377667">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 30.813332298257745%; width: 57.587325605322135%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 57.090309023067086%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">84.5 <span style="font-size:9px; color:#888;">(72.1~99.3)</span></div>
+        </td>
+                    <td data-sort="-2.6645029182392337"><span style="color:#e53935; font-weight:bold;">-2.7</span><br><span style="font-size:10px; color:#666; line-height:1;">(-16.3~7.2)</span></td>
+                    <td data-sort="0.22161383858977807">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 80.53981275623354%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 65.48623337061905%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">0.2 <span style="font-size:9px; color:#888;">(-0.9~0.5)</span></div>
+        </td>
+                    <td data-sort="0.009672543576988983">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 1.2896724769318646%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">1.0</div>
+        </div>
+        </td>
+                    <td data-sort="ゾンニッヒ" class="horse-name">ゾンニッヒ</td>
+                    <td data-sort="団野" class="jockey">団野</td>
+                    <td data-sort="57.5">57.5</td>
+                    <td data-sort="20.126958591147073">20.1</td>
+                    <td data-sort="92.57142857142857">92.6</td>
+                    <td data-sort="35.0">35</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="16"><div class="waku-circle-table" style="background-color:#f48fb1; color:#333333; width:26px; height:26px; font-size:14px;">16</div></td>
+                    <td data-sort="10.0">10</td>
+                    <td data-sort="14.5">14.5</td>
+                    
+                    <td data-sort="-1.718604167257035"><span style="color: #1976d2; font-weight: bold;">-171.9</span></td>
+                    <td data-sort="-1.400721241507957"><span style="color: #1976d2; font-weight: bold;">-140.1</span><br><span style="font-size:9px; color:#777;">z:-1.06</span></td>
+                    <td data-sort="-1.3548345914777404"><span style="color: #1976d2; font-weight: bold;">-135.5</span><br><span style="font-size:9px; color:#777;">z:-0.83</span></td>
+                    <td data-sort="0.1447340305159007">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 19.297870735453426%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">14.5</div>
+        </div>
+        </td>
+                    <td data-sort="0.08163636263308768">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 10.88484835107836%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">8.2</div>
+        </div>
+        </td>
+                    <td data-sort="0.2820786119219908">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 37.61048158959877%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">28.2</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="77.05623927195829">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0.9487636311730562%; width: 84.83968535557912%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 41.223144697726724%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">77.1 <span style="font-size:9px; color:#888;">(58.1~98.1)</span></div>
+        </td>
+                    <td data-sort="-2.442871111419482"><span style="color:#e53935; font-weight:bold;">-2.4</span><br><span style="font-size:10px; color:#666; line-height:1;">(-16.0~6.6)</span></td>
+                    <td data-sort="0.08993281989684013">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 78.54727637218791%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 57.9642155219621%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">0.1 <span style="font-size:9px; color:#888;">(-0.9~0.5)</span></div>
+        </td>
+                    <td data-sort="0.01165067946366774">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 1.5534239284890319%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">1.2</div>
+        </div>
+        </td>
+                    <td data-sort="サイルーン" class="horse-name">サイルーン</td>
+                    <td data-sort="大野" class="jockey">大野</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="10.333769633507853">10.3</td>
+                    <td data-sort="101.5">101.5</td>
+                    <td data-sort="19.0">19</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="6"><div class="waku-circle-table" style="background-color:#e53935; color:#ffffff; width:26px; height:26px; font-size:14px;">6</div></td>
+                    <td data-sort="6.0">6</td>
+                    <td data-sort="12.2">12.2</td>
+                    
+                    <td data-sort="-1.8352565554379607"><span style="color: #1976d2; font-weight: bold;">-183.5</span></td>
+                    <td data-sort="-1.5371727864173625"><span style="color: #1976d2; font-weight: bold;">-153.7</span><br><span style="font-size:9px; color:#777;">z:-1.32</span></td>
+                    <td data-sort="-1.6679672806357444"><span style="color: #1976d2; font-weight: bold;">-166.8</span><br><span style="font-size:9px; color:#777;">z:-1.50</span></td>
+                    <td data-sort="0.12222181140347683">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 16.296241520463578%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">12.2</div>
+        </div>
+        </td>
+                    <td data-sort="0.08077820972844929">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 10.770427963793239%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">8.1</div>
+        </div>
+        </td>
+                    <td data-sort="0.25618878192909006">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 34.15850425721201%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">25.6</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="80.88491911438966">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 5.048488370668692%; width: 79.71720890192726%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 49.342078331589526%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">80.9 <span style="font-size:9px; color:#888;">(60.0~97.6)</span></div>
+        </td>
+                    <td data-sort="-2.424733958147793"><span style="color:#e53935; font-weight:bold;">-2.4</span><br><span style="font-size:10px; color:#666; line-height:1;">(-15.6~6.8)</span></td>
+                    <td data-sort="0.23101783393770256">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 84.32484913856949%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 66.02341801239892%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">0.2 <span style="font-size:9px; color:#888;">(-0.9~0.6)</span></div>
+        </td>
+                    <td data-sort="0.010039054613774105">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 1.3385406151698807%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">1.0</div>
+        </div>
+        </td>
+                    <td data-sort="マテンロウオリオン" class="horse-name">マテンロウオリオン</td>
+                    <td data-sort="横山典" class="jockey">横山典</td>
+                    <td data-sort="56.0">56.0</td>
+                    <td data-sort="8.763660161827701">8.8</td>
+                    <td data-sort="93.42857142857143">93.4</td>
+                    <td data-sort="32.0">32</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="12"><div class="waku-circle-table" style="background-color:#43a047; color:#ffffff; width:26px; height:26px; font-size:14px;">12</div></td>
+                    <td data-sort="16.0">16</td>
+                    <td data-sort="110.6">110.6</td>
+                    
+                    <td data-sort="-1.9947954963986771"><span style="color: #1976d2; font-weight: bold;">-199.5</span></td>
+                    <td data-sort="-1.438712136771802"><span style="color: #1976d2; font-weight: bold;">-143.9</span><br><span style="font-size:9px; color:#777;">z:-1.13</span></td>
+                    <td data-sort="-1.6405038531968177"><span style="color: #1976d2; font-weight: bold;">-164.1</span><br><span style="font-size:9px; color:#777;">z:-1.44</span></td>
+                    <td data-sort="0.1336044915517201">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 17.813932206896016%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">13.4</div>
+        </div>
+        </td>
+                    <td data-sort="0.05365834608109449">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 7.154446144145932%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">5.4</div>
+        </div>
+        </td>
+                    <td data-sort="0.20018480843314257">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 26.691307791085677%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">20.0</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="81.0365988083085">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 10.084733743426042%; width: 76.23910151986017%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 49.66372376009567%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">81.0 <span style="font-size:9px; color:#888;">(62.4~98.3)</span></div>
+        </td>
+                    <td data-sort="-2.812821768347861"><span style="color:#e53935; font-weight:bold;">-2.8</span><br><span style="font-size:10px; color:#666; line-height:1;">(-18.9~6.5)</span></td>
+                    <td data-sort="0.1968833814927759">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 85.93794532080385%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 64.07355490309537%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">0.2 <span style="font-size:9px; color:#888;">(-0.9~0.6)</span></div>
+        </td>
+                    <td data-sort="0.009465836349919413">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 1.2621115133225884%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">0.9</div>
+        </div>
+        </td>
+                    <td data-sort="ダディーズビビッド" class="horse-name">ダディーズビビッド</td>
+                    <td data-sort="横山和" class="jockey">横山和</td>
+                    <td data-sort="57.5">57.5</td>
+                    <td data-sort="12.846968110423608">12.8</td>
+                    <td data-sort="97.66666666666667">97.7</td>
+                    <td data-sort="34.0">34</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="9"><div class="waku-circle-table" style="background-color:#fdd835; color:#333333; width:26px; height:26px; font-size:14px;">9</div></td>
+                    <td data-sort="15.0">15</td>
+                    <td data-sort="71.0">71.0</td>
+                    
+                    <td data-sort="-2.0768538949636377"><span style="color: #1976d2; font-weight: bold;">-207.7</span></td>
+                    <td data-sort="-1.7176174205043016"><span style="color: #1976d2; font-weight: bold;">-171.8</span><br><span style="font-size:9px; color:#777;">z:-1.66</span></td>
+                    <td data-sort="-1.7186635934047145"><span style="color: #1976d2; font-weight: bold;">-171.9</span><br><span style="font-size:9px; color:#777;">z:-1.61</span></td>
+                    <td data-sort="0.10426007812520739">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 13.901343750027653%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">10.4</div>
+        </div>
+        </td>
+                    <td data-sort="0.07876693368405209">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 10.502257824540278%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">7.9</div>
+        </div>
+        </td>
+                    <td data-sort="0.2260016079827239">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 30.133547731029854%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">22.6</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="78.62768694090761">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 83.99260444750952%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 44.55548896738647%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">78.6 <span style="font-size:9px; color:#888;">(57.6~97.2)</span></div>
+        </td>
+                    <td data-sort="-2.141093727000113"><span style="color:#e53935; font-weight:bold;">-2.1</span><br><span style="font-size:10px; color:#666; line-height:1;">(-16.0~7.5)</span></td>
+                    <td data-sort="0.2224745905278974">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 82.34948757786518%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 65.53540212330692%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">0.2 <span style="font-size:9px; color:#888;">(-0.9~0.5)</span></div>
+        </td>
+                    <td data-sort="0.011338301072499961">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 1.5117734763333281%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">1.1</div>
+        </div>
+        </td>
+                    <td data-sort="エエヤン" class="horse-name">エエヤン</td>
+                    <td data-sort="杉原" class="jockey">杉原</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="2.1213660161827703">2.1</td>
+                    <td data-sort="80.75">80.8</td>
+                    <td data-sort="20.0">20</td>
+                </tr>
+            
+                </tbody>
+            </table>
+            </div>
+        </div>
+        
+        <div class="race-container" id="202609020311">
+            <div class="header-section">
+                <div style="display:flex; align-items:center; flex-wrap:wrap;">
+                    <h1>阪神11R チャーチルダウンズC (芝1600m)</h1>
+                    <div class="race-info-badges"></div>
+                </div>
+                <div class="meta-container">
+                    <div class="meta-box">
+                        <strong>馬場指数予測</strong>
+                        <span>-10.1</span> <span class="sub">[-16.7 〜 -2.1]</span>
+                    </div>
+                    <div class="meta-box">
+                        <strong>RPCI (ペース) 予測</strong>
+                        <span>50.4 <span style="color:#43a047; margin-left:4px; font-size:16px;">M (ミドル)</span></span> 
+                        <span class="sub">[47.5 〜 51.9]</span>
+                    </div>
+                </div>
+            </div>
+        <div class="pace-dashboard"><h3>展開マップ</h3><div class="dashboard-content"><div class="map-wrapper"><div class="map-area" style="height: 230px;"><div style="position: absolute; top: 0; left: 0; width: 25%; height: 100%; background: rgba(227, 242, 253, 0.3); border-right: 1px dashed #90caf9;"><span style="position: absolute; bottom: 4px; left: 6px; font-size: 11px; font-weight: bold; color: #1976d2;">逃げ</span></div><div style="position: absolute; top: 0; left: 25%; width: 25%; height: 100%; background: rgba(227, 242, 253, 0.1); border-right: 1px dashed #90caf9;"><span style="position: absolute; bottom: 4px; left: 6px; font-size: 11px; font-weight: bold; color: #1976d2;">先行</span></div><div style="position: absolute; top: 0; left: 50%; width: 25%; height: 100%; background: rgba(227, 242, 253, 0.1); border-right: 1px dashed #90caf9;"><span style="position: absolute; bottom: 4px; left: 6px; font-size: 11px; font-weight: bold; color: #1976d2;">差し</span></div><div style="position: absolute; top: 0; left: 75%; width: 25%; height: 100%; background: rgba(227, 242, 253, 0.3);"><span style="position: absolute; bottom: 4px; left: 6px; font-size: 11px; font-weight: bold; color: #1976d2;">追込</span></div><div style="position: absolute; top: 6px; left: 15px; font-size: 14px; color: #d32f2f; font-weight: bold;">← ゴール</div><div style="position: absolute; top: 6px; right: 15px; font-size: 11px; color: #777; font-weight: bold;">↑ 内ラチ沿い</div><div style="position: absolute; bottom: 6px; right: 15px; font-size: 11px; color: #777; font-weight: bold;">↓ 大外回し</div><div class="waku-circle-map" style="position: absolute; left: 74.11541592376616%; top: 30px; transform: translate(-50%, -50%); background-color:#ffffff; color:#333333; z-index:99;">1</div><div class="waku-circle-map" style="position: absolute; left: 34.18800303571225%; top: 30px; transform: translate(-50%, -50%); background-color:#333333; color:#ffffff; z-index:99;">2</div><div class="waku-circle-map" style="position: absolute; left: 36.02237451670237%; top: 64px; transform: translate(-50%, -50%); background-color:#e53935; color:#ffffff; z-index:98;">3</div><div class="waku-circle-map" style="position: absolute; left: 57.17895476082393%; top: 30px; transform: translate(-50%, -50%); background-color:#e53935; color:#ffffff; z-index:99;">4</div><div class="waku-circle-map agari-super" style="position: absolute; left: 59.78808040538817%; top: 64px; transform: translate(-50%, -50%); background-color:#1e88e5; color:#ffffff; z-index:98;">5</div><div class="waku-circle-map" style="position: absolute; left: 49.723478092492975%; top: 30px; transform: translate(-50%, -50%); background-color:#1e88e5; color:#ffffff; z-index:99;">6</div><div class="waku-circle-map" style="position: absolute; left: 63.664560141282635%; top: 30px; transform: translate(-50%, -50%); background-color:#fdd835; color:#333333; z-index:99;">7</div><div class="waku-circle-map agari-super" style="position: absolute; left: 52.983522204579934%; top: 64px; transform: translate(-50%, -50%); background-color:#fdd835; color:#333333; z-index:98;">8</div><div class="waku-circle-map" style="position: absolute; left: 47.03195806648333%; top: 64px; transform: translate(-50%, -50%); background-color:#43a047; color:#ffffff; z-index:98;">9</div><div class="waku-circle-map agari-good" style="position: absolute; left: 70.91100519400652%; top: 64px; transform: translate(-50%, -50%); background-color:#43a047; color:#ffffff; z-index:98;">10</div><div class="waku-circle-map" style="position: absolute; left: 53.21830160015557%; top: 98px; transform: translate(-50%, -50%); background-color:#fb8c00; color:#333333; z-index:97;">11</div><div class="waku-circle-map" style="position: absolute; left: 55.47384572833032%; top: 132px; transform: translate(-50%, -50%); background-color:#fb8c00; color:#333333; z-index:96;">12</div><div class="waku-circle-map" style="position: absolute; left: 40.45364258330437%; top: 30px; transform: translate(-50%, -50%); background-color:#f48fb1; color:#333333; z-index:99;">13</div><div class="waku-circle-map agari-super" style="position: absolute; left: 54.98940197603843%; top: 166px; transform: translate(-50%, -50%); background-color:#f48fb1; color:#333333; z-index:95;">14</div></div></div><div class="mini-chart"><div style="font-size:13px; font-weight:bold; color:#0097a7; margin-bottom:10px; text-align:center;">逃げ指数 トップ5</div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#333333; color:#ffffff;">2</div></div><div class="mini-bar-track"><div class="mini-bar-fill-nige" style="width:100%;"></div></div><div class="mini-bar-value">30.0</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#e53935; color:#ffffff;">3</div></div><div class="mini-bar-track"><div class="mini-bar-fill-nige" style="width:41.85525237530365%;"></div></div><div class="mini-bar-value">12.5</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#f48fb1; color:#333333;">13</div></div><div class="mini-bar-track"><div class="mini-bar-fill-nige" style="width:21.769196890929233%;"></div></div><div class="mini-bar-value">6.5</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#1e88e5; color:#ffffff;">5</div></div><div class="mini-bar-track"><div class="mini-bar-fill-nige" style="width:16.07235070621464%;"></div></div><div class="mini-bar-value">4.8</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#fb8c00; color:#333333;">11</div></div><div class="mini-bar-track"><div class="mini-bar-fill-nige" style="width:15.854061246578944%;"></div></div><div class="mini-bar-value">4.8</div></div></div><div class="mini-chart"><div style="font-size:13px; font-weight:bold; color:#e65100; margin-bottom:10px; text-align:center;">上がりスコア トップ5</div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#1e88e5; color:#ffffff;">5</div></div><div class="mini-bar-track"><div class="mini-bar-fill-agari" style="width:100%;"></div></div><div class="mini-bar-value">21.6</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#f48fb1; color:#333333;">14</div></div><div class="mini-bar-track"><div class="mini-bar-fill-agari" style="width:99.48506571534952%;"></div></div><div class="mini-bar-value">21.5</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#fdd835; color:#333333;">8</div></div><div class="mini-bar-track"><div class="mini-bar-fill-agari" style="width:92.27909721148644%;"></div></div><div class="mini-bar-value">19.9</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#43a047; color:#ffffff;">10</div></div><div class="mini-bar-track"><div class="mini-bar-fill-agari" style="width:88.9029821670366%;"></div></div><div class="mini-bar-value">19.2</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#fdd835; color:#333333;">7</div></div><div class="mini-bar-track"><div class="mini-bar-fill-agari" style="width:75.27132337990815%;"></div></div><div class="mini-bar-value">16.3</div></div></div><div class="mini-chart"><div style="font-size:13px; font-weight:bold; color:#2e7d32; margin-bottom:10px; text-align:center;">同条件1年平均 トップ5</div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#e53935; color:#ffffff;">3</div></div><div class="mini-bar-track"><div class="mini-bar-fill-cond" style="width:100%;"></div></div><div class="mini-bar-value">87.2</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#43a047; color:#ffffff;">10</div></div><div class="mini-bar-track"><div class="mini-bar-fill-cond" style="width:95.41547277936962%;"></div></div><div class="mini-bar-value">83.2</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#fdd835; color:#333333;">8</div></div><div class="mini-bar-track"><div class="mini-bar-fill-cond" style="width:93.98280802292264%;"></div></div><div class="mini-bar-value">82.0</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#f48fb1; color:#333333;">13</div></div><div class="mini-bar-track"><div class="mini-bar-fill-cond" style="width:93.21872015281757%;"></div></div><div class="mini-bar-value">81.3</div></div><div class="mini-bar-container"><div class="mini-bar-label"><div class="waku-circle-table" style="background-color:#fb8c00; color:#333333;">11</div></div><div class="mini-bar-track"><div class="mini-bar-fill-cond" style="width:88.96848137535817%;"></div></div><div class="mini-bar-value">77.6</div></div></div></div></div>
+            <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:35px;">馬番</th>
+                        <th style="width:35px;">人気</th>
+                        <th style="width:45px;">単勝</th>
+                        
+                        <th style="width:50px;">rank1.1</th>
+                        <th style="width:55px;">rank3_all</th>
+                        <th style="width:55px;">rank3_last</th>
+                        <th style="width:65px;">bin1.1.1</th>
+                        <th style="width:65px;">bin1.1.3</th>
+                        <th style="width:65px;">bin_穴馬</th>
+                        
+                        <th style="width:130px;">予測能力値<br>(10%-mid-90%)</th>
+                        <th style="width:85px;">残差<br>(10%-mid-90%)</th>
+                        <th style="width:130px;">予測ポジション</th>
+                        <th style="width:65px;">逃げ指数</th>
+                        <th style="width:105px; text-align:left;">馬名</th>
+                        <th style="width:70px; text-align:left;">騎手</th>
+                        <th style="width:35px;">斤量</th>
+                        <th style="width:45px;">上がり<br>スコア</th>
+                        <th style="width:45px;">同条件<br>1年平均</th>
+                        <th style="width:35px;">戦数</th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                <tr>
+                    <td data-sort="8"><div class="waku-circle-table" style="background-color:#fdd835; color:#333333; width:26px; height:26px; font-size:14px;">8</div></td>
+                    <td data-sort="1.0"><span class="ninki-badge" style="background-color:#fff59d; color:#000;">1</span></td>
+                    <td data-sort="2.9"><span style="color:#d32f2f; font-weight:bold;">2.9</span></td>
+                    
+                    <td data-sort="0.8116864398165587"><span style="color: #d32f2f; font-weight: bold;">+81.2</span></td>
+                    <td data-sort="0.3826040309161187"><span style="color: #d32f2f; font-weight: bold;">+38.3</span><br><span style="font-size:9px; color:#d32f2f;">z:1.78</span></td>
+                    <td data-sort="0.09072979526790766"><span style="color: #d32f2f; font-weight: bold;">+9.1</span><br><span style="font-size:9px; color:#d32f2f;">z:1.84</span></td>
+                    <td data-sort="0.6444193970674333">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 85.92258627565779%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">64.4</div>
+        </div>
+        </td>
+                    <td data-sort="0.31713137750368636">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 42.28418366715818%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">31.7</div>
+        </div>
+        </td>
+                    <td data-sort="0.20211860670618637">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 26.949147560824848%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">20.2</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="85.57165621319535">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 52.4640392774376%; width: 40.26402929301337%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 67.05365160468597%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">85.6 <span style="font-size:9px; color:#888;">(78.5~98.0)</span></div>
+        </td>
+                    <td data-sort="-0.5545078137692416"><span style="color:#e53935; font-weight:bold;">-0.6</span><br><span style="font-size:10px; color:#666; line-height:1;">(-13.8~11.6)</span></td>
+                    <td data-sort="-0.011003711116062779">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 77.80554722579231%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 53.72940275572492%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">-0.0 <span style="font-size:9px; color:#888;">(-0.6~0.3)</span></div>
+        </td>
+                    <td data-sort="0.03327515659430331">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 4.436687545907108%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">3.3</div>
+        </div>
+        </td>
+                    <td data-sort="アンドゥーリル" class="horse-name">アンドゥーリル</td>
+                    <td data-sort="川田" class="jockey">川田</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="19.924146341463416">19.9</td>
+                    <td data-sort="82.0">82.0</td>
+                    <td data-sort="4.0">4</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="3"><div class="waku-circle-table" style="background-color:#e53935; color:#ffffff; width:26px; height:26px; font-size:14px;">3</div></td>
+                    <td data-sort="4.0">4</td>
+                    <td data-sort="8.4"><span style="color:#d32f2f; font-weight:bold;">8.4</span></td>
+                    
+                    <td data-sort="0.19172678020682746"><span style="color: #d32f2f; font-weight: bold;">+19.2</span></td>
+                    <td data-sort="0.1315044223849171"><span style="color: #d32f2f; font-weight: bold;">+13.2</span><br><span style="font-size:9px; color:#d32f2f;">z:1.20</span></td>
+                    <td data-sort="-0.20074692197828203"><span style="color: #1976d2; font-weight: bold;">-20.1</span><br><span style="font-size:9px; color:#d32f2f;">z:1.10</span></td>
+                    <td data-sort="0.5749897346341611">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 76.66529795122149%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">57.5</div>
+        </div>
+        </td>
+                    <td data-sort="0.352943842998051">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 47.05917906640679%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">35.3</div>
+        </div>
+        </td>
+                    <td data-sort="0.30954364775340704">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 41.27248636712093%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">31.0</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="83.75214857393941">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 45.328465392121934%; width: 44.088715859313844%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 63.29867489197652%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">83.8 <span style="font-size:9px; color:#888;">(75.0~96.4)</span></div>
+        </td>
+                    <td data-sort="-0.8612784967277113"><span style="color:#e53935; font-weight:bold;">-0.9</span><br><span style="font-size:10px; color:#666; line-height:1;">(-15.0~11.6)</span></td>
+                    <td data-sort="-0.2585902823161921">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 54.836448191824694%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 32.52796814587796%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">-0.3 <span style="font-size:9px; color:#888;">(-0.6~0.0)</span></div>
+        </td>
+                    <td data-sort="0.12543929280887078">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 16.72523904118277%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">12.5</div>
+        </div>
+        </td>
+                    <td data-sort="リゾートアイランド" class="horse-name">リゾートアイランド</td>
+                    <td data-sort="武豊" class="jockey">武豊</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="12.149024390243902">12.1</td>
+                    <td data-sort="87.25">87.2</td>
+                    <td data-sort="4.0">4</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="9"><div class="waku-circle-table" style="background-color:#43a047; color:#ffffff; width:26px; height:26px; font-size:14px;">9</div></td>
+                    <td data-sort="12.0">12</td>
+                    <td data-sort="69.2">69.2</td>
+                    
+                    <td data-sort="0.03645536583894199"><span style="color: #d32f2f; font-weight: bold;">+3.6</span></td>
+                    <td data-sort="-0.08194398879375472"><span style="color: #1976d2; font-weight: bold;">-8.2</span><br><span style="font-size:9px; color:#777;">z:0.72</span></td>
+                    <td data-sort="-0.360936010210955"><span style="color: #1976d2; font-weight: bold;">-36.1</span><br><span style="font-size:9px; color:#777;">z:0.69</span></td>
+                    <td data-sort="0.48716388724295645">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 64.95518496572753%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">48.7</div>
+        </div>
+        </td>
+                    <td data-sort="0.26874374297763715">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 35.83249906368495%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">26.9</div>
+        </div>
+        </td>
+                    <td data-sort="0.37552244803824425">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 50.06965973843256%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">37.6</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="81.34976682539738">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 37.53823943503029%; width: 48.18921472093693%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 58.340802044296424%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">81.3 <span style="font-size:9px; color:#888;">(71.3~94.6)</span></div>
+        </td>
+                    <td data-sort="-0.6345137508215706"><span style="color:#e53935; font-weight:bold;">-0.6</span><br><span style="font-size:10px; color:#666; line-height:1;">(-14.0~11.5)</span></td>
+                    <td data-sort="-0.07598442596571428">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 68.15467484766428%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 48.16494758310416%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">-0.1 <span style="font-size:9px; color:#888;">(-0.6~0.2)</span></div>
+        </td>
+                    <td data-sort="0.03467938433138479">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 4.623917910851305%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">3.5</div>
+        </div>
+        </td>
+                    <td data-sort="クールデイトナ" class="horse-name">クールデイトナ</td>
+                    <td data-sort="吉村" class="jockey">吉村</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="12.17178010471204">12.2</td>
+                    <td data-sort="75.4">75.4</td>
+                    <td data-sort="5.0">5</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="14"><div class="waku-circle-table" style="background-color:#f48fb1; color:#333333; width:26px; height:26px; font-size:14px;">14</div></td>
+                    <td data-sort="5.0">5</td>
+                    <td data-sort="8.7"><span style="color:#d32f2f; font-weight:bold;">8.7</span></td>
+                    
+                    <td data-sort="-0.25395129879514394"><span style="color: #1976d2; font-weight: bold;">-25.4</span></td>
+                    <td data-sort="-0.2756636276078835"><span style="color: #1976d2; font-weight: bold;">-27.6</span><br><span style="font-size:9px; color:#777;">z:0.27</span></td>
+                    <td data-sort="-0.6786662314473136"><span style="color: #1976d2; font-weight: bold;">-67.9</span><br><span style="font-size:9px; color:#777;">z:-0.12</span></td>
+                    <td data-sort="0.5339858845586067">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 71.19811794114756%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">53.4</div>
+        </div>
+        </td>
+                    <td data-sort="0.16537196841462476">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 22.04959578861663%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">16.5</div>
+        </div>
+        </td>
+                    <td data-sort="0.27145816091042374">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 36.19442145472316%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">27.1</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="76.31807831535173">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 18.218151670369025%; width: 56.43786821918154%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 47.956743866582215%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">76.3 <span style="font-size:9px; color:#888;">(61.9~89.3)</span></div>
+        </td>
+                    <td data-sort="-0.39434882483642203"><span style="color:#e53935; font-weight:bold;">-0.4</span><br><span style="font-size:10px; color:#666; line-height:1;">(-16.4~15.0)</span></td>
+                    <td data-sort="0.018276671555804216">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 83.13317672205744%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 56.23675247004803%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">0.0 <span style="font-size:9px; color:#888;">(-0.6~0.3)</span></div>
+        </td>
+                    <td data-sort="0.033240109327253756">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 4.432014576967167%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">3.3</div>
+        </div>
+        </td>
+                    <td data-sort="アスクイキゴミ" class="horse-name">アスクイキゴミ</td>
+                    <td data-sort="坂井" class="jockey">坂井</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="21.48">21.5</td>
+                    <td data-sort="70.0">70.0</td>
+                    <td data-sort="1.0">1</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="5"><div class="waku-circle-table" style="background-color:#1e88e5; color:#ffffff; width:26px; height:26px; font-size:14px;">5</div></td>
+                    <td data-sort="6.0">6</td>
+                    <td data-sort="17.6">17.6</td>
+                    
+                    <td data-sort="-0.37609341615873587"><span style="color: #1976d2; font-weight: bold;">-37.6</span></td>
+                    <td data-sort="-0.2577979717626084"><span style="color: #1976d2; font-weight: bold;">-25.8</span><br><span style="font-size:9px; color:#777;">z:0.31</span></td>
+                    <td data-sort="-0.5224936888161982"><span style="color: #1976d2; font-weight: bold;">-52.2</span><br><span style="font-size:9px; color:#777;">z:0.28</span></td>
+                    <td data-sort="0.47266541682077234">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 63.02205557610298%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">47.3</div>
+        </div>
+        </td>
+                    <td data-sort="0.11954998722770398">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 15.939998297027197%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">12.0</div>
+        </div>
+        </td>
+                    <td data-sort="0.29149733970724595">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 38.86631196096613%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">29.1</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="76.46648444294092">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 18.399711305327735%; width: 62.461747221794006%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 48.263014387847356%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">76.5 <span style="font-size:9px; color:#888;">(62.0~92.3)</span></div>
+        </td>
+                    <td data-sort="-0.8638767494742184"><span style="color:#e53935; font-weight:bold;">-0.9</span><br><span style="font-size:10px; color:#666; line-height:1;">(-14.0~11.0)</span></td>
+                    <td data-sort="0.08832430986885739">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 84.87704416919448%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 62.23510050673522%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">0.1 <span style="font-size:9px; color:#888;">(-0.6~0.4)</span></div>
+        </td>
+                    <td data-sort="0.04816849002093952">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 6.42246533612527%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">4.8</div>
+        </div>
+        </td>
+                    <td data-sort="シーミハットク" class="horse-name">シーミハットク</td>
+                    <td data-sort="高杉" class="jockey">高杉</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="21.591180390290337">21.6</td>
+                    <td data-sort="73.16666666666667">73.2</td>
+                    <td data-sort="6.0">6</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="6"><div class="waku-circle-table" style="background-color:#1e88e5; color:#ffffff; width:26px; height:26px; font-size:14px;">6</div></td>
+                    <td data-sort="2.0"><span class="ninki-badge" style="background-color:#81d4fa; color:#000;">2</span></td>
+                    <td data-sort="3.3"><span style="color:#d32f2f; font-weight:bold;">3.3</span></td>
+                    
+                    <td data-sort="-0.39756356652722985"><span style="color: #1976d2; font-weight: bold;">-39.8</span></td>
+                    <td data-sort="-0.20024245552101885"><span style="color: #1976d2; font-weight: bold;">-20.0</span><br><span style="font-size:9px; color:#777;">z:0.45</span></td>
+                    <td data-sort="-0.6148707989608797"><span style="color: #1976d2; font-weight: bold;">-61.5</span><br><span style="font-size:9px; color:#777;">z:0.04</span></td>
+                    <td data-sort="0.4734598630829848">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 63.12798174439798%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">47.3</div>
+        </div>
+        </td>
+                    <td data-sort="0.2330343976108689">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 31.071253014782517%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">23.3</div>
+        </div>
+        </td>
+                    <td data-sort="0.3408334601295425">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 45.44446135060567%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">34.1</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="78.64310933084236">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 33.83966094401511%; width: 46.822688633108555%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 52.754985506867236%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">78.6 <span style="font-size:9px; color:#888;">(69.5~92.2)</span></div>
+        </td>
+                    <td data-sort="-0.4916809386729435"><span style="color:#e53935; font-weight:bold;">-0.5</span><br><span style="font-size:10px; color:#666; line-height:1;">(-13.7~12.8)</span></td>
+                    <td data-sort="-0.05859147808360475">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 71.79150028478954%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 49.65434761561622%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">-0.1 <span style="font-size:9px; color:#888;">(-0.6~0.2)</span></div>
+        </td>
+                    <td data-sort="0.03380143729083962">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 4.506858305445283%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">3.4</div>
+        </div>
+        </td>
+                    <td data-sort="サンダーストラック" class="horse-name">サンダーストラック</td>
+                    <td data-sort="ルメール" class="jockey">ルメール</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="14.8172131147541">14.8</td>
+                    <td data-sort="71.0">71.0</td>
+                    <td data-sort="3.0">3</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="13"><div class="waku-circle-table" style="background-color:#f48fb1; color:#333333; width:26px; height:26px; font-size:14px;">13</div></td>
+                    <td data-sort="9.0">9</td>
+                    <td data-sort="43.8">43.8</td>
+                    
+                    <td data-sort="-0.5344254979767328"><span style="color: #1976d2; font-weight: bold;">-53.4</span></td>
+                    <td data-sort="-0.42773779265548634"><span style="color: #1976d2; font-weight: bold;">-42.8</span><br><span style="font-size:9px; color:#777;">z:-0.07</span></td>
+                    <td data-sort="-0.7894906367153349"><span style="color: #1976d2; font-weight: bold;">-78.9</span><br><span style="font-size:9px; color:#777;">z:-0.41</span></td>
+                    <td data-sort="0.37684983254343685">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 50.24664433912491%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">37.7</div>
+        </div>
+        </td>
+                    <td data-sort="0.11997228115945317">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 15.996304154593757%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">12.0</div>
+        </div>
+        </td>
+                    <td data-sort="0.35932101933867583">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 47.909469245156785%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">35.9</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="74.51911614997002">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 1.6164783148912378%; width: 77.97348515367773%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 44.24416751223612%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">74.5 <span style="font-size:9px; color:#888;">(53.9~91.6)</span></div>
+        </td>
+                    <td data-sort="-0.8612784967277113"><span style="color:#e53935; font-weight:bold;">-0.9</span><br><span style="font-size:10px; color:#666; line-height:1;">(-14.9~13.1)</span></td>
+                    <td data-sort="-0.19390583484435328">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 62.536641200183986%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 38.067053229130465%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">-0.2 <span style="font-size:9px; color:#888;">(-0.6~0.1)</span></div>
+        </td>
+                    <td data-sort="0.06524181573508958">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 8.69890876467861%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">6.5</div>
+        </div>
+        </td>
+                    <td data-sort="ファンクション" class="horse-name">ファンクション</td>
+                    <td data-sort="鮫島駿" class="jockey">鮫島駿</td>
+                    <td data-sort="55.0">55.0</td>
+                    <td data-sort="11.38704918032787">11.4</td>
+                    <td data-sort="81.33333333333333">81.3</td>
+                    <td data-sort="3.0">3</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="12"><div class="waku-circle-table" style="background-color:#fb8c00; color:#333333; width:26px; height:26px; font-size:14px;">12</div></td>
+                    <td data-sort="10.0">10</td>
+                    <td data-sort="56.1">56.1</td>
+                    
+                    <td data-sort="-0.6740226878344054"><span style="color: #1976d2; font-weight: bold;">-67.4</span></td>
+                    <td data-sort="-0.40769465345927214"><span style="color: #1976d2; font-weight: bold;">-40.8</span><br><span style="font-size:9px; color:#777;">z:-0.03</span></td>
+                    <td data-sort="-0.4468084674575591"><span style="color: #1976d2; font-weight: bold;">-44.7</span><br><span style="font-size:9px; color:#777;">z:0.47</span></td>
+                    <td data-sort="0.35966350802099334">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 47.95513440279912%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">36.0</div>
+        </div>
+        </td>
+                    <td data-sort="0.28494089124209665">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 37.99211883227955%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">28.5</div>
+        </div>
+        </td>
+                    <td data-sort="0.371345429288492">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 49.51272390513227%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">37.1</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="87.62847417690794">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 53.208342443661735%; width: 46.791657556338265%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 71.29837330268421%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">87.6 <span style="font-size:9px; color:#888;">(78.9~101.5)</span></div>
+        </td>
+                    <td data-sort="-0.8702735133325599"><span style="color:#e53935; font-weight:bold;">-0.9</span><br><span style="font-size:10px; color:#666; line-height:1;">(-14.4~11.8)</span></td>
+                    <td data-sort="0.02534823120356309">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 88.74341719017596%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 56.8423071604129%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">0.0 <span style="font-size:9px; color:#888;">(-0.6~0.4)</span></div>
+        </td>
+                    <td data-sort="0.025940094116247443">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 3.458679215499659%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">2.6</div>
+        </div>
+        </td>
+                    <td data-sort="サーディンラン" class="horse-name">サーディンラン</td>
+                    <td data-sort="松山" class="jockey">松山</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="9.312570204664445">9.3</td>
+                    <td data-sort="70.25">70.2</td>
+                    <td data-sort="4.0">4</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="10"><div class="waku-circle-table" style="background-color:#43a047; color:#ffffff; width:26px; height:26px; font-size:14px;">10</div></td>
+                    <td data-sort="3.0"><span class="ninki-badge" style="background-color:#ef9a9a; color:#000;">3</span></td>
+                    <td data-sort="7.9"><span style="color:#d32f2f; font-weight:bold;">7.9</span></td>
+                    
+                    <td data-sort="-0.6749722761595437"><span style="color: #1976d2; font-weight: bold;">-67.5</span></td>
+                    <td data-sort="-0.23047900421134188"><span style="color: #1976d2; font-weight: bold;">-23.0</span><br><span style="font-size:9px; color:#777;">z:0.38</span></td>
+                    <td data-sort="-0.31845487008414686"><span style="color: #1976d2; font-weight: bold;">-31.8</span><br><span style="font-size:9px; color:#777;">z:0.80</span></td>
+                    <td data-sort="0.4851498907040009">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 64.6866520938668%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">48.5</div>
+        </div>
+        </td>
+                    <td data-sort="0.15088623209198715">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 20.118164278931623%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">15.1</div>
+        </div>
+        </td>
+                    <td data-sort="0.3003807992622633">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 40.05077323496844%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">30.0</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="81.30428179563393">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 18.090120388212352%; width: 67.90877327929279%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 58.24693311852016%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">81.3 <span style="font-size:9px; color:#888;">(61.8~94.8)</span></div>
+        </td>
+                    <td data-sort="-1.0649357071833936"><span style="color:#e53935; font-weight:bold;">-1.1</span><br><span style="font-size:10px; color:#666; line-height:1;">(-14.2~11.5)</span></td>
+                    <td data-sort="0.2506887241649012">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 96.61079655975527%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 76.13875649250814%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">0.3 <span style="font-size:9px; color:#888;">(-0.6~0.5)</span></div>
+        </td>
+                    <td data-sort="0.010723297810172169">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 1.429773041356289%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">1.1</div>
+        </div>
+        </td>
+                    <td data-sort="バルセシート" class="horse-name">バルセシート</td>
+                    <td data-sort="北村友" class="jockey">北村友</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="19.19520325203252">19.2</td>
+                    <td data-sort="83.25">83.2</td>
+                    <td data-sort="4.0">4</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="1"><div class="waku-circle-table" style="background-color:#ffffff; color:#333333; width:26px; height:26px; font-size:14px;">1</div></td>
+                    <td data-sort="11.0">11</td>
+                    <td data-sort="59.9">59.9</td>
+                    
+                    <td data-sort="-0.7684028455230892"><span style="color: #1976d2; font-weight: bold;">-76.8</span></td>
+                    <td data-sort="-0.7376351649830275"><span style="color: #1976d2; font-weight: bold;">-73.8</span><br><span style="font-size:9px; color:#777;">z:-0.78</span></td>
+                    <td data-sort="-0.8054244640787888"><span style="color: #1976d2; font-weight: bold;">-80.5</span><br><span style="font-size:9px; color:#777;">z:-0.45</span></td>
+                    <td data-sort="0.2881375822907385">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 38.418344305431795%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">28.8</div>
+        </div>
+        </td>
+                    <td data-sort="0.17807558740540447">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 23.74341165405393%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">17.8</div>
+        </div>
+        </td>
+                    <td data-sort="0.2903436891112371">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 38.71249188149828%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">29.0</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="86.87162249820744">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 48.81673403230501%; width: 45.685625718328666%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 69.73643403560995%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">86.9 <span style="font-size:9px; color:#888;">(76.7~98.9)</span></div>
+        </td>
+                    <td data-sort="-1.0344986778650136"><span style="color:#e53935; font-weight:bold;">-1.0</span><br><span style="font-size:10px; color:#666; line-height:1;">(-16.6~10.8)</span></td>
+                    <td data-sort="0.2974643952396322">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 100%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 80.1442699047077%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">0.3 <span style="font-size:9px; color:#888;">(-0.6~0.5)</span></div>
+        </td>
+                    <td data-sort="0.009852697603491533">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 1.3136930137988712%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">1.0</div>
+        </div>
+        </td>
+                    <td data-sort="ストームサンダー" class="horse-name">ストームサンダー</td>
+                    <td data-sort="斎藤" class="jockey">斎藤</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="12.476730128510233">12.5</td>
+                    <td data-sort="75.625">75.6</td>
+                    <td data-sort="8.0">8</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="7"><div class="waku-circle-table" style="background-color:#fdd835; color:#333333; width:26px; height:26px; font-size:14px;">7</div></td>
+                    <td data-sort="8.0">8</td>
+                    <td data-sort="18.8">18.8</td>
+                    
+                    <td data-sort="-0.7842447367125215"><span style="color: #1976d2; font-weight: bold;">-78.4</span></td>
+                    <td data-sort="-0.3900116290627357"><span style="color: #1976d2; font-weight: bold;">-39.0</span><br><span style="font-size:9px; color:#777;">z:0.01</span></td>
+                    <td data-sort="-0.5604884007057758"><span style="color: #1976d2; font-weight: bold;">-56.0</span><br><span style="font-size:9px; color:#777;">z:0.18</span></td>
+                    <td data-sort="0.4388346485367933">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 58.51128647157245%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">43.9</div>
+        </div>
+        </td>
+                    <td data-sort="0.1390428429764506">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 18.53904573019341%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">13.9</div>
+        </div>
+        </td>
+                    <td data-sort="0.3491921611785014">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 46.558954823800185%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">34.9</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="78.4562118966253">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 13.564800111660796%; width: 70.55298106725002%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 52.36927923226363%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">78.5 <span style="font-size:9px; color:#888;">(59.7~93.8)</span></div>
+        </td>
+                    <td data-sort="-0.5635028303740901"><span style="color:#e53935; font-weight:bold;">-0.6</span><br><span style="font-size:10px; color:#666; line-height:1;">(-13.7~12.5)</span></td>
+                    <td data-sort="0.10111852736698113">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 87.80226603995867%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 63.330700176603294%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">0.1 <span style="font-size:9px; color:#888;">(-0.6~0.4)</span></div>
+        </td>
+                    <td data-sort="0.01858327465531708">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 2.477769954042277%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">1.9</div>
+        </div>
+        </td>
+                    <td data-sort="サトノセプター" class="horse-name">サトノセプター</td>
+                    <td data-sort="岩田望" class="jockey">岩田望</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="16.251967213114753">16.3</td>
+                    <td data-sort="74.0">74.0</td>
+                    <td data-sort="3.0">3</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="2"><div class="waku-circle-table" style="background-color:#333333; color:#ffffff; width:26px; height:26px; font-size:14px;">2</div></td>
+                    <td data-sort="13.0">13</td>
+                    <td data-sort="69.6">69.6</td>
+                    
+                    <td data-sort="-1.0638132265721043"><span style="color: #1976d2; font-weight: bold;">-106.4</span></td>
+                    <td data-sort="-0.7594727231534301"><span style="color: #1976d2; font-weight: bold;">-75.9</span><br><span style="font-size:9px; color:#777;">z:-0.83</span></td>
+                    <td data-sort="-1.2082304459884674"><span style="color: #1976d2; font-weight: bold;">-120.8</span><br><span style="font-size:9px; color:#777;">z:-1.48</span></td>
+                    <td data-sort="0.2641668305736091">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 35.22224407648122%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">26.4</div>
+        </div>
+        </td>
+                    <td data-sort="0.19821638447100495">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 26.428851262800656%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">19.8</div>
+        </div>
+        </td>
+                    <td data-sort="0.334408160291691">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 44.587754705558794%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">33.4</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="73.19757337849879">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 17.4400504857856%; width: 66.04287579368247%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 41.51685698896003%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">73.2 <span style="font-size:9px; color:#888;">(61.5~93.5)</span></div>
+        </td>
+                    <td data-sort="-0.8932422220072228"><span style="color:#e53935; font-weight:bold;">-0.9</span><br><span style="font-size:10px; color:#666; line-height:1;">(-17.4~13.0)</span></td>
+                    <td data-sort="-0.28536711096265494">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 58.17798491777789%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 30.235003794640313%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">-0.3 <span style="font-size:9px; color:#888;">(-0.6~0.0)</span></div>
+        </td>
+                    <td data-sort="0.29969785317286773">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 39.959713756382364%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">30.0</div>
+        </div>
+        </td>
+                    <td data-sort="メイショウソラリス" class="horse-name">メイショウソラリス</td>
+                    <td data-sort="角田和" class="jockey">角田和</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="1.7545528455284551">1.8</td>
+                    <td data-sort="64.66666666666667">64.7</td>
+                    <td data-sort="3.0">3</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="4"><div class="waku-circle-table" style="background-color:#e53935; color:#ffffff; width:26px; height:26px; font-size:14px;">4</div></td>
+                    <td data-sort="7.0">7</td>
+                    <td data-sort="17.9">17.9</td>
+                    
+                    <td data-sort="-1.3010295718843299"><span style="color: #1976d2; font-weight: bold;">-130.1</span></td>
+                    <td data-sort="-0.9855530114269229"><span style="color: #1976d2; font-weight: bold;">-98.6</span><br><span style="font-size:9px; color:#777;">z:-1.35</span></td>
+                    <td data-sort="-1.1147955969865226"><span style="color: #1976d2; font-weight: bold;">-111.5</span><br><span style="font-size:9px; color:#777;">z:-1.24</span></td>
+                    <td data-sort="0.22132901661684706">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 29.51053554891294%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">22.1</div>
+        </div>
+        </td>
+                    <td data-sort="0.14030186239765782">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 18.706914986354377%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">14.0</div>
+        </div>
+        </td>
+                    <td data-sort="0.3322482761635679">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 44.29977015514239%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">33.2</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="75.05089242761396">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 9.892590034698609%; width: 69.01062208930264%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 45.34161140081517%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">75.1 <span style="font-size:9px; color:#888;">(57.9~91.3)</span></div>
+        </td>
+                    <td data-sort="-0.96784963920639"><span style="color:#e53935; font-weight:bold;">-1.0</span><br><span style="font-size:10px; color:#666; line-height:1;">(-14.1~11.9)</span></td>
+                    <td data-sort="0.05023818008238742">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 84.02524336413397%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 58.97369345102991%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">0.1 <span style="font-size:9px; color:#888;">(-0.6~0.3)</span></div>
+        </td>
+                    <td data-sort="0.032643339366656324">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 4.35244524888751%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">3.3</div>
+        </div>
+        </td>
+                    <td data-sort="エイシンティザー" class="horse-name">エイシンティザー</td>
+                    <td data-sort="西塚" class="jockey">西塚</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="9.06859078590786">9.1</td>
+                    <td data-sort="64.75">64.8</td>
+                    <td data-sort="4.0">4</td>
+                </tr>
+            
+                <tr>
+                    <td data-sort="11"><div class="waku-circle-table" style="background-color:#fb8c00; color:#333333; width:26px; height:26px; font-size:14px;">11</div></td>
+                    <td data-sort="14.0">14</td>
+                    <td data-sort="144.5">144.5</td>
+                    
+                    <td data-sort="-1.5358861919399078"><span style="color: #1976d2; font-weight: bold;">-153.6</span></td>
+                    <td data-sort="-1.2971445536635775"><span style="color: #1976d2; font-weight: bold;">-129.7</span><br><span style="font-size:9px; color:#777;">z:-2.06</span></td>
+                    <td data-sort="-1.2922194396268245"><span style="color: #1976d2; font-weight: bold;">-129.2</span><br><span style="font-size:9px; color:#777;">z:-1.69</span></td>
+                    <td data-sort="0.19971931374041166">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 26.62924183205489%; background: #ffb74d;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">20.0</div>
+        </div>
+        </td>
+                    <td data-sort="0.09518273716448158">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 12.691031621930879%; background: #64b5f6;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">9.5</div>
+        </div>
+        </td>
+                    <td data-sort="0.332177436099194">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 44.290324813225865%; background: #ab47bc;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">33.2</div>
+        </div>
+        </td>
+                    
+                    <td data-sort="72.18267680232917">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 75.17572551299311%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 39.422382128231284%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">72.2 <span style="font-size:9px; color:#888;">(53.1~89.5)</span></div>
+        </td>
+                    <td data-sort="-0.7068216786964723"><span style="color:#e53935; font-weight:bold;">-0.7</span><br><span style="font-size:10px; color:#666; line-height:1;">(-14.6~10.7)</span></td>
+                    <td data-sort="-0.007576571242706445">
+        <div style="position: relative; width: 100%; height: 16px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-top: 4px;">
+            <div style="position: absolute; left: 0%; width: 81.20037804234575%; height: 100%; background: #90caf9;"></div>
+            <div style="position: absolute; left: 54.022877000194455%; width: 4px; height: 100%; background: #d32f2f; transform: translateX(-50%); z-index: 2;"></div>
+        </div>
+        <div style="font-size: 10px; color: #555; text-align: center; margin-top:2px; line-height:1;">-0.0 <span style="font-size:9px; color:#888;">(-0.6~0.3)</span></div>
+        </td>
+                    <td data-sort="0.04751428119670869">
+        <div style="position: relative; width: 100%; background: #e0e0e0; height: 16px; border-radius: 2px; overflow: hidden;">
+            <div style="position: absolute; left: 0; top: 0; height: 100%; width: 6.335237492894491%; background: #4dd0e1;"></div>
+            <div style="position: absolute; width: 100%; text-align: center; font-size: 11px; line-height: 16px; font-weight: bold; color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">4.8</div>
+        </div>
+        </td>
+                    <td data-sort="ユウファラオ" class="horse-name">ユウファラオ</td>
+                    <td data-sort="松若" class="jockey">松若</td>
+                    <td data-sort="57.0">57.0</td>
+                    <td data-sort="6.099847691575441">6.1</td>
+                    <td data-sort="77.625">77.6</td>
+                    <td data-sort="9.0">9</td>
+                </tr>
+            
+                </tbody>
+            </table>
+            </div>
+        </div>
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const getCellValue = (tr, idx) => tr.children[idx].getAttribute('data-sort');
+            const comparer = (idx, asc) => (a, b) => ((v1, v2) => {
+                if (v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2)) {
+                    return parseFloat(v1) - parseFloat(v2);
+                }
+                return v1.toString().localeCompare(v2);
+            })(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+
+            document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
+                const table = th.closest('table');
+                const tbody = table.querySelector('tbody');
+                
+                table.querySelectorAll('th').forEach(h => {
+                    if (h !== th) { h.classList.remove('asc', 'desc'); }
+                });
+                
+                const asc = th.classList.contains('asc');
+                th.classList.toggle('asc', !asc);
+                th.classList.toggle('desc', asc);
+                
+                Array.from(tbody.querySelectorAll('tr'))
+                    .sort(comparer(Array.from(th.parentNode.children).indexOf(th), !asc))
+                    .forEach(tr => tbody.appendChild(tr));
+            })));
+        });
+        </script>
+    </body>
+    </html>
+    
