@@ -1,0 +1,379 @@
+{
+  "cutoff": "2026-11-22",
+  "rules": [
+    {
+      "gate": "all",
+      "gate_text": "全対象",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "all",
+      "template": {
+        "family": "core",
+        "head": "HM1",
+        "kind": "win",
+        "label": "厳密中穴の指数1位・単勝",
+        "mode": "single",
+        "selectors": [
+          "HM1"
+        ],
+        "template": "HM1_win"
+      }
+    },
+    {
+      "gate": "all",
+      "gate_text": "全対象",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "all",
+      "template": {
+        "family": "core",
+        "head": "HB",
+        "kind": "win",
+        "label": "掲載穴1・2のうち3着内予測が高い方・単勝",
+        "mode": "single",
+        "selectors": [
+          "HB"
+        ],
+        "template": "HB_win"
+      }
+    },
+    {
+      "gate": "gain",
+      "gate_text": "軸の条件総合利がプラス",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "all",
+      "template": {
+        "family": "core",
+        "head": "HM1",
+        "kind": "win",
+        "label": "厳密中穴の指数1位・単勝",
+        "mode": "single",
+        "selectors": [
+          "HM1"
+        ],
+        "template": "HM1_win"
+      }
+    },
+    {
+      "gate": "AB",
+      "gate_text": "A・B買い目があるレース",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "all",
+      "template": {
+        "family": "core",
+        "head": "HM1",
+        "kind": "win",
+        "label": "厳密中穴の指数1位・単勝",
+        "mode": "single",
+        "selectors": [
+          "HM1"
+        ],
+        "template": "HM1_win"
+      }
+    },
+    {
+      "gate": "all",
+      "gate_text": "全対象",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "all",
+      "template": {
+        "family": "flow",
+        "head": "HM1",
+        "k": 1,
+        "kind": "wide",
+        "label": "厳密中穴の指数1位→3着内確率上位1頭・ワイド",
+        "mode": "flow",
+        "ranker": "p3",
+        "template": "HM1_p31_wide"
+      }
+    },
+    {
+      "gate": "all",
+      "gate_text": "全対象",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "all",
+      "template": {
+        "family": "flow",
+        "head": "HB",
+        "k": 1,
+        "kind": "wide",
+        "label": "掲載穴1・2のうち3着内予測が高い方→3着内上位1頭・ワイド",
+        "mode": "flow",
+        "ranker": "p3",
+        "template": "HB_p31_wide"
+      }
+    },
+    {
+      "gate": "H2_higher",
+      "gate_text": "穴2の予測3着内率が穴1より高い",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "all",
+      "template": {
+        "family": "core",
+        "head": "F1",
+        "kind": "wide",
+        "label": "本命1―穴2・ワイド",
+        "mode": "pairs",
+        "reverse": false,
+        "selectors": [
+          "H2"
+        ],
+        "template": "F1_H2_wide"
+      }
+    },
+    {
+      "gate": "chaos",
+      "gate_text": "荒れ度表示が高い",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "all",
+      "template": {
+        "family": "core",
+        "head": "F1",
+        "kind": "wide",
+        "label": "本命1―穴2・ワイド",
+        "mode": "pairs",
+        "reverse": false,
+        "selectors": [
+          "H2"
+        ],
+        "template": "F1_H2_wide"
+      }
+    },
+    {
+      "gate": "gain",
+      "gate_text": "軸の条件総合利がプラス",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "all",
+      "template": {
+        "family": "flow",
+        "head": "HM1",
+        "k": 5,
+        "kind": "wide",
+        "label": "厳密中穴の指数1位→統合能力上位5頭・ワイド",
+        "mode": "flow",
+        "ranker": "ability",
+        "template": "HM1_ability5_wide"
+      }
+    },
+    {
+      "gate": "all",
+      "gate_text": "全対象",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "all",
+      "template": {
+        "family": "flow",
+        "head": "HM1",
+        "k": 1,
+        "kind": "quinella",
+        "label": "厳密中穴の指数1位→3着内確率上位1頭・馬連",
+        "mode": "flow",
+        "ranker": "p3",
+        "template": "HM1_p31_quinella"
+      }
+    },
+    {
+      "gate": "all",
+      "gate_text": "全対象",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "tokyo",
+      "template": {
+        "family": "core",
+        "head": "HM1",
+        "kind": "win",
+        "label": "厳密中穴の指数1位・単勝",
+        "mode": "single",
+        "selectors": [
+          "HM1"
+        ],
+        "template": "HM1_win"
+      }
+    },
+    {
+      "gate": "all",
+      "gate_text": "全対象",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "tokyo",
+      "template": {
+        "family": "core",
+        "head": "HB",
+        "kind": "win",
+        "label": "掲載穴1・2のうち3着内予測が高い方・単勝",
+        "mode": "single",
+        "selectors": [
+          "HB"
+        ],
+        "template": "HB_win"
+      }
+    },
+    {
+      "gate": "all",
+      "gate_text": "全対象",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "tokyo",
+      "template": {
+        "family": "core",
+        "head": "H1",
+        "kind": "win",
+        "label": "穴上位2頭・単勝",
+        "mode": "single",
+        "selectors": [
+          "H1",
+          "H2"
+        ],
+        "template": "H2set_win"
+      }
+    },
+    {
+      "gate": "AB",
+      "gate_text": "A・B買い目があるレース",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "tokyo",
+      "template": {
+        "family": "core",
+        "head": "HM1",
+        "kind": "win",
+        "label": "厳密中穴の指数1位・単勝",
+        "mode": "single",
+        "selectors": [
+          "HM1"
+        ],
+        "template": "HM1_win"
+      }
+    },
+    {
+      "gate": "all",
+      "gate_text": "全対象",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "tokyo",
+      "template": {
+        "family": "flow",
+        "head": "HM1",
+        "k": 2,
+        "kind": "wide",
+        "label": "厳密中穴の指数1位→3着内確率上位2頭・ワイド",
+        "mode": "flow",
+        "ranker": "p3",
+        "template": "HM1_p32_wide"
+      }
+    },
+    {
+      "gate": "all",
+      "gate_text": "全対象",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "tokyo",
+      "template": {
+        "family": "flow",
+        "head": "HB",
+        "k": 2,
+        "kind": "wide",
+        "label": "掲載穴1・2のうち3着内予測が高い方→3着内上位2頭・ワイド",
+        "mode": "flow",
+        "ranker": "p3",
+        "template": "HB_p32_wide"
+      }
+    },
+    {
+      "gate": "all",
+      "gate_text": "全対象",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "tokyo",
+      "template": {
+        "family": "core",
+        "head": "HM1",
+        "kind": "wide",
+        "label": "厳密中穴指数1→本命1・厳密中穴指数2・ワイド",
+        "mode": "pairs",
+        "reverse": false,
+        "selectors": [
+          "F1",
+          "HM2"
+        ],
+        "template": "HM1_FM2_wide"
+      }
+    },
+    {
+      "gate": "gain",
+      "gate_text": "軸の条件総合利がプラス",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "tokyo",
+      "template": {
+        "family": "flow",
+        "head": "HM1",
+        "k": 3,
+        "kind": "wide",
+        "label": "厳密中穴の指数1位→統合能力上位3頭・ワイド",
+        "mode": "flow",
+        "ranker": "ability",
+        "template": "HM1_ability3_wide"
+      }
+    },
+    {
+      "gate": "all",
+      "gate_text": "全対象",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "tokyo",
+      "template": {
+        "family": "flow",
+        "head": "HM1",
+        "k": 1,
+        "kind": "quinella",
+        "label": "厳密中穴の指数1位→3着内確率上位1頭・馬連",
+        "mode": "flow",
+        "ranker": "p3",
+        "template": "HM1_p31_quinella"
+      }
+    },
+    {
+      "gate": "all",
+      "gate_text": "全対象",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "tokyo",
+      "template": {
+        "family": "flow",
+        "head": "HM1",
+        "k": 2,
+        "kind": "quinella",
+        "label": "厳密中穴の指数1位→3着内確率上位2頭・馬連",
+        "mode": "flow",
+        "ranker": "p3",
+        "template": "HM1_p32_quinella"
+      }
+    },
+    {
+      "gate": "all",
+      "gate_text": "全対象",
+      "prospective_reproduction": "固定V7.1出力と当日以前の履歴・掲載A/B判定のみ。確定オッズ・結果は選択に使わない。",
+      "retrospective_warning": "この2か月での候補。A/Bルール選定は2026/11/15までの結果を含む。",
+      "scope": "tokyo",
+      "template": {
+        "family": "flow",
+        "head": "HM1",
+        "k": 3,
+        "kind": "quinella",
+        "label": "厳密中穴の指数1位→3着内確率上位3頭・馬連",
+        "mode": "flow",
+        "ranker": "p3",
+        "template": "HM1_p33_quinella"
+      }
+    }
+  ],
+  "upstream_models_unchanged": true
+}
